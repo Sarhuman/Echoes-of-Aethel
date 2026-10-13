@@ -9,7 +9,7 @@ Um RPG de ação sobre herança, culpa e poder em um mundo de magia decadente. A
 
 Cinco heróis atravessam florestas contaminadas, cidades sepultadas e máquinas ancestrais. Entre uma batalha e outra, decisões tomadas para proteger os vivos alimentam uma força que transforma o mundo por dentro.
 
-> **Estado atual:** documentação de design/arquitetura e implementação inicial de persistência offline. Há um harness Godot executável de persistência, com 27 verificações de save e 25 de IA aprovadas; ainda não há campanha jogável. Habilidades, fórmulas e taxas de loot são especificações experimentais, sujeitas a implementação e playtest.
+> **Estado atual:** documentação de design/arquitetura e implementação inicial de persistência offline. Há cena técnica Godot com Player/dash, parede, inimigo e HUD, com 71 verificações aprovadas; ainda não há campanha jogável. Habilidades, fórmulas e taxas de loot são especificações experimentais, sujeitas a implementação e playtest.
 
 ## 📜 História — O Coração partido
 
@@ -112,6 +112,8 @@ No **Mapa 12**, a luta e a revelação convergem. Após derrotar Vael, o jogador
 O [índice geral](docs/GDD/README.md) reúne também os documentos existentes de campanha, arte, loot, prólogo e engenharia. As próximas Sprints ampliarão os módulos sem duplicar o cânone.
 
 ## 🛠️ Desenvolvimento
+
+[Executar a cena técnica do Player](docs/engineering/player-test-scene.md): abrir client/godot/project.godot no Godot 4.6 e pressionar F5.
 
 As [decisões de produção aprovadas](docs/engineering/production-decisions.md) prevalecem sobre propostas anteriores: Windows offline, slice Bastião/Cidadela/Bosque, MP em ativas e stamina para dash. Runtime ainda precisa dessa reconciliação.
 
