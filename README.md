@@ -104,6 +104,7 @@ No **Mapa 12**, a luta e a revelação convergem. Após derrotar Vael, o jogador
 | [04 — Mapas e Quests — spoilers](docs/GDD/04_mapas_e_quests.md) | Doze mapas, 24 opções e degradação narrativa da Cidadela |
 | [05 — Combate e HUD](docs/GDD/05_combate_e_hud.md) | Fórmulas, HP/MP/vigor, Bruma, Eclipse e feedback visual |
 | [06 — Arquitetura de Software](docs/GDD/06_arquitetura_software.md) | Godot/GDScript, componentes, eventos, entidades e diálogo |
+| [07 — Roteiro e Diálogos — spoilers](docs/GDD/07_roteiro_e_dialogos.md) | Prólogo, NPCs dinâmicos, confronto com Vael e dois finais |
 
 O [índice geral](docs/GDD/README.md) reúne também os documentos existentes de campanha, arte, loot, prólogo e engenharia. As próximas Sprints ampliarão os módulos sem duplicar o cânone.
 
