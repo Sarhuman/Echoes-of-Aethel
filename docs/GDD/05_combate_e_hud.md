@@ -89,7 +89,7 @@ Validar custo/cooldown/alvo/estado antes de debitar MP ou vigor. Cooldown só in
 
 ### 2.3 Alquimista e atalhos
 
-Lysa vende Poção de Vida pequena e Frasco de Éter pequeno com efeitos da Sprint 3 (50 HP / 30 MP). Preços iniciais experimentais: **10 ouro** / **12 ouro**; estoque ilimitado de protótipo, condicionado à capacidade do inventário. Economia será simulada antes de produção.
+Lyra vende Poção de Vida pequena e Frasco de Éter pequeno com efeitos da Sprint 3 (50 HP / 30 MP). Preços iniciais experimentais: **10 ouro** / **12 ouro**; estoque ilimitado de protótipo, condicionado à capacidade do inventário. Economia será simulada antes de produção.
 
 Compra autoritativa: validar presença no hub, ouro inteiro suficiente, quantidade/capacidade; débito e entrega na mesma transação com idempotência. Nenhuma animação concede item. Não vender em combate nem consumir ouro em compra recusada.
 

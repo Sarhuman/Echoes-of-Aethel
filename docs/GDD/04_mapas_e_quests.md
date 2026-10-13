@@ -59,7 +59,7 @@ Um mensageiro acusa a aldeia de abastecer cultistas. A estrada corre perigo e pa
 | Opção / ID | Texto apresentado ao jogador | Consequência imediata | Impacto oculto regional / ritual | Impacto tardio na Cidadela |
 |---|---|---|---|---|
 | A / `judge_suspects` | Executar os acusados para impedir outra abertura da estrada. | A rota é liberada e a escolta retorna; moradores inocentes se dispersam. | As mortes alimentam espectros; a defesa do bosque confunde viajantes com invasores. | A Cidadela recebe armas sem donos; parentes passam a evitar Maera e pedem listas dos mortos. |
-| B / `shelter_villagers` | Escoltar os moradores à Cidadela para protegê-los e investigar. | Famílias vivas chegam ao abrigo e entregam seus relatos. | Um portador contamina a água; a Bruma aprende os caminhos de abastecimento. | Lysa fecha o poço decorativo e instala distribuição limpa; o aprendiz de Oren adoece, sem remover a oficina. |
+| B / `shelter_villagers` | Escoltar os moradores à Cidadela para protegê-los e investigar. | Famílias vivas chegam ao abrigo e entregam seus relatos. | Um portador contamina a água; a Bruma aprende os caminhos de abastecimento. | Lyra fecha o poço decorativo e instala distribuição limpa; o aprendiz de Bram adoece, sem remover a oficina. |
 
 **Aplicação:** opções A/B canalizam, respectivamente, `judgment` / `mercy`. Disparo tardio `first_return_to_citadel`; fatos imediatos e eventos futuros são persistidos juntos. Se o jogador não voltar ao hub entre mapas, o evento é aplicado ao marco correspondente e mostrado na próxima visita, sem duplicação.
 
@@ -82,12 +82,12 @@ Um pesquisador externo oferece soro experimental. Os primeiros pacientes respira
 > **Alquimista — caixa azul / borda dupla**  
 > “Tenho uma noite de alívio. Ainda não sei o que ela cobra depois.”
 
-**Pistas antes da escolha:** Cadernos registram melhora e alterações nos animais; Lysa recomenda cautela.
+**Pistas antes da escolha:** Cadernos registram melhora e alterações nos animais; Lyra recomenda cautela.
 
 | Opção / ID | Texto apresentado ao jogador | Consequência imediata | Impacto oculto regional / ritual | Impacto tardio na Cidadela |
 |---|---|---|---|---|
 | A / `deliver_venom` | Fornecer os ingredientes para tratar quem não pode esperar. | Pacientes melhoram e uma ala da enfermaria volta a funcionar. | O tratamento induz mutações tardias; a Bruma cria vínculos entre corpos tratados. | Retratos mostram olhos alterados e familiares escondem os sintomas por medo de exclusão. |
-| B / `destroy_research` | Destruir os lotes e a pesquisa para impedir um tratamento inseguro. | A distribuição perigosa é interrompida; ninguém recebe novos lotes. | Sem pesquisa, a infecção avança. O pesquisador morre na fuga ao pântano; desaparece uma rota de tratamento. | Leitos vazios e bilhetes interrompidos; Lysa mantém atendimento básico, mas discute o preço da prudência. |
+| B / `destroy_research` | Destruir os lotes e a pesquisa para impedir um tratamento inseguro. | A distribuição perigosa é interrompida; ninguém recebe novos lotes. | Sem pesquisa, a infecção avança. O pesquisador morre na fuga ao pântano; desaparece uma rota de tratamento. | Leitos vazios e bilhetes interrompidos; Lyra mantém atendimento básico, mas discute o preço da prudência. |
 
 **Aplicação:** opções A/B canalizam, respectivamente, `mercy` / `judgment`. Disparo tardio `act1_completion`; fatos imediatos e eventos futuros são persistidos juntos. Se o jogador não voltar ao hub entre mapas, o evento é aplicado ao marco correspondente e mostrado na próxima visita, sem duplicação.
 
@@ -114,7 +114,7 @@ Após a queda de Silvano, a seiva pode ser contida ou devolvida à terra. Ambas 
 
 | Opção / ID | Texto apresentado ao jogador | Consequência imediata | Impacto oculto regional / ritual | Impacto tardio na Cidadela |
 |---|---|---|---|---|
-| A / `seal_sap` | Selar a seiva para impedir outra contaminação. | O fragmento é isolado e a névoa junto ao portal recua. | Árvores privadas de Éter morrem; os ecos alimentam a memória ritual de Vael. | A feira perde madeira e plantas; Oren aceita reaproveitar materiais de casas vazias. |
+| A / `seal_sap` | Selar a seiva para impedir outra contaminação. | O fragmento é isolado e a névoa junto ao portal recua. | Árvores privadas de Éter morrem; os ecos alimentam a memória ritual de Vael. | A feira perde madeira e plantas; Bram aceita reaproveitar materiais de casas vazias. |
 | B / `drain_sap` | Devolver a seiva ao bosque para recuperar a vegetação. | Brotações cobrem o templo e o fragmento se desprende. | Raízes ampliadas aprisionam moradores externos; a vida nova se alimenta de seus ecos. | Refugiados cobertos por pólen chegam; a praça ganha flores que o povo passa a venerar. |
 
 **Aplicação:** opções A/B canalizam, respectivamente, `judgment` / `mercy`. Disparo tardio `act1_completion`; fatos imediatos e eventos futuros são persistidos juntos. Se o jogador não voltar ao hub entre mapas, o evento é aplicado ao marco correspondente e mostrado na próxima visita, sem duplicação.
@@ -227,7 +227,7 @@ Pressão ameaça colapsar os canais. Drenar para baixo limpa o acesso; inverter 
 | Opção / ID | Texto apresentado ao jogador | Consequência imediata | Impacto oculto regional / ritual | Impacto tardio na Cidadela |
 |---|---|---|---|---|
 | A / `drain_lower` | Drenar para baixo e proteger a rota principal de abastecimento. | O canal de travessia fica utilizável. | Assentamentos inferiores são arrasados; seus mortos alimentam a fundição ritual. | O abastecimento melhora; parentes de trabalhadores desaparecidos ocupam a entrada do arquivo. |
-| B / `reverse_flow` | Inverter o fluxo para poupar as comunidades das profundezas. | Moradores inferiores recebem tempo para evacuar. | Resíduo sobe à superfície e desencadeia doença fora e dentro das moradias. | Lysa instala triagem; panos verdes cobrem janelas, sem dano mecânico ou perda de cura. |
+| B / `reverse_flow` | Inverter o fluxo para poupar as comunidades das profundezas. | Moradores inferiores recebem tempo para evacuar. | Resíduo sobe à superfície e desencadeia doença fora e dentro das moradias. | Lyra instala triagem; panos verdes cobrem janelas, sem dano mecânico ou perda de cura. |
 
 **Aplicação:** opções A/B canalizam, respectivamente, `judgment` / `mercy`. Disparo tardio `first_return_to_citadel`; fatos imediatos e eventos futuros são persistidos juntos. Se o jogador não voltar ao hub entre mapas, o evento é aplicado ao marco correspondente e mostrado na próxima visita, sem duplicação.
 
@@ -255,7 +255,7 @@ O núcleo alimenta contenção e forjas. Pode reforçar uma arma para enfrentar 
 | Opção / ID | Texto apresentado ao jogador | Consequência imediata | Impacto oculto regional / ritual | Impacto tardio na Cidadela |
 |---|---|---|---|---|
 | A / `extract_core` | Extrair o núcleo para enfrentar o Abismo e encerrar sua ameaça. | Desbloqueia uma melhoria limitada de arma, sem ignorar orçamento de item. | Máquinas sem contenção escapam e devastam assentamentos; energia alimenta o circuito de Vael. | Peças novas chegam à oficina junto de sobreviventes mutilados; alguns exigem militarizar o trabalho. |
-| B / `stabilize_core` | Manter o núcleo para estabilizar a fábrica e conter as máquinas. | A contenção volta a funcionar e a forja se acalma. | Descarga funde portas e prende exploradores; estabilidade depende das almas aprisionadas. | Oren recebe uma máquina de abastecimento seguro, mas ouve nela as vozes dos desaparecidos. |
+| B / `stabilize_core` | Manter o núcleo para estabilizar a fábrica e conter as máquinas. | A contenção volta a funcionar e a forja se acalma. | Descarga funde portas e prende exploradores; estabilidade depende das almas aprisionadas. | Bram recebe uma máquina de abastecimento seguro, mas ouve nela as vozes dos desaparecidos. |
 
 **Aplicação:** opções A/B canalizam, respectivamente, `judgment` / `mercy`. Disparo tardio `act3_completion`; fatos imediatos e eventos futuros são persistidos juntos. Se o jogador não voltar ao hub entre mapas, o evento é aplicado ao marco correspondente e mostrado na próxima visita, sem duplicação.
 
@@ -378,7 +378,7 @@ Não é timer de horas reais. O estágio depende de atos concluídos, escolhas e
 | Estágio | Base visual após marco | Predominância de misericórdia | Predominância de julgamento | Serviços preservados |
 |---|---|---|---|---|
 | 0 — Chegada | Pedra limpa, cristal frio, feira pequena | Sem projeção inicial | Sem projeção inicial | Cura, save, inventário e preparação |
-| 1 — Após mapa 3 | Névoa violeta decorativa, água isolada se contaminada, ramos secos/flores conforme seiva | Refugiados, enfermaria cheia, gratidão misturada a doença | Memoriais, registros de execução e guardas desconfiados | Lysa atende; Oren substitui aprendiz ausente |
+| 1 — Após mapa 3 | Névoa violeta decorativa, água isolada se contaminada, ramos secos/flores conforme seiva | Refugiados, enfermaria cheia, gratidão misturada a doença | Memoriais, registros de execução e guardas desconfiados | Lyra atende; Bram substitui aprendiz ausente |
 | 2 — Após mapa 6 | Ocre e cinzas na praça, armazéns e cadernos do ossuário | Filas, relatos de sonhos e famílias que esquecem nomes | Placas de sentença, silêncio imposto e doutrina de proteção | Mercador substituto; receitas ficam no diário |
 | 3 — Após mapa 9 | Tubos verdes, máquinas improvisadas, panos sobre janelas | Doença, reencontros e culto à cura/sacrifício | Oficina militarizada, desaparecidos sem nome e censura | Oficinas em área segura; atendimento continua |
 | 4 — Pré-final, após mapa 11 | Fissuras lilases no céu, estandartes novos, vigília na praça | Culto ao herói e acolhimento que exige conformidade | Interrogatórios e glorificação da barreira | Posto de retorno permite preparar/repetir a luta |
@@ -391,8 +391,8 @@ Predominância por ato é a soma das escolhas daquele ato; soma acumulada orient
 | NPC | Função preservada | Transformação narrativa |
 |---|---|---|
 | Maera | Portão e orientação | De acolhimento tenso a líder de vigília ou guarda institucional |
-| Oren | Ferreiro quando sistema existir; preparação no MVP | Reaproveita armas, protege aprendiz e enfrenta pressão militar |
-| Lysa | Cura / consumíveis quando implementados | Mantém cuidado sob doença, fanatismo e escassez |
+| Bram | Ferreiro quando sistema existir; preparação no MVP | Reaproveita armas, protege aprendiz e enfrenta pressão militar |
+| Lyra | Cura / consumíveis quando implementados | Mantém cuidado sob doença, fanatismo e escassez |
 | Irian | Arquivo e diário | Guarda nomes; detecta padrões e resiste à censura |
 
 Se um NPC secundário adoece ou morre, um substituto assume sua função operacional. Personagens centrais acima não são removidos por essas quests. Eventos podem alterar retrato, fala e cenário; nenhum buff de hub gera ganho econômico duplicável.

@@ -30,8 +30,8 @@ A cena pode ser pulada. Pular ainda registra objetivos e checkpoint uma vez; o d
 | NPC / função | Antes | Após acolher a aldeia | Após executar os suspeitos |
 |---|---|---|---|
 | Maera / portão | “Traga nomes. Estamos cansados de contar sombras.” | “Vieram vivos. Hoje isso precisa bastar.” | “A estrada abriu. Ninguém quis celebrar.” |
-| Oren / ferreiro | “Aço não promete. Só precisa aguentar mais um golpe.” | “O aprendiz adoeceu. Eu cuido da oficina.” | “Trouxeram espadas sem dono. Não vou vendê-las.” |
-| Lysa / alquimista | “Se a água mudar de cheiro, venha antes da sede.” | “Fervemos tudo. Mesmo assim, o gosto permanece.” | “Tenho remédios sobrando. Isso nunca foi boa notícia.” |
+| Bram / ferreiro | “Aço não promete. Só precisa aguentar mais um golpe.” | “O aprendiz adoeceu. Eu cuido da oficina.” | “Trouxeram espadas sem dono. Não vou vendê-las.” |
+| Lyra / alquimista | “Se a água mudar de cheiro, venha antes da sede.” | “Fervemos tudo. Mesmo assim, o gosto permanece.” | “Tenho remédios sobrando. Isso nunca foi boa notícia.” |
 | Irian / arquivo | “Nem toda lembrança pertence a quem a carrega.” | “A marca do cristal apareceu no poço. Copiei antes que apagassem.” | “As pedras da estrada repetem o mesmo nome. Nenhum viajante o disse.” |
 
 Serviços seguem disponíveis e o hub nunca causa dano. Retratos e cenário mostram a mudança; falas não expõem a causa oculta antes de observação suficiente.
