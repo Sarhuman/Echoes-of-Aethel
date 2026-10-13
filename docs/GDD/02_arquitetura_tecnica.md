@@ -4,6 +4,8 @@
 
 Stack escolhida nesta Sprint: Dart/Flutter/Flame no cliente, Python/FastAPI no servidor e PostgreSQL. Esta decisão substitui a etapa anterior de seleção de engine. O protótipo offline continua como primeiro marco; progressão online terá autoridade do servidor e não aceitará importação irrestrita de saves locais.
 
+> **Revisão da Sprint 6:** o cliente passa a Godot/GDScript conforme [módulo 06](06_arquitetura_software.md). Flutter/Flame e referências de build/renderização abaixo registram a proposta anterior; API, banco, segurança e Compose continuam referência. Export web e renderer devem ser validados no pipeline Godot.
+
 ## 1. Stack tecnológico
 
 | Camada | Tecnologia | Responsabilidade |

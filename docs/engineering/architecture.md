@@ -1,6 +1,6 @@
 # Arquitetura proposta
 
-Documento inicial complementado pela [Sprint 2](../GDD/02_arquitetura_tecnica.md), referência canônica para stack, API, paperdoll e deployment. Flutter/Flame e FastAPI/PostgreSQL estão definidos; nenhuma engine ou infraestrutura está implementada.
+Documento inicial complementado pela [Sprint 2](../GDD/02_arquitetura_tecnica.md), referência canônica para stack, API, paperdoll e deployment. Godot/GDScript (Sprint 6) e FastAPI/PostgreSQL estão definidos; nenhuma engine ou infraestrutura está implementada.
 
 ## Limites
 
@@ -10,7 +10,7 @@ Documento inicial complementado pela [Sprint 2](../GDD/02_arquitetura_tecnica.md
 - **Apresentação:** cenas 2D, animações, efeitos, UI, input e acessibilidade. Consome estado/eventos sem conceder recompensas diretamente.
 - **Infraestrutura:** arquivos de save, carregamento de assets e adapters da engine.
 
-A stack escolhida na Sprint 2 exige experimento mínimo de input, colisão, iluminação, exportação e save no equipamento-alvo antes de fixar versões. O modelo permite ampliar conteúdo sem exigir um serviço distribuído.
+A stack revisada na [Sprint 6](../GDD/06_arquitetura_software.md) exige experimento mínimo de input, colisão, iluminação, exportação e save no equipamento-alvo antes de fixar versões. O modelo permite ampliar conteúdo sem exigir um serviço distribuído.
 
 ## Persistência e consistência
 
