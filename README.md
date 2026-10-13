@@ -97,6 +97,7 @@ No **Mapa 12**, a luta e a revelação convergem. Após derrotar Vael, o jogador
 | [01 — Classes e Atributos](docs/GDD/01_classes_e_atributos.md) | Sprint 1 documentada: fórmulas, cinco classes, habilidades e diálogos |
 | [02 — Arquitetura Técnica](docs/GDD/02_arquitetura_tecnica.md) | Flutter/Flame, FastAPI, PostgreSQL, paperdoll, API e deploy |
 | [03 — Sistema de Loot](docs/GDD/03_sistema_de_loot.md) | Raridades, afixos, slots, drops, consumíveis e JSON de itens |
+| [04 — Mapas e Quests — spoilers](docs/GDD/04_mapas_e_quests.md) | Doze mapas, 24 opções e degradação narrativa da Cidadela |
 
 O [índice geral](docs/GDD/README.md) reúne também os documentos existentes de campanha, arte, loot, prólogo e engenharia. As próximas Sprints ampliarão os módulos sem duplicar o cânone.
 

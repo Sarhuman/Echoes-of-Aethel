@@ -1,5 +1,7 @@
 # Campanha — spoilers de produção
 
+A [Sprint 4 — Bíblia dos mapas e quests](../GDD/04_mapas_e_quests.md) é a referência detalhada de opções, consequências, flags e evolução da Cidadela. Esta página mantém o resumo e quests secundárias. Em conflito de detalhe, prevalece o módulo 04.
+
 ## Cânone e resolução de inconsistências
 
 Cinco Santuários filtravam o Éter selvagem. Vael perfurou o Coração durante o eclipse; ele se partiu em cinco fragmentos. A Bruma é o Éter liberado, com capacidade de reconfigurar vida e matéria. Vael interpreta isso como renascimento inevitável; seu discurso não prova que sua tirania seja necessária.
@@ -32,7 +34,7 @@ As consequências abaixo são informação de produção; não devem aparecer in
 | Mapa / quest | Opção A e consequência | Opção B e consequência | Pista prévia / disparo |
 |---|---|---|---|
 | 01 — A Caça ao Espião | Executar os suspeitos protege a rota; mortos inocentes fortalecem espectros | Acolher a aldeia salva famílias; um portador contamina a água do hub | Acusações contraditórias e sintomas / retorno ao hub |
-| 02 — O Alquimista Desesperado | Entregar veneno produz alívio; o soro causa mutações | Destruir a pesquisa impede mutações; perde-se a proteção e o alquimista morre | Animais tratados apresentam alterações / retorno ao hub |
+| 02 — O Alquimista Desesperado | Entregar veneno produz alívio; o soro causa mutações | Destruir a pesquisa impede mutações; perde-se a proteção e o alquimista morre durante a fuga ao pântano | Animais tratados apresentam alterações / retorno ao hub |
 | 03 — As Raízes do Guardião | Selar a seiva libera o fragmento; o bosque perde suas últimas árvores vivas | Drenar a seiva recupera vegetação; raízes aprisionam habitantes externos | Raízes ligadas a casas e árvores / vitória sobre Silvano |
 | 04 — A Caravana Perdida | Salvar suprimentos evita fome; mercadores mortos assombram as dunas | Salvar mercadores preserva vidas; a escassez gera revolta | Tempo limitado e carga pesada / retorno ao acampamento |
 | 05 — O Ritual da Chama | Oferecer vitalidade abre passagem; a onda corrompe fontes | Sacrificar o prisioneiro preserva recursos; sua alma alimenta mortos-vivos | Inscrição liga altar à água e às tumbas / entrada no mapa 06 |

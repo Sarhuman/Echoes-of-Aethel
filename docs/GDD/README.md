@@ -7,8 +7,9 @@
 | 01 — Classes e atributos | Especificação experimental concluída; implementação pendente | [01_classes_e_atributos.md](01_classes_e_atributos.md) |
 | 02 — Arquitetura técnica | Stack e contratos definidos; deploy/benchmarks pendentes | [02_arquitetura_tecnica.md](02_arquitetura_tecnica.md) |
 | 03 — Sistema de loot | Especificação experimental concluída; implementação pendente | [03_sistema_de_loot.md](03_sistema_de_loot.md) |
+| 04 — Mapas e quests | Bíblia de produção concluída; mapas/quests pendentes | [04_mapas_e_quests.md](04_mapas_e_quests.md) |
 
-Sprints posteriores à 03 ainda não possuem módulos publicados nesta pasta. Não considerar documentação como confirmação de sistemas executáveis.
+Sprints posteriores à 04 ainda não possuem módulos publicados nesta pasta. Não considerar documentação como confirmação de sistemas executáveis.
 
 ## Base de design existente
 
@@ -36,3 +37,5 @@ O módulo 01 define os cinco atributos, quatro ativas e duas passivas por classe
 O módulo 02 define a stack Flutter/Flame + FastAPI/PostgreSQL e substitui a seleção de engine pendente na arquitetura preliminar. Offline e online usam autoridades separadas; não importar livremente saves locais para economia online.
 
 O módulo 03 substitui o baseline de quatro raridades: acrescenta Mágico, especifica taxas condicionais e fixa receita/fragmento como recompensa única por campanha.
+
+O módulo 04 define o detalhamento de mapas/dilemas, flags e degradação do hub. O resumo de campanha e as quests secundárias permanecem em design/campaign.md; em conflitos de detalhe da campanha principal, prevalece o módulo 04.
