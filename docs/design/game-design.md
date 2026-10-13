@@ -23,10 +23,10 @@ No protótipo, implementar somente o Bastião: ataque básico, defesa com custo 
 ## Combate, loot e progressão
 
 - Ataques fortes têm antecipação visual, área legível e recuperação. Colisões determinam acertos independentemente da animação.
-- Inimigos comuns: XP pequena e chance de ouro, consumíveis e equipamento comum/raro.
-- Elites e sub-bosses: XP maior, materiais e maior chance de raros/épicos.
-- Chefes de ato: ao menos um equipamento épico; lendário tem chance adicional, sem promessa de lendário em toda repetição. Fragmento de campanha somente na primeira vitória.
-- Raridades: comum, raro, épico, lendário. Conjuntos e crafting avançado ficam para expansão.
+- Inimigos comuns: XP pequena e chance de ouro, consumíveis e equipamento comum/mágico.
+- Elites: maior chance de mágicos/raros; sub-bosses: equipamento raro/épico e essências.
+- Chefes de ato: um equipamento épico ou lendário garantido por vitória autorizada; receita e fragmento de campanha somente na primeira vitória.
+- Raridades: comum, mágico, raro, épico, lendário, conforme [Sprint 3](../GDD/03_sistema_de_loot.md). Conjuntos e crafting avançado ficam para expansão.
 - Respawn ocorre em nova expedição ou reset explícito de zona. Não reaparecer sobre o jogador nem restaurar decisões de história.
 - Morte retorna ao último hub/checkpoint seguro. No MVP, preserva escolhas e inventário e reinicia o encontro sem nova recompensa de campanha.
 
