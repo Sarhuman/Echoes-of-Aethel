@@ -49,12 +49,12 @@ Ataques em tempo real combinam posicionamento, esquiva, gestão de MP, telegraph
 
 | Encontro | Progressão e recompensa previstas |
 |---|---|
-| Inimigos comuns | XP menor; chance de ouro, consumíveis e equipamentos comuns ou raros |
-| Elites | XP maior e melhor chance de raros/épicos |
-| Sub-bosses | Equipamento garantido na tabela inicial, materiais conforme catálogo e chance de épico/lendário |
-| Bosses de ato | Equipamento épico ou lendário; fragmento de campanha único quando aplicável |
+| Inimigos comuns | XP menor; chance de ouro, consumíveis e equipamentos comuns ou mágicos |
+| Elites | XP maior e alta chance de mágicos/raros; materiais de crafting |
+| Sub-bosses | Equipamento raro ou épico garantido e essências elementais |
+| Bosses de ato | Equipamento épico ou lendário; receita e fragmento únicos na primeira vitória da campanha |
 
-Raridades: **Comum → Raro → Épico → Lendário**. Nível do item e afixos determinam seu poder junto da raridade. Novas expedições podem repovoar encontros; recompensas únicas e decisões de história não se repetem.
+Raridades: **Comum → Mágico → Raro → Épico → Lendário**. Nível do item e afixos determinam seu poder junto da raridade. Novas expedições podem repovoar encontros; recompensas únicas e decisões de história não se repetem.
 
 ### Arte e interface 16-bit
 
@@ -96,6 +96,7 @@ No **Mapa 12**, a luta e a revelação convergem. Após derrotar Vael, o jogador
 | [Índice geral — docs/GDD/](docs/GDD/README.md) | Organização e referências canônicas do projeto |
 | [01 — Classes e Atributos](docs/GDD/01_classes_e_atributos.md) | Sprint 1 documentada: fórmulas, cinco classes, habilidades e diálogos |
 | [02 — Arquitetura Técnica](docs/GDD/02_arquitetura_tecnica.md) | Flutter/Flame, FastAPI, PostgreSQL, paperdoll, API e deploy |
+| [03 — Sistema de Loot](docs/GDD/03_sistema_de_loot.md) | Raridades, afixos, slots, drops, consumíveis e JSON de itens |
 
 O [índice geral](docs/GDD/README.md) reúne também os documentos existentes de campanha, arte, loot, prólogo e engenharia. As próximas Sprints ampliarão os módulos sem duplicar o cânone.
 

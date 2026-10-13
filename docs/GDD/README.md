@@ -6,8 +6,9 @@
 |---|---|---|
 | 01 — Classes e atributos | Especificação experimental concluída; implementação pendente | [01_classes_e_atributos.md](01_classes_e_atributos.md) |
 | 02 — Arquitetura técnica | Stack e contratos definidos; deploy/benchmarks pendentes | [02_arquitetura_tecnica.md](02_arquitetura_tecnica.md) |
+| 03 — Sistema de loot | Especificação experimental concluída; implementação pendente | [03_sistema_de_loot.md](03_sistema_de_loot.md) |
 
-Sprints posteriores à 02 ainda não possuem módulos publicados nesta pasta. Não considerar documentação como confirmação de sistemas executáveis.
+Sprints posteriores à 03 ainda não possuem módulos publicados nesta pasta. Não considerar documentação como confirmação de sistemas executáveis.
 
 ## Base de design existente
 
@@ -33,3 +34,5 @@ Sprints posteriores à 02 ainda não possuem módulos publicados nesta pasta. N�
 O módulo 01 define os cinco atributos, quatro ativas e duas passivas por classe e sprites jogáveis 32×32, substituindo o esboço preliminar. Para campanha e segurança dos hubs, vale o design canônico reconciliado. A proposta original é referência histórica e seu prompt textual não implementa o ARPG. Mudanças futuras precisam atualizar os documentos afetados e seus links.
 
 O módulo 02 define a stack Flutter/Flame + FastAPI/PostgreSQL e substitui a seleção de engine pendente na arquitetura preliminar. Offline e online usam autoridades separadas; não importar livremente saves locais para economia online.
+
+O módulo 03 substitui o baseline de quatro raridades: acrescenta Mágico, especifica taxas condicionais e fixa receita/fragmento como recompensa única por campanha.
