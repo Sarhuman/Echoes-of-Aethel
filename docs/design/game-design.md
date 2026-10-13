@@ -4,7 +4,7 @@
 
 Título: **Echoes of Aethel**. Fantasia sombria com magia antiga decadente. Combate em tempo real, exploração, equipamentos e especialização de habilidades. A influência de ARPGs orienta o ritmo; personagens, mapas e arte serão próprios.
 
-Direção proposta para o protótipo: top-down 2D, pixel art e iluminação dinâmica limitada. A perspectiva isométrica fica como alternativa a avaliar antes da produção de assets finais. Primeira entrega single-player offline, sem contas, backend ou multiplayer.
+Direção visual: top-down 3/4 em pixel art 16-bit, chão ortogonal e iluminação dinâmica limitada, conforme [guia de arte](art-direction.md). Profundidade vem da composição dos sprites e não exige geometria isométrica. Primeira entrega single-player offline, sem contas, backend ou multiplayer.
 
 Loop: preparar equipamento no hub → explorar → lutar e coletar → decidir um dilema → enfrentar um sub-boss → voltar e observar consequências → avançar. A campanha final contém quatro atos de três mapas; não exige mundo aberto contínuo no MVP.
 
@@ -18,7 +18,7 @@ Loop: preparar equipamento no hub → explorar → lutar e coletar → decidir u
 | thorn_summoner | Invocadora de Espinhos | Feras espirituais, golens, veneno e suporte; Sabedoria/Vontade | A tribo fundiu suas almas à natureza; ela carrega as vozes ancestrais no cajado. |
 | sacred_flame_inquisitor | Inquisidor da Chama Sagrada | Maça, fogo, autocura; Fé/Força | Renegou a seita ao descobrir a aliança de seu líder com a corrupção. |
 
-No protótipo, implementar somente o Bastião: ataque básico, defesa com custo de recurso e esquiva. Provocação influencia inimigos controlados por IA; não pressupõe multiplayer. As outras classes são conteúdo planejado. Árvores, coeficientes e custos ainda não estão balanceados.
+No protótipo, implementar somente o Bastião: ataque básico, defesa com custo de recurso e esquiva. Provocação influencia inimigos controlados por IA; não pressupõe multiplayer. As outras classes são conteúdo planejado. A [especificação de árvores](classes-and-skills.md) define ramos iniciais; coeficientes e custos ainda não estão balanceados. Inteligência e Éter são, respectivamente, atributo e recurso; Precisão é derivada e Sabedoria é a expressão narrativa de Vontade.
 
 ## Combate, loot e progressão
 
