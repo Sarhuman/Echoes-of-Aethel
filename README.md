@@ -9,7 +9,7 @@ Um RPG de ação sobre herança, culpa e poder em um mundo de magia decadente. A
 
 Cinco heróis atravessam florestas contaminadas, cidades sepultadas e máquinas ancestrais. Entre uma batalha e outra, decisões tomadas para proteger os vivos alimentam uma força que transforma o mundo por dentro.
 
-> **Estado atual:** documentação de design e arquitetura. Ainda não há jogo executável ou engine configurada. Habilidades, fórmulas e taxas de loot são especificações experimentais, sujeitas a implementação e playtest.
+> **Estado atual:** documentação de design e arquitetura. Ainda não há jogo executável; a stack está definida, com implementação pendente. Habilidades, fórmulas e taxas de loot são especificações experimentais, sujeitas a implementação e playtest.
 
 ## 📜 História — O Coração partido
 
@@ -95,6 +95,7 @@ No **Mapa 12**, a luta e a revelação convergem. Após derrotar Vael, o jogador
 |---|---|
 | [Índice geral — docs/GDD/](docs/GDD/README.md) | Organização e referências canônicas do projeto |
 | [01 — Classes e Atributos](docs/GDD/01_classes_e_atributos.md) | Sprint 1 documentada: fórmulas, cinco classes, habilidades e diálogos |
+| [02 — Arquitetura Técnica](docs/GDD/02_arquitetura_tecnica.md) | Flutter/Flame, FastAPI, PostgreSQL, paperdoll, API e deploy |
 
 O [índice geral](docs/GDD/README.md) reúne também os documentos existentes de campanha, arte, loot, prólogo e engenharia. As próximas Sprints ampliarão os módulos sem duplicar o cânone.
 
@@ -102,6 +103,6 @@ O [índice geral](docs/GDD/README.md) reúne também os documentos existentes de
 
 **Primeiro marco jogável:** Cidadela → Bosque das Névoas → retorno à Cidadela, com Bastião, combate, Garras de Musgo, loot e uma escolha persistente com consequência observável.
 
-A primeira entrega será **single-player offline**. Engine e plataforma inicial ainda precisam de uma decisão técnica validada. Domínio, conteúdo, apresentação e persistência terão limites claros; saves serão versionados e efeitos/recompensas protegidos contra duplicação.
+A primeira entrega será **single-player offline**. A stack definida é Dart/Flutter/Flame + Python/FastAPI/PostgreSQL. Versões e plataforma inicial precisam de validação técnica; progressão online futura terá autoridade do servidor, separada de saves offline. Domínio, conteúdo, apresentação e persistência terão limites claros; saves serão versionados e efeitos/recompensas protegidos contra duplicação.
 
 Cada entrega é publicada com commit e PR conforme o [fluxo do GitHub](docs/engineering/github-workflow.md). Este README apresenta a visão do jogo; o [roadmap](docs/engineering/roadmap.md) distingue planejamento de implementação.

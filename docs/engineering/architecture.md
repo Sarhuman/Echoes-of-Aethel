@@ -1,6 +1,6 @@
 # Arquitetura proposta
 
-Documento de decisão inicial; nenhuma engine ou infraestrutura está implementada.
+Documento inicial complementado pela [Sprint 2](../GDD/02_arquitetura_tecnica.md), referência canônica para stack, API, paperdoll e deployment. Flutter/Flame e FastAPI/PostgreSQL estão definidos; nenhuma engine ou infraestrutura está implementada.
 
 ## Limites
 
@@ -10,7 +10,7 @@ Documento de decisão inicial; nenhuma engine ou infraestrutura está implementa
 - **Apresentação:** cenas 2D, animações, efeitos, UI, input e acessibilidade. Consome estado/eventos sem conceder recompensas diretamente.
 - **Infraestrutura:** arquivos de save, carregamento de assets e adapters da engine.
 
-Escolher a engine em decisão posterior a um experimento mínimo de input, colisão, iluminação, exportação e save no equipamento-alvo. Evitar comprometer a base com versões ou bibliotecas ainda não verificadas. O modelo permite ampliar conteúdo sem exigir um serviço distribuído.
+A stack escolhida na Sprint 2 exige experimento mínimo de input, colisão, iluminação, exportação e save no equipamento-alvo antes de fixar versões. O modelo permite ampliar conteúdo sem exigir um serviço distribuído.
 
 ## Persistência e consistência
 

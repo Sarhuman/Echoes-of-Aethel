@@ -1,8 +1,8 @@
 # Plano de implementação
 
-## 0 — Escolher e validar a base técnica
+## 0 — Validar a base técnica escolhida
 
-Definir plataforma inicial e controles. Comparar a engine candidata com uma cena pequena: movimento, colisão, ataque, luz e save. Registrar decisão, versão verificada e instruções reproduzíveis. Aceite: exportação executável no equipamento-alvo e retorno de save válido.
+Definir plataforma inicial e controles. Validar Flutter/Flame, conforme a [Sprint 2](../GDD/02_arquitetura_tecnica.md), com uma cena pequena: movimento, colisão, ataque, luz e save. Registrar decisão, versão verificada e instruções reproduzíveis. Aceite: exportação executável no equipamento-alvo e retorno de save válido.
 
 ## 1 — Fatia jogável do Bosque
 
@@ -35,3 +35,7 @@ Arte final, áudio, acessibilidade, balanceamento, migrações de saves e perfil
 - Playtest das duas escolhas e morte/retry com a mesma seed; regressões de colisão e segurança do hub.
 
 Este PR entrega documentação. Não há testes de execução ou CI de jogo para alegar como aprovados.
+
+## Trilha de infraestrutura online
+
+Após a fatia offline, implementar contratos da Sprint 2, ownership/idempotência, encontros autoritativos, persistência e testes de concorrência. Só então validar Compose, restauração e carga em VPS. Nenhum snapshot econômico offline é aceito como progresso online. Campanha single-player online não pressupõe multiplayer cooperativo.
