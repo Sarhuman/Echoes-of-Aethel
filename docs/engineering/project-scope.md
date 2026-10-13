@@ -68,7 +68,7 @@ A Cidadela pode mudar visualmente e em suas falas, mas mantém segurança e serv
 | Apresentação | Cena geométrica, HUD e efeitos opcionais | Tiles, sprites, animações, áudio e UI final |
 | Mundo/quest | Documentação e narrativa | Mapas jogáveis, interações e consequências no runtime |
 
-O PR #17 registrou 125 verificações headless no Godot 4.6. Isso valida os comportamentos cobertos, não a campanha, desempenho, acessibilidade completa ou export Windows. PRs dependentes ainda precisam de integração por ordem; conteúdo em branch não equivale a conteúdo entregue na main.
+O PR #17 registrou 125 verificações headless no Godot 4.6. Isso valida os comportamentos cobertos, não a campanha, desempenho, acessibilidade completa ou export Windows. Os PRs #1–#18 foram integrados à main em ordem de dependência em 2026-10-13, após nova execução das 125 verificações. Veja o estado consolidado em [versões](versions.md).
 
 ## 7. Arquitetura e fronteiras
 

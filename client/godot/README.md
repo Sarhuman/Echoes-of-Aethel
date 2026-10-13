@@ -25,3 +25,7 @@ Abra o projeto no editor e use F5 para a cena. Controles/limitações em [Player
 Apresentação opcional: F8 Base/Melhorado; F9 efeitos reduzidos. Flags e limitações em [apresentação](../../docs/engineering/enhanced-presentation.md). Teste: `godot --headless --path client/godot --script res://tests/test_presentation.gd`.
 
 Ataques e limites da amostragem física: [combate offline](../../docs/engineering/offline-combat.md). F6 reinicia a cena técnica; sem checkpoint ou loot.
+
+## Versão do projeto
+
+Protótipo `0.1.0-dev`, validado com Godot 4.6 stable. Consulte [versões e compatibilidade](../../docs/engineering/versions.md) e o [changelog](../../CHANGELOG.md).
