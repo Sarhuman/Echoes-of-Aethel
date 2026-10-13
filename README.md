@@ -9,6 +9,7 @@ Fundação de design e planejamento técnico. Ainda não há jogo executável, e
 ## Documentação
 
 - [Design canônico e classes](docs/design/game-design.md)
+- [Sprint 1 — Classes e atributos](docs/GDD/01_classes_e_atributos.md)
 - [Direção de arte 16-bit](docs/design/art-direction.md)
 - [Cinco classes e árvores de habilidades](docs/design/classes-and-skills.md)
 - [Baseline experimental de loot](docs/design/loot-baseline.md)
