@@ -17,6 +17,10 @@
 
 Módulos posteriores ao 09 ainda não possuem módulos publicados nesta pasta. Não considerar documentação como confirmação de sistemas executáveis.
 
+## Consolidação de produção
+
+[Escopo atual](../engineering/project-scope.md) e [proposta visual](../design/visual-proposal.md) distinguem a primeira fatia jogável da campanha completa. Controles aprovados: movimento WASD/setas; básico 1; habilidades 2/Q, 3/E, 4/R, 5/F; dash Espaço. As [decisões de produção](../engineering/production-decisions.md) e revisões explícitas posteriores prevalecem sobre propostas históricas de engine, vigor e identidade dos NPCs.
+
 ## Base de design existente
 
 | Tema | Documento |

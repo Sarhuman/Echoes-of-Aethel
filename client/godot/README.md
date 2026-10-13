@@ -1,6 +1,6 @@
 # Godot — harness de persistência e IA
 
-Base executável de testes offline em Godot 4.6. Há main scene técnica com Player/dash, ataques reais J/K, MP, inimigo FSM, parede e HUD; ainda não há campanha ou mapa final.
+Base executável de testes offline em Godot 4.6. Há main scene técnica com Player/dash, ataques reais 1 e 2/Q, MP, inimigo FSM, parede e HUD; ainda não há campanha ou mapa final.
 
 Autoloads: EventBus, GameState e SaveSystem; schema em core/world_save_schema.gd. O caminho res://core/save_system.gd corresponde a este projeto.
 
@@ -24,4 +24,4 @@ Abra o projeto no editor e use F5 para a cena. Controles/limitações em [Player
 
 Apresentação opcional: F8 Base/Melhorado; F9 efeitos reduzidos. Flags e limitações em [apresentação](../../docs/engineering/enhanced-presentation.md). Teste: `godot --headless --path client/godot --script res://tests/test_presentation.gd`.
 
-Ataques e limites da amostragem física: [combate offline](../../docs/engineering/offline-combat.md). R reinicia a cena técnica; sem checkpoint ou loot.
+Ataques e limites da amostragem física: [combate offline](../../docs/engineering/offline-combat.md). F6 reinicia a cena técnica; sem checkpoint ou loot.
