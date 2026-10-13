@@ -4,14 +4,14 @@ Base: PR #16, commit 9809c40cb3399fa3bbf4ef13232b25c46b2b6f7b. Godot 4.6.
 
 ## Executar
 
-Abrir `client/godot/project.godot` e F5. WASD/setas movem; J ataca; K executa pesado; Espaço esquiva; R recarrega a cena técnica. F8/F9 preservam apresentação opcional/redução de efeitos. HUD mostra HP, MP, stamina, fase e HP do inimigo. O cone representa a direção/alcance lógico projetado; amarelo prepara, vermelho ativo, cinza recupera.
+Abrir `client/godot/project.godot` e F5. WASD/setas movem; 1 ataca; 2 ou Q executa pesado; Espaço esquiva; F6 recarrega a cena técnica. F8/F9 preservam apresentação opcional/redução de efeitos. HUD mostra HP, MP, stamina, fase e HP do inimigo. O cone representa a direção/alcance lógico projetado; amarelo prepara, vermelho ativo, cinza recupera.
 
 | Ataque | Preparação / ativo / recuperação | Custo | Dano | Alcance lógico |
 |---|---|---|---|---|
-| Básico J | 150 / 80 / 250 ms | Gratuito | 12 | 56 px |
-| Pesado K | 350 / 80 / 370 ms | 12 MP | 24 | 64 px |
+| Básico 1 | 150 / 80 / 250 ms | Gratuito | 12 | 56 px |
+| Pesado 2/Q | 350 / 80 / 370 ms | 12 MP | 24 | 64 px |
 
-Os 800 ms do pesado seguem a revisão da conversa. Demais valores são configuração EXPERIMENTAL desta cena, não fórmula de arma nem balanceamento final. MP máximo 40, sem regeneração/poção nesta entrega; R permite repetir o teste. Não interpretar os 24 como solução da ambiguidade do +22 do machado. Stamina continua no dash (25); guarda, interrupção por dano comum, recompensa, migração v2 e checkpoint permanecem pendentes.
+Os 800 ms do pesado seguem a revisão da conversa. Demais valores são configuração EXPERIMENTAL desta cena, não fórmula de arma nem balanceamento final. MP máximo 40, sem regeneração/poção nesta entrega; F6 permite repetir o teste. Não interpretar os 24 como solução da ambiguidade do +22 do machado. Stamina continua no dash (25); guarda, interrupção por dano comum, recompensa, migração v2 e checkpoint permanecem pendentes.
 
 ## Responsabilidades
 
@@ -52,3 +52,7 @@ Godot 4.6 Linux headless: 41 combate + 19 Player + 25 FSM + 27 save + 13 apresen
 godot --headless --editor --path client/godot --quit
 godot --headless --path client/godot --script res://tests/test_combat.gd
 ```
+
+## Controles revisados
+
+Mapeamento completo em [escopo](project-scope.md#4-controles-aprovados). 3/E, 4/R e 5/F estão reservados e informam que a habilidade ainda não foi implementada; não gastam recursos. J/K foram removidos. F6 substitui R no reinício técnico.

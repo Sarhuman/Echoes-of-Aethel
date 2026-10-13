@@ -113,7 +113,9 @@ O [índice geral](docs/GDD/README.md) reúne também os documentos existentes de
 
 ## 🛠️ Desenvolvimento
 
-[Combate offline](docs/engineering/offline-combat.md): J/K atacam, MP e dano real, R reinicia a cena.
+[Escopo do projeto](docs/engineering/project-scope.md) · [Proposta visual](docs/design/visual-proposal.md) · [Controles aprovados](docs/engineering/project-scope.md#4-controles-aprovados)
+
+[Combate offline](docs/engineering/offline-combat.md): 1 e 2/Q atacam, MP e dano real, F6 reinicia a cena.
 
 [Apresentação Base/Melhorada](docs/engineering/enhanced-presentation.md): F8 alterna e F9 reduz efeitos.
 

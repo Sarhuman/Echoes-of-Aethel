@@ -38,11 +38,27 @@ dash={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"physical_keycode":32)]
 }
-normal_recovery={
+attack_basic={
 "deadzone": 0.2,
-"events": [Object(InputEventKey,"physical_keycode":74)]
+"events": [Object(InputEventKey,"physical_keycode":49)]
 }
-heavy_windup={
+skill_1={
 "deadzone": 0.2,
-"events": [Object(InputEventKey,"physical_keycode":75)]
+"events": [Object(InputEventKey,"physical_keycode":50),Object(InputEventKey,"physical_keycode":81)]
+}
+skill_2={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":51),Object(InputEventKey,"physical_keycode":69)]
+}
+skill_3={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":52),Object(InputEventKey,"physical_keycode":82)]
+}
+skill_4={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":53),Object(InputEventKey,"physical_keycode":70)]
+}
+debug_restart={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":4194337)]
 }

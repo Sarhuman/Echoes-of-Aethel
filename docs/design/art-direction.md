@@ -52,4 +52,8 @@ Flashes críticos e tremor de câmera são opcionais, ajustáveis e desativados 
 
 ## Primeiro pacote de assets
 
-Cidadela e Bosque com tiles temporários; Bastião 32×32 em quatro direções; lobo e cultista; Garras de Musgo 96×96; retratos de Maera e Irian; UI, telegraph de investida, impacto e loot. Registrar autor, licença e arquivo-fonte de cada asset antes de integrar. Este documento não entrega sprites prontos.
+Cidadela e Bosque com tiles temporários; Bastião 32×32 em quatro direções; lobo e cultista; Garras de Musgo 128×128 (revisão do protótipo); retratos de Maera e Irian; UI, telegraph de investida, impacto e loot. Registrar autor, licença e arquivo-fonte de cada asset antes de integrar. Este documento não entrega sprites prontos.
+
+## Proposta consolidada
+
+Veja [proposta visual 01](visual-proposal.md) para composição, paleta, HUD com controles aprovados e briefing da imagem conceitual. Arte conceitual não é captura da build nem spritesheet pronto.

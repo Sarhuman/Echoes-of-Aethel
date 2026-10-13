@@ -3,6 +3,7 @@ extends ActorBase
 
 signal stamina_changed(current: float, maximum: float)
 signal mp_changed(current: float, maximum: float)
+signal skill_unavailable(slot: int)
 signal attack_started(attack_id: StringName)
 signal hp_changed(current: int, maximum: int)
 
@@ -85,6 +86,14 @@ func request_attack(heavy: bool, sequence: int = 0) -> AttackController.Status:
 		attack_started.emit(spec.attack_id)
 	return result["status"]
 
+func request_skill(slot: int) -> AttackController.Status:
+	if slot == 1:
+		# Technical harness binding, not the final class loadout.
+		return request_attack(true)
+	if slot in [2, 3, 4] and not is_dead:
+		skill_unavailable.emit(slot)
+	return AttackController.Status.REJECTED
+
 func _sync_attack_state() -> void:
 	current_action_state = attacks.phase as ActionState
 	heavy_action = attacks.definition != null and attacks.definition.heavy
@@ -145,10 +154,15 @@ func _physics_process(delta: float) -> void:
 		input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		if input_vector != Vector2.ZERO and current_action_state == ActionState.IDLE:
 			facing = input_vector.normalized()
-		if Input.is_action_just_pressed("normal_recovery"):
+		if Input.is_action_just_pressed("attack_basic"):
 			request_attack(false)
-		if Input.is_action_just_pressed("heavy_windup"):
-			request_attack(true)
+		elif Input.is_action_just_pressed("skill_1"):
+			request_skill(1)
+		else:
+			for slot in range(2, 5):
+				if Input.is_action_just_pressed("skill_%d" % slot):
+					request_skill(slot)
+					break
 		if Input.is_action_just_pressed("dash"):
 			attempt_dash(input_vector)
 	advance_attack(delta)

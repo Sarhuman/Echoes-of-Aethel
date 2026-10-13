@@ -1,6 +1,6 @@
 # Atualização: ataques reais
 
-J/K agora executam ataques básico/pesado com MP e dano; R reinicia. Consulte [combate offline](offline-combat.md) para parâmetros, testes e limites atuais. A descrição abaixo registra a etapa anterior do PR #15.
+1 e 2/Q agora executam ataques básico/pesado com MP e dano; F6 reinicia. Consulte [combate offline](offline-combat.md) para parâmetros, testes e limites atuais. A descrição abaixo registra a etapa anterior do PR #15.
 
 # Player e cena de validação
 
@@ -8,7 +8,7 @@ Cena executável técnica Godot 4.6 em `client/godot/scenes/test_scene.tscn`, co
 
 ## Controles
 
-Abrir `client/godot/project.godot` no editor Godot 4.6 e pressionar F5. WASD/setas movem; Espaço faz dash; J coloca o jogador em recuperação normal de teste; K inicia windup pesado de teste. J/K não causam dano nem implementam as habilidades reais. O inimigo usa EnemyFSM e dano final fixo 15. HUD exibe HP/stamina/i-frames/cooldown/fase/morte. MP, combate ofensivo, quest, respawn de checkpoint e inventário ainda não estão presentes nessa cena.
+Abrir `client/godot/project.godot` no editor Godot 4.6 e pressionar F5. WASD/setas movem; Espaço faz dash; J coloca o jogador em recuperação normal de teste; K inicia windup pesado de teste. 1 e 2/Q não causam dano nem implementam as habilidades reais. O inimigo usa EnemyFSM e dano final fixo 15. HUD exibe HP/stamina/i-frames/cooldown/fase/morte. MP, combate ofensivo, quest, respawn de checkpoint e inventário ainda não estão presentes nessa cena.
 
 ## Regras integradas
 
