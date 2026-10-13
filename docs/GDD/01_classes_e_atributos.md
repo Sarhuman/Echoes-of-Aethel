@@ -74,7 +74,7 @@ Cada classe tem **quatro habilidades ativas e duas passivas**. A1 é o ataque in
 
 Cooldown começa na execução validada, junto do gasto do recurso indicado. Sem alvo válido, recurso insuficiente, animação bloqueada ou cooldown ativo: comando recusado sem custo. Custos não são debitados de novo por retry. Repetir o mesmo comando não repete dano ou recompensa. Passivas custam 0 MP; cooldown “—” significa efeito contínuo, e cooldown explícito limita o disparo.
 
-Esquiva e interação são ações universais fora da árvore. Esquiva proposta: 0 MP, cooldown 1,2 s, duração 0,25 s, sem atravessar paredes; janela de invulnerabilidade deve ser validada em playtest. Ataques gratuitos têm cooldown que também limita sua cadência. Diálogo offline pausa combate e timers juntos.
+Esquiva e interação são ações universais fora da árvore. Esquiva/dash revisada pela [Sprint 6](06_arquitetura_software.md): 25 stamina, cooldown 1,2 s, duração 0,2 s, sem atravessar paredes; stamina é separada de MP/vigor e invulnerabilidade não é implícita. Ataques gratuitos têm cooldown que também limita sua cadência. Diálogo offline pausa combate e timers juntos.
 
 ## 3. Mago — Tecelão de Runas
 

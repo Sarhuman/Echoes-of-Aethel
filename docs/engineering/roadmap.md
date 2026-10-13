@@ -2,7 +2,7 @@
 
 ## 0 — Validar a base técnica escolhida
 
-Definir plataforma inicial e controles. Validar Flutter/Flame, conforme a [Sprint 2](../GDD/02_arquitetura_tecnica.md), com uma cena pequena: movimento, colisão, ataque, luz e save. Registrar decisão, versão verificada e instruções reproduzíveis. Aceite: exportação executável no equipamento-alvo e retorno de save válido.
+Definir plataforma inicial e controles. Validar Godot/GDScript, conforme a [Sprint 6](../GDD/06_arquitetura_software.md), com uma cena pequena: movimento, colisão, ataque, luz e save. Registrar decisão, versão verificada e instruções reproduzíveis. Aceite: exportação executável no equipamento-alvo e retorno de save válido.
 
 ## 1 — Fatia jogável do Bosque
 

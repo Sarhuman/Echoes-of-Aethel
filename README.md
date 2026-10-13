@@ -99,10 +99,11 @@ No **Mapa 12**, a luta e a revelação convergem. Após derrotar Vael, o jogador
 |---|---|
 | [Índice geral — docs/GDD/](docs/GDD/README.md) | Organização e referências canônicas do projeto |
 | [01 — Classes e Atributos](docs/GDD/01_classes_e_atributos.md) | Sprint 1 documentada: fórmulas, cinco classes, habilidades e diálogos |
-| [02 — Arquitetura Técnica](docs/GDD/02_arquitetura_tecnica.md) | Flutter/Flame, FastAPI, PostgreSQL, paperdoll, API e deploy |
+| [02 — Arquitetura Técnica](docs/GDD/02_arquitetura_tecnica.md) | API, PostgreSQL, paperdoll e deploy; cliente revisado na Sprint 6 |
 | [03 — Sistema de Loot](docs/GDD/03_sistema_de_loot.md) | Raridades, afixos, slots, drops, consumíveis e JSON de itens |
 | [04 — Mapas e Quests — spoilers](docs/GDD/04_mapas_e_quests.md) | Doze mapas, 24 opções e degradação narrativa da Cidadela |
 | [05 — Combate e HUD](docs/GDD/05_combate_e_hud.md) | Fórmulas, HP/MP/vigor, Bruma, Eclipse e feedback visual |
+| [06 — Arquitetura de Software](docs/GDD/06_arquitetura_software.md) | Godot/GDScript, componentes, eventos, entidades e diálogo |
 
 O [índice geral](docs/GDD/README.md) reúne também os documentos existentes de campanha, arte, loot, prólogo e engenharia. As próximas Sprints ampliarão os módulos sem duplicar o cânone.
 
@@ -110,6 +111,6 @@ O [índice geral](docs/GDD/README.md) reúne também os documentos existentes de
 
 **Primeiro marco jogável:** Cidadela → Bosque das Névoas → retorno à Cidadela, com Bastião, combate, Garras de Musgo, loot e uma escolha persistente com consequência observável.
 
-A primeira entrega será **single-player offline**. A stack definida é Dart/Flutter/Flame + Python/FastAPI/PostgreSQL. Versões e plataforma inicial precisam de validação técnica; progressão online futura terá autoridade do servidor, separada de saves offline. Domínio, conteúdo, apresentação e persistência terão limites claros; saves serão versionados e efeitos/recompensas protegidos contra duplicação.
+A primeira entrega será **single-player offline**. A Sprint 6 define Godot/GDScript para o cliente, substituindo a proposta Flutter/Flame, e mantém Python/FastAPI/PostgreSQL para autoridade online. Versões e plataforma inicial precisam de validação técnica; progressão online futura terá autoridade do servidor, separada de saves offline. Domínio, conteúdo, apresentação e persistência terão limites claros; saves serão versionados e efeitos/recompensas protegidos contra duplicação.
 
 Cada entrega é publicada com commit e PR conforme o [fluxo do GitHub](docs/engineering/github-workflow.md). Este README apresenta a visão do jogo; o [roadmap](docs/engineering/roadmap.md) distingue planejamento de implementação.

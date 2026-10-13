@@ -4,6 +4,8 @@
 
 Este módulo define a engenharia do combate em tempo real com apresentação 16-bit. Complementa as [classes](01_classes_e_atributos.md), a [API autoritativa](02_arquitetura_tecnica.md), o [loot](03_sistema_de_loot.md) e os [mapas/quests](04_mapas_e_quests.md). Prevalece sobre regras anteriores de recurso do Bastião, regeneração e multiplicador crítico. O roteiro final detalhado de Vael continua pendente; esta Sprint passou a tratar combate e HUD.
 
+> **Revisão da Sprint 6:** Godot substitui Flutter/Flame na apresentação; dash passa a usar stamina universal (100 máximo, custo 25, duração 0,2 s e cooldown 1,2 s), separada de vigor. Demais regras de combate e autoridade permanecem conforme [módulo 06](06_arquitetura_software.md).
+
 ## 1. Dificuldade dinâmica e ambiental
 
 Não existe seletor Fácil/Médio/Difícil. O desafio vem de progressão por zona, composição de encontros e consequências das decisões. Recursos de acessibilidade visual/input não alteram recompensa nem são rótulos de dificuldade.
@@ -167,7 +169,7 @@ Apesar da descrição visual de “crítico no dano final”, a matemática faz 
 
 Aplicar limites de HP: com alvo de 10 HP, golpe nominal 35 registra `hp_damage=10`, `overkill=25`; FCT mostra dano de HP efetivo 10, com tooltip/log opcional para nominal. Não curar por overkill. Barreira absorvida tem evento próprio. Balanceamento de DPS e tempo para matar exige simulação, não está provado por estes exemplos.
 
-## 4. HUD — Flutter/Flame
+## 4. HUD — Godot (revisão Sprint 6)
 
 ### 4.1 Layout responsivo
 
@@ -182,7 +184,7 @@ HUD superior esquerda dentro de SafeArea: retrato pixel 48×48/64×64, nome curt
 | Conexão online | Pending/reconciliação visíveis; não afirmar uso aprovado antes da resposta |
 | Layout pequeno | Compactar nome/retrato e distribuir botões fora da área principal de combate; preservar texto/controles |
 
-Flame renderiza mundo/VFX; widgets Flutter em overlays representam menus e HUD acessível. Rebuild somente em mudanças relevantes de estado, não criar widgets por inimigo a cada frame. Arte usa nearest e escala inteira quando possível; texto pode renderizar em resolução própria para legibilidade.
+Godot renderiza mundo/VFX com nós 2D; Control/CanvasLayer representam menus e HUD. Atualizar somente em mudanças relevantes de estado, não criar nós de UI por inimigo a cada frame. Arte usa nearest e escala inteira quando possível; texto pode renderizar em resolução própria para legibilidade.
 
 ### 4.2 Floating Combat Text — FCT
 

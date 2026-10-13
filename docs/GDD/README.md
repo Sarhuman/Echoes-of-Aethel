@@ -9,8 +9,9 @@
 | 03 — Sistema de loot | Especificação experimental concluída; implementação pendente | [03_sistema_de_loot.md](03_sistema_de_loot.md) |
 | 04 — Mapas e quests | Bíblia de produção concluída; mapas/quests pendentes | [04_mapas_e_quests.md](04_mapas_e_quests.md) |
 | 05 — Combate e HUD | Regras experimentais; runtime/HUD/Eclipse pendentes | [05_combate_e_hud.md](05_combate_e_hud.md) |
+| 06 — Arquitetura de software | Godot definido; exemplos não executados na engine | [06_arquitetura_software.md](06_arquitetura_software.md) |
 
-Sprints posteriores à 05 ainda não possuem módulos publicados nesta pasta. Não considerar documentação como confirmação de sistemas executáveis.
+Sprints posteriores à 06 ainda não possuem módulos publicados nesta pasta. Não considerar documentação como confirmação de sistemas executáveis.
 
 ## Base de design existente
 
@@ -42,3 +43,5 @@ O módulo 03 substitui o baseline de quatro raridades: acrescenta Mágico, espec
 O módulo 04 define o detalhamento de mapas/dilemas, flags e degradação do hub. O resumo de campanha e as quests secundárias permanecem em design/campaign.md; em conflitos de detalhe da campanha principal, prevalece o módulo 04.
 
 O módulo 05 rege combate e HUD: Bastião usa vigor nas técnicas físicas; MP regenera fora de combate; multiplicador crítico pode chegar a 2×. Roteiro final específico de Vael permanece pendente em módulo posterior.
+
+O módulo 06 substitui Flutter/Flame por Godot no cliente e acrescenta stamina universal para dash. Backend e autoridade online permanecem; exemplos originais são referência histórica, sem runtime.
