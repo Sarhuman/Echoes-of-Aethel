@@ -4,7 +4,7 @@
 
 Direção aprovada: top-down 3/4 com chão ortogonal e personagens mostrando frente e lateral. A impressão de profundidade vem da arte e da ordenação pelo ponto dos pés; não exige geometria isométrica. Combate continua em tempo real.
 
-Tiles de 16×16 px, módulos de cenário de 32×32 px. Personagens em células de 48×48 px, com silhueta ocupando aproximadamente 32×40 px; criaturas pequenas podem usar 32×32. Bosses em 96×96 ou 128×128, compostos quando necessário. Colisor e hitbox são independentes da célula e nunca incluem cajados, capas ou efeitos decorativos.
+Tiles de 16×16 px, módulos de cenário de 32×32 px. Personagens jogáveis em células de 32×32 px, conforme a [Sprint 1](../GDD/01_classes_e_atributos.md); criaturas normais podem usar 32×32 ou 48×48 conforme silhueta. Bosses em 96×96 ou 128×128, compostos quando necessário. Colisor e hitbox são independentes da célula e nunca incluem cajados, capas ou efeitos decorativos.
 
 Viewport de referência: 640×360. Preferir escala inteira com filtro nearest; em telas menores, adaptar UI e área visível sem cortar controles. A UI pode ser renderizada em resolução própria para texto ampliado. Não reduzir legibilidade para preservar uma grade estética.
 
@@ -52,4 +52,4 @@ Flashes críticos e tremor de câmera são opcionais, ajustáveis e desativados 
 
 ## Primeiro pacote de assets
 
-Cidadela e Bosque com tiles temporários; Bastião 48×48 em quatro direções; lobo e cultista; Garras de Musgo 96×96; retratos de Maera e Irian; UI, telegraph de investida, impacto e loot. Registrar autor, licença e arquivo-fonte de cada asset antes de integrar. Este documento não entrega sprites prontos.
+Cidadela e Bosque com tiles temporários; Bastião 32×32 em quatro direções; lobo e cultista; Garras de Musgo 96×96; retratos de Maera e Irian; UI, telegraph de investida, impacto e loot. Registrar autor, licença e arquivo-fonte de cada asset antes de integrar. Este documento não entrega sprites prontos.

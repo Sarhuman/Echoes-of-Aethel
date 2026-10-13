@@ -12,13 +12,13 @@ Loop: preparar equipamento no hub → explorar → lutar e coletar → decidir u
 
 | ID estável | Classe | Combate e recurso temático | Origem e conflito |
 |---|---|---|---|
-| rune_weaver | Tecelão de Runas | Magia elemental de área, barreiras, controle; Inteligência/Éter | Sua ordem rompeu nós da realidade e foi consumida. Busca selar as fendas e redimir seus mestres. |
-| shadow_sentinel | Sentinela das Sombras | Adagas, armadilhas, esquiva, ocultação breve; Destreza/Precisão | Uma execução ativou um selo. A velocidade recebida consome sua vitalidade; busca uma cura. |
-| twilight_bastion | Bastião do Crepúsculo | Machado, escudo, defesa e controle; Força/Vitalidade | Fechou os portões para salvar civis, abandonando família e soldados. Sua proteção nasce da culpa. |
-| thorn_summoner | Invocadora de Espinhos | Feras espirituais, golens, veneno e suporte; Sabedoria/Vontade | A tribo fundiu suas almas à natureza; ela carrega as vozes ancestrais no cajado. |
-| sacred_flame_inquisitor | Inquisidor da Chama Sagrada | Maça, fogo, autocura; Fé/Força | Renegou a seita ao descobrir a aliança de seu líder com a corrupção. |
+| rune_weaver | Tecelão de Runas | Magia elemental de área, barreiras, controle; INT/FTH; Éter como MP | Sua ordem rompeu nós da realidade e foi consumida. Busca selar as fendas e redimir seus mestres. |
+| shadow_sentinel | Sentinela das Sombras | Adagas, armadilhas, esquiva, ocultação breve; DEX/STR | Uma execução ativou um selo. A velocidade recebida consome sua vitalidade; busca uma cura. |
+| twilight_bastion | Bastião do Crepúsculo | Machado, escudo, defesa e controle; STR/VIT | Fechou os portões para salvar civis, abandonando família e soldados. Sua proteção nasce da culpa. |
+| thorn_summoner | Invocadora de Espinhos | Feras espirituais, golens, veneno e suporte; INT/FTH; sabedoria ancestral narrativa | A tribo fundiu suas almas à natureza; ela carrega as vozes ancestrais no cajado. |
+| sacred_flame_inquisitor | Inquisidor da Chama Sagrada | Maça, fogo, autocura; FTH/STR | Renegou a seita ao descobrir a aliança de seu líder com a corrupção. |
 
-No protótipo, implementar somente o Bastião: ataque básico, defesa com custo de recurso e esquiva. Provocação influencia inimigos controlados por IA; não pressupõe multiplayer. As outras classes são conteúdo planejado. A [especificação de árvores](classes-and-skills.md) define ramos iniciais; coeficientes e custos ainda não estão balanceados. Inteligência e Éter são, respectivamente, atributo e recurso; Precisão é derivada e Sabedoria é a expressão narrativa de Vontade.
+No protótipo, implementar somente o Bastião: ataque básico, defesa com custo de recurso e esquiva. Provocação influencia inimigos controlados por IA; não pressupõe multiplayer. As outras classes são conteúdo planejado. A [Sprint 1](../GDD/01_classes_e_atributos.md) define cinco atributos, quatro ativas e duas passivas por classe, fórmulas e custos experimentais. Éter é recurso; Precisão é derivada; Sabedoria e Vontade são termos narrativos, sem sexto atributo.
 
 ## Combate, loot e progressão
 
