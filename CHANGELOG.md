@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.0-dev — 2026-10-13
+
+- Arena como cena inicial: três encontros, HUD, pausa, vitória/derrota e reinício.
+- Lobo e Cultista experimentais com parâmetros e antecipações diferentes.
+- Navegação A* compartilhada para obstáculos estáticos e memória da última posição visível por três segundos.
+- Recuperação de 30 HP, MP e stamina entre encontros; sem gravar progressão.
+- Cena técnica preservada; F8/F9 permanecem exclusivos dela.
+- 144 verificações headless: 125 regressões + 19 de arena, incluindo desvio físico, pausa e transições.
+- Execução pelo Godot 4.6; sem export Windows ou avaliação gráfica neste ambiente.
+
+
 ## 0.1.0-dev — 2026-10-13
 
 Primeiro identificador de desenvolvimento do protótipo técnico; sem tag, release binária ou campanha completa.
