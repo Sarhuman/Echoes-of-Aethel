@@ -1,0 +1,4 @@
+.godot/
+secrets/
+.env
+*.log
