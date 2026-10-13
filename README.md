@@ -58,11 +58,11 @@ Raridades: **Comum → Mágico → Raro → Épico → Lendário**. Nível do it
 
 ### Dificuldade e recursos
 
-Sem seletor tradicional: a progressão por atos e a Bruma mudam o desafio de novas expedições em mapas revisitados. HP/MP e vigor do Bastião são confirmados pelo domínio; poções podem ser compradas no hub e usadas por atalhos. O modo Eclipse, planejado para após a primeira conclusão, cria uma nova campanha com morte permanente e fases adicionais de boss; ainda não está implementado.
+Sem seletor tradicional: a progressão por atos e a Bruma mudam o desafio de novas expedições em mapas revisitados. HP/MP e stamina são confirmados pelo domínio; fúria do Bastião será buff passivo; poções podem ser compradas no hub e usadas por atalhos. O modo Eclipse, planejado para após a primeira conclusão, cria uma nova campanha com morte permanente e fases adicionais de boss; ainda não está implementado.
 
 ### Arte e interface 16-bit
 
-Perspectiva **top-down 3/4**, chão ortogonal, tiles de 16×16 e sprites jogáveis de **32×32 pixels**. Bosses ocupam células maiores, com névoa, raízes e luz de Éter compondo a atmosfera sem esconder sinais de ataque.
+Perspectiva **top-down 3/4 com projeção simulada 2:1**, geometria e colisões a validar, tiles de 16×16 e sprites jogáveis de **32×32 pixels**. Bosses ocupam células maiores, com névoa, raízes e luz de Éter compondo a atmosfera sem esconder sinais de ataque.
 
 Caixas de diálogo azul-escuras usam **borda dupla de prata e marfim**, fontes pixel art legíveis e retratos expressivos de 64×64. Texto ampliável, avanço manual e efeitos reduzidos fazem parte da direção de interface. Cor, forma e som trabalham juntos na leitura do combate.
 
@@ -113,8 +113,10 @@ O [índice geral](docs/GDD/README.md) reúne também os documentos existentes de
 
 ## 🛠️ Desenvolvimento
 
+As [decisões de produção aprovadas](docs/engineering/production-decisions.md) prevalecem sobre propostas anteriores: Windows offline, slice Bastião/Cidadela/Bosque, MP em ativas e stamina para dash. Runtime ainda precisa dessa reconciliação.
+
 **Primeiro marco jogável:** Cidadela → Bosque das Névoas → retorno à Cidadela, com Bastião, combate, Garras de Musgo, loot e uma escolha persistente com consequência observável.
 
-A primeira entrega será **single-player offline**. A Sprint 6 define Godot/GDScript para o cliente, substituindo a proposta Flutter/Flame, e mantém Python/FastAPI/PostgreSQL para autoridade online. Versões e plataforma inicial precisam de validação técnica; progressão online futura terá autoridade do servidor, separada de saves offline. Domínio, conteúdo, apresentação e persistência terão limites claros; saves serão versionados e efeitos/recompensas protegidos contra duplicação.
+A primeira entrega será **single-player offline**. A Sprint 6 define Godot/GDScript para o cliente, substituindo a proposta Flutter/Flame, e mantém Python/FastAPI/PostgreSQL para autoridade online. Windows é a plataforma inicial. Alpha prevê conta/saves em nuvem/telemetria, sem combate autoritativo no lançamento single-player; instâncias competitivas exigirão contrato próprio. Domínio, conteúdo, apresentação e persistência terão limites claros; saves serão versionados e efeitos/recompensas protegidos contra duplicação.
 
 Cada entrega é publicada com commit e PR conforme o [fluxo do GitHub](docs/engineering/github-workflow.md). Este README apresenta a visão do jogo; o [roadmap](docs/engineering/roadmap.md) distingue planejamento de implementação.
