@@ -1,3 +1,7 @@
+# Atualização: ataques reais
+
+J/K agora executam ataques básico/pesado com MP e dano; R reinicia. Consulte [combate offline](offline-combat.md) para parâmetros, testes e limites atuais. A descrição abaixo registra a etapa anterior do PR #15.
+
 # Player e cena de validação
 
 Cena executável técnica Godot 4.6 em `client/godot/scenes/test_scene.tscn`, configurada como main scene. Usa formas geométricas temporárias, sem sprites do Aseprite ou mapa Bosque final.

@@ -9,7 +9,7 @@ Um RPG de ação sobre herança, culpa e poder em um mundo de magia decadente. A
 
 Cinco heróis atravessam florestas contaminadas, cidades sepultadas e máquinas ancestrais. Entre uma batalha e outra, decisões tomadas para proteger os vivos alimentam uma força que transforma o mundo por dentro.
 
-> **Estado atual:** documentação de design/arquitetura e implementação inicial de persistência offline. Há cena técnica Godot com Player/dash, parede, inimigo e HUD, com 84 verificações aprovadas; ainda não há campanha jogável. Habilidades, fórmulas e taxas de loot são especificações experimentais, sujeitas a implementação e playtest.
+> **Estado atual:** documentação de design/arquitetura e implementação inicial de persistência offline. Há cena técnica Godot com ataques básico/pesado, MP, Player/dash, parede, inimigo e HUD, com 125 verificações aprovadas; ainda não há campanha jogável. Habilidades, fórmulas e taxas de loot são especificações experimentais, sujeitas a implementação e playtest.
 
 ## 📜 História — O Coração partido
 
@@ -112,6 +112,8 @@ No **Mapa 12**, a luta e a revelação convergem. Após derrotar Vael, o jogador
 O [índice geral](docs/GDD/README.md) reúne também os documentos existentes de campanha, arte, loot, prólogo e engenharia. As próximas Sprints ampliarão os módulos sem duplicar o cânone.
 
 ## 🛠️ Desenvolvimento
+
+[Combate offline](docs/engineering/offline-combat.md): J/K atacam, MP e dano real, R reinicia a cena.
 
 [Apresentação Base/Melhorada](docs/engineering/enhanced-presentation.md): F8 alterna e F9 reduz efeitos.
 
