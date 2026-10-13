@@ -77,7 +77,7 @@ Luz em áreas pequenas; partículas contidas; impacto curto; sem bloom que destr
 5. Efeitos essenciais: antecipação, arco de golpe, impacto, projétil e marcador de interação.
 6. Retratos e ambientação de áudio mínimos, após o loop funcionar.
 
-Entregar cada asset com arquivo-fonte, dimensões, pivô, metadados de animação e proveniência/licença. A imagem gerada nesta conversa é referência de composição; não é tilemap, atlas, export do Godot ou asset pronto para produção.
+Entregar cada asset com arquivo-fonte, dimensões, pivô, metadados de animação e proveniência/licença. As [imagens da galeria](../media/concepts/README.md) são referências de composição; não é tilemap, atlas, export do Godot ou asset pronto para produção.
 
 ## 8. Briefing da imagem conceitual
 

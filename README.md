@@ -1,130 +1,151 @@
-# 🌑 Echoes of Aethel
+# Echoes of Aethel
 
-> **O caminho para o inferno está cheio de boas intenções.**
-> Em Aethel, salvar alguém pode ser a primeira etapa de uma tragédia.
+**Dark fantasy · ARPG 2D · Pixel art · Single-player offline**
 
-**Dark Fantasy ARPG 2D · Pixel Art 16-bit · Combate em tempo real**
+> O caminho para o inferno está cheio de boas intenções.
 
-Um RPG de ação sobre herança, culpa e poder em um mundo de magia decadente. A apresentação busca a expressividade dos RPGs clássicos como **Final Fantasy VI**; combate, exploração e progressão de equipamentos recebem a influência de **Diablo**. Personagens, arte, música e universo terão identidade própria.
+![Proposta visual de Echoes of Aethel: Bastião entre a Cidadela e o Bosque das Névoas](docs/media/concepts/aethel-visual-target.png)
 
-Cinco heróis atravessam florestas contaminadas, cidades sepultadas e máquinas ancestrais. Entre uma batalha e outra, decisões tomadas para proteger os vivos alimentam uma força que transforma o mundo por dentro.
+*Arte conceitual gerada por IA para orientar a produção. As imagens desta página não são capturas da versão executável nem sprites prontos. O jogo atual usa uma cena técnica com formas provisórias.*
 
-> **Estado atual:** documentação de design/arquitetura e implementação inicial de persistência offline. Há cena técnica Godot com ataques básico/pesado, MP, Player/dash, parede, inimigo e HUD, com 125 verificações aprovadas; ainda não há campanha jogável. Habilidades, fórmulas e taxas de loot são especificações experimentais, sujeitas a implementação e playtest.
+[Escopo do projeto](docs/engineering/project-scope.md) · [Proposta visual](docs/design/visual-proposal.md) · [GDD](docs/GDD/README.md) · [Histórico](CHANGELOG.md) · [Versões](docs/engineering/versions.md)
 
-## 📜 História — O Coração partido
+## O jogo
 
-### O prólogo
+Um mundo de magia decadente, ferido pela ruptura do Coração de Éter. Na **Cidadela dos Últimos**, um fragmento ainda puro preserva um refúgio. Além dos portões, a Bruma transforma criaturas, ruínas e pessoas.
 
-Cinco Santuários filtravam a magia selvagem do **Coração de Éter** e sustentavam o equilíbrio de Aethel. Durante um eclipse, **Vael**, o Supremo Arquimago, tentou perfurar esse núcleo para extrair poder ilimitado.
+O Bastião atravessa o Bosque das Névoas em busca de respostas. Combate, exploração e escolhas se encontram: salvar alguém pode desencadear outra tragédia, e as consequências reaparecem no mundo. A segurança do hub e os serviços essenciais permanecem disponíveis.
 
-O Coração se partiu em cinco fragmentos. A **Bruma Estelar** espalhou-se pelas terras: animais perderam sua natureza, mortos voltaram a caminhar e antigos guardiões se tornaram ameaças. Na **Cidadela dos Últimos**, um fragmento ainda puro mantém uma pequena região protegida.
+**Loop da primeira fatia:** preparar-se na Cidadela → explorar o Bosque → lutar → coletar → decidir o destino do espião → retornar e observar a consequência.
 
-### A jornada e o mistério de Vael
+## Versão e estado real
 
-O herói chega à Cidadela por uma razão pessoal: redenção, cura, dever, sobrevivência ou ruptura com uma fé corrompida. Para alcançar o Pináculo Celestial, precisa enfrentar os guardiões e recuperar os três fragmentos sob seu domínio. O quinto permanece com Vael.
-
-Ao longo da jornada, criaturas reconhecem uma marca que o protagonista não compreende. Registros antigos contradizem o que ele sabe sobre sua origem. No Mapa 12, o confronto com **Vael, o Sol-Negro**, revela por que seu caminho e o ritual parecem inseparáveis.
-
-### Boas intenções, consequências sombrias
-
-Cada dilema narrativo oferece duas alternativas. Ambas podem parecer necessárias; ambas preservam alguma coisa e condenam outra. Misericórdia e julgamento canalizam a energia do mundo para a mesma engrenagem ritualística, mas mudam pessoas, encontros e destinos de maneiras distintas.
-
-As consequências exatas permanecem ocultas no momento da escolha. Sintomas, relatos e inscrições oferecem pistas; o jogador observa os efeitos depois, nos mapas e no hub. A tragédia não apaga sua influência: suas decisões determinam quem sobrevive, quem sofre e o que restará no epílogo.
-
-## ⚔️ Mecânicas principais
-
-### Doze mapas, quatro atos e um lugar para voltar
-
-A campanha contém **12 mapas em 4 atos**, com exploração, encontros e arenas. A Cidadela é o hub principal; acampamentos seguros apoiam os atos posteriores. Cura, inventário e, na visão completa, ferreiro, alquimista, encantador e baú permitem preparar a próxima expedição.
-
-Com o avanço da história e das escolhas, o hub se deteriora: moradores adoecem, crenças endurecem e a escassez muda diálogos e cenários. **Sua segurança mecânica permanece:** não há inimigos ativos nem dano no hub, e serviços essenciais continuam disponíveis.
-
-### Quests de dupla escolha
-
-Dilemas morais com duas opções, pistas prévias e consequências imediatas ou atrasadas. Decisões persistem no save e não são desfeitas por morte, respawn ou respec. Menus e interações operacionais não seguem a regra de duas escolhas.
-
-### Combate, experiência e loot
-
-Ataques em tempo real combinam posicionamento, esquiva, gestão de MP, telegraphs e habilidades de classe. Cada classe possui quatro habilidades ativas e duas passivas no módulo inicial de design.
-
-| Encontro | Progressão e recompensa previstas |
+| Item | Estado |
 |---|---|
-| Inimigos comuns | XP menor; chance de ouro, consumíveis e equipamentos comuns ou mágicos |
-| Elites | XP maior e alta chance de mágicos/raros; materiais de crafting |
-| Sub-bosses | Equipamento raro ou épico garantido e essências elementais |
-| Bosses de ato | Equipamento épico ou lendário; receita e fragmento únicos na primeira vitória da campanha |
+| Projeto | **0.1.0-dev — protótipo técnico / pré-alpha** |
+| Engine validada | **Godot 4.6 stable**, GDScript, renderer GL Compatibility |
+| Plataforma inicial | Windows; export executável ainda pendente |
+| Testes executados | **125 verificações aprovadas**, Godot 4.6 Linux headless |
+| Save | Envelope `schema_version = 1`; conteúdo `world-save-1` |
+| Campanha | Documentada; ainda não jogável |
+| Download / release | Sem pacote Windows, tag ou release publicada |
 
-Raridades: **Comum → Mágico → Raro → Épico → Lendário**. Nível do item e afixos determinam seu poder junto da raridade. Novas expedições podem repovoar encontros; recompensas únicas e decisões de história não se repetem.
+A versão está em [VERSION](VERSION) e em `config/version` do projeto. O número do save tem ciclo independente. As verificações foram executadas localmente; não representam CI, benchmark ou playtest visual.
 
-### Dificuldade e recursos
+## Galeria conceitual
 
-Sem seletor tradicional: a progressão por atos e a Bruma mudam o desafio de novas expedições em mapas revisitados. HP/MP e stamina são confirmados pelo domínio; fúria do Bastião será buff passivo; poções podem ser compradas no hub e usadas por atalhos. O modo Eclipse, planejado para após a primeira conclusão, cria uma nova campanha com morte permanente e fases adicionais de boss; ainda não está implementado.
+### Cidadela dos Últimos — abrigo e preparação
 
-### Arte e interface 16-bit
+![Conceito da Cidadela: praça protegida, forja, alquimia, conselho, guarda e comércio](docs/media/concepts/citadel-safe-hub.png)
 
-Perspectiva **top-down 3/4 com projeção simulada 2:1**, geometria e colisões a validar, tiles de 16×16 e sprites jogáveis de **32×32 pixels**. Bosses ocupam células maiores, com névoa, raízes e luz de Éter compondo a atmosfera sem esconder sinais de ataque.
+*Proposta de ambiente seguro: pedra azul, luz âmbar e Éter ciano. Bram, Lyra, Irian, Maera e Sera mantêm suas funções. Este mapa ainda precisa ser produzido na engine.*
 
-Caixas de diálogo azul-escuras usam **borda dupla de prata e marfim**, fontes pixel art legíveis e retratos expressivos de 64×64. Texto ampliável, avanço manual e efeitos reduzidos fazem parte da direção de interface. Cor, forma e som trabalham juntos na leitura do combate.
+### Bosque das Névoas — Garras de Musgo
 
-## 🧙 Cinco classes jogáveis
+![Conceito do Bastião diante de Garras de Musgo em uma arena de raízes e ruínas](docs/media/concepts/moss-claws-arena.png)
 
-Os nomes clássicos descrevem o papel; os títulos pertencem ao universo de Aethel. Os atributos distribuíveis são **STR, DEX, INT, FTH e VIT**.
+*Proposta de arena e antecipação visual. Boss, onda de choque e composição final permanecem em desenvolvimento; a imagem não comprova mecânicas implementadas.*
 
-| Classe / título | Papel de combate | Atributo principal | Sprite 32×32 | Origem | Habilidade assinatura |
-|---|---|---|---|---|---|
-| **Mago — Tecelão de Runas** | Magia de área, controle e barreiras | INT — Inteligência | Manto violeta, runas claras, cajado e sombras azuis | Sobreviveu à ordem que rompeu os nós da realidade; busca selar as fendas e reparar seus erros | **Nó de Éter:** cria uma barreira temporária |
-| **Ladina — Sentinela das Sombras** | Adagas, armadilhas e reposicionamento | DEX — Destreza | Capa azul-noite, prata e detalhes vermelhos | Uma execução ativou um selo; sua velocidade extraordinária vem de uma marca que consome vitalidade | **Passo Velado:** ocultação breve para preparar o próximo golpe |
-| **Guerreiro — Bastião do Crepúsculo** | Defesa frontal e ataques pesados | STR — Força | Armadura azul-ferro, escudo âmbar e machado | Fechou os portões para salvar a cidade, abandonando família e soldados do lado de fora | **Guarda do Crepúsculo:** reduz dano frontal por tempo limitado |
-| **Druida — Invocadora de Espinhos** | Invocações, veneno e sustentação | INT — Inteligência | Musgo, osso e violeta; cajado ramificado | Sua tribo fundiu as almas à natureza; as vozes ancestrais permanecem em seu cajado | **Golem de Pedra:** invoca um protetor temporário |
-| **Paladino — Inquisidor da Chama Sagrada** | Maça, dano sagrado e autocura | FTH — Fé | Marfim, cobre e chama azul; tabardo gasto | Renegou a seita ao descobrir a aliança de seu líder com as forças da corrupção | **Veredito Solar:** projeta um golpe sagrado em cone |
+Origem, integridade e uso dos três arquivos: [manifesto das imagens](docs/media/concepts/README.md).
 
-Custos, cooldowns, passivas, atributos secundários e reações a Vael estão no [Módulo de Classes e Atributos](docs/GDD/01_classes_e_atributos.md).
+## O que funciona agora
 
-## 🗺️ Atos e bosses
+- Movimento com projeção 2:1, colisão com parede, dash, stamina e 120 ms de invulnerabilidade.
+- Ataques básico/pesado com MP, direção fixa, fases temporais e um acerto por alvo por golpe.
+- Recusa de comandos inválidos e prevenção de débito/execução duplicados.
+- Inimigo com FSM, alcance, percepção e verificação de parede.
+- HP, morte, bloqueio de dano na Cidadela e núcleo de persistência de mundo com backup.
+- HUD técnico, indicador do golpe e apresentação Base/Melhorada com efeitos reduzidos.
 
-| Ato | Mapas | Região e progressão | Confronto principal |
-|---|---|---|---|
-| **I — O Despertar das Sombras** | 1–3 | Bosque das Névoas → Pântano dos Lamentantes → Portal do Julgamento. Garras de Musgo e Matriarca das Águas antecedem o guardião | **Silvano, o Traidor**, espírito da floresta manifestado em armadura antiga |
-| **II — As Cinzas do Império** | 4–6 | Dunas de Sal → Vale dos Sacrifícios → Cripta de Ossos. Autômatos, altares e mortos cristalizados expõem o preço da antiga prosperidade | **Malignus, o Colecionador de Ossos** |
-| **III — O Abismo das Máquinas e da Carne** | 7–9 | Esgotos de Éter → Fundição Proibida → Abismo da Voracidade. A Mãe das Proles e o Autômato Forjador guardam a descida | **Gorgoroth, a Boca das Sombras** |
-| **IV — O Pináculo Celestial** | 10–12 | Jardins Suspensos → Ponte dos Lamentos → Coração de Éter. Arconte de Prata e Guardião dos Portões protegem o caminho final | **Vael, o Arconte Primogênito / Sol-Negro** |
+A detecção de golpes usa amostragem física discreta. Não há reconstrução histórica de trajetórias nem garantia de colisão contínua para movimento rápido. Parâmetros de dano, MP e alcance são experimentais. [Contratos e limites do combate](docs/engineering/offline-combat.md).
 
-No **Mapa 12**, a luta e a revelação convergem. Após derrotar Vael, o jogador decide entre restaurar a Ordem ou assumir a Ascensão. Nenhuma rota oferece salvação sem custo; decisões anteriores moldam os epílogos.
+## Executar a cena técnica
 
-> Os documentos de campanha contêm spoilers completos. A apresentação acima preserva o segredo da origem do protagonista.
+1. Instale **Godot 4.6 stable**.
+2. Clone este repositório e importe `client/godot/project.godot` no Project Manager.
+3. Abra o projeto e pressione **F5**.
 
-## 📚 Índice do GDD
+```bash
+git clone https://github.com/Sarhuman/Echoes-of-Aethel.git
+cd Echoes-of-Aethel
+godot --path client/godot
+```
 
-| Documento | Conteúdo / estado |
+O repositório pode exigir acesso autenticado. Não é necessário backend ou conta dentro do jogo para esta cena. Ainda não há instalador nem executável Windows distribuído.
+
+### Controles aprovados
+
+| Ação | Teclas | Na cena atual |
+|---|---|---|
+| Movimento | **WASD** ou **setas** | Implementado |
+| Ataque básico | **1** | Implementado |
+| Habilidade 1 | **2** ou **Q** | Pesado experimental |
+| Habilidade 2 | **3** ou **E** | Reservada; aviso de indisponibilidade |
+| Habilidade 3 | **4** ou **R** | Reservada; aviso de indisponibilidade |
+| Habilidade 4 | **5** ou **F** | Reservada; aviso de indisponibilidade |
+| Dash | **Espaço** | Implementado |
+| Reiniciar cena técnica | **F6** | Ferramenta de teste, não checkpoint |
+| Alternar apresentação | **F8** | Base / Melhorada |
+| Reduzir efeitos | **F9** | Implementado |
+
+Números da fileira superior. Aliases acionam a mesma habilidade; W permanece exclusivo de movimento. Habilidades reservadas não gastam recursos. Os ícones da arte conceitual não definem o loadout final.
+
+### Verificar a base
+
+Executar da raiz, com Godot 4.6 disponível como `godot`:
+
+```bash
+godot --headless --editor --path client/godot --quit
+godot --headless --path client/godot --script res://tests/test_save_system.gd
+godot --headless --path client/godot --script res://tests/test_enemy_fsm.gd
+godot --headless --path client/godot --script res://tests/test_player.gd
+godot --headless --path client/godot --script res://tests/test_presentation.gd
+godot --headless --path client/godot --script res://tests/test_combat.gd
+```
+
+As suítes de persistência usam e apagam dados do harness; não executar sobre saves de produção ou concorrentemente sobre o mesmo slot. Distribuição: save 27, FSM 25, Player 19, apresentação 13, combate 41.
+
+## O que falta para a primeira fatia jogável
+
+| Prioridade | Entrega pendente | Aceite |
+|---|---|---|
+| 1 | Guarda, habilidades restantes e regras de interrupção | Arena com todas as ações utilizáveis e custos validados |
+| 2 | Cidadela/Bosque conectados e morte/checkpoint | Sair, lutar, morrer e recuperar sem perder decisões |
+| 3 | Lobo, Cultista e Garras de Musgo | Encontros próprios, antecipações e esquiva verificadas |
+| 4 | Inventário, loot/XP e migração do save | Recompensa confirmada sem perda/duplicação, inclusive bolsa cheia |
+| 5 | A Caça ao Espião e consequência no hub | Executar ou poupar; salvar/reabrir preserva a rota escolhida |
+| 6 | Arte, áudio, menus e acessibilidade | Leitura clara em movimento e com efeitos reduzidos |
+| 7 | CI, export e playtest Windows | Build reproduzível e loop completo fora do editor |
+
+Também faltam uma política de licença do projeto e a revisão de proveniência dos futuros assets externos. Nenhuma licença de terceiros foi atribuída automaticamente às imagens desta página.
+
+## Visão de expansão
+
+A campanha completa prevê **cinco classes, quatro atos e doze mapas**. Bastião é a primeira classe; Tecelão de Runas, Sentinela das Sombras, Invocadora de Espinhos e Inquisidor da Chama Sagrada entram em etapas posteriores.
+
+O caminho passa pelo Bosque, Pântano e Portal, segue por desertos, criptas, máquinas e jardins suspensos, até Vael no Pináculo Celestial. Detalhes e spoilers estão no GDD. Multiplayer, outras plataformas, crafting avançado e Eclipse ficam fora da primeira fatia. A Alpha poderá acrescentar conta e saves em nuvem; não há backend implementado neste repositório.
+
+## Arquitetura e referências
+
+`AttackDefinition` guarda conteúdo; `CombatService` calcula; `AttackController` confirma execução; atores adaptam input/física; apresentação reage a fatos confirmados. Save, quest e economia mantêm autoridade no domínio.
+
+| Referência | Uso no projeto |
 |---|---|
-| [Índice geral — docs/GDD/](docs/GDD/README.md) | Organização e referências canônicas do projeto |
-| [01 — Classes e Atributos](docs/GDD/01_classes_e_atributos.md) | Sprint 1 documentada: fórmulas, cinco classes, habilidades e diálogos |
-| [02 — Arquitetura Técnica](docs/GDD/02_arquitetura_tecnica.md) | API, PostgreSQL, paperdoll e deploy; cliente revisado na Sprint 6 |
-| [03 — Sistema de Loot](docs/GDD/03_sistema_de_loot.md) | Raridades, afixos, slots, drops, consumíveis e JSON de itens |
-| [04 — Mapas e Quests — spoilers](docs/GDD/04_mapas_e_quests.md) | Doze mapas, 24 opções e degradação narrativa da Cidadela |
-| [05 — Combate e HUD](docs/GDD/05_combate_e_hud.md) | Fórmulas, HP/MP/vigor, Bruma, Eclipse e feedback visual |
-| [06 — Arquitetura de Software](docs/GDD/06_arquitetura_software.md) | Godot/GDScript, componentes, eventos, entidades e diálogo |
-| [07 — Roteiro e Diálogos — spoilers](docs/GDD/07_roteiro_e_dialogos.md) | Prólogo, NPCs dinâmicos, confronto com Vael e dois finais |
-| [08 — Diálogos e Degradação do Hub — spoilers](docs/GDD/08_dialogos_hub_degradacao.md) | Bram, Lyra, Ancião/refugiados e seleção de diálogo Godot |
-| [Sprint 8 — Save System](docs/GDD/08_save_system.md) | Persistência JSON, backup/recuperação e testes Godot |
-| [09 — Enemy FSM](docs/GDD/09_enemy_fsm.md) | Estados de IA, percepção, ataques e NPCs hostis offline |
+| [Godot Tactical RPG](https://github.com/ramaureirac/godot-tactical-rpg) | Inspiração de composição ator/modelo/serviço; implementação própria para tempo real 2D |
+| [Maaack Game Template](https://github.com/Maaack/Godot-Game-Template) | Candidato para menus/carregamento; ainda não instalado |
+| [Dialogic](https://github.com/dialogic-godot/dialogic) | Candidato para apresentação de diálogos; ainda não instalado |
 
-O [índice geral](docs/GDD/README.md) reúne também os documentos existentes de campanha, arte, loot, prólogo e engenharia. As próximas Sprints ampliarão os módulos sem duplicar o cânone.
+Não há versões instaladas desses plugins para atualizar. A versão será fixada quando houver adoção. Saves Resource externos do template não substituem nosso JSON. Ver [versões e compatibilidade](docs/engineering/versions.md).
 
-## 🛠️ Desenvolvimento
+## Documentação e histórico
 
-[Escopo do projeto](docs/engineering/project-scope.md) · [Proposta visual](docs/design/visual-proposal.md) · [Controles aprovados](docs/engineering/project-scope.md#4-controles-aprovados)
+- [Escopo, fronteiras e critérios de aceite](docs/engineering/project-scope.md)
+- [Direção visual e pacote de produção](docs/design/visual-proposal.md)
+- [Índice do GDD](docs/GDD/README.md)
+- [Decisões de produção](docs/engineering/production-decisions.md)
+- [Roadmap](docs/engineering/roadmap.md)
+- [Combate offline](docs/engineering/offline-combat.md)
+- [Fluxo de contribuição por PR](docs/engineering/github-workflow.md)
+- [Changelog](CHANGELOG.md)
 
-[Combate offline](docs/engineering/offline-combat.md): 1 e 2/Q atacam, MP e dano real, F6 reinicia a cena.
-
-[Apresentação Base/Melhorada](docs/engineering/enhanced-presentation.md): F8 alterna e F9 reduz efeitos.
-
-[Executar a cena técnica do Player](docs/engineering/player-test-scene.md): abrir client/godot/project.godot no Godot 4.6 e pressionar F5.
-
-As [decisões de produção aprovadas](docs/engineering/production-decisions.md) prevalecem sobre propostas anteriores: Windows offline, slice Bastião/Cidadela/Bosque, MP em ativas e stamina para dash. Runtime ainda precisa dessa reconciliação.
-
-**Primeiro marco jogável:** Cidadela → Bosque das Névoas → retorno à Cidadela, com Bastião, combate, Garras de Musgo, loot e uma escolha persistente com consequência observável.
-
-A primeira entrega será **single-player offline**. A Sprint 6 define Godot/GDScript para o cliente, substituindo a proposta Flutter/Flame, e mantém Python/FastAPI/PostgreSQL para autoridade online. Windows é a plataforma inicial. Alpha prevê conta/saves em nuvem/telemetria, sem combate autoritativo no lançamento single-player; instâncias competitivas exigirão contrato próprio. Domínio, conteúdo, apresentação e persistência terão limites claros; saves serão versionados e efeitos/recompensas protegidos contra duplicação.
-
-Cada entrega é publicada com commit e PR conforme o [fluxo do GitHub](docs/engineering/github-workflow.md). Este README apresenta a visão do jogo; o [roadmap](docs/engineering/roadmap.md) distingue planejamento de implementação.
+Os PRs #1–#18 foram integrados à `main` em ordem de dependência. Documentos de sprint preservam o histórico; o escopo atual e as decisões posteriores indicam o que continua vigente.
