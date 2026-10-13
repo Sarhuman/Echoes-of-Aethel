@@ -9,7 +9,7 @@ Um RPG de ação sobre herança, culpa e poder em um mundo de magia decadente. A
 
 Cinco heróis atravessam florestas contaminadas, cidades sepultadas e máquinas ancestrais. Entre uma batalha e outra, decisões tomadas para proteger os vivos alimentam uma força que transforma o mundo por dentro.
 
-> **Estado atual:** documentação de design e arquitetura. Ainda não há jogo executável; a stack está definida, com implementação pendente. Habilidades, fórmulas e taxas de loot são especificações experimentais, sujeitas a implementação e playtest.
+> **Estado atual:** documentação de design/arquitetura e implementação inicial de persistência offline. Há um harness Godot executável de persistência, com 27 verificações aprovadas; ainda não há campanha jogável. Habilidades, fórmulas e taxas de loot são especificações experimentais, sujeitas a implementação e playtest.
 
 ## 📜 História — O Coração partido
 
@@ -106,6 +106,7 @@ No **Mapa 12**, a luta e a revelação convergem. Após derrotar Vael, o jogador
 | [06 — Arquitetura de Software](docs/GDD/06_arquitetura_software.md) | Godot/GDScript, componentes, eventos, entidades e diálogo |
 | [07 — Roteiro e Diálogos — spoilers](docs/GDD/07_roteiro_e_dialogos.md) | Prólogo, NPCs dinâmicos, confronto com Vael e dois finais |
 | [08 — Diálogos e Degradação do Hub — spoilers](docs/GDD/08_dialogos_hub_degradacao.md) | Bram, Lyra, Ancião/refugiados e seleção de diálogo Godot |
+| [Sprint 8 — Save System](docs/GDD/08_save_system.md) | Persistência JSON, backup/recuperação e testes Godot |
 
 O [índice geral](docs/GDD/README.md) reúne também os documentos existentes de campanha, arte, loot, prólogo e engenharia. As próximas Sprints ampliarão os módulos sem duplicar o cânone.
 
