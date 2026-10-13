@@ -428,7 +428,7 @@ Percentuais são experimentais e conhecidos pelo jogador antes da confirmação;
 
 No mapa 12, a linhagem já foi revelada antes da escolha, mas o epílogo detalhado permanece oculto. Mostrar a diferença positiva pretendida — preservar a Cidadela ou reconstruir Aethel — e as evidências de risco, sem prometer cura limpa. A ascensão do projeto de Vael é ideológica/ritual: Ordem perpetua extração e controle; Ascensão perpetua soberania sobre almas no sucessor. Derrotá-lo é uma vitória real de combate, não anulada por uma ressurreição obrigatória.
 
-Memoriais, refugiados, sonhos, doutrina e marcas da escolta variam conforme flags; não reduzir o epílogo a um único número de karma. A Sprint 5 detalhará roteiro final, arena, fases e diálogo por classe sem trocar estes resultados canônicos.
+Memoriais, refugiados, sonhos, doutrina e marcas da escolta variam conforme flags; não reduzir o epílogo a um único número de karma. A Sprint 5 define combate/HUD; roteiro final, arena e fases específicas de Vael ficam para um módulo posterior sem trocar estes resultados canônicos.
 
 ## 7. Validação futura
 
@@ -442,3 +442,5 @@ Memoriais, refugiados, sonhos, doutrina e marcas da escolta variam conforme flag
 - Playtest de plausibilidade: jogador consegue explicar o benefício de qualquer opção antes de descobrir a tragédia.
 
 Este módulo é documentação de produção. Mapas, quests e projeção visual ainda não estão implementados.
+
+Dificuldade de expedições revisitadas e Eclipse seguem a [Sprint 5](05_combate_e_hud.md). Quest não respawna e a promoção de elite não altera encontros já iniciados.
