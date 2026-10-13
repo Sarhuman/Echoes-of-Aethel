@@ -202,7 +202,7 @@ func interact() -> void:
 
 Resolver é serviço explícito configurado na composição; não método inexistente adicionado informalmente ao GameState. Se agressão mata a vítima, estado dead prevalece sobre hostile; não ativar perseguição após morte. Hit repetido não aplica reputação repetidamente sem crime_id/action_id. NPC reage a dano dirigido ao próprio ID, não a qualquer sinal global.
 
-Mudança de cor é só feedback, não a própria IA. Separar alvo conhecido, percepção, perseguição, antecipação e recuperação. Em hubs, combat_enabled=false e o domínio recusa ataque; Maera/Lysa/Oren/Irian e serviços essenciais respeitam Sprint 4. Sistema de crime externo é extensão planejada, não quest implementada por esta documentação.
+Mudança de cor é só feedback, não a própria IA. Separar alvo conhecido, percepção, perseguição, antecipação e recuperação. Em hubs, combat_enabled=false e o domínio recusa ataque; Maera/Lyra/Bram/Irian e serviços essenciais respeitam Sprint 4. Sistema de crime externo é extensão planejada, não quest implementada por esta documentação.
 
 ## 7. DialogueNode — dados e escolhas
 

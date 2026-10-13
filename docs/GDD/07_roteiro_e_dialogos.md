@@ -50,18 +50,18 @@ O herói chega. Maera segura a grade enquanto examina uma marca luminosa na mão
 
 **ID:** `prologue.council` · **Entrada:** primeira interação no salão do cristal.
 
-Conselho funcional: Maera responde pela guarda; Irian pelo arquivo/fragmento; Lysa pelo cuidado e água; Oren pelas oficinas; Sera representa abastecimento e mercadores. Sem um monarca infalível: o grupo discorda e assume limites.
+Conselho funcional: Maera responde pela guarda; Irian pelo arquivo/fragmento; Lyra pelo cuidado e água; Bram pelas oficinas; Sera representa abastecimento e mercadores. Sem um monarca infalível: o grupo discorda e assume limites.
 
 > **Irian — P02.01**  
 > “Cinco Santuários mantinham o Éter no seu leito. Vael tentou abrir o Coração durante o eclipse. Agora temos um fragmento e quatro ausências.”
 
-> **Lysa — P02.02**  
+> **Lyra — P02.02**  
 > “O cristal afasta a Bruma dos portões. Não a tira do que já trouxeram para dentro. Preciso de água limpa, não de outra promessa.”
 
 > **Sera — P02.03**  
 > “A última caravana chegou sem condutor. Havia comida. Ninguém teve coragem de comer antes que ela examinasse.”
 
-> **Oren — P02.04**  
+> **Bram — P02.04**  
 > “Posso reforçar escudos. Não posso reforçar uma estrada inteira.”
 
 > **Maera — P02.05**  
@@ -78,17 +78,17 @@ O cristal pulsa ao herói se aproximar. Irian recolhe a mão antes do contato.
 > **Herói — P02.08**  
 > “E se aquilo que eu trouxer não for uma cura?”
 
-> **Lysa — P02.09**  
+> **Lyra — P02.09**  
 > “Traga o que viu. Nós decidiremos o que fazer com isso. Não carregue nossa ignorância como se fosse culpa sua.”
 
 **Saída:** objetivo Bosque disponível, checkpoint Cidadela registrado. Conselho não sabe da linhagem e não antecipa o diagnóstico final do Éter. Equipamento inicial é concedido pelo caso de uso de criação, não outra vez nesta cena.
 
 ### Cena P03 — A soleira
 
-> **Oren — P03.01**  
+> **Bram — P03.01**  
 > “Aço não promete. Só precisa aguentar mais um golpe.”
 
-> **Lysa — P03.02**  
+> **Lyra — P03.02**  
 > “Vida, Éter. Dois frascos, dois limites. Se estiver inteiro, guarde o remédio para depois.”
 
 > **Irian — P03.03**  
@@ -122,11 +122,13 @@ No arquivo de Irian, três registros independentes confirmam linhagens marcadas 
 
 O herói pode ler essa prova antes da arena. A confirmação dramática acontece com Vael; o pai não é a única fonte da verdade.
 
+O [módulo 08](08_dialogos_hub_degradacao.md) detalha Bram/Lyra/Irian e prevalece em regras específicas de seleção/degradação do hub; este roteiro preserva prólogo, transições, clímax e finais.
+
 ## 4. Diálogos dinâmicos e deterioração do hub
 
 Estágios e flags seguem módulo 04. Aplicar variantes por **fato observado**, não somente pelo contador numérico. Ordem de seleção: epílogo final → flag concreta visível → estágio/afinidade → fallback inicial. Em empate, variante mista. Os eventos ocultos continuam secretos até seu trigger; cruzar um ato não revela automaticamente uma consequência ainda pendente.
 
-### 4.1 Oren — Ferreiro
+### 4.1 Bram — Ferreiro
 
 | Estágio | Visual | Linha de misericórdia / acolhimento | Linha de julgamento / contenção | Variante mista |
 |---|---|---|---|---|
@@ -136,9 +138,9 @@ Estágios e flags seguem módulo 04. Aplicar variantes por **fato observado**, n
 | Ato III | Tubos e máquina nova; fuligem no retrato | “A máquina trabalha à noite. Às vezes pede água com a voz de alguém.” | “Querem que eu fabrique mais. Perguntei quem vai segurar tudo isso. Não responderam.” | “O metal chega. Os homens que o traziam, não.” |
 | Pré-final | Oficina organizada demais; estandarte preso com prego torto | “Estão chamando sua dor de bênção. Não deixe que cobrem a mesma dos outros.” | “O escudo protege quem está atrás dele. Começaram a usá-lo para empurrar.” | “Ainda sei fazer uma arma. Esqueci como explicar por que não quero fazer outra.” |
 
-Cada linha tem ID `hub.oren.stage_N.mercy|judgment|mixed`. A flag `shelter_villagers` só cita o aprendiz febril após contaminação observada; sem essa flag, substituir por “As famílias que chegaram dormem na oficina. Eu trabalho devagar para não acordá-las.” Oren não morre nem fecha preparação essencial.
+Cada linha tem ID `hub.bram.stage_N.mercy|judgment|mixed`. A flag `shelter_villagers` só cita o aprendiz febril após contaminação observada; sem essa flag, substituir por “As famílias que chegaram dormem na oficina. Eu trabalho devagar para não acordá-las.” Bram não morre nem fecha preparação essencial.
 
-### 4.2 Lysa — Alquimista
+### 4.2 Lyra — Alquimista
 
 | Estágio | Visual | Linha de misericórdia | Linha de julgamento | Variante mista |
 |---|---|---|---|---|
@@ -148,7 +150,7 @@ Cada linha tem ID `hub.oren.stage_N.mercy|judgment|mixed`. A flag `shelter_villa
 | Ato III | Máscara repousa ao lado dos frascos; janelas vedadas | “Trouxemos gente das profundezas. A superfície não soube recebê-los inteira.” | “Contivemos a descarga. Continuo ouvindo os que ficaram no lugar dela.” | “O mapa mudou os canos. A água continua chegando a alguma boca.” |
 | Pré-final | Símbolos sagrados sobre antigos rótulos | “Querem beber o que tocar sua mão. Eu ainda prefiro ferver a água.” | “A cura virou ordem. Já não perguntam se alguém quer recebê-la.” | “Se eu não escrever seu nome neste frasco, talvez ainda se lembrem de que é só remédio.” |
 
-IDs `hub.lysa.stage_N.variant`. Sonhos exigem `free_captives` observado; vozes do ossuário exigem `reinforce_seal`. A fala sobre espelhos exige `deliver_venom`; caso contrário: “O tratamento parou. A fila, não.” Atendimento e compra de poções continuam conforme módulo 05, sem preço punitivo escondido por afinidade.
+IDs `hub.lyra.stage_N.variant`. Sonhos exigem `free_captives` observado; vozes do ossuário exigem `reinforce_seal`. A fala sobre espelhos exige `deliver_venom`; caso contrário: “O tratamento parou. A fila, não.” Atendimento e compra de poções continuam conforme módulo 05, sem preço punitivo escondido por afinidade.
 
 ### 4.3 Sera — Mercadora / abastecimento
 
@@ -310,7 +312,7 @@ O herói insere a própria marca no filtro. Os fragmentos retomam o circuito; o 
 
 A câmera atravessa a feira, segue além da muralha e revela árvores sem brilho, fontes imóveis e assentamentos sem Éter vital. A cidade recebe salvação material; o circuito perpetua a extração e a estrutura de controle de Vael.
 
-> **Lysa — E01.04**  
+> **Lyra — E01.04**  
 > “A água está limpa. Não tenho como mandá-la para todos.”
 
 > **Irian — E01.05**  
@@ -335,10 +337,10 @@ A praça reaparece limpa. Pessoas se levantam ao mesmo tempo. Sera examina a bal
 > **Sera — E02.02**  
 > “Há lugar para todos.”
 
-> **Oren — E02.03**  
+> **Bram — E02.03**  
 > “Há lugar para todos.”
 
-> **Lysa — E02.04**  
+> **Lyra — E02.04**  
 > “Há lugar para todos.”
 
 Irian tenta escrever um nome. A mão repete o símbolo do Coração. Retratos têm olhos semelhantes; a tranquilidade cobra autonomia e memória. O projeto de soberania de Vael ascende no sucessor, embora o corpo de Vael esteja derrotado.
@@ -364,16 +366,16 @@ Aplicar uma entrada por quest/flag relevante, mais final base. Os exemplos abaix
 | Romper a ponte | Vigília registra a escolta isolada sem presumir todos mortos | Ponte recomposta; ausência da escolta deixa de ser reconhecida |
 
 | Entregar veneno ao alquimista | Sobreviventes tratados reivindicam cuidado contínuo, mesmo após conter a Bruma | Corpos recompostos perdem a lembrança do tratamento e de seu consentimento |
-| Destruir a pesquisa | Lysa preserva uma página vazia para o pesquisador perdido; famílias discutem a cura que não receberam | A página recebe um símbolo uniforme, não um nome |
-| Selar a seiva | Oren guarda madeira morta como testemunho do bosque perdido | Árvores renascem iguais, sem os nomes dados pelos antigos moradores |
+| Destruir a pesquisa | Lyra preserva uma página vazia para o pesquisador perdido; famílias discutem a cura que não receberam | A página recebe um símbolo uniforme, não um nome |
+| Selar a seiva | Bram guarda madeira morta como testemunho do bosque perdido | Árvores renascem iguais, sem os nomes dados pelos antigos moradores |
 | Drenar a seiva | Refugiados mantêm mapas das casas presas às raízes | Casas e raízes se fundem; os habitantes esquecem onde terminava seu abrigo |
 | Oferecer vitalidade no altar | Cisternas continuam isoladas; gratidão ao herói convive com a água perdida | Água retorna, mas ninguém lembra que o sacrifício teve um autor |
 | Executar o cultista no altar | Placas de sentença persistem; o conselho disputa se devem permanecer | As placas deixam de listar julgados e repetem apenas o Coração |
 | Libertar cativos do ossuário | Irian conserva retratos para famílias que perderam memórias dos mortos | Retratos exibem o mesmo rosto, completando a dissolução dos nomes |
 | Reforçar o selo | Vozes permanecem no arquivo e famílias exigem fim da prisão | As vozes se tornam parte da harmonia coletiva, sem libertação individual |
 | Drenar aos níveis inferiores | O abastecimento funciona; trabalhadores ausentes recebem memorial | Túneis se refazem sem a história de quem vivia neles |
-| Inverter o fluxo | Lysa mantém ala de sobreviventes e registro da doença da superfície | Janelas se abrem, mas residentes não distinguem suas antigas casas |
-| Extrair o núcleo | Oren sela a melhoria como obra única e guarda relatos das máquinas libertas | A peça se integra às novas forjas; autoria e vítimas desaparecem dos registros |
+| Inverter o fluxo | Lyra mantém ala de sobreviventes e registro da doença da superfície | Janelas se abrem, mas residentes não distinguem suas antigas casas |
+| Extrair o núcleo | Bram sela a melhoria como obra única e guarda relatos das máquinas libertas | A peça se integra às novas forjas; autoria e vítimas desaparecem dos registros |
 | Estabilizar o núcleo | A máquina continua útil e audível; placas identificam exploradores presos | As vozes da máquina se confundem com as de toda a cidade |
 | Perdoar as almas no pedestal | Refugiados externos continuam pedindo abertura dos portões | A cidade os integra sem preservar suas identidades de origem |
 | Condenar as almas no pedestal | Estandartes da guarda preservam a doutrina; famílias contestam nomes retidos | O símbolo substitui todos os estandartes; obediência já não parece imposta |
