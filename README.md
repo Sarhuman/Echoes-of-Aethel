@@ -1,31 +1,107 @@
-# Echoes of Aethel
+# 🌑 Echoes of Aethel
 
-ARPG indie 2D de fantasia sombria: cinco heróis, doze mapas e escolhas trágicas que alimentam um ritual ancestral.
+> **O caminho para o inferno está cheio de boas intenções.**
+> Em Aethel, salvar alguém pode ser a primeira etapa de uma tragédia.
 
-## Estado do projeto
+**Dark Fantasy ARPG 2D · Pixel Art 16-bit · Combate em tempo real**
 
-Fundação de design e planejamento técnico. Ainda não há jogo executável, engine configurada ou sistemas implementados. Os números de balanceamento serão definidos e medidos no protótipo.
+Um RPG de ação sobre herança, culpa e poder em um mundo de magia decadente. A apresentação busca a expressividade dos RPGs clássicos como **Final Fantasy VI**; combate, exploração e progressão de equipamentos recebem a influência de **Diablo**. Personagens, arte, música e universo terão identidade própria.
 
-## Documentação
+Cinco heróis atravessam florestas contaminadas, cidades sepultadas e máquinas ancestrais. Entre uma batalha e outra, decisões tomadas para proteger os vivos alimentam uma força que transforma o mundo por dentro.
 
-- [Design canônico e classes](docs/design/game-design.md)
-- [Sprint 1 — Classes e atributos](docs/GDD/01_classes_e_atributos.md)
-- [Direção de arte 16-bit](docs/design/art-direction.md)
-- [Cinco classes e árvores de habilidades](docs/design/classes-and-skills.md)
-- [Baseline experimental de loot](docs/design/loot-baseline.md)
-- [Prólogo, diálogos e encontros do Ato I](docs/design/prologue-and-act-one.md)
-- [Campanha, decisões e revelação final — spoilers](docs/design/campaign.md)
-- [Proposta original dos 12 mapas](docs/reference/proposta-original-12-mapas.md)
-- [Arquitetura e invariantes](docs/engineering/architecture.md)
-- [Plano de implementação e critérios de aceite](docs/engineering/roadmap.md)
-- [Fluxo de entregas no GitHub](docs/engineering/github-workflow.md)
+> **Estado atual:** documentação de design e arquitetura. Ainda não há jogo executável ou engine configurada. Habilidades, fórmulas e taxas de loot são especificações experimentais, sujeitas a implementação e playtest.
 
-O design canônico prevalece sobre a proposta original, preservada como referência. O prompt de RPG textual dessa proposta não é uma implementação do ARPG.
+## 📜 História — O Coração partido
 
-## Primeiro objetivo
+### O prólogo
 
-Entregar uma fatia jogável offline: Cidadela → Bosque das Névoas → retorno à Cidadela, com Bastião, combate, Garras de Musgo, loot, uma decisão persistente e sua consequência observável.
+Cinco Santuários filtravam a magia selvagem do **Coração de Éter** e sustentavam o equilíbrio de Aethel. Durante um eclipse, **Vael**, o Supremo Arquimago, tentou perfurar esse núcleo para extrair poder ilimitado.
 
-## Contribuição
+O Coração se partiu em cinco fragmentos. A **Bruma Estelar** espalhou-se pelas terras: animais perderam sua natureza, mortos voltaram a caminhar e antigos guardiões se tornaram ameaças. Na **Cidadela dos Últimos**, um fragmento ainda puro mantém uma pequena região protegida.
 
-Mudanças por branches e pull requests. Separar conteúdo, regras de jogo, persistência e apresentação. Documentar alterações de cânone e validar saves e progressão antes de expandir a campanha.
+### A jornada e o mistério de Vael
+
+O herói chega à Cidadela por uma razão pessoal: redenção, cura, dever, sobrevivência ou ruptura com uma fé corrompida. Para alcançar o Pináculo Celestial, precisa enfrentar os guardiões e recuperar os três fragmentos sob seu domínio. O quinto permanece com Vael.
+
+Ao longo da jornada, criaturas reconhecem uma marca que o protagonista não compreende. Registros antigos contradizem o que ele sabe sobre sua origem. No Mapa 12, o confronto com **Vael, o Sol-Negro**, revela por que seu caminho e o ritual parecem inseparáveis.
+
+### Boas intenções, consequências sombrias
+
+Cada dilema narrativo oferece duas alternativas. Ambas podem parecer necessárias; ambas preservam alguma coisa e condenam outra. Misericórdia e julgamento canalizam a energia do mundo para a mesma engrenagem ritualística, mas mudam pessoas, encontros e destinos de maneiras distintas.
+
+As consequências exatas permanecem ocultas no momento da escolha. Sintomas, relatos e inscrições oferecem pistas; o jogador observa os efeitos depois, nos mapas e no hub. A tragédia não apaga sua influência: suas decisões determinam quem sobrevive, quem sofre e o que restará no epílogo.
+
+## ⚔️ Mecânicas principais
+
+### Doze mapas, quatro atos e um lugar para voltar
+
+A campanha contém **12 mapas em 4 atos**, com exploração, encontros e arenas. A Cidadela é o hub principal; acampamentos seguros apoiam os atos posteriores. Cura, inventário e, na visão completa, ferreiro, alquimista, encantador e baú permitem preparar a próxima expedição.
+
+Com o avanço da história e das escolhas, o hub se deteriora: moradores adoecem, crenças endurecem e a escassez muda diálogos e cenários. **Sua segurança mecânica permanece:** não há inimigos ativos nem dano no hub, e serviços essenciais continuam disponíveis.
+
+### Quests de dupla escolha
+
+Dilemas morais com duas opções, pistas prévias e consequências imediatas ou atrasadas. Decisões persistem no save e não são desfeitas por morte, respawn ou respec. Menus e interações operacionais não seguem a regra de duas escolhas.
+
+### Combate, experiência e loot
+
+Ataques em tempo real combinam posicionamento, esquiva, gestão de MP, telegraphs e habilidades de classe. Cada classe possui quatro habilidades ativas e duas passivas no módulo inicial de design.
+
+| Encontro | Progressão e recompensa previstas |
+|---|---|
+| Inimigos comuns | XP menor; chance de ouro, consumíveis e equipamentos comuns ou raros |
+| Elites | XP maior e melhor chance de raros/épicos |
+| Sub-bosses | Equipamento garantido na tabela inicial, materiais conforme catálogo e chance de épico/lendário |
+| Bosses de ato | Equipamento épico ou lendário; fragmento de campanha único quando aplicável |
+
+Raridades: **Comum → Raro → Épico → Lendário**. Nível do item e afixos determinam seu poder junto da raridade. Novas expedições podem repovoar encontros; recompensas únicas e decisões de história não se repetem.
+
+### Arte e interface 16-bit
+
+Perspectiva **top-down 3/4**, chão ortogonal, tiles de 16×16 e sprites jogáveis de **32×32 pixels**. Bosses ocupam células maiores, com névoa, raízes e luz de Éter compondo a atmosfera sem esconder sinais de ataque.
+
+Caixas de diálogo azul-escuras usam **borda dupla de prata e marfim**, fontes pixel art legíveis e retratos expressivos de 64×64. Texto ampliável, avanço manual e efeitos reduzidos fazem parte da direção de interface. Cor, forma e som trabalham juntos na leitura do combate.
+
+## 🧙 Cinco classes jogáveis
+
+Os nomes clássicos descrevem o papel; os títulos pertencem ao universo de Aethel. Os atributos distribuíveis são **STR, DEX, INT, FTH e VIT**.
+
+| Classe / título | Papel de combate | Atributo principal | Sprite 32×32 | Origem | Habilidade assinatura |
+|---|---|---|---|---|---|
+| **Mago — Tecelão de Runas** | Magia de área, controle e barreiras | INT — Inteligência | Manto violeta, runas claras, cajado e sombras azuis | Sobreviveu à ordem que rompeu os nós da realidade; busca selar as fendas e reparar seus erros | **Nó de Éter:** cria uma barreira temporária |
+| **Ladina — Sentinela das Sombras** | Adagas, armadilhas e reposicionamento | DEX — Destreza | Capa azul-noite, prata e detalhes vermelhos | Uma execução ativou um selo; sua velocidade extraordinária vem de uma marca que consome vitalidade | **Passo Velado:** ocultação breve para preparar o próximo golpe |
+| **Guerreiro — Bastião do Crepúsculo** | Defesa frontal e ataques pesados | STR — Força | Armadura azul-ferro, escudo âmbar e machado | Fechou os portões para salvar a cidade, abandonando família e soldados do lado de fora | **Guarda do Crepúsculo:** reduz dano frontal por tempo limitado |
+| **Druida — Invocadora de Espinhos** | Invocações, veneno e sustentação | INT — Inteligência | Musgo, osso e violeta; cajado ramificado | Sua tribo fundiu as almas à natureza; as vozes ancestrais permanecem em seu cajado | **Golem de Pedra:** invoca um protetor temporário |
+| **Paladino — Inquisidor da Chama Sagrada** | Maça, dano sagrado e autocura | FTH — Fé | Marfim, cobre e chama azul; tabardo gasto | Renegou a seita ao descobrir a aliança de seu líder com as forças da corrupção | **Veredito Solar:** projeta um golpe sagrado em cone |
+
+Custos, cooldowns, passivas, atributos secundários e reações a Vael estão no [Módulo de Classes e Atributos](docs/GDD/01_classes_e_atributos.md).
+
+## 🗺️ Atos e bosses
+
+| Ato | Mapas | Região e progressão | Confronto principal |
+|---|---|---|---|
+| **I — O Despertar das Sombras** | 1–3 | Bosque das Névoas → Pântano dos Lamentantes → Portal do Julgamento. Garras de Musgo e Matriarca das Águas antecedem o guardião | **Silvano, o Traidor**, espírito da floresta manifestado em armadura antiga |
+| **II — As Cinzas do Império** | 4–6 | Dunas de Sal → Vale dos Sacrifícios → Cripta de Ossos. Autômatos, altares e mortos cristalizados expõem o preço da antiga prosperidade | **Malignus, o Colecionador de Ossos** |
+| **III — O Abismo das Máquinas e da Carne** | 7–9 | Esgotos de Éter → Fundição Proibida → Abismo da Voracidade. A Mãe das Proles e o Autômato Forjador guardam a descida | **Gorgoroth, a Boca das Sombras** |
+| **IV — O Pináculo Celestial** | 10–12 | Jardins Suspensos → Ponte dos Lamentos → Coração de Éter. Arconte de Prata e Guardião dos Portões protegem o caminho final | **Vael, o Arconte Primogênito / Sol-Negro** |
+
+No **Mapa 12**, a luta e a revelação convergem. Após derrotar Vael, o jogador decide entre restaurar a Ordem ou assumir a Ascensão. Nenhuma rota oferece salvação sem custo; decisões anteriores moldam os epílogos.
+
+> Os documentos de campanha contêm spoilers completos. A apresentação acima preserva o segredo da origem do protagonista.
+
+## 📚 Índice do GDD
+
+| Documento | Conteúdo / estado |
+|---|---|
+| [Índice geral — docs/GDD/](docs/GDD/README.md) | Organização e referências canônicas do projeto |
+| [01 — Classes e Atributos](docs/GDD/01_classes_e_atributos.md) | Sprint 1 documentada: fórmulas, cinco classes, habilidades e diálogos |
+
+O [índice geral](docs/GDD/README.md) reúne também os documentos existentes de campanha, arte, loot, prólogo e engenharia. As próximas Sprints ampliarão os módulos sem duplicar o cânone.
+
+## 🛠️ Desenvolvimento
+
+**Primeiro marco jogável:** Cidadela → Bosque das Névoas → retorno à Cidadela, com Bastião, combate, Garras de Musgo, loot e uma escolha persistente com consequência observável.
+
+A primeira entrega será **single-player offline**. Engine e plataforma inicial ainda precisam de uma decisão técnica validada. Domínio, conteúdo, apresentação e persistência terão limites claros; saves serão versionados e efeitos/recompensas protegidos contra duplicação.
+
+Cada entrega é publicada com commit e PR conforme o [fluxo do GitHub](docs/engineering/github-workflow.md). Este README apresenta a visão do jogo; o [roadmap](docs/engineering/roadmap.md) distingue planejamento de implementação.
