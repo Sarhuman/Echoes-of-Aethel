@@ -102,6 +102,8 @@ Prefixo `/api/v1`; JSON UTF-8; timestamps UTC; UUIDs para entidades; IDs estáve
 | POST `/characters` | Nome, `class_id`, cosméticos permitidos | Personagem nível 1 com base da Sprint 1; sem atributos enviados pelo cliente |
 | GET `/characters/{id}` | Propriedade | Snapshot, versão, inventário e checkpoint |
 | PATCH `/characters/{id}/state` | `expected_version`, preferências/cosméticos permitidos | Save parcial autorizado; não aceita HP, XP, ouro, inventário ou corrupção arbitrários |
+| POST `/characters/{id}/purchases` | Oferta do catálogo, quantidade e versão esperada | Compra no hub: débito de ouro e itens atômicos |
+| POST `/characters/{id}/consumables` | Instância/stack e action_id | Uso como comando de simulação; recurso/cooldown autoritativos |
 | POST `/characters/{id}/equipment` | Instância, slot, versão esperada | Equipamento, atributos e aparência recalculados |
 | POST `/characters/{id}/attribute-allocations` | Distribuição de pontos disponíveis | Valida total, limites e progressão |
 | POST `/characters/{id}/skill-unlocks` | Nó e versão esperada | Valida nível, pontos e pré-requisitos |
@@ -353,3 +355,5 @@ Consultadas em 13/10/2026; versões de implementação ainda serão fixadas.
 - [Compose: secrets](https://docs.docker.com/compose/how-tos/use-secrets/)
 - [Compose: ordem e readiness](https://docs.docker.com/compose/how-tos/startup-order/)
 - [Caddy: reverse proxy](https://caddyserver.com/docs/caddyfile/directives/reverse_proxy)
+
+Recursos, dificuldade e eventos visuais seguem a [Sprint 5](05_combate_e_hud.md). Snapshot do Bastião inclui vigor atual; definição de habilidade distingue MP/VG. Eclipse adiciona mode/status vivo-morto e desbloqueio da conta. Esses campos exigem migração explícita antes da implementação, sem aceitar valores econômicos/HP enviados pelo cliente.

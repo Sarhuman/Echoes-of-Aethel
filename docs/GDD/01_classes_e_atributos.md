@@ -4,6 +4,8 @@
 
 Este módulo é a referência canônica para atributos, dimensões dos sprites jogáveis e árvores de classe. Substitui o desenho preliminar de três ramos e seis atributos. Combate ARPG em tempo real com apresentação 16-bit; as fórmulas são originais, inspiradas na simplicidade dos RPGs de console, sem alegar reproduzir a matemática de Final Fantasy VI.
 
+Regras de combate/recursos são complementadas pela [Sprint 5](05_combate_e_hud.md): vigor do Bastião, regeneração somente fora de combate e crítico até 2×.
+
 ## 1. Sistema de atributos
 
 | Atributo | Sigla | Função |
@@ -39,8 +41,8 @@ Usar inteiros e `floor` (arredondar para baixo), calculando novamente após muda
 | Defesa física, DEF | `armadura + floor(VIT/2) + 2×(L−1)` |
 | Defesa mágica, MDEF | `ward + floor((INT+FTH)/3) + (L−1)` |
 | Chance de crítico | `min(25%, 5% + 0,25%×DEX + bonus_crit)` |
-| Multiplicador crítico | `1,5`, somente dano direto |
-| Regeneração de MP | `1 + floor(INT/10)` MP/s após 3 s sem gastar MP |
+| Multiplicador crítico | `min(2,0; 1,5 + bonus_multiplicador)`, somente dano direto |
+| Regeneração de MP | `1 + floor(INT/10)` MP/s somente fora de combate, conforme Sprint 5 |
 
 Não há regeneração natural de HP em combate. Cura no hub restaura HP/MP. Equipamento que diminui máximos limita o valor atual ao novo máximo, sem curar ao ser trocado. Velocidade de movimento e esquiva são comuns às classes no baseline; DEX não torna telegraphs inviáveis para o Bastião.
 
@@ -50,7 +52,7 @@ Cada habilidade informa poder `P`, atributo de escala `A`, tipo e eventual bônu
 
 1. `base = P + W + 2×A + 2×(L−1)`.
 2. `ofensivo = floor(base × (1 + bonus_dano))`, com bônus aditivos limitados entre 0 e 100%.
-3. `critico = floor(ofensivo × 1,5)` se crítico válido; caso contrário, `ofensivo`. Apenas um sorteio por acerto; ticks de DoT não criticam.
+3. `critico = floor(ofensivo × multiplicador_critico)` se crítico válido; caso contrário, `ofensivo`. Apenas um sorteio por acerto; ticks de DoT não criticam.
 4. `mitigado = floor(critico × 100 / (100 + defesa))`. Usar DEF em físico e MDEF em arcano, gelo, fogo, sagrado e veneno.
 5. `resistido = floor(mitigado × (100 − resistencia)/100)`, resistência por tipo limitada a −50%…75%.
 6. `final = floor(resistido × (1 − reducao_temporaria))`, redução total limitada a 60%. Se o ataque acertou e não há invulnerabilidade explícita, dano mínimo de 1; imunidade/esquiva válida produz 0.
@@ -70,7 +72,7 @@ Escudos absorvem o dano final antes do HP, até sua capacidade, sem nova mitiga�
 
 Cada classe tem **quatro habilidades ativas e duas passivas**. A1 é o ataque inicial gratuito; A2 é liberada no nível 2, A3 no 4, A4 no 6. P1 abre no 3 após A2; P2 no 5 após A3. A2–A4/P1–P2 custam um ponto cada. Um ponto por nível desde o 2 permite comprar os cinco nós até o 6. A4 requer A3. Sem ranks nesta versão; todos os nós comprados funcionam, sem pré-condição narrativa.
 
-Cooldown começa na execução validada, junto do gasto de MP. Sem alvo válido, MP insuficiente, animação bloqueada ou cooldown ativo: comando recusado sem custo. Custos não são debitados de novo por retry. Repetir o mesmo comando não repete dano ou recompensa. Passivas custam 0 MP; cooldown “—” significa efeito contínuo, e cooldown explícito limita o disparo.
+Cooldown começa na execução validada, junto do gasto do recurso indicado. Sem alvo válido, recurso insuficiente, animação bloqueada ou cooldown ativo: comando recusado sem custo. Custos não são debitados de novo por retry. Repetir o mesmo comando não repete dano ou recompensa. Passivas custam 0 MP; cooldown “—” significa efeito contínuo, e cooldown explícito limita o disparo.
 
 Esquiva e interação são ações universais fora da árvore. Esquiva proposta: 0 MP, cooldown 1,2 s, duração 0,25 s, sem atravessar paredes; janela de invulnerabilidade deve ser validada em playtest. Ataques gratuitos têm cooldown que também limita sua cadência. Diálogo offline pausa combate e timers juntos.
 
@@ -87,7 +89,7 @@ Esquiva e interação são ações universais fora da árvore. Esquiva proposta:
 | A3 — Círculo de Brasas | 20 | 8 s | Fogo / INT | P=12 em área; queimadura P_tick=2 por 3 ticks |
 | A4 — Nó de Éter | 18 | 12 s | Utilidade / INT | Barreira P=20 por até 4 s |
 | P1 — Fratura Rúnica | 0 | 3 s | Modificador / arcano | +15% no próximo dano direto contra alvo sob sua lentidão; sem autociclo |
-| P2 — Memória do Selo | 0 | — | Recurso / sem dano | +1 MP/s à regeneração enquanto sua barreira estiver ativa; respeita atraso de 3 s |
+| P2 — Memória do Selo | 0 | — | Recurso / sem dano | +1 MP/s à regeneração enquanto sua barreira estiver ativa; somente fora de combate conforme Sprint 5 |
 
 **Vael:** “Minha mão desenhou a primeira runa que sua ordem chamou de descoberta.”
 
@@ -122,10 +124,10 @@ Esquiva e interação são ações universais fora da árvore. Esquiva proposta:
 
 **Sprite:** 32×32; armadura azul-ferro #565E65, sombra #29334E, escudo âmbar #B59050. Corpo largo, machado e escudo com silhuetas distintas. Colisor nos pés, sem incorporar largura decorativa do escudo.
 
-| Nó / habilidade | MP | CD | Tipo / escala | Efeito e parâmetros iniciais |
+| Nó / habilidade | Vigor | CD | Tipo / escala | Efeito e parâmetros iniciais |
 |---|---:|---|---|---|
 | A1 — Golpe de Machado | 0 | 0,9 s | Físico / STR | P=10; arco frontal curto |
-| A2 — Guarda do Crepúsculo | 8 | 6 s | Utilidade / sem dano | Redução frontal 40% por 2 s; costas desprotegidas; sem regenerar MP pelo bloqueio |
+| A2 — Guarda do Crepúsculo | 8 | 6 s | Utilidade / sem dano | Redução frontal 40% por 2 s; costas desprotegidas; gera vigor apenas conforme limites da Sprint 5 |
 | A3 — Impacto do Baluarte | 12 | 7 s | Físico / STR | P=18; interrupção de 0,5 s em comuns; bosses não sofrem stun |
 | A4 — Fenda de Aço | 20 | 9 s | Físico / STR | P=30; linha curta, antecipação própria de 0,6 s |
 | P1 — Postura Firme | 0 | 6 s | Defesa / sem dano | Após primeiro bloqueio de A2, +10 pontos percentuais de redução por 2 s; teto compartilhado 60% |
@@ -150,7 +152,7 @@ Esquiva e interação são ações universais fora da árvore. Esquiva proposta:
 | A3 — Jardim de Pragas | 18 | 8 s | Veneno / INT | Área persiste 3 s e aplica 3 ticks de P_tick=2; reentrada não duplica efeito |
 | A4 — Fera Ancestral | 24 | 16 s | Arcano / INT | Dura 10 s; HP=30+3×INT, DEF=10, MDEF=20; golpe P=3, intervalo 1,2 s |
 | P1 — Raiz Mineral | 0 | — | Defesa / invocação | Golem recebe +10 DEF; não aumenta defesa da heroína |
-| P2 — Elo da Matilha | 0 | — | Recurso / sem dano | +1 MP/s de regeneração enquanto houver invocação viva; bônus único, respeita atraso |
+| P2 — Elo da Matilha | 0 | — | Recurso / sem dano | +1 MP/s de regeneração enquanto houver invocação viva; bônus único, somente fora de combate |
 
 Máximo um golem e uma fera por heroína. Reinvocar substitui entidade anterior sem explosão ou recompensa. Invocações obedecem colisão, não contam como alvo obrigatório de puzzles e são removidas no reset/morte/transição. `W` da invocação é o foco capturado no lançamento.
 
@@ -205,7 +207,7 @@ Markdown não garante fundos e bordas coloridas em todos os renderizadores. As f
 
 ## 9. Contrato técnico e validação
 
-Uma definição de habilidade contém ID estável, classe, nó, pré-requisitos, custo inteiro de MP, cooldown em milissegundos, tipo, atributo de escala, poder e efeitos com duração/limite. Passivas distinguem efeito contínuo de proc e não são comandos equipáveis. IDs de habilidades podem seguir `classe.a1`…`classe.p2`; textos são separados das regras.
+Uma definição de habilidade contém ID estável, classe, nó, pré-requisitos, resource_type (MP/VG) e custo inteiro, cooldown em milissegundos, tipo, atributo de escala, poder e efeitos com duração/limite. Passivas distinguem efeito contínuo de proc e não são comandos equipáveis. IDs de habilidades podem seguir `classe.a1`…`classe.p2`; textos são separados das regras.
 
 Testes a implementar com o domínio: atributos efetivos limitados; máximos consistentes; exemplo 42→35 e crítico 63→52; MP insuficiente sem execução; cooldown após comando válido; passiva disparada uma vez; reset de invocações; ticks sem crítico; cura sem overflow; escolhas/saves sem duplicação. Nada disso é anunciado como código já existente.
 

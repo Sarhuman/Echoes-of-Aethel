@@ -30,7 +30,7 @@ UI combina cor, rótulo escrito e ícone; texto claro sobre painel azul-escuro. 
 | Poder base | weapon_power / focus_power | Usado como W da Sprint 1, conforme o ataque; não somar arma e foco no mesmo componente |
 | Defesa | armor, ward | Valores não negativos; somam equipamento antes da fórmula de mitigação |
 | Resistência | fire, cold, sacred, arcane, poison | Limite final −50%…75%, por tipo |
-| Ofensivo | bonus_damage_pct, bonus_crit_pct | Respeita teto total de dano/crítico da Sprint 1 |
+| Ofensivo | bonus_damage_pct, bonus_crit_pct, bonus_crit_multiplier | Respeita tetos: dano +100%, crítico 25%, multiplicador total 2× conforme Sprint 5; afixo de multiplicador somente em Raro/Épico/Lendário |
 | Sustentação | bonus_healing_pct | Teto final de 50%; não altera consumíveis sem regra explícita |
 
 Nível de item (`item_level`) controla faixas de poder e afixos; requisito (`requirement_level`) controla quem pode equipar. Não são sinônimos. Ambos entre 1 e 30 neste baseline, sem item de nível superior à faixa autorizada da zona. Faixas por mapa serão definidas na Sprint 4. Cada afixo tem tier, peso, faixa inteira e custo de orçamento no catálogo. Antes de implementar, publicar esses catálogos e simular extremos; esta Sprint não inventa uma curva de DPS validada.
@@ -215,3 +215,5 @@ Transação bloqueia estado do encontro/personagem na ordem definida, registra m
 - Balanceamento: medir ouro/hora, equipamentos/hora, tempo para upgrades, poder por nível e utilidade por classe. Valores deste documento não são desempenho ou economia aprovados.
 
 Esta Sprint entrega especificação, tabelas e exemplo JSON. Não implementa sorteio, inventário, crafting ou assets de jogo.
+
+Compra no hub e apresentação do consumo seguem a [Sprint 5](05_combate_e_hud.md); cooldown compartilhado de 5 s e regras de recurso cheio permanecem. Afixo de multiplicador usa unidade em pontos (máximo acumulado +0,5), com tier/peso/faixa publicados no catálogo antes de habilitar geração.

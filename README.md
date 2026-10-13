@@ -56,6 +56,10 @@ Ataques em tempo real combinam posicionamento, esquiva, gestão de MP, telegraph
 
 Raridades: **Comum → Mágico → Raro → Épico → Lendário**. Nível do item e afixos determinam seu poder junto da raridade. Novas expedições podem repovoar encontros; recompensas únicas e decisões de história não se repetem.
 
+### Dificuldade e recursos
+
+Sem seletor tradicional: a progressão por atos e a Bruma mudam o desafio de novas expedições em mapas revisitados. HP/MP e vigor do Bastião são confirmados pelo domínio; poções podem ser compradas no hub e usadas por atalhos. O modo Eclipse, planejado para após a primeira conclusão, cria uma nova campanha com morte permanente e fases adicionais de boss; ainda não está implementado.
+
 ### Arte e interface 16-bit
 
 Perspectiva **top-down 3/4**, chão ortogonal, tiles de 16×16 e sprites jogáveis de **32×32 pixels**. Bosses ocupam células maiores, com névoa, raízes e luz de Éter compondo a atmosfera sem esconder sinais de ataque.
@@ -98,6 +102,7 @@ No **Mapa 12**, a luta e a revelação convergem. Após derrotar Vael, o jogador
 | [02 — Arquitetura Técnica](docs/GDD/02_arquitetura_tecnica.md) | Flutter/Flame, FastAPI, PostgreSQL, paperdoll, API e deploy |
 | [03 — Sistema de Loot](docs/GDD/03_sistema_de_loot.md) | Raridades, afixos, slots, drops, consumíveis e JSON de itens |
 | [04 — Mapas e Quests — spoilers](docs/GDD/04_mapas_e_quests.md) | Doze mapas, 24 opções e degradação narrativa da Cidadela |
+| [05 — Combate e HUD](docs/GDD/05_combate_e_hud.md) | Fórmulas, HP/MP/vigor, Bruma, Eclipse e feedback visual |
 
 O [índice geral](docs/GDD/README.md) reúne também os documentos existentes de campanha, arte, loot, prólogo e engenharia. As próximas Sprints ampliarão os módulos sem duplicar o cânone.
 
