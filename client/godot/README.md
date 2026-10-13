@@ -20,3 +20,5 @@ Veja [documentação do save](../../docs/GDD/08_save_system.md) para recuperaç�
 ActorBase e EnemyFSM implementam o núcleo offline; CrimeService, dano completo, loot e navegação ainda não estão integrados. Veja [FSM](../../docs/GDD/09_enemy_fsm.md).
 
 Abra o projeto no editor e use F5 para a cena. Controles/limitações em [Player e cena](../../docs/engineering/player-test-scene.md).
+
+Apresentação opcional: F8 Base/Melhorado; F9 efeitos reduzidos. Flags e limitações em [apresentação](../../docs/engineering/enhanced-presentation.md). Teste: `godot --headless --path client/godot --script res://tests/test_presentation.gd`.
