@@ -13,8 +13,9 @@
 | 07 — Roteiro e diálogos | Roteiro de produção; scripts/cenas pendentes | [07_roteiro_e_dialogos.md](07_roteiro_e_dialogos.md) |
 | 08 — Diálogos e degradação do hub | Especificação narrativa/dados; scripts pendentes | [08_dialogos_hub_degradacao.md](08_dialogos_hub_degradacao.md) |
 | Sprint 8 — Save System | Código estrutural Godot, 27 verificações aprovadas | [08_save_system.md](08_save_system.md) |
+| 09 — Enemy FSM | Núcleo offline, 25 verificações aprovadas | [09_enemy_fsm.md](09_enemy_fsm.md) |
 
-Módulos posteriores ao 08 ainda não possuem módulos publicados nesta pasta. Não considerar documentação como confirmação de sistemas executáveis.
+Módulos posteriores ao 09 ainda não possuem módulos publicados nesta pasta. Não considerar documentação como confirmação de sistemas executáveis.
 
 ## Base de design existente
 
