@@ -31,12 +31,14 @@ func run() -> void:
 	player.advance_timers(0.08)
 	check(not player.is_dashing and not player.attempt_dash(), "dash duration and cooldown separate")
 	player.advance_timers(1.0)
-	player.begin_test_action(false)
+	player.request_attack(false)
+	player.advance_attack(0.24)
 	check(player.attempt_dash(), "normal recovery cancellable")
 	player.advance_timers(1.2)
-	player.begin_test_action(true)
+	player.request_attack(true)
 	check(not player.attempt_dash(), "heavy windup blocks dash")
-	player.advance_timers(0.5)
+	player.advance_timers(0.8)
+	player.advance_attack(0.8)
 	player.stamina = 24
 	check(not player.attempt_dash(), "insufficient stamina")
 	player.stamina = 100

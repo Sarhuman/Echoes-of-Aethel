@@ -34,7 +34,7 @@ Arte final, áudio, acessibilidade, balanceamento, migrações de saves e perfil
 - Testes de save corrompido, versão desconhecida e recuperação do backup sem perda silenciosa.
 - Playtest das duas escolhas e morte/retry com a mesma seed; regressões de colisão e segurança do hub.
 
-Este PR entrega documentação. Não há testes de execução ou CI de jogo para alegar como aprovados.
+Atualização de 13/10/2026: há 125 verificações headless de save, FSM, Player, apresentação e combate; veja [combate offline](offline-combat.md). Export Windows, playtest e CI automatizada continuam pendentes.
 
 ## Trilha de infraestrutura online
 

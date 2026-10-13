@@ -22,10 +22,12 @@ func _physics_process(_delta: float) -> void:
 		move_and_slide()
 
 func take_damage(amount: int, attacker: ActorBase) -> bool:
-	# Offline harness only: production damage is resolved by CombatService.
+	# Actor boundary validates every damage source, including the existing enemy FSM.
 	if is_dead or not combat_enabled or amount <= 0 or not is_instance_valid(attacker):
 		return false
-	if not attacker.combat_enabled or attacker.zone_id != zone_id:
+	if zone_id == &"citadel" or attacker.zone_id == &"citadel":
+		return false
+	if attacker.is_dead or not attacker.combat_enabled or attacker.zone_id != zone_id:
 		return false
 	var actual := mini(amount, current_health)
 	if narrative_npc and actual == current_health:
