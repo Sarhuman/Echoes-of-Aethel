@@ -1,5 +1,7 @@
 # Prólogo e Ato I
 
+O [módulo 07](../GDD/07_roteiro_e_dialogos.md) consolida prólogo, conselho, diálogos dinâmicos e roteiro final. Em conflitos de encenação/fala, prevalece o 07; padrões de encontros do Ato I abaixo continuam baseline experimental.
+
 Texto de produção. Falas exibidas não revelam a linhagem; observações de consequência pertencem à implementação e ao diário após o evento.
 
 ## Abertura — O cristal que ainda respira

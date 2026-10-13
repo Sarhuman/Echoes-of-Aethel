@@ -67,3 +67,5 @@ Vael recebe o herói antes do combate: “Cada misericórdia alimentou minha pac
 | Bastião | “Você fechou os portões; eu fechei os céus. Conhecemos o preço de proteger os nossos.” |
 | Invocadora | “Seus ancestrais não me esqueceram. Fugiam de mim através de você.” |
 | Inquisidor | “Sua chama e a minha nasceram da mesma fome. O fogo não distingue pai e filho.” |
+
+Prólogo, revelação e epílogos são detalhados no [módulo 07](../GDD/07_roteiro_e_dialogos.md). O nome dramático “O Fim da Ordem” identifica restore_order, mantendo a restauração do filtro, sem trocar a opção canônica.
