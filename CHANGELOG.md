@@ -2,6 +2,8 @@
 
 ## 0.2.0-dev — 2026-10-13
 
+- Ajustes de 14/10 após retorno da missão: removidas as cinco listras artificiais do chão da Cidadela. O objetivo final identifica Irian como líder do conselho, orienta o retorno ao hub quando necessário e é concluído após uma conversa registrada no save. Validação: 19 suítes / 392 verificações.
+
 - Ajustes de 14/10 após novo playtest: Cultista Cego e Garras de Musgo recebem quatro quadros de locomoção com pés alinhados e sombras de contato; movimento deixa de aplicar oscilação vertical. Inimigos passam a colidir com cenário, sem prender o Bastião por contato físico, preservando ataques por proximidade. Validação: 19 suítes / 385 verificações, export Windows e inicialização por 120 quadros.
 
 - Ajustes visuais de 14/10: recorte dos atlas usa células de 627 px e os quadros do Bastião alinham os pés; indicadores de ataque inimigo recebem borda clara e preenchimento progressivo; marcadores cinzentos de pilares saem do Bosque. Validação: 19 suítes / 377 verificações, export Windows e inicialização por 120 quadros.

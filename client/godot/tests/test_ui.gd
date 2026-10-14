@@ -51,4 +51,12 @@ func run() -> void:
 	check(dialogue.valid(),"typed dialogue catalog valid")
 	for id in ["npc.blacksmith","npc.alchemist","npc.elder","npc.gatekeeper","npc.merchant"]:
 		check(not DialogueResolver.resolve(id,{}).is_empty(),"essential NPC has fallback "+id)
+	var return_state := WorldSaveSchema.initial()
+	return_state.world_flags["forest_01.moss_claws.defeated"] = true
+	return_state.quest_choices["act1.spy_hunt"] = "judge_suspects"
+	return_state.applied_effects["first_return_to_citadel"] = true
+	check(SliceHUD.objective_for(return_state, "citadel", 3).contains("Irian"), "hub objective identifies council leader")
+	check(SliceHUD.objective_for(return_state, "forest_01", 3).contains("Volte à Cidadela"), "forest objective points back to council")
+	return_state.world_flags["hub.council_briefed"] = true
+	check(SliceHUD.objective_for(return_state, "citadel", 3).contains("PRIMEIRA FATIA CONCLUÍDA"), "council briefing completes objective")
 	finish()

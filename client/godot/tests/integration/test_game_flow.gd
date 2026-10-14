@@ -114,6 +114,15 @@ func run() -> void:
 	await physics_frame
 	check(not game.player.is_dead and game.player.current_health == game.player.max_health and game.session.zone == "citadel","death retry heals in hub")
 	check(game.session.state.quest_choices.has("act1.spy_hunt"),"death preserves choices")
+	game.ui.update_state(game.player,game.session,{})
+	check(game.ui.objective.text.contains("Irian"),"completed return directs player to council leader")
+	game.nearest = {"id": "npc.elder", "name": "Irian"}
+	game.interact()
+	check(game.session.state.world_flags.get("hub.council_briefed",false) and game.ui.menu_open,"council conversation recorded")
+	game.command("resume")
+	game.ui.update_state(game.player,game.session,{})
+	check(game.ui.objective.text.contains("PRIMEIRA FATIA CONCLUÍDA"),"briefing completes objective")
+	check(game.session.saves.load_game().ok and game.session.state.world_flags.get("hub.council_briefed",false),"council briefing survives reload")
 	game.travel("forest_01")
 	await physics_frame
 	check(get_nodes_in_group("enemies").size() == 5,"defeated sub-boss stays defeated")

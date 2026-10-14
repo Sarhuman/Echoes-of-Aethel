@@ -237,6 +237,11 @@ func interact() -> void:
 	elif id in ["npc.merchant", "npc.alchemist"]:
 		show_shop()
 	elif id.begins_with("npc."):
+		if id == "npc.elder" and session.state.applied_effects.has("first_return_to_citadel") and not session.state.world_flags.get("hub.council_briefed", false):
+			var candidate := session.snapshot()
+			candidate.world_flags["hub.council_briefed"] = true
+			var briefing := session.commit(candidate, "council_briefing")
+			if not briefing.ok: return
 		var line := DialogueResolver.resolve(id,session.state.world_flags)
 		get_tree().paused = true
 		ui.show_menu(line.speaker,line.text,[["Encerrar conversa","resume"]])

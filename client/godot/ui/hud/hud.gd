@@ -365,14 +365,17 @@ func update_state(player: Player, session: SliceSession, nearest: Dictionary) ->
 	var clues := 0
 	for id in session.quest.definition.clues:
 		if state.world_flags.get(id,false): clues += 1
-	if not state.world_flags.get("forest_01.moss_claws.defeated",false):
-		objective.text = "A CAÇA AO ESPIÃO\nInvestigue a aldeia (%d/3) e enfrente Garras de Musgo ao nordeste." % clues
-	elif not state.quest_choices.has("act1.spy_hunt"):
-		objective.text = "A CAÇA AO ESPIÃO\nGarras derrotado. Investigue (%d/3) e confirme sua decisão na aldeia." % clues
-	elif not state.applied_effects.has("first_return_to_citadel"):
-		objective.text = "O PESO DA ESCOLHA\nRetorne à Cidadela e encontre quem ficou."
-	else:
-		objective.text = "PRIMEIRA FATIA CONCLUÍDA\nConverse com o conselho. O Bosque continua aberto para exploração."
+	objective.text = objective_for(state, session.zone, clues)
+static func objective_for(state: Dictionary, zone: String, clues: int) -> String:
+	if not state.world_flags.get("forest_01.moss_claws.defeated", false):
+		return "A CAÇA AO ESPIÃO\nInvestigue a aldeia (%d/3) e enfrente Garras de Musgo ao nordeste." % clues
+	if not state.quest_choices.has("act1.spy_hunt"):
+		return "A CAÇA AO ESPIÃO\nGarras derrotado. Investigue (%d/3) e confirme sua decisão na aldeia." % clues
+	if not state.applied_effects.has("first_return_to_citadel"):
+		return "O PESO DA ESCOLHA\nRetorne à Cidadela e encontre quem ficou."
+	if not state.world_flags.get("hub.council_briefed", false):
+		return "O PESO DA ESCOLHA\n%s e fale com Irian, líder do conselho, junto ao cristal." % ("Volte à Cidadela" if zone != "citadel" else "Vá até o centro da Cidadela")
+	return "PRIMEIRA FATIA CONCLUÍDA\nSua decisão foi registrada por Irian. O Bosque continua aberto para exploração."
 func _process(delta: float) -> void:
 	notice_left = maxf(0,notice_left-delta)
 	if notice_left <= 0: message.text = ""

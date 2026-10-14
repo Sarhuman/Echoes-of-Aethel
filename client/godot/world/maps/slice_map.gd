@@ -97,9 +97,6 @@ func _draw() -> void:
 	if zone_id == "citadel":
 		if flags.get("hub.contamination_observed", false):
 			draw_circle(Vector2(920, 505), 80, Color(0.30, 0.18, 0.48, 0.25))
-		if flags.get("hub.memorial_observed", false):
-			for index in range(5):
-				draw_line(Vector2(780 + index * 17, 710), Vector2(780 + index * 17, 675), Color("#c2b6a1"), 3)
 	for entry in interactions:
 		var point: Vector2 = entry.position
 		draw_arc(point, 12, 0, TAU, 24, Color("#d1af70"), 2)
