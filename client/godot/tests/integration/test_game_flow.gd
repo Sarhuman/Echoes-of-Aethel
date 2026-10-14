@@ -21,7 +21,20 @@ func run() -> void:
 	check(paused and game.ui.menu_open,"title pauses simulation")
 	game.start_game(false)
 	await physics_frame
+	check(game.begun and game.session.zone == "citadel" and paused and game.ui.menu_open,"new campaign shows opening")
+	game.command("prologue_next")
+	check(game.prologue_index == 1 and paused,"opening advances without moving world")
+	game.command("skip_prologue")
+	check(not paused and game.session.state.world_flags.get("prologue.last_bell",false),"skipping opening saves objective without reward")
 	check(game.begun and game.session.zone == "citadel" and not paused,"new campaign playable")
+	await process_frame
+	game.ui.update_state(game.player,game.session,{})
+	check(game.ui.objective.text.contains("Fale com Irian"),"new journey directs player to first council")
+	game.nearest = {"id": "npc.elder", "name": "Irian"}
+	game.interact()
+	check(paused and game.ui.menu_open and game.council_index == 0,"Irian opens council scene")
+	game.command("skip_council")
+	check(not paused and game.session.state.world_flags.get("prologue.council",false),"council skip persists once")
 	check(game.player.current_health == 172 and game.player.mp == 52,"starts healed")
 	check(game.ui.hp.size.y >= 20 and game.ui.hp_value.text.contains("172"),"framed resource meter shows numeric health")
 	var shop_state: Dictionary = game.session.snapshot()

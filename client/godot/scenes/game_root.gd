@@ -9,6 +9,22 @@ var handling_death := false
 var nearest: Dictionary = {}
 var audio_director: AethelAudioDirector
 var combat_text: AethelCombatText
+var impact_feedback: AethelImpactFeedback
+var prologue_index := 0
+var council_index := 0
+const PROLOGUE_PAGES := [
+	["O ÚLTIMO SINO", "Narrador", "Aethel aprendeu a medir o tempo pela luz do Éter. Quando o Coração se partiu, os relógios continuaram. Foi o mundo que perdeu o ritmo."],
+	["O ÚLTIMO SINO", "Narrador", "A Bruma ergueu os mortos, mudou as feras e ensinou os vivos a temer a água. Atrás destes portões, um fragmento ainda respira."],
+	["A PORTA DA CIDADELA", "Maera", "Guarde essa mão. Aqui dentro, qualquer brilho vira promessa."],
+	["A PORTA DA CIDADELA", "Bastião", "Conheço estes portões. Foi o lado de fora que mudou."],
+	["A PORTA DA CIDADELA", "Maera", "Então entre. O conselho está junto ao cristal. Se oferecerem respostas fáceis, olhe para as mãos de quem fala."]
+]
+const COUNCIL_PAGES := [
+	["O CONSELHO DOS QUE FICARAM", "Irian", "Cinco Santuários mantinham o Éter no seu leito. Vael tentou abrir o Coração durante o eclipse. Agora temos um fragmento e quatro ausências."],
+	["O CONSELHO DOS QUE FICARAM", "Lyra", "O cristal afasta a Bruma dos portões. Não a tira do que já trouxeram para dentro. Preciso de água limpa, não de outra promessa."],
+	["O CONSELHO DOS QUE FICARAM", "Maera", "Há gente desaparecendo no Bosque. Se mandarmos toda a guarda, deixamos estes portões sem ninguém. Se não mandarmos ninguém, a cidade acaba por dentro."],
+	["O CONSELHO DOS QUE FICARAM", "Irian", "Silvano guarda uma parte do Coração. Não lhe pedimos que salve tudo hoje. Comece pela estrada."]
+]
 func _ready() -> void:
 	var left_click := InputEventMouseButton.new()
 	left_click.button_index = MOUSE_BUTTON_LEFT
@@ -23,6 +39,8 @@ func _ready() -> void:
 	add_child(world)
 	combat_text = AethelCombatText.new()
 	add_child(combat_text)
+	impact_feedback = AethelImpactFeedback.new()
+	add_child(impact_feedback)
 	ui = SliceHUD.new()
 	add_child(ui)
 	audio_director = AethelAudioDirector.new()
@@ -56,6 +74,27 @@ func start_game(continue_game: bool) -> void:
 		return
 	load_zone()
 	resume()
+	if not continue_game and not session.state.world_flags.get("prologue.last_bell", false):
+		prologue_index = 0
+		show_prologue_page()
+func show_prologue_page() -> void:
+	get_tree().paused = true
+	var page: Array = PROLOGUE_PAGES[prologue_index]
+	ui.show_cinematic(page[0], page[1], page[2], prologue_index + 1, PROLOGUE_PAGES.size())
+func finish_prologue() -> void:
+	var candidate := session.snapshot()
+	candidate.world_flags["prologue.last_bell"] = true
+	var saved := session.commit(candidate, "prologue")
+	if saved.ok: resume()
+func show_council_page() -> void:
+	get_tree().paused = true
+	var page: Array = COUNCIL_PAGES[council_index]
+	ui.show_cinematic(page[0], page[1], page[2], council_index + 1, COUNCIL_PAGES.size(), "council_next", "skip_council")
+func finish_council() -> void:
+	var candidate := session.snapshot()
+	candidate.world_flags["prologue.council"] = true
+	var saved := session.commit(candidate, "prologue_council")
+	if saved.ok: resume()
 func load_zone() -> void:
 	for node in world.get_children():
 		world.remove_child(node)
@@ -70,6 +109,8 @@ func load_zone() -> void:
 	session.player = player
 	session.apply_player()
 	var camera := player.get_node("Camera2D") as Camera2D
+	impact_feedback.set_camera(camera)
+	impact_feedback.enabled = not ui.reduced_effects
 	camera.limit_left = 0
 	camera.limit_top = 0
 	camera.limit_right = int(map.map_size.x)
@@ -85,6 +126,7 @@ func load_zone() -> void:
 	handling_death = false
 func show_damage(id: String, amount: int, _source: String) -> void:
 	audio_director.play_effect(&"hit")
+	impact_feedback.impulse(5.0 if id == String(player.actor_id) else 3.0)
 	for actor in get_tree().get_nodes_in_group("enemies") + get_tree().get_nodes_in_group("player"):
 		if is_instance_valid(actor) and String(actor.actor_id) == id:
 			combat_text.show_damage(actor.global_position, amount)
@@ -148,6 +190,16 @@ func command(action: String) -> void:
 			ui.show_menu("Uma nova jornada","Iniciar substitui a campanha atual; o save anterior será mantido no backup.",[["Iniciar nova campanha","confirm_new"],["Voltar","title"]])
 		else: start_game(false)
 	elif action == "confirm_new": start_game(false)
+	elif action == "prologue_next":
+		prologue_index += 1
+		if prologue_index >= PROLOGUE_PAGES.size(): finish_prologue()
+		else: show_prologue_page()
+	elif action == "skip_prologue": finish_prologue()
+	elif action == "council_next":
+		council_index += 1
+		if council_index >= COUNCIL_PAGES.size(): finish_council()
+		else: show_council_page()
+	elif action == "skip_council": finish_council()
 	elif action == "continue": start_game(true)
 	elif action == "title": show_title()
 	elif action == "quit": get_tree().quit()
@@ -176,6 +228,8 @@ func command(action: String) -> void:
 	elif action == "toggle_effects":
 		ui.reduced_effects = not ui.reduced_effects
 		ui.save_options()
+		impact_feedback.enabled = not ui.reduced_effects
+		if ui.reduced_effects: impact_feedback.reset()
 		if is_instance_valid(player): player.get_node("Camera2D").position_smoothing_enabled = not ui.reduced_effects
 		if ui.menu_open: command("options")
 	elif action == "toggle_sound":
@@ -237,6 +291,10 @@ func interact() -> void:
 	elif id in ["npc.merchant", "npc.alchemist"]:
 		show_shop()
 	elif id.begins_with("npc."):
+		if id == "npc.elder" and session.state.world_flags.get("prologue.last_bell", false) and not session.state.world_flags.get("prologue.council", false) and not session.state.quest_choices.has("act1.spy_hunt"):
+			council_index = 0
+			show_council_page()
+			return
 		if id == "npc.elder" and session.state.applied_effects.has("first_return_to_citadel") and not session.state.world_flags.get("hub.council_briefed", false):
 			var candidate := session.snapshot()
 			candidate.world_flags["hub.council_briefed"] = true
