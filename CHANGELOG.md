@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.0-dev — 2026-10-13
+
+- Primeira jornada jogável: Cidadela, Bosque, três inimigos, Garras de Musgo, quest com duas escolhas, diálogo, consequência no hub e retorno seguro.
+- Fórmula de dano e atributos do Bastião, guarda, três habilidades, regeneração, inventário de 60 posições, equipamento, consumíveis, loot e XP.
+- Save de conteúdo v2 com migração de v1, backup, recompensas excedentes recuperáveis e testes de recarga.
+- Mapas, sprites e ícones originais em arte pintada de fantasia sombria, com grade de itens e capturas reais do Godot no README. HP, MP e stamina receberam a paleta vermelho, azul e amarelo.
+- Animações de quatro quadros para caminhada e machado, efeitos visíveis de golpe, Fenda, Guarda e esquiva. Clique esquerdo/direito como aliases de ataque/Impacto; aviso explica o bloqueio de combate na Cidadela.
+- Menu inicial, pausa, controles, opções, diário, HUD e sons simples sintetizados.
+- 14 suítes / 271 verificações aprovadas localmente em Godot 4.6. Export Windows gerado e inicializado por 120 quadros no smoke. CI configurado para testes e export.
+- Playtest humano, animação, áudio final, balanceamento e campanha completa permanecem pendentes.
+
 ## 0.1.0-dev — 2026-10-13
 
 Primeiro identificador de desenvolvimento do protótipo técnico; sem tag, release binária ou campanha completa.

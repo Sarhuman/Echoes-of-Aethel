@@ -2,11 +2,8 @@
 [ext_resource type="Script" path="res://combat/attack_definition.gd" id="1"]
 [resource]
 script = ExtResource("1")
-attack_id = &"heavy_prototype"
-heavy = true
-windup = 0.35
-active = 0.08
-recovery = 0.37
-mp_cost = 12.0
-damage = 24
-reach = 64.0
+attack_id = &"twilight_guard"
+mp_cost = 8.0
+cooldown = 6.0
+effect_duration = 2.0
+reduction = 0.4

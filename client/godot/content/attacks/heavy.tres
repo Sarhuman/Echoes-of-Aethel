@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AttackDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://combat/attack_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+attack_id = &"bulwark_impact"
+heavy = true
+windup = 0.35
+active = 0.08
+recovery = 0.37
+mp_cost = 12.0
+power = 18
+cooldown = 7.0
+interrupt_seconds = 0.5
+reach = 64.0

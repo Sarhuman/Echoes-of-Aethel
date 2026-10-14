@@ -1,5 +1,7 @@
 # Echoes of Aethel — escopo de produto e produção
 
+> Estado de implementação: a primeira fatia está jogável em `0.2.0-dev`. Para conflitos sobre slots, MP, dano e checkpoint, prevalecem as [decisões D1–D8](decisions-first-slice.md). Esta página mantém parte do texto histórico de planejamento.
+
 Versão 1.0 · 13/10/2026 · plataforma inicial: Windows · Godot 4.6.
 
 Este documento consolida o projeto sem substituir os IDs narrativos, o GDD ou os contratos existentes. Define a fronteira da primeira entrega e distingue implementação comprovada de intenção. Controles abaixo foram aprovados pelo usuário; estimativas visuais e números de balanceamento permanecem propostas quando assim identificados.
@@ -49,7 +51,7 @@ As quatro habilidades devem seguir os contratos da classe após reconciliação 
 
 Números são teclas da fileira superior nesta entrega. Os aliases representam a mesma ação; apertar 2 e Q simultaneamente não cria dois comandos. W é exclusivamente movimento. Uma intenção ofensiva por passo de física; básico tem precedência quando múltiplas ações ofensivas chegam juntas. Não há buffer de combo/autoataque nesta etapa.
 
-**Cena técnica atual:** 1 = básico; 2/Q = pesado experimental; 3/E, 4/R e 5/F exibem aviso de habilidade ainda não implementada, sem gasto. F6 reinicia a cena técnica; F8 alterna apresentação e F9 reduz efeitos. Reinício de teste não é checkpoint e não estará exposto assim na campanha. Remapeamento e controles adicionais são trabalhos futuros, não menus já entregues.
+**Versão jogável 0.2.0-dev:** 1 ou clique esquerdo = básico; 2/Q ou clique direito = Impacto; 3/E = Guarda; 4/R = Fenda; 5/F permanece reservado. Ataques e habilidades de combate são bloqueados na Cidadela segura, com aviso ao jogador; funcionam no Bosque. O jogador também usa C para interagir, I para a bolsa, J para o diário e Esc para pausa/opções. F6 e F8 pertencem à cena técnica histórica, não ao loop da campanha.
 
 ## 5. Narrativa que deve permanecer estável
 

@@ -8,6 +8,8 @@ extends CharacterBody2D
 @export var combat_enabled := true
 @export var movement_speed := 100.0
 @export var max_health := 100
+@export var defense := 0
+@export var magic_defense := 0
 var current_health := 100
 var is_dead := false
 @onready var _events: Node = get_node("/root/EventBus")

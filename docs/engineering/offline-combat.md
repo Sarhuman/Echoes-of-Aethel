@@ -1,5 +1,7 @@
 # Combate offline — ataques reais na cena técnica
 
+> Nota de versão: os valores fixos do protótipo foram substituídos pela fórmula e atributos da primeira fatia; consulte [decisões D1–D8](decisions-first-slice.md) e [valores experimentais](experimental-values.md). As seções abaixo preservam o contrato e o histórico técnico original.
+
 Base: PR #16, commit 9809c40cb3399fa3bbf4ef13232b25c46b2b6f7b. Godot 4.6.
 
 ## Executar

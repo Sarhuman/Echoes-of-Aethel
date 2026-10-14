@@ -1,0 +1,82 @@
+extends SceneTree
+var checks := 0
+var failures := 0
+func _initialize() -> void: call_deferred("run")
+func check(value: bool, label: String) -> void:
+	checks += 1
+	if not value:
+		failures += 1
+		push_error(label)
+func finish() -> void:
+	print("%d checks; %d failures" % [checks, failures])
+	quit(1 if failures else 0)
+func run() -> void:
+	var wolf: EnemyDefinition = load("res://content/enemies/ethereal_wolf.tres")
+	var invalid := wolf.duplicate() as EnemyDefinition
+	invalid.attack_range = NAN
+	check(not invalid.valid(),"invalid parameters refused")
+	var world := Node2D.new()
+	root.add_child(world)
+	var player := preload("res://entities/player/player.tscn").instantiate() as Player
+	world.add_child(player)
+	player.input_enabled = false
+	player.set_physics_process(false)
+	player.zone_id = &"forest_01"
+	player.position = Vector2(200,200)
+	var boss := preload("res://entities/enemies/moss_claws.tscn").instantiate() as EnemyActor
+	boss.actor_id = &"forest_01.moss_claws.01:1"
+	boss.zone_id = &"forest_01"
+	world.add_child(boss)
+	boss.set_physics_process(false)
+	boss.position = Vector2(150,200)
+	check(boss.brain.windup_for(0) == 0.9 and boss.brain.windup_for(1) == 1.1 and boss.brain.windup_for(2) == 1.2,"all boss telegraphs")
+	boss.brain.locked_position = Vector2(200,200)
+	check(not boss.brain.roots_hit(Vector2(200,200)) and boss.brain.roots_hit(Vector2(250,200)),"roots preserve corridor")
+	boss.brain.interrupt(0.5)
+	check(boss.brain.interrupted == 0,"boss stun immune")
+	boss.current_health = 399
+	boss.brain.step(0.01,player)
+	check(boss.brain.phase_two and boss.brain.phase == "recovery","phase change offers recovery")
+	var common := preload("res://entities/enemies/ethereal_wolf.tscn").instantiate() as EnemyActor
+	common.actor_id = &"forest_01.ethereal_wolf.01:1"
+	common.zone_id = &"forest_01"
+	world.add_child(common)
+	common.set_physics_process(false)
+	common.brain.phase = "windup"
+	common.interrupt(0.5)
+	check(common.brain.phase == "recovery" and common.brain.interrupted == 0.5,"impact cancels common windup")
+	common.zone_id = &"citadel"
+	check(not common.take_damage(10,player),"safe zone protected")
+	var wall := StaticBody2D.new()
+	wall.collision_layer = 2
+	wall.position = Vector2(250,200)
+	var shape := CollisionShape2D.new()
+	var rect := RectangleShape2D.new()
+	rect.size = Vector2(20,160)
+	shape.shape = rect
+	wall.add_child(shape)
+	world.add_child(wall)
+	common.zone_id = &"forest_01"
+	common.position = Vector2(210,200)
+	common.brain.phase = "charge"
+	common.brain.remaining = 1
+	common.brain.interrupted = 0
+	common.brain.locked_direction = Vector2.RIGHT
+	player.position = Vector2(320,200)
+	common.set_physics_process(true)
+	for i in range(45): await physics_frame
+	check(common.position.x < 240,"charge blocked by physical wall")
+	common.set_physics_process(false)
+	var cultist: EnemyDefinition = load("res://content/enemies/blind_cultist.tres")
+	var shot := EnemyProjectile.new()
+	shot.source = common
+	shot.spec = cultist
+	shot.direction = Vector2.RIGHT
+	world.add_child(shot)
+	shot.position = Vector2(225,200)
+	var hp := player.current_health
+	for i in range(35): await physics_frame
+	check(not is_instance_valid(shot) and player.current_health == hp,"projectile blocked by wall")
+	world.queue_free()
+	await process_frame
+	finish()

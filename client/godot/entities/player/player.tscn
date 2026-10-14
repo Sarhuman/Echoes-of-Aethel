@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://entities/player/player.gd" id="1"]
+[ext_resource type="Script" path="res://presentation/bastion_visual.gd" id="2"]
+[sub_resource type="CircleShape2D" id="body"]
+radius = 9.0
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 1
+collision_mask = 3
+script = ExtResource("1")
+actor_id = &"player.bastion"
+team_id = &"player"
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("body")
+[node name="Visual" type="Node2D" parent="."]
+script = ExtResource("2")
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.25, 1.25)
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0

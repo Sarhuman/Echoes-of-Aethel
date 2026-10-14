@@ -1,5 +1,7 @@
 # Sprint 1 — Classes e atributos
 
+> Os valores de combate da versão jogável seguem as [decisões da primeira fatia](../engineering/decisions-first-slice.md) e [valores experimentais](../engineering/experimental-values.md). Quando este GDD histórico fala em vigor ou quatro slots ativos, as decisões D2 e D5 prevalecem.
+
 **Projeto:** Echoes of Aethel · **Versão:** 1.0 · **Estado:** especificação para protótipo; valores sujeitos a playtest.
 
 Este módulo é a referência canônica para atributos, dimensões dos sprites jogáveis e árvores de classe. Substitui o desenho preliminar de três ramos e seis atributos. Combate ARPG em tempo real com apresentação 16-bit; as fórmulas são originais, inspiradas na simplicidade dos RPGs de console, sem alegar reproduzir a matemática de Final Fantasy VI.

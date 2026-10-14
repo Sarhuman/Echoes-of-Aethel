@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnemyDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://content/enemies/enemy_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+enemy_id = &"ethereal_wolf"
+display_name = "Lobo Etéreo"
+category = &"common"
+max_health = 60
+defense = 5
+attack_power = 18
+damage_type = &"physical"
+base_xp = 10
+movement_speed = 120
+detection_range = 200
+attack_range = 40
+attack_cooldown = 1.5
+windup_duration = 0.7
+recovery_duration = 0.9

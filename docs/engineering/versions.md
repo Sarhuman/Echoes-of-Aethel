@@ -1,18 +1,20 @@
 # Versões e compatibilidade
 
+> Atualização de 13/10/2026: primeira fatia jogável em `0.2.0-dev`. As linhas históricas abaixo sobre auditoria da `main` descrevem o marco anterior.
+
 Revisão: 13/10/2026. Esta tabela registra o que existe no repositório; não anuncia lançamento comercial ou compatibilidade não testada.
 
 | Camada | Versão / fonte | Política |
 |---|---|---|
-| Projeto | `0.1.0-dev` em `/VERSION` e `client/godot/project.godot` → `config/version` | Pré-alpha técnica; ambos devem mudar juntos |
+| Projeto | `0.2.0-dev` em `/VERSION` e `client/godot/project.godot` → `config/version` | Primeira fatia jogável; ambos devem mudar juntos |
 | Engine validada | Godot `4.6.stable.official.89cea1439` | Manter 4.6 stable para reproduzir os testes; atualizar somente com validação |
 | Formato do projeto Godot | `config_version=5` | Formato do arquivo, não versão do jogo |
 | Schema do save | `SaveSystem.SCHEMA_VERSION = 1` | Não aumentar sem migração e testes de recuperação |
-| Conteúdo do save | `WorldSaveSchema.CONTENT_VERSION = "world-save-1"` | Separado de engine e versão do jogo |
+| Conteúdo do save | `WorldSaveSchema.CONTENT_VERSION = "world-save-2"` | Migrável de `world-save-1`; separado da versão do envelope |
 | Renderer | `gl_compatibility` | Não alterado pela galeria ou arte conceitual |
 | Maaack / Dialogic / Tactical RPG | Sem instalação no projeto | Referências de arquitetura/produção; não são dependências de runtime |
 | Python/FastAPI/PostgreSQL | Planejados para etapa online | Sem implementação, lockfile ou versão de runtime para atualizar aqui |
-| Releases / tags | Nenhuma publicada na auditoria | A versão dev é metadado de código, não um pacote distribuído |
+| Releases / tags | Nenhuma publicada até este trabalho | Export local Windows e artefato CI; versão dev não é release pública |
 
 ## Resultado da auditoria
 
@@ -35,4 +37,4 @@ READMEs consultados durante esta sessão: Maaack declara compatibilidade 4.4+; D
 - Assets com proveniência; política de licença definida pelo proprietário.
 - CI e processo de empacotamento reproduzíveis.
 
-CI, export Windows e campanha jogável ainda são pendências. A galeria ilustra objetivos visuais e não elimina esses gates.
+CI, export Windows e primeira jornada jogável foram implementados nesta branch. Playtest humano e política de licença permanecem antes de uma release pública.
