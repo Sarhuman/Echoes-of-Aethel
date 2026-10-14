@@ -2,7 +2,7 @@
 
 ## 0.2.0-dev — 2026-10-13
 
-- Abertura sonora de 14/10: composição épica original no prólogo e narração em português pela voz disponível no sistema, com legendas permanentes, redução de volume da música durante as falas e interrupção ao avançar ou pular. Validação headless: 20 suítes / 409 verificações; disponibilidade e qualidade da voz dependem do sistema do jogador.
+- Revisão da abertura de 14/10: removida a voz sintética após o playtest. O prólogo mantém texto em português, ritmo controlado pelo jogador e composição musical original. Validação headless: 20 suítes / 408 verificações.
 
 - Evolução de 14/10: abertura ilustrada com falas do prólogo, conselho de Irian na primeira conversa, opção de pular e progresso salvo sem recompensas duplicadas. A câmera responde brevemente a dano confirmado; Efeitos reduzidos desliga o tremor. Captura real da abertura e testes do fluxo adicionados. Validação: 20 suítes / 406 verificações.
 

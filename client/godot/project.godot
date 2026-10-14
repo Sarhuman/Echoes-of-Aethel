@@ -20,9 +20,6 @@ renderer/rendering_method="gl_compatibility"
 textures/default_filters/use_nearest_mipmap_filter=false
 textures/canvas_textures/default_texture_filter=0
 
-[audio]
-general/text_to_speech=true
-
 [display]
 window/size/viewport_width=1280
 window/size/viewport_height=720

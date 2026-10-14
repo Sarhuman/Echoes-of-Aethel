@@ -19,8 +19,6 @@ var enabled := true
 var zone := "citadel"
 var fighting := false
 var cinematic := false
-var narration_voice := ""
-var narration_active := false
 var _music: Dictionary = {}
 var _effects: Array[AudioStreamPlayer] = []
 var _effect_cursor := 0
@@ -42,11 +40,10 @@ func _ready() -> void:
 		_effects.append(player)
 
 func _process(delta: float) -> void:
-	if not enabled and narration_active: stop_narration()
 	var active := "prologue" if cinematic else ("combat" if fighting and zone == "forest_01" else zone)
 	for id in _music:
 		var player: AudioStreamPlayer = _music[id]
-		var target := ((-29.0 if narration_active else -19.0) if id == active and enabled else -80.0)
+		var target := (-19.0 if id == active and enabled else -80.0)
 		player.volume_db = move_toward(player.volume_db, target, delta * 48.0)
 		if enabled and id == active and not player.playing:
 			player.play()
@@ -59,25 +56,6 @@ func set_context(new_zone: String, in_combat: bool) -> void:
 
 func set_cinematic(active: bool) -> void:
 	cinematic = active
-	if not active: stop_narration()
-
-func narrate(text: String) -> bool:
-	stop_narration()
-	if not enabled or text.is_empty() or not DisplayServer.has_feature(DisplayServer.FEATURE_TEXT_TO_SPEECH): return false
-	if narration_voice.is_empty():
-		var voices := DisplayServer.tts_get_voices_for_language("pt")
-		if voices.is_empty(): return false
-		narration_voice = voices[0]
-	DisplayServer.tts_speak(text, narration_voice, 78, 0.92, 0.88, 0, true)
-	narration_active = true
-	return true
-
-func stop_narration() -> void:
-	if narration_active: DisplayServer.tts_stop()
-	narration_active = false
-
-func _exit_tree() -> void:
-	stop_narration()
 
 func play_effect(id: StringName) -> void:
 	if not enabled or not EFFECTS.has(String(id)): return

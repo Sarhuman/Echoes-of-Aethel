@@ -20,7 +20,6 @@ func run() -> void:
 	check(director.cinematic, "opening selects original cinematic score")
 	director.set_cinematic(false)
 	director.enabled = false
-	check(not director.narrate("Sem som") and not director.narration_active, "muted option suppresses narration")
 	director.play_effect(&"basic")
 	check(not director._effects[0].playing, "muted option suppresses effects")
 	director.queue_free()
