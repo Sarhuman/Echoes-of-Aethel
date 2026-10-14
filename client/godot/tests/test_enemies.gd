@@ -67,6 +67,7 @@ func run() -> void:
 	for i in range(45): await physics_frame
 	check(common.position.x < 240,"charge blocked by physical wall")
 	common.set_physics_process(false)
+	check((common.get_node("Shape") as CollisionShape2D).shape.radius >= 20, "enemy body keeps visible separation")
 	var cultist: EnemyDefinition = load("res://content/enemies/blind_cultist.tres")
 	var shot := EnemyProjectile.new()
 	shot.source = common
@@ -77,6 +78,15 @@ func run() -> void:
 	var hp := player.current_health
 	for i in range(35): await physics_frame
 	check(not is_instance_valid(shot) and player.current_health == hp,"projectile blocked by wall")
+	var corpse := preload("res://entities/enemies/ethereal_wolf.tscn").instantiate() as EnemyActor
+	corpse.actor_id = &"forest_01.ethereal_wolf.test:1"
+	corpse.zone_id = &"forest_01"
+	world.add_child(corpse)
+	corpse.set_physics_process(false)
+	corpse.current_health = 1
+	check(corpse.take_damage(1, player) and corpse.is_dead, "wolf death confirmed")
+	await create_timer(0.4).timeout
+	check(not is_instance_valid(corpse), "dead wolf leaves no painted marker or collision")
 	world.queue_free()
 	await process_frame
 	finish()

@@ -42,7 +42,7 @@ No editor, abra `client/godot/project.godot` e pressione **F5**. O projeto usa o
 
 O slot 5/F está reservado. A Cidadela é uma área segura: lá, ataques e habilidades de combate ficam bloqueados e mostram um aviso. Atravesse o portão leste para lutar no Bosque. A bolsa mostra itens em grade, equipamento, peso, capacidade e ações de usar, equipar ou descartar. Excedentes de recompensas aguardam retirada na Cidadela.
 
-Lyra e Sera atendem na Cidadela: aproxime-se e pressione **C** para comprar Poção de Vida (10 ouro) ou Frasco de Éter (12 ouro). Ouro vem dos encontros; compras recusadas por falta de ouro ou espaço não gastam nada. O HUD mostra Vida, Éter e Fôlego em medidores com valores numéricos.
+Lyra e Sera atendem na Cidadela: aproxime-se e pressione **C** para comprar provisões, antídoto ou equipamento. Sera também compra materiais e peças não equipadas. Ouro vem dos encontros; transações recusadas não alteram a bolsa. O HUD mostra Vida, Éter e Fôlego em medidores com valores numéricos. A trilha original alterna entre Cidadela, Bosque e combate, com efeitos para golpes e habilidades; a opção **Som** silencia tudo. [Proveniência e geração do áudio](docs/media/runtime-audio.md).
 
 ![Captura real da bolsa de itens](docs/media/runtime/inventory-gameplay.png)
 
@@ -50,7 +50,7 @@ Lyra e Sera atendem na Cidadela: aproxime-se e pressione **C** para comprar Poç
 
 ## Conteúdo e limites
 
-A jornada traz Lobo Etéreo, Cultista Cego e Garras de Musgo com ataques antecipados, boss com três padrões, progressão de atributos, loot e XP. A quest **A Caça ao Espião** permite julgar suspeitos ou escoltar moradores; a escolha altera falas e detalhes do hub. A Cidadela é área segura e checkpoint único.
+A jornada traz Lobo Etéreo, Cultista Cego e Garras de Musgo com ataques antecipados, boss com três padrões, progressão de atributos, loot e XP. A quest **A Caça ao Espião** permite julgar suspeitos ou escoltar moradores; a escolha altera falas e detalhes do hub. A Cidadela é área segura e checkpoint único. Corpos de inimigos derrotados somem; a esquiva atravessa inimigos, e a borda do abismo do Bosque bloqueia a passagem.
 
 Esta é a primeira fatia da campanha. Os quatro atos, as outras quatro classes e os demais mapas descritos no GDD continuam planejados. Há animações de caminhada e golpe; outros movimentos, a mixagem e o equilíbrio ainda precisam de playtest. Os valores de balanceamento estão marcados como experimentais em [experimental-values.md](docs/engineering/experimental-values.md).
 
@@ -62,7 +62,7 @@ Da raiz do repositório:
 bash tools/run_tests.sh
 ```
 
-No Windows, também é possível executar `tools/run_tests.ps1 -Godot <caminho-para-godot.exe>`. A validação local desta branch aprovou **16 suítes e 308 verificações** em Godot 4.6, incluindo a arena técnica anterior, um fluxo de integração da jornada e compras. A exportação Windows usa `tools/export_windows.ps1` com os templates oficiais 4.6 instalados em `.godot-tools/`. O workflow de CI importa, testa e exporta automaticamente em pushes e PRs. Capturas de QA exigem `-- --test-harness` para isolar o save.
+No Windows, também é possível executar `tools/run_tests.ps1 -Godot <caminho-para-godot.exe>`. A validação local passou em **18 suítes / 338 verificações**, incluindo combate, mapa, áudio, comércio, save e o fluxo de integração da jornada. A exportação Windows usa `tools/export_windows.ps1` com os templates oficiais 4.6 instalados em `.godot-tools/`; o executável foi inicializado por 120 quadros no smoke. O workflow de CI importa, testa e exporta automaticamente em pushes e PRs. Capturas de QA exigem `-- --test-harness` para isolar o save.
 
 As capturas acima são do executável Godot rodando localmente. Elas verificam renderização, mas não substituem um playtest humano de navegação, dificuldade e desempenho em diferentes PCs.
 

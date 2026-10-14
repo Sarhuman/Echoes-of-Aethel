@@ -16,7 +16,7 @@ func _ready() -> void:
 	if not has_node("Shape"):
 		var collision := CollisionShape2D.new()
 		var shape := CircleShape2D.new()
-		shape.radius = 17 if definition.category == &"sub_boss" else 9
+		shape.radius = 34 if definition.category == &"sub_boss" else 20
 		collision.shape = shape
 		collision.name = "Shape"
 		add_child(collision)
@@ -39,12 +39,19 @@ func take_damage(amount: int, attacker: ActorBase) -> bool:
 	if applied:
 		flash = 0.12
 		queue_redraw()
+		if is_dead:
+			_fade_out()
 	return applied
+func restore_dead() -> void:
+	super.restore_dead()
+	queue_free()
+func _fade_out() -> void:
+	var fade := create_tween()
+	fade.tween_property(self, "modulate:a", 0.0, 0.3)
+	fade.tween_callback(queue_free)
 func _draw() -> void:
 	if definition == null: return
-	if is_dead:
-		draw_circle(Vector2.ZERO, 9, Color("#474f41"))
-		return
+	if is_dead: return
 	if brain != null and brain.phase == "windup":
 		var forward := Vector2(brain.locked_direction.x, brain.locked_direction.y * 0.5)
 		var col := Color(0.95, 0.48, 0.29, 0.45)

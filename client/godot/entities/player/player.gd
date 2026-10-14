@@ -5,6 +5,7 @@ signal stamina_changed(current: float, maximum: float)
 signal mp_changed(current: float, maximum: float)
 signal skill_unavailable(slot: int)
 signal attack_started(attack_id: StringName)
+signal dash_started
 signal hp_changed(current: int, maximum: int)
 signal action_blocked(reason: String)
 
@@ -44,6 +45,7 @@ var damage_over_time := false
 var skill_cooldowns: Dictionary = {}
 var _rift: AttackDefinition = preload("res://content/attacks/steel_rift.tres")
 var slow_left := 0.0
+var _normal_collision_mask := 3
 
 var is_dashing: bool:
 	get: return dash_left > 0.00000001
@@ -64,6 +66,7 @@ func _ready() -> void:
 	rng.randomize()
 	stamina = stamina_max
 	mp = mp_max
+	_normal_collision_mask = collision_mask
 	add_to_group("player")
 	process_physics_priority = -10 # Player timers precede the test enemy's attack.
 
@@ -97,11 +100,14 @@ func attempt_dash(direction: Vector2 = Vector2.ZERO) -> bool:
 	dash_direction = facing
 	stamina -= dash_cost
 	dash_left = dash_duration
+	# Pass through enemies during the escape, while scenery (layer 2) stays solid.
+	collision_mask = _normal_collision_mask & ~1
 	iframe_left = minf(iframe_duration, dash_duration)
 	cooldown_left = dash_cooldown
 	attacks.cancel()
 	current_action_state = ActionState.IDLE # Costs already paid are not refunded.
 	stamina_changed.emit(stamina, stamina_max)
+	dash_started.emit()
 	return true
 
 func request_attack(heavy: bool, sequence: int = 0) -> AttackController.Status:
@@ -210,6 +216,9 @@ func advance_timers(delta: float) -> void:
 	iframe_left = maxf(0.0, iframe_left - delta)
 	var dash_elapsed := minf(dash_left, delta)
 	dash_left = maxf(0.0, dash_left - delta)
+	if not is_dashing and collision_mask != _normal_collision_mask:
+		dash_left = 0.0
+		collision_mask = _normal_collision_mask
 	var previous := stamina
 	stamina = minf(stamina_max, stamina + stamina_regen * (delta - dash_elapsed))
 	if stamina != previous:
@@ -266,6 +275,7 @@ func take_damage(amount: int, attacker: ActorBase) -> bool:
 		regeneration.notify_combat_event()
 		if is_dead:
 			dash_left = 0.0
+			collision_mask = _normal_collision_mask
 			iframe_left = 0.0
 			attacks.cancel()
 			current_action_state = ActionState.IDLE

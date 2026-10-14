@@ -2,7 +2,7 @@
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1"]
 [ext_resource type="Script" path="res://presentation/bastion_visual.gd" id="2"]
 [sub_resource type="CircleShape2D" id="body"]
-radius = 9.0
+radius = 14.0
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 1
 collision_mask = 3

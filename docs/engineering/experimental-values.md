@@ -100,6 +100,8 @@ Consumíveis (GDD 03 §2.1 e GDD 05): `potion_health_small` restaura até 50 HP 
 
 Preço (Lyra, `npc.alchemist`): Poção de Vida pequena 10 ouro · Frasco de Éter pequeno 12 ouro (GDD 05). Compra fora do slice mínimo é opcional; se implementada: débito e entrega na mesma transação, idempotente, só no hub, recusada sem consumir ouro.
 
+Mercado ampliado na Cidadela (NOVO, experimental): antídoto 8 ouro; machado de ferro e colete acolchoado 35 ouro cada. Sera compra uma unidade por transação: presa de lobo 3, cinza cultista 4, essência de raiz 12, equipamento comum 10, mágico 16, raro 30, épico 55 ouro. Itens equipados e itens de missão não podem ser vendidos. Compras e vendas são commits idempotentes; estes preços precisam de playtest.
+
 ## 8. Equipamento (sem afixos — D8)
 
 Faixa de item do mapa 01: 1–3 (GDD 04); `requirement_level = 1`. Nomes são placeholders (NOVO).

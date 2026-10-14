@@ -41,6 +41,15 @@ func _ready() -> void:
 			wall(point, Vector2(34, 46))
 		wall(Vector2(665, 335), Vector2(280, 155))
 		wall(Vector2(965, 500), Vector2(35, 35))
+		# The painted village has a broken fence and a drop that are not rectangular.
+		# Keep the walking route above the ravine while following its visible edge.
+		wall_polygon(PackedVector2Array([
+			Vector2(755, 1080), Vector2(785, 980), Vector2(860, 910),
+			Vector2(945, 855), Vector2(1050, 790), Vector2(1150, 750),
+			Vector2(1240, 690), Vector2(1335, 635), Vector2(1430, 575),
+			Vector2(1570, 500), Vector2(1740, 430), Vector2(1920, 420),
+			Vector2(1920, 1080)
+		]))
 		for abyss in [Rect2(1210, 610, 710, 470), Rect2(1380, 440, 540, 170), Rect2(1510, 370, 410, 70)]:
 			wall(abyss.get_center(), abyss.size)
 	for obstacle in [Rect2(0, 0, map_size.x, 20), Rect2(0, map_size.y - 20, map_size.x, 20), Rect2(0, 0, 20, map_size.y), Rect2(map_size.x - 20, 0, 20, map_size.y)]:
@@ -56,6 +65,15 @@ func wall(center: Vector2, size: Vector2) -> void:
 	var shape := RectangleShape2D.new()
 	shape.size = size
 	collision.shape = shape
+	body.add_child(collision)
+	add_child(body)
+
+func wall_polygon(points: PackedVector2Array) -> void:
+	var body := StaticBody2D.new()
+	body.collision_layer = 2
+	body.collision_mask = 1
+	var collision := CollisionPolygon2D.new()
+	collision.polygon = points
 	body.add_child(collision)
 	add_child(body)
 

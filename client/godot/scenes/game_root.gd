@@ -7,6 +7,7 @@ var player: Player
 var begun := false
 var handling_death := false
 var nearest: Dictionary = {}
+var audio_director: AethelAudioDirector
 func _ready() -> void:
 	var left_click := InputEventMouseButton.new()
 	left_click.button_index = MOUSE_BUTTON_LEFT
@@ -21,9 +22,13 @@ func _ready() -> void:
 	add_child(world)
 	ui = SliceHUD.new()
 	add_child(ui)
+	audio_director = AethelAudioDirector.new()
+	add_child(audio_director)
+	audio_director.enabled = ui.sound_enabled
 	ui.command.connect(command)
 	session.notice.connect(ui.show_notice)
 	get_node("/root/EventBus").actor_died.connect(actor_died)
+	get_node("/root/EventBus").actor_damaged.connect(func(_id, _amount, _source): audio_director.play_effect(&"hit"))
 	var preview := preload("res://world/maps/citadel.tscn").instantiate()
 	world.add_child(preview)
 	var camera := Camera2D.new()
@@ -67,7 +72,9 @@ func load_zone() -> void:
 	camera.limit_right = int(map.map_size.x)
 	camera.limit_bottom = int(map.map_size.y)
 	camera.reset_smoothing()
-	player.attack_started.connect(func(_id): ui.tone(170))
+	player.attack_started.connect(audio_director.play_effect)
+	player.dash_started.connect(func(): audio_director.play_effect(&"dash"))
+	audio_director.set_context(session.zone, false)
 	player.action_blocked.connect(ui.show_notice)
 	player.skill_unavailable.connect(func(_slot): ui.show_notice("Este slot ainda não possui habilidade."))
 	if session.zone == "forest_01": spawn_enemies()
@@ -94,6 +101,7 @@ func _process(_delta: float) -> void:
 		var enemy := node as EnemyActor
 		if not enemy.is_dead and enemy.brain.current_state in [EnemyFSM.State.ATTACK,EnemyFSM.State.CHASE]: engaged = true
 	player.engaged = engaged
+	audio_director.set_context(session.zone, engaged)
 	ui.update_state(player,session,nearest)
 func actor_died(id: String) -> void:
 	if not begun: return
@@ -163,6 +171,7 @@ func command(action: String) -> void:
 	elif action == "toggle_sound":
 		ui.sound_enabled = not ui.sound_enabled
 		ui.save_options()
+		audio_director.enabled = ui.sound_enabled
 		command("options")
 	elif not begun: return
 	elif action == "interact": interact()
@@ -172,6 +181,9 @@ func command(action: String) -> void:
 		var result := session.buy(action.trim_prefix("buy:"))
 		var feedback: String = "Compra concluída. O item está na bolsa." if result.ok else "Compra recusada: " + ("ouro insuficiente" if result.code == "INSUFFICIENT_GOLD" else "bolsa cheia" if result.code == "BAG_FULL" else result.code)
 		show_shop(feedback)
+	elif action.begins_with("sell:"):
+		var result := session.sell(action.trim_prefix("sell:"))
+		show_shop("Venda concluída; ouro recebido." if result.ok else "Venda recusada: " + result.code)
 	elif action == "journal":
 		get_tree().paused = true
 		var body := "A Caça ao Espião\n\nUm mensageiro acusa moradores de abastecer cultistas. A aldeia está sem escolta; parte dos moradores adoeceu. Investigue as três pistas, decida e volte à Cidadela.\n\n"
@@ -235,6 +247,15 @@ func show_inventory() -> void:
 func show_shop(feedback: String = "") -> void:
 	if session.zone != "citadel": return
 	get_tree().paused = true
-	var stock := "Ouro disponível: %d\n\nPoção de Vida pequena — 10 ouro\nFrasco de Éter pequeno — 12 ouro" % session.inventory.gold
+	var stock := "Ouro disponível: %d\n\nLyra oferece provisões. Sera vende equipamento e compra materiais e peças não equipadas." % session.inventory.gold
 	if not feedback.is_empty(): stock += "\n\n" + feedback
-	ui.show_menu("PROVISÕES DA CIDADELA",stock,[["Comprar Poção de Vida — 10 ouro","buy:potion_health_small"],["Comprar Frasco de Éter — 12 ouro","buy:flask_aether_small"],["Voltar ao jogo","resume"]])
+	var options: Array = []
+	for id in MerchantService.PRICES:
+		var spec := session.inventory.item(StringName(id))
+		options.append(["Comprar %s — %d ouro" % [spec.display_name, MerchantService.PRICES[id]], "buy:" + id])
+	for id in MerchantService.SELL_PRICES:
+		if session.inventory.counts.get(id, 0) > 0 and not id in session.inventory.equipped.values():
+			var spec := session.inventory.item(StringName(id))
+			options.append(["Vender %s — %d ouro" % [spec.display_name, MerchantService.SELL_PRICES[id]], "sell:" + id])
+	options.append(["Voltar ao jogo", "resume"])
+	ui.show_menu("MERCADO DA CIDADELA", stock, options)
