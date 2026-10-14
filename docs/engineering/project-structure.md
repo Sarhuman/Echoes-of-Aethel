@@ -1,6 +1,6 @@
 # Estrutura do projeto Godot
 
-Revisão: 13/10/2026 · Godot 4.6 stable · GDScript · base `0.1.0-dev`.
+Revisão: 14/10/2026 · Godot 4.6 stable · GDScript · primeira fatia `0.2.0-dev`.
 
 Este documento é o mapa operacional para quem implementa (incluindo o GPT). Ele **não substitui** [escopo](project-scope.md), [decisões de produção](production-decisions.md) nem o [GDD](../GDD/README.md). Coluna **Estado**: `existe` = no repositório e testado; `planejado` = pasta/arquivo a criar por um cartão de [tasks/](tasks/README.md); `vazio` = pasta reservada com `.gitkeep`.
 
@@ -131,7 +131,7 @@ Ao criar um ID novo, registre-o nesta tabela no mesmo PR.
 
 ## 6. Estado de implementação (atualize ao concluir cada cartão)
 
-Atualizado para `0.2.0-dev`. As suítes de teste estão distribuídas entre os módulos; o total validado é 15 suítes e 289 verificações.
+Atualizado para `0.2.0-dev`. As suítes de teste estão distribuídas entre os módulos; o total validado é 16 suítes e 308 verificações, incluindo a arena técnica preservada da `main`.
 
 | Módulo | Estado | Verificações | Cartão |
 |---|---|---|---|
@@ -154,7 +154,7 @@ Atualizado para `0.2.0-dev`. As suítes de teste estão distribuídas entre os m
 | Diálogos e NPCs | implementado | 15 UI | T09 |
 | HUD, menus e áudio mínimo | implementado | 15 UI | T10 |
 | Consequência local no hub | implementado | 37 integração | T11 |
-| CI e export Windows | implementado; playtest humano pendente | 15 suítes + smoke | T12 |
+| CI e export Windows | implementado; playtest humano pendente | 16 suítes + smoke | T12 |
 
 ## 7. Divergências entre documentos e como foram resolvidas
 

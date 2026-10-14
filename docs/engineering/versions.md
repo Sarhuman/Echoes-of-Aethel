@@ -37,4 +37,4 @@ READMEs consultados durante esta sessão: Maaack declara compatibilidade 4.4+; D
 - Assets com proveniência; política de licença definida pelo proprietário.
 - CI e processo de empacotamento reproduzíveis.
 
-CI, export Windows e primeira jornada jogável foram implementados nesta branch. Playtest humano e política de licença permanecem antes de uma release pública.
+CI, export Windows e primeira jornada jogável foram implementados nesta branch. A arena de três encontros integrada à `main` como PR #20 foi preservada em `res://playtest/arena.tscn`; o projeto abre `res://scenes/game_root.tscn`. São 16 suítes e 308 verificações locais. Playtest humano e política de licença permanecem antes de uma release pública.
