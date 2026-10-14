@@ -39,3 +39,12 @@ static func in_cone(forward: Vector2, screen_offset: Vector2, reach: float) -> b
 	if not offset.is_finite() or offset.length() > reach:
 		return false
 	return offset.is_zero_approx() or forward.normalized().dot(offset.normalized()) >= 0.5 - 0.000001
+
+static func in_cone_body(forward: Vector2, screen_offset: Vector2, reach: float, body_radius: float) -> bool:
+	if not forward.is_finite() or forward.is_zero_approx() or not screen_offset.is_finite() or not is_finite(reach) or reach <= 0 or not is_finite(body_radius) or body_radius < 0:
+		return false
+	var logical := Vector2(screen_offset.x, screen_offset.y * 2.0)
+	var direction := forward.normalized()
+	var along := logical.dot(direction)
+	var across := absf(logical.cross(direction))
+	return along >= -body_radius and along <= reach + body_radius and logical.length() <= reach + body_radius and across <= maxf(0.0, along) * 1.732051 + body_radius

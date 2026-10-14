@@ -2,6 +2,8 @@
 
 ## 0.2.0-dev — 2026-10-13
 
+- Ajustes de 14/10 após playtest: cinco NPCs passam a ser desenhados na Cidadela; Lobo Etéreo tem quatro quadros de locomoção e contorna o poço; o jogador deixa de ser preso pela colisão de inimigos. Impacto considera o corpo de Garras de Musgo, com números de dano e “MISS”; Guarda exibe um escudo mais legível. As outras quatro classes seguem documentadas para expansão, sem seleção jogável nesta versão. Validação: 19 suítes / 361 verificações, export Windows e inicialização do executável por 120 quadros.
+
 - Atualização de 14/10: inimigos derrotados deixam de gerar marcador residual; separação física, esquiva que atravessa atores e barreira acompanhando a borda do abismo no Bosque. Comércio ampliado com equipamento, antídoto e venda idempotente de materiais/peças. Três composições e seis efeitos originais gerados por código, integrados às opções de som. Validação: 18 suítes / 338 verificações, export Windows e inicialização do executável por 120 quadros.
 
 - Atualização de 14/10: medidores de Vida, Éter e Fôlego com molduras e valores; compras no hub com Lyra e Sera (10/12 ouro), débito/entrega atômicos e proteção contra repetição. Capturas de QA agora exigem slot de teste isolado. A arena técnica da `main` foi preservada como playtest opcional. Validação ampliada para 16 suítes / 308 verificações.

@@ -21,7 +21,20 @@ func run() -> void:
 	check(not blocked(map, map.spawn), "forest entrance remains walkable")
 	check(not blocked(map, Vector2(1090, 610)), "quest decision remains reachable")
 	check(not blocked(map, Vector2(1600, 220)), "boss arena remains reachable")
+	check(SliceMap.NPC_ART is Texture2D and SliceMap.NPC_ORDER.size() == 5, "five painted hub NPCs are available")
 	map.queue_free()
+	await process_frame
+	var hub := preload("res://world/maps/citadel.tscn").instantiate() as SliceMap
+	root.add_child(hub)
+	await physics_frame
+	for id in SliceMap.NPC_ORDER:
+		var found := false
+		for entry in hub.interactions:
+			if entry.id == id:
+				found = true
+				check(blocked(hub, entry.position), "hub NPC has physical foot position: " + id)
+		check(found, "visible hub NPC keeps interaction: " + id)
+	hub.queue_free()
 	await process_frame
 	print("Map boundaries: %d checks; %d failures" % [checks, failures])
 	quit(1 if failures else 0)

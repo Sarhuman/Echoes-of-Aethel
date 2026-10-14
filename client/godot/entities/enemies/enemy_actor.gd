@@ -1,9 +1,11 @@
 class_name EnemyActor
 extends ActorBase
 const ATLAS := preload("res://assets/painted/actors_atlas.png")
+const WOLF_WALK := preload("res://assets/painted/wolf_walk.png")
 @export var definition: EnemyDefinition
 var brain: SliceEnemyFSM
 var flash := 0.0
+var walk_clock := 0.0
 func _ready() -> void:
 	if definition == null or not definition.valid():
 		combat_enabled = false
@@ -30,6 +32,10 @@ func _physics_process(delta: float) -> void:
 	var player := get_tree().get_first_node_in_group("player") as Player
 	brain.step(delta, player)
 	if not is_dead: move_and_slide()
+	if not is_dead and get_real_velocity().length() > 8:
+		walk_clock += delta * (8.0 if definition.category == &"common" else 4.0)
+	else:
+		walk_clock = 0.0
 	flash = maxf(0, flash - delta)
 	queue_redraw()
 func interrupt(seconds: float) -> void:
@@ -88,7 +94,16 @@ func _draw() -> void:
 	elif definition.enemy_id == &"moss_claws":
 		source = Rect2(640, 640, 640, 640)
 		visual = Rect2(-90, -136, 180, 152)
-	draw_texture_rect_region(ATLAS, visual, source, tint)
+	if walk_clock > 0:
+		var stride := sin(walk_clock * TAU)
+		draw_set_transform(Vector2(0, -2.5 * absf(stride)), stride * 0.025, Vector2(1.0 + stride * 0.018, 1.0 - stride * 0.018))
+	if definition.enemy_id == &"ethereal_wolf" and walk_clock > 0:
+		var frame := int(walk_clock) % 4
+		var cell_width := WOLF_WALK.get_width() / 4.0
+		draw_texture_rect_region(WOLF_WALK, visual, Rect2(frame * cell_width, 0, cell_width, WOLF_WALK.get_height()), tint)
+	else:
+		draw_texture_rect_region(ATLAS, visual, source, tint)
+	draw_set_transform(Vector2.ZERO)
 	var bar_y := -81.0 if definition.category == &"common" else -143.0
 	draw_rect(Rect2(-22, bar_y, 44, 4), Color("#24252a"))
 	draw_rect(Rect2(-22, bar_y, 44.0 * current_health / max_health, 4), Color("#c5b47d"))

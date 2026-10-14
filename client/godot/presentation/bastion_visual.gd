@@ -48,11 +48,13 @@ func _draw() -> void:
 		draw_line(Vector2.ZERO, Vector2(trail.x, trail.y * 0.5), Color(0.51, 0.87, 0.97, 0.56), 12)
 		draw_arc(Vector2.ZERO, 24, 0, TAU, 28, Color(0.63, 0.94, 1, 0.68), 3)
 	if player.guard.active_left > 0:
-		var angle := player.facing.angle()
-		draw_arc(Vector2.ZERO, 42, angle - 1.1, angle + 1.1, 28, Color("#9cefff"), 7)
-		draw_arc(Vector2.ZERO, 34, angle - 1.1, angle + 1.1, 28, Color(0.18, 0.70, 0.86, 0.62), 4)
+		var center := player.project_direction(player.facing) * 33 + Vector2(0, -21)
+		var shield := PackedVector2Array([center + Vector2(-12, -14), center + Vector2(12, -14), center + Vector2(11, 8), center + Vector2(0, 19), center + Vector2(-11, 8)])
+		draw_colored_polygon(shield, Color(0.12, 0.42, 0.55, 0.29))
+		for i in range(shield.size()):
+			draw_line(shield[i], shield[(i + 1) % shield.size()], Color(0.50, 0.88, 0.97, 0.72), 2)
 	if flash_left > 0 and last_action == &"twilight_guard":
-		draw_circle(Vector2.ZERO, 24 + (0.65 - flash_left) * 40, Color(0.26, 0.88, 0.97, flash_left * 0.13))
+		draw_circle(Vector2.ZERO, 20 + (0.65 - flash_left) * 28, Color(0.26, 0.88, 0.97, flash_left * 0.06))
 	if attacking:
 		draw_attack_effect()
 

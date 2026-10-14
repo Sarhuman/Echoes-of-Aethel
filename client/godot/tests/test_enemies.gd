@@ -68,6 +68,7 @@ func run() -> void:
 	check(common.position.x < 240,"charge blocked by physical wall")
 	common.set_physics_process(false)
 	check((common.get_node("Shape") as CollisionShape2D).shape.radius >= 20, "enemy body keeps visible separation")
+	check(EnemyActor.WOLF_WALK is Texture2D and EnemyActor.WOLF_WALK.get_width() > 1000, "wolf locomotion frames import")
 	var cultist: EnemyDefinition = load("res://content/enemies/blind_cultist.tres")
 	var shot := EnemyProjectile.new()
 	shot.source = common
@@ -87,6 +88,26 @@ func run() -> void:
 	check(corpse.take_damage(1, player) and corpse.is_dead, "wolf death confirmed")
 	await create_timer(0.4).timeout
 	check(not is_instance_valid(corpse), "dead wolf leaves no painted marker or collision")
+	var forest := preload("res://world/maps/forest_01.tscn").instantiate() as SliceMap
+	world.add_child(forest)
+	player.position = Vector2(1010, 500)
+	common.position = Vector2(925, 500)
+	common.brain.phase = "idle"
+	common.brain.interrupted = 0
+	common.brain.attack_timer = 0
+	await physics_frame
+	common.brain.step(0.016, player)
+	check(common.brain.current_state == EnemyFSM.State.CHASE and absf(common.velocity.y) > 0, "wolf steers around well instead of freezing")
+	forest.queue_free()
+	await process_frame
+	player.position = Vector2(200, 300)
+	common.position = Vector2(235, 300)
+	await physics_frame
+	for i in range(35):
+		player.velocity = Vector2(150, 0)
+		player.move_and_slide()
+		await physics_frame
+	check(player.position.x > 255, "player can move through wolf without becoming pinned")
 	world.queue_free()
 	await process_frame
 	finish()

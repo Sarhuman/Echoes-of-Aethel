@@ -8,6 +8,7 @@ var begun := false
 var handling_death := false
 var nearest: Dictionary = {}
 var audio_director: AethelAudioDirector
+var combat_text: AethelCombatText
 func _ready() -> void:
 	var left_click := InputEventMouseButton.new()
 	left_click.button_index = MOUSE_BUTTON_LEFT
@@ -20,6 +21,8 @@ func _ready() -> void:
 	world = Node2D.new()
 	world.name = "World"
 	add_child(world)
+	combat_text = AethelCombatText.new()
+	add_child(combat_text)
 	ui = SliceHUD.new()
 	add_child(ui)
 	audio_director = AethelAudioDirector.new()
@@ -28,7 +31,7 @@ func _ready() -> void:
 	ui.command.connect(command)
 	session.notice.connect(ui.show_notice)
 	get_node("/root/EventBus").actor_died.connect(actor_died)
-	get_node("/root/EventBus").actor_damaged.connect(func(_id, _amount, _source): audio_director.play_effect(&"hit"))
+	get_node("/root/EventBus").actor_damaged.connect(show_damage)
 	var preview := preload("res://world/maps/citadel.tscn").instantiate()
 	world.add_child(preview)
 	var camera := Camera2D.new()
@@ -73,12 +76,19 @@ func load_zone() -> void:
 	camera.limit_bottom = int(map.map_size.y)
 	camera.reset_smoothing()
 	player.attack_started.connect(audio_director.play_effect)
+	player.attack_missed.connect(combat_text.show_miss)
 	player.dash_started.connect(func(): audio_director.play_effect(&"dash"))
 	audio_director.set_context(session.zone, false)
 	player.action_blocked.connect(ui.show_notice)
 	player.skill_unavailable.connect(func(_slot): ui.show_notice("Este slot ainda não possui habilidade."))
 	if session.zone == "forest_01": spawn_enemies()
 	handling_death = false
+func show_damage(id: String, amount: int, _source: String) -> void:
+	audio_director.play_effect(&"hit")
+	for actor in get_tree().get_nodes_in_group("enemies") + get_tree().get_nodes_in_group("player"):
+		if is_instance_valid(actor) and String(actor.actor_id) == id:
+			combat_text.show_damage(actor.global_position, amount)
+			return
 func spawn_enemies() -> void:
 	var spawns: Array = [
 		["ethereal_wolf",Vector2(520,790)],["ethereal_wolf",Vector2(700,690)],

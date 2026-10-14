@@ -5,7 +5,7 @@
 radius = 14.0
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 1
-collision_mask = 3
+collision_mask = 2
 script = ExtResource("1")
 actor_id = &"player.bastion"
 team_id = &"player"

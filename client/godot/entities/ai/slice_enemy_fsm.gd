@@ -56,10 +56,11 @@ func step(delta: float, player: Player) -> void:
 		if remaining <= 0: phase = "idle"
 	else:
 		var distance := logical_offset(player.global_position).length()
-		if distance > spec.detection_range * 1.5 or not _line_of_sight(player):
+		if distance > spec.detection_range * 1.5:
 			current_state = State.IDLE
 			return
-		if distance <= spec.attack_range and attack_timer <= 0:
+		var clear_path := _line_of_sight(player)
+		if clear_path and distance <= spec.attack_range and attack_timer <= 0:
 			current_state = State.ATTACK
 			phase = "windup"
 			locked_position = player.global_position
@@ -69,9 +70,17 @@ func step(delta: float, player: Player) -> void:
 			remaining = windup_for(pattern)
 			attack_number += 1
 			attack_telegraphed.emit(player.actor_id, locked_position)
-		elif distance > spec.attack_range * 0.85:
+		elif not clear_path or distance > spec.attack_range * 0.85:
 			current_state = State.CHASE
 			var direction := logical_offset(player.global_position).normalized()
+			if not clear_path:
+				var ray := PhysicsRayQueryParameters2D.create(actor.global_position, player.global_position, 2)
+				ray.exclude = [actor.get_rid(), player.get_rid()]
+				var obstacle := actor.get_world_2d().direct_space_state.intersect_ray(ray)
+				if not obstacle.is_empty():
+					var tangent: Vector2 = obstacle.normal.orthogonal()
+					if tangent.dot(player.global_position - actor.global_position) < 0: tangent = -tangent
+					direction = Vector2(tangent.x, tangent.y * 2).normalized()
 			actor.velocity = Vector2(direction.x, direction.y * 0.5) * spec.movement_speed
 func windup_for(kind: int) -> float:
 	if spec.category != &"sub_boss": return spec.windup_duration

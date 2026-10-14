@@ -4,6 +4,8 @@ extends Node2D
 @export var zone_id := "citadel"
 const CITADEL_ART := preload("res://assets/painted/citadel_courtyard.png")
 const FOREST_ART := preload("res://assets/painted/forest_village.png")
+const NPC_ART := preload("res://assets/painted/citadel_npcs.png")
+const NPC_ORDER := ["npc.blacksmith", "npc.elder", "npc.alchemist", "npc.gatekeeper", "npc.merchant"]
 var interactions: Array[Dictionary] = []
 var spawn := Vector2(790, 555)
 var map_size := Vector2(1672, 941)
@@ -26,6 +28,8 @@ func _ready() -> void:
 		]
 		for obstacle in [Rect2(95, 125, 300, 165), Rect2(690, 5, 195, 170), Rect2(1090, 125, 205, 120), Rect2(115, 585, 225, 150), Rect2(1535, 355, 135, 235)]:
 			wall(obstacle.get_center(), obstacle.size)
+		for entry in interactions:
+			if NPC_ORDER.has(entry.id): wall(entry.position, Vector2(18, 16))
 	else:
 		map_size = Vector2(1920, 1080)
 		spawn = Vector2(265, 850)
@@ -103,3 +107,10 @@ func _draw() -> void:
 		var point: Vector2 = entry.position
 		draw_arc(point, 12, 0, TAU, 24, Color("#d1af70"), 2)
 		draw_circle(point, 3, Color("#f5d9a2"))
+		var npc_index := NPC_ORDER.find(entry.id)
+		if zone_id == "citadel" and npc_index >= 0:
+			var cell_width := NPC_ART.get_width() / 5.0
+			var source := Rect2(npc_index * cell_width, 0, cell_width, NPC_ART.get_height())
+			draw_texture_rect_region(NPC_ART, Rect2(point.x - 29, point.y - 107, 58, 107), source)
+			var title := entry.name as String
+			draw_string(ThemeDB.fallback_font, point + Vector2(-32, -112), title, HORIZONTAL_ALIGNMENT_CENTER, 64, 15, Color("#ffe0aa"))
