@@ -132,3 +132,6 @@ func discard(id: String) -> Dictionary:
 	var candidate := snapshot()
 	candidate.inventory = inv.to_dict()
 	return commit(candidate, "discard")
+func buy(item_id: String) -> Dictionary:
+	var request_id := "shop." + Crypto.new().generate_random_bytes(12).hex_encode()
+	return MerchantService.purchase(item_id, request_id, zone, snapshot(), commit)

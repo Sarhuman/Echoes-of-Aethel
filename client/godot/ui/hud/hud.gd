@@ -6,6 +6,9 @@ var hp: ProgressBar
 var mp: ProgressBar
 var stamina: ProgressBar
 var resources: Label
+var hp_value: Label
+var mp_value: Label
+var stamina_value: Label
 var objective: Label
 var location: Label
 var message: Label
@@ -52,15 +55,18 @@ func _ready() -> void:
 	objective.position = Vector2(17,12)
 	objective.size = Vector2(334,80)
 	objective.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	var bottom := panel(screen,Rect2(24,562,410,134))
-	hp = bar(bottom,Vector2(18,17),Vector2(255,12),Color("#e74c3c"))
-	mp = bar(bottom,Vector2(18,46),Vector2(255,9),Color("#3498db"))
-	stamina = bar(bottom,Vector2(18,75),Vector2(255,7),Color("#f1c40f"))
-	resources = label(bottom,"",13,Color("#d7ddd3"))
-	resources.position = Vector2(285,10)
-	resources.size = Vector2(118,80)
-	var hint := label(bottom,"1 / clique: atacar  •  C: interagir  •  Espaço: esquivar",12,Color("#91a39e"))
-	hint.position = Vector2(18,109)
+	var bottom := panel(screen,Rect2(24,548,410,148))
+	var heading := label(bottom,"BASTIÃO DO CREPÚSCULO",12,Color("#c5ad7e"))
+	heading.position = Vector2(17,7)
+	hp = resource_bar(bottom,"VIDA",30,Color("#e74c3c"))
+	mp = resource_bar(bottom,"ÉTER",59,Color("#3498db"))
+	stamina = resource_bar(bottom,"FÔLEGO",88,Color("#f1c40f"))
+	hp_value = resource_value(bottom,30)
+	mp_value = resource_value(bottom,59)
+	stamina_value = resource_value(bottom,88)
+	resources = label(bottom,"",13,Color("#e7d6a9"))
+	resources.position = Vector2(18,119)
+	resources.size = Vector2(375,22)
 	var skill_panel := panel(screen,Rect2(454,621,802,75))
 	skills = label(skill_panel,"",15,Color("#ded9bd"))
 	skills.position = Vector2(18,9)
@@ -116,6 +122,33 @@ func bar(parent: Node, p: Vector2, s: Vector2, color: Color) -> ProgressBar:
 	b.add_theme_stylebox_override("fill",fg)
 	parent.add_child(b)
 	return b
+func resource_bar(parent: Node, title: String, y: float, color: Color) -> ProgressBar:
+	var caption := label(parent,title,12,Color("#ddd0ae"))
+	caption.position = Vector2(18,y + 2)
+	caption.size = Vector2(76,20)
+	var meter := bar(parent,Vector2(98,y),Vector2(291,21),color)
+	var background := StyleBoxFlat.new()
+	background.bg_color = Color("#080e16")
+	background.border_color = Color("#8c7a57")
+	background.set_border_width_all(2)
+	background.set_corner_radius_all(3)
+	var fill := StyleBoxFlat.new()
+	fill.bg_color = color.darkened(0.22)
+	fill.border_color = color.lightened(0.28)
+	fill.set_border_width_all(1)
+	fill.set_corner_radius_all(2)
+	meter.add_theme_stylebox_override("background",background)
+	meter.add_theme_stylebox_override("fill",fill)
+	return meter
+func resource_value(parent: Node, y: float) -> Label:
+	var value := label(parent,"",12,Color("#fff5df"))
+	value.position = Vector2(100,y + 1)
+	value.size = Vector2(285,19)
+	value.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	value.add_theme_color_override("font_shadow_color",Color(0,0,0,0.95))
+	value.add_theme_constant_override("shadow_offset_x",1)
+	value.add_theme_constant_override("shadow_offset_y",1)
+	return value
 func show_menu(title: String, body: String, buttons: Array) -> void:
 	for child in overlay.get_children():
 		overlay.remove_child(child)
@@ -152,7 +185,9 @@ func show_menu(title: String, body: String, buttons: Array) -> void:
 		button.pressed.connect(func(): tone(520); command.emit(action))
 		menu_box.add_child(button)
 		if first == null: first = button
-	if first != null: first.grab_focus.call_deferred()
+	if first != null: focus_menu_button.call_deferred(first)
+func focus_menu_button(button: Button) -> void:
+	if is_instance_valid(button) and button.is_inside_tree(): button.grab_focus()
 func close_menu() -> void:
 	menu_open = false
 	overlay.hide()
@@ -315,7 +350,10 @@ func update_state(player: Player, session: SliceSession, nearest: Dictionary) ->
 	mp.value = player.mp
 	stamina.max_value = player.stamina_max
 	stamina.value = player.stamina
-	resources.text = "%d / %d HP\n%d / %d MP\nNv. %d  •  %d ouro" % [player.current_health,player.max_health,int(player.mp),int(player.mp_max),player.stats.level,session.inventory.gold]
+	hp_value.text = "%d / %d" % [player.current_health,player.max_health]
+	mp_value.text = "%d / %d" % [int(player.mp),int(player.mp_max)]
+	stamina_value.text = "%d / %d" % [int(player.stamina),int(player.stamina_max)]
+	resources.text = "NÍVEL %d     ◆  %d OURO" % [player.stats.level,session.inventory.gold]
 	location.text = "CIDADELA DOS ÚLTIMOS" if session.zone == "citadel" else "BOSQUE DAS NÉVOAS"
 	prompt.text = "" if nearest.is_empty() else "[C]  " + nearest.name
 	var labels: Array[String] = []

@@ -2,13 +2,15 @@
 
 ## 0.2.0-dev — 2026-10-13
 
+- Atualização de 14/10: medidores de Vida, Éter e Fôlego com molduras e valores; compras no hub com Lyra e Sera (10/12 ouro), débito/entrega atômicos e proteção contra repetição. Capturas de QA agora exigem slot de teste isolado. Validação ampliada para 15 suítes / 289 verificações.
+
 - Primeira jornada jogável: Cidadela, Bosque, três inimigos, Garras de Musgo, quest com duas escolhas, diálogo, consequência no hub e retorno seguro.
 - Fórmula de dano e atributos do Bastião, guarda, três habilidades, regeneração, inventário de 60 posições, equipamento, consumíveis, loot e XP.
 - Save de conteúdo v2 com migração de v1, backup, recompensas excedentes recuperáveis e testes de recarga.
 - Mapas, sprites e ícones originais em arte pintada de fantasia sombria, com grade de itens e capturas reais do Godot no README. HP, MP e stamina receberam a paleta vermelho, azul e amarelo.
 - Animações de quatro quadros para caminhada e machado, efeitos visíveis de golpe, Fenda, Guarda e esquiva. Clique esquerdo/direito como aliases de ataque/Impacto; aviso explica o bloqueio de combate na Cidadela.
 - Menu inicial, pausa, controles, opções, diário, HUD e sons simples sintetizados.
-- 14 suítes / 271 verificações aprovadas localmente em Godot 4.6. Export Windows gerado e inicializado por 120 quadros no smoke. CI configurado para testes e export.
+- Export Windows gerado e inicializado por 120 quadros no smoke. CI configurado para testes e export.
 - Playtest humano, animação, áudio final, balanceamento e campanha completa permanecem pendentes.
 
 ## 0.1.0-dev — 2026-10-13

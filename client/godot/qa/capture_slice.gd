@@ -1,5 +1,10 @@
 extends SceneTree
-func _initialize() -> void: call_deferred("run")
+func _initialize() -> void:
+	if "--test-harness" not in OS.get_cmdline_user_args():
+		push_error("Captura bloqueada: execute com -- --test-harness para isolar o save.")
+		quit(2)
+		return
+	call_deferred("run")
 func capture(name: String) -> void:
 	for i in range(8): await process_frame
 	await RenderingServer.frame_post_draw
@@ -29,6 +34,15 @@ func run() -> void:
 	await capture("arena")
 	game.command("inventory")
 	await capture("inventory")
+	game.command("resume")
+	game.travel("citadel")
+	await process_frame
+	var candidate: Dictionary = game.session.snapshot()
+	candidate.inventory.gold = 25
+	game.session.commit(candidate,"capture_fixture")
+	game.ui.update_state(game.player,game.session,{})
+	game.command("shop")
+	await capture("merchant")
 	paused = false
 	game.queue_free()
 	await process_frame

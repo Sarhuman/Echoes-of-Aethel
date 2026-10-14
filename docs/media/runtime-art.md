@@ -11,6 +11,6 @@ As seis imagens em `client/godot/assets/painted/` foram geradas para Echoes of A
 | `bastion_walk.png` | quatro quadros de caminhada do Bastião |
 | `bastion_attack.png` | quatro quadros de ataque com machado |
 
-O código seleciona regiões dos atlas em tempo de renderização; os PNGs permanecem intactos. Os arquivos em [runtime/](runtime/) são **capturas reais do Godot** desta versão e mostram Cidadela, Bosque, arena, ataque e bolsa. As três imagens em [concepts/](concepts/) continuam sendo apenas referências de direção.
+O código seleciona regiões dos atlas em tempo de renderização; os PNGs permanecem intactos. Os arquivos em [runtime/](runtime/) são **capturas reais do Godot** desta versão e mostram Cidadela, Bosque, arena, ataque, bolsa e comércio. As três imagens em [concepts/](concepts/) continuam sendo apenas referências de direção.
 
 Os tons de interface e ataque são sintetizados em `ui/hud/hud.gd` e ainda precisam de composição e mixagem próprias. A fonte é o fallback fornecido pela engine Godot.

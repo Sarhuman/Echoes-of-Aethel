@@ -23,6 +23,15 @@ func run() -> void:
 	await physics_frame
 	check(game.begun and game.session.zone == "citadel" and not paused,"new campaign playable")
 	check(game.player.current_health == 172 and game.player.mp == 52,"starts healed")
+	check(game.ui.hp.size.y >= 20 and game.ui.hp_value.text.contains("172"),"framed resource meter shows numeric health")
+	var shop_state: Dictionary = game.session.snapshot()
+	shop_state.inventory.gold = 20
+	check(game.session.commit(shop_state,"shop_fixture").ok,"shop fixture persists")
+	game.command("shop")
+	check(paused and game.ui.menu_open,"merchant menu opens in hub")
+	game.command("buy:potion_health_small")
+	check(game.session.inventory.gold == 10 and game.session.inventory.counts.get("potion_health_small",0) == 4,"merchant debits gold and delivers item")
+	game.command("resume")
 	check(game.player.request_attack(false) == AttackController.Status.REJECTED,"hub blocks offense")
 	Input.action_press("attack_basic")
 	await physics_frame

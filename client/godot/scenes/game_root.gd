@@ -167,6 +167,11 @@ func command(action: String) -> void:
 	elif not begun: return
 	elif action == "interact": interact()
 	elif action == "inventory": show_inventory()
+	elif action == "shop": show_shop()
+	elif action.begins_with("buy:"):
+		var result := session.buy(action.trim_prefix("buy:"))
+		var feedback: String = "Compra concluída. O item está na bolsa." if result.ok else "Compra recusada: " + ("ouro insuficiente" if result.code == "INSUFFICIENT_GOLD" else "bolsa cheia" if result.code == "BAG_FULL" else result.code)
+		show_shop(feedback)
 	elif action == "journal":
 		get_tree().paused = true
 		var body := "A Caça ao Espião\n\nUm mensageiro acusa moradores de abastecer cultistas. A aldeia está sem escolta; parte dos moradores adoeceu. Investigue as três pistas, decida e volte à Cidadela.\n\n"
@@ -207,6 +212,8 @@ func interact() -> void:
 	elif id == "stash":
 		session.reclaim()
 		ui.show_notice("Recompensas retiradas conforme o espaço disponível na bolsa.")
+	elif id in ["npc.merchant", "npc.alchemist"]:
+		show_shop()
 	elif id.begins_with("npc."):
 		var line := DialogueResolver.resolve(id,session.state.world_flags)
 		get_tree().paused = true
@@ -225,3 +232,9 @@ func interact() -> void:
 func show_inventory() -> void:
 	get_tree().paused = true
 	ui.show_inventory_grid(session.inventory)
+func show_shop(feedback: String = "") -> void:
+	if session.zone != "citadel": return
+	get_tree().paused = true
+	var stock := "Ouro disponível: %d\n\nPoção de Vida pequena — 10 ouro\nFrasco de Éter pequeno — 12 ouro" % session.inventory.gold
+	if not feedback.is_empty(): stock += "\n\n" + feedback
+	ui.show_menu("PROVISÕES DA CIDADELA",stock,[["Comprar Poção de Vida — 10 ouro","buy:potion_health_small"],["Comprar Frasco de Éter — 12 ouro","buy:flask_aether_small"],["Voltar ao jogo","resume"]])

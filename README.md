@@ -12,7 +12,7 @@ O Bastião sai da Cidadela dos Últimos para investigar a aldeia no Bosque das N
 
 ![Captura real de um golpe de machado no Bosque](docs/media/runtime/attack-gameplay.png)
 
-Os cenários e sprites originais foram criados para esta versão tomando [esta imagem conceitual](docs/media/concepts/aethel-visual-target.png) como referência de atmosfera. A composição dos mapas privilegia caminhos legíveis, profundidade isométrica, ruínas góticas e itens materiais como nos RPGs táticos e ARPGs clássicos. [Proveniência da arte](docs/media/runtime-art.md).
+Os cenários e sprites originais foram criados para esta versão tomando [esta imagem conceitual](docs/media/concepts/aethel-visual-target.png) como referência de atmosfera. A composição dos mapas privilegia caminhos legíveis, profundidade isométrica e ruínas góticas. **Path of Exile 2** é a referência principal para a próxima etapa de combate e habilidades; o conteúdo e as regras de Aethel permanecem próprios. [Proveniência da arte](docs/media/runtime-art.md).
 
 ## Jogar
 
@@ -42,7 +42,11 @@ No editor, abra `client/godot/project.godot` e pressione **F5**. O projeto usa o
 
 O slot 5/F está reservado. A Cidadela é uma área segura: lá, ataques e habilidades de combate ficam bloqueados e mostram um aviso. Atravesse o portão leste para lutar no Bosque. A bolsa mostra itens em grade, equipamento, peso, capacidade e ações de usar, equipar ou descartar. Excedentes de recompensas aguardam retirada na Cidadela.
 
+Lyra e Sera atendem na Cidadela: aproxime-se e pressione **C** para comprar Poção de Vida (10 ouro) ou Frasco de Éter (12 ouro). Ouro vem dos encontros; compras recusadas por falta de ouro ou espaço não gastam nada. O HUD mostra Vida, Éter e Fôlego em medidores com valores numéricos.
+
 ![Captura real da bolsa de itens](docs/media/runtime/inventory-gameplay.png)
+
+![Captura real do comércio na Cidadela](docs/media/runtime/merchant-gameplay.png)
 
 ## Conteúdo e limites
 
@@ -58,7 +62,7 @@ Da raiz do repositório:
 bash tools/run_tests.sh
 ```
 
-No Windows, também é possível executar `tools/run_tests.ps1 -Godot <caminho-para-godot.exe>`. A validação local desta branch aprovou **14 suítes e 271 verificações** em Godot 4.6, incluindo um fluxo de integração da jornada. A exportação Windows usa `tools/export_windows.ps1` com os templates oficiais 4.6 instalados em `.godot-tools/`. O workflow de CI importa, testa e exporta automaticamente em pushes e PRs.
+No Windows, também é possível executar `tools/run_tests.ps1 -Godot <caminho-para-godot.exe>`. A validação local desta branch aprovou **15 suítes e 289 verificações** em Godot 4.6, incluindo um fluxo de integração da jornada e compras. A exportação Windows usa `tools/export_windows.ps1` com os templates oficiais 4.6 instalados em `.godot-tools/`. O workflow de CI importa, testa e exporta automaticamente em pushes e PRs. Capturas de QA exigem `-- --test-harness` para isolar o save.
 
 As capturas acima são do executável Godot rodando localmente. Elas verificam renderização, mas não substituem um playtest humano de navegação, dificuldade e desempenho em diferentes PCs.
 

@@ -131,7 +131,7 @@ Ao criar um ID novo, registre-o nesta tabela no mesmo PR.
 
 ## 6. Estado de implementação (atualize ao concluir cada cartão)
 
-Atualizado para `0.2.0-dev`. As suítes de teste estão distribuídas entre os módulos; o total validado é 14 suítes e 271 verificações.
+Atualizado para `0.2.0-dev`. As suítes de teste estão distribuídas entre os módulos; o total validado é 15 suítes e 289 verificações.
 
 | Módulo | Estado | Verificações | Cartão |
 |---|---|---|---|
@@ -144,16 +144,17 @@ Atualizado para `0.2.0-dev`. As suítes de teste estão distribuídas entre os m
 | Catálogo de conteúdo | implementado | 9 | T00 |
 | Guarda e habilidades | implementado | 10 | T01 |
 | Inimigos Lobo/Cultista | implementado | 9 | T02 |
-| Mapas, zonas, retorno e morte | implementado | 33 integração | T03 |
-| Garras de Musgo | implementado | 33 integração | T04 |
+| Mapas, zonas, retorno e morte | implementado | 37 integração | T03 |
+| Garras de Musgo | implementado | 37 integração | T04 |
 | Inventário e peso | implementado | 20 | T05 |
+| Comércio no hub | implementado; Lyra/Sera vendem consumíveis | 14 + 37 integração | — |
 | Save v2 e migração | implementado | 9 | T06 |
 | Loot e XP atômicos | implementado | 26 | T07 |
-| Quest `act1.spy_hunt` | implementado | 26 + 33 integração | T08 |
+| Quest `act1.spy_hunt` | implementado | 26 + 37 integração | T08 |
 | Diálogos e NPCs | implementado | 15 UI | T09 |
 | HUD, menus e áudio mínimo | implementado | 15 UI | T10 |
-| Consequência local no hub | implementado | 33 integração | T11 |
-| CI e export Windows | implementado; playtest humano pendente | 14 suítes + smoke | T12 |
+| Consequência local no hub | implementado | 37 integração | T11 |
+| CI e export Windows | implementado; playtest humano pendente | 15 suítes + smoke | T12 |
 
 ## 7. Divergências entre documentos e como foram resolvidas
 
