@@ -4,7 +4,7 @@ Revisão: 13/10/2026. Esta tabela registra o que existe no repositório; não an
 
 | Camada | Versão / fonte | Política |
 |---|---|---|
-| Projeto | `0.1.0-dev` em `/VERSION` e `client/godot/project.godot` → `config/version` | Pré-alpha técnica; ambos devem mudar juntos |
+| Projeto | `0.2.0-dev` em `/VERSION` e `client/godot/project.godot` → `config/version` | Pré-alpha técnica; ambos devem mudar juntos |
 | Engine validada | Godot `4.6.stable.official.89cea1439` | Manter 4.6 stable para reproduzir os testes; atualizar somente com validação |
 | Formato do projeto Godot | `config_version=5` | Formato do arquivo, não versão do jogo |
 | Schema do save | `SaveSystem.SCHEMA_VERSION = 1` | Não aumentar sem migração e testes de recuperação |
@@ -36,3 +36,7 @@ READMEs consultados durante esta sessão: Maaack declara compatibilidade 4.4+; D
 - CI e processo de empacotamento reproduzíveis.
 
 CI, export Windows e campanha jogável ainda são pendências. A galeria ilustra objetivos visuais e não elimina esses gates.
+
+## Atualização de playtest 0.2.0-dev
+
+A cena inicial agora é `res://playtest/arena.tscn`. São 144 verificações headless (125 anteriores + 19 da arena). A versão 0.1.0-dev acima registra a auditoria histórica; a versão de aplicação atual é 0.2.0-dev. Engine e schemas permanecem iguais. Não há executável Windows publicado.

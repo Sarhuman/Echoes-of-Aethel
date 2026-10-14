@@ -6,7 +6,7 @@
 
 ![Proposta visual de Echoes of Aethel: Bastião entre a Cidadela e o Bosque das Névoas](docs/media/concepts/aethel-visual-target.png)
 
-*Arte conceitual gerada por IA para orientar a produção. As imagens desta página não são capturas da versão executável nem sprites prontos. O jogo atual usa uma cena técnica com formas provisórias.*
+*Arte conceitual gerada por IA para orientar a produção. As imagens desta página não são capturas da versão executável nem sprites prontos. O jogo atual abre uma arena de playtest com formas provisórias.*
 
 [Escopo do projeto](docs/engineering/project-scope.md) · [Proposta visual](docs/design/visual-proposal.md) · [GDD](docs/GDD/README.md) · [Histórico](CHANGELOG.md) · [Versões](docs/engineering/versions.md)
 
@@ -22,10 +22,10 @@ O Bastião atravessa o Bosque das Névoas em busca de respostas. Combate, explor
 
 | Item | Estado |
 |---|---|
-| Projeto | **0.1.0-dev — protótipo técnico / pré-alpha** |
+| Projeto | **0.2.0-dev — arena de playtest / pré-alpha** |
 | Engine validada | **Godot 4.6 stable**, GDScript, renderer GL Compatibility |
 | Plataforma inicial | Windows; export executável ainda pendente |
-| Testes executados | **125 verificações aprovadas**, Godot 4.6 Linux headless |
+| Testes executados | **144 verificações aprovadas**, Godot 4.6 Linux headless |
 | Save | Envelope `schema_version = 1`; conteúdo `world-save-1` |
 | Campanha | Documentada; ainda não jogável |
 | Download / release | Sem pacote Windows, tag ou release publicada |
@@ -50,6 +50,8 @@ Origem, integridade e uso dos três arquivos: [manifesto das imagens](docs/media
 
 ## O que funciona agora
 
+- Arena com três encontros, vitória/derrota, pausa e reinício; recuperação entre encontros.
+- Lobo e Cultista experimentais, navegação estática A*, memória limitada e avisos de ataque.
 - Movimento com projeção 2:1, colisão com parede, dash, stamina e 120 ms de invulnerabilidade.
 - Ataques básico/pesado com MP, direção fixa, fases temporais e um acerto por alvo por golpe.
 - Recusa de comandos inválidos e prevenção de débito/execução duplicados.
@@ -59,11 +61,14 @@ Origem, integridade e uso dos três arquivos: [manifesto das imagens](docs/media
 
 A detecção de golpes usa amostragem física discreta. Não há reconstrução histórica de trajetórias nem garantia de colisão contínua para movimento rápido. Parâmetros de dano, MP e alcance são experimentais. [Contratos e limites do combate](docs/engineering/offline-combat.md).
 
-## Executar a cena técnica
+## Jogar o playtest
 
 1. Instale **Godot 4.6 stable**.
 2. Clone este repositório e importe `client/godot/project.godot` no Project Manager.
 3. Abra o projeto e pressione **F5**.
+4. Clique em **Iniciar treino** ou pressione **Enter**. Vença três encontros.
+
+[Guia do playtest](docs/engineering/playtest.md): instalação, objetivo, controles e roteiro de avaliação. A cena técnica anterior continua em `res://scenes/test_scene.tscn` (F6 no editor executa a cena aberta).
 
 ```bash
 git clone https://github.com/Sarhuman/Echoes-of-Aethel.git
@@ -71,7 +76,7 @@ cd Echoes-of-Aethel
 godot --path client/godot
 ```
 
-O repositório pode exigir acesso autenticado. Não é necessário backend ou conta dentro do jogo para esta cena. Ainda não há instalador nem executável Windows distribuído.
+O repositório pode exigir acesso autenticado. Não é necessário backend ou conta dentro do jogo para o playtest. Ainda não há instalador nem executável Windows distribuído.
 
 ### Controles aprovados
 
@@ -84,9 +89,11 @@ O repositório pode exigir acesso autenticado. Não é necessário backend ou co
 | Habilidade 3 | **4** ou **R** | Reservada; aviso de indisponibilidade |
 | Habilidade 4 | **5** ou **F** | Reservada; aviso de indisponibilidade |
 | Dash | **Espaço** | Implementado |
-| Reiniciar cena técnica | **F6** | Ferramenta de teste, não checkpoint |
-| Alternar apresentação | **F8** | Base / Melhorada |
-| Reduzir efeitos | **F9** | Implementado |
+| Reiniciar tentativa | **F6** | Volta à preparação; não é checkpoint |
+| Iniciar / próximo encontro | **Enter** | Também disponível por botão |
+| Pausar / continuar | **Esc** | Congela a arena |
+| Alternar apresentação | **F8** | Apenas na cena técnica anterior |
+| Reduzir efeitos | **F9** | Apenas na cena técnica anterior |
 
 Números da fileira superior. Aliases acionam a mesma habilidade; W permanece exclusivo de movimento. Habilidades reservadas não gastam recursos. Os ícones da arte conceitual não definem o loadout final.
 
@@ -101,9 +108,10 @@ godot --headless --path client/godot --script res://tests/test_enemy_fsm.gd
 godot --headless --path client/godot --script res://tests/test_player.gd
 godot --headless --path client/godot --script res://tests/test_presentation.gd
 godot --headless --path client/godot --script res://tests/test_combat.gd
+godot --headless --path client/godot --script res://tests/test_arena.gd
 ```
 
-As suítes de persistência usam e apagam dados do harness; não executar sobre saves de produção ou concorrentemente sobre o mesmo slot. Distribuição: save 27, FSM 25, Player 19, apresentação 13, combate 41.
+As suítes de persistência usam e apagam dados do harness; não executar sobre saves de produção ou concorrentemente sobre o mesmo slot. Distribuição: save 27, FSM 25, Player 19, apresentação 13, combate 41 e arena 19.
 
 ## O que falta para a primeira fatia jogável
 
@@ -111,7 +119,7 @@ As suítes de persistência usam e apagam dados do harness; não executar sobre 
 |---|---|---|
 | 1 | Guarda, habilidades restantes e regras de interrupção | Arena com todas as ações utilizáveis e custos validados |
 | 2 | Cidadela/Bosque conectados e morte/checkpoint | Sair, lutar, morrer e recuperar sem perder decisões |
-| 3 | Lobo, Cultista e Garras de Musgo | Encontros próprios, antecipações e esquiva verificadas |
+| 3 | Finalizar Lobo/Cultista e implementar Garras de Musgo | Encontros próprios, antecipações e esquiva verificadas |
 | 4 | Inventário, loot/XP e migração do save | Recompensa confirmada sem perda/duplicação, inclusive bolsa cheia |
 | 5 | A Caça ao Espião e consequência no hub | Executar ou poupar; salvar/reabrir preserva a rota escolhida |
 | 6 | Arte, áudio, menus e acessibilidade | Leitura clara em movimento e com efeitos reduzidos |

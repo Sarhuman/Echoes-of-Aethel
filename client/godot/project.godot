@@ -1,9 +1,9 @@
 config_version=5
 
 [application]
-config/version="0.1.0-dev"
+config/version="0.2.0-dev"
 config/name="Echoes of Aethel - Persistence Harness"
-run/main_scene="res://scenes/test_scene.tscn"
+run/main_scene="res://playtest/arena.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
 [autoload]
@@ -17,6 +17,7 @@ renderer/rendering_method="gl_compatibility"
 [display]
 window/size/viewport_width=960
 window/size/viewport_height=540
+window/stretch/mode="canvas_items"
 
 [input]
 move_left={

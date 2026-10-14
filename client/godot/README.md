@@ -28,4 +28,6 @@ Ataques e limites da amostragem física: [combate offline](../../docs/engineerin
 
 ## Versão do projeto
 
-Protótipo `0.1.0-dev`, validado com Godot 4.6 stable. Consulte [versões e compatibilidade](../../docs/engineering/versions.md) e o [changelog](../../CHANGELOG.md).
+Protótipo `0.2.0-dev`, validado com Godot 4.6 stable. Consulte [versões e compatibilidade](../../docs/engineering/versions.md) e o [changelog](../../CHANGELOG.md).
+
+F5 abre a arena de três encontros. Consulte o [guia do playtest](../../docs/engineering/playtest.md). O harness antigo permanece em `res://scenes/test_scene.tscn`.
