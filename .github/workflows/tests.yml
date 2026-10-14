@@ -1,0 +1,33 @@
+name: Godot first slice
+on:
+  push:
+  pull_request:
+jobs:
+  test-and-export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned Godot 4.6
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .godot-tools
+          curl --fail --location --retry 3 https://github.com/godotengine/godot-builds/releases/download/4.6-stable/Godot_v4.6-stable_linux.x86_64.zip -o /tmp/godot.zip
+          unzip -q /tmp/godot.zip -d .godot-tools
+          chmod +x .godot-tools/Godot_v4.6-stable_linux.x86_64
+          echo "GODOT=$GITHUB_WORKSPACE/.godot-tools/Godot_v4.6-stable_linux.x86_64" >> "$GITHUB_ENV"
+      - name: All headless suites
+        run: bash tools/run_tests.sh
+      - name: Windows template
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 https://github.com/godotengine/godot-builds/releases/download/4.6-stable/Godot_v4.6-stable_export_templates.tpz -o /tmp/templates.zip
+          unzip -p /tmp/templates.zip templates/windows_release_x86_64.exe > .godot-tools/windows_release_x86_64.exe
+          mkdir -p dist
+          "$GODOT" --headless --path client/godot --export-release "Windows Desktop"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: EchoesOfAethel-Windows
+          path: dist/EchoesOfAethel.exe

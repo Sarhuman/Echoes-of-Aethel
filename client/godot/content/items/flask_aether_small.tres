@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://content/items/item_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+item_id = &"flask_aether_small"
+display_name = "Frasco de Éter"
+kind = &"consumable"
+weight = 0.5
+max_stack = 20
+slot = &""
+power = 0
+armor = 0
+restore = 30

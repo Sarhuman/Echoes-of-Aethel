@@ -2,8 +2,8 @@ config_version=5
 
 [application]
 config/version="0.2.0-dev"
-config/name="Echoes of Aethel - Persistence Harness"
-run/main_scene="res://playtest/arena.tscn"
+config/name="Echoes of Aethel"
+run/main_scene="res://scenes/game_root.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
 [autoload]
@@ -11,15 +11,45 @@ EventBus="*res://core/event_bus.gd"
 GameState="*res://core/game_state.gd"
 SaveSystem="*res://core/save_system.gd"
 
+[debug]
+file_logging/enable_file_logging=false
+file_logging/enable_file_logging.pc=false
+
 [rendering]
 renderer/rendering_method="gl_compatibility"
+textures/default_filters/use_nearest_mipmap_filter=false
+textures/canvas_textures/default_texture_filter=0
 
 [display]
-window/size/viewport_width=960
-window/size/viewport_height=540
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 
 [input]
+interact={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":67)]
+}
+inventory={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":73)]
+}
+journal={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":74)]
+}
+use_health={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":72)]
+}
+use_mana={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":84)]
+}
+pause={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":4194305)]
+}
 move_left={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"physical_keycode":65),Object(InputEventKey,"physical_keycode":4194319)]

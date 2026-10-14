@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnemyDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://content/enemies/enemy_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+enemy_id = &"blind_cultist"
+display_name = "Cultista Cego"
+category = &"common"
+max_health = 45
+defense = 3
+attack_power = 14
+damage_type = &"arcane"
+base_xp = 12
+movement_speed = 70
+detection_range = 220
+attack_range = 160
+attack_cooldown = 2
+windup_duration = 1
+recovery_duration = 1.2

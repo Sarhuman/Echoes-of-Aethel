@@ -2,14 +2,16 @@
 
 ## 0.2.0-dev — 2026-10-13
 
-- Arena como cena inicial: três encontros, HUD, pausa, vitória/derrota e reinício.
-- Lobo e Cultista experimentais com parâmetros e antecipações diferentes.
-- Navegação A* compartilhada para obstáculos estáticos e memória da última posição visível por três segundos.
-- Recuperação de 30 HP, MP e stamina entre encontros; sem gravar progressão.
-- Cena técnica preservada; F8/F9 permanecem exclusivos dela.
-- 144 verificações headless: 125 regressões + 19 de arena, incluindo desvio físico, pausa e transições.
-- Execução pelo Godot 4.6; sem export Windows ou avaliação gráfica neste ambiente.
+- Atualização de 14/10: medidores de Vida, Éter e Fôlego com molduras e valores; compras no hub com Lyra e Sera (10/12 ouro), débito/entrega atômicos e proteção contra repetição. Capturas de QA agora exigem slot de teste isolado. A arena técnica da `main` foi preservada como playtest opcional. Validação ampliada para 16 suítes / 308 verificações.
 
+- Primeira jornada jogável: Cidadela, Bosque, três inimigos, Garras de Musgo, quest com duas escolhas, diálogo, consequência no hub e retorno seguro.
+- Fórmula de dano e atributos do Bastião, guarda, três habilidades, regeneração, inventário de 60 posições, equipamento, consumíveis, loot e XP.
+- Save de conteúdo v2 com migração de v1, backup, recompensas excedentes recuperáveis e testes de recarga.
+- Mapas, sprites e ícones originais em arte pintada de fantasia sombria, com grade de itens e capturas reais do Godot no README. HP, MP e stamina receberam a paleta vermelho, azul e amarelo.
+- Animações de quatro quadros para caminhada e machado, efeitos visíveis de golpe, Fenda, Guarda e esquiva. Clique esquerdo/direito como aliases de ataque/Impacto; aviso explica o bloqueio de combate na Cidadela.
+- Menu inicial, pausa, controles, opções, diário, HUD e sons simples sintetizados.
+- Export Windows gerado e inicializado por 120 quadros no smoke. CI configurado para testes e export.
+- Playtest humano, animação, áudio final, balanceamento e campanha completa permanecem pendentes.
 
 ## 0.1.0-dev — 2026-10-13
 

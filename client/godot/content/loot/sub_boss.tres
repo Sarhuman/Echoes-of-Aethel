@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=2 format=3]
+[ext_resource type="Script" path="res://content/loot/loot_table.gd" id="1"]
+[resource]
+script = ExtResource("1")
+equipment_chance = 100
+gold_chance = 100
+gold_min = 25
+gold_max = 50
+consumable_chance = 60
+material_chance = 100
+essence_chance = 100
+rarity_weights = Array[int]([0, 0, 7500, 2500])
+xp_multiplier = 8

@@ -32,7 +32,7 @@ func make_actor(id: StringName, position_value: Vector2, team: StringName) -> Ac
 
 func run() -> void:
 	for suffix in ["", ".bak", ".tmp", ".corrupt"]:
-		DirAccess.remove_absolute("user://savegame.json" + suffix)
+		DirAccess.remove_absolute("user://tests/savegame.json" + suffix)
 	var state := root.get_node("GameState")
 	var saves := root.get_node("SaveSystem")
 	var bus := root.get_node("EventBus")
@@ -137,6 +137,6 @@ func run() -> void:
 	for actor in [enemy, player, attacker, corpse]: actor.queue_free()
 	await process_frame
 	for suffix in ["", ".bak", ".tmp", ".corrupt"]:
-		DirAccess.remove_absolute("user://savegame.json" + suffix)
+		DirAccess.remove_absolute("user://tests/savegame.json" + suffix)
 	print("FSM checks: %d; failures: %d" % [checks, failures])
 	quit(1 if failures else 0)

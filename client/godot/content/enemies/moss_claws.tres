@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnemyDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://content/enemies/enemy_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+enemy_id = &"moss_claws"
+display_name = "Garras de Musgo"
+category = &"sub_boss"
+max_health = 800
+defense = 15
+attack_power = 32
+damage_type = &"physical"
+base_xp = 25
+movement_speed = 80
+detection_range = 400
+attack_range = 110
+attack_cooldown = 1.2
+windup_duration = 0.9
+recovery_duration = 1

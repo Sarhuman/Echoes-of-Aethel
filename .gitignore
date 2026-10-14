@@ -2,3 +2,7 @@
 secrets/
 .env
 *.log
+*.import
+.godot-tools/
+dist/
+test-results/

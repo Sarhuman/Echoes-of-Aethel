@@ -178,7 +178,7 @@ func _process_attack(delta: float) -> void:
 			_winding = false
 			attack_timer = attack_cooldown
 			if _target_valid(_locked_target) and actor.global_position.distance_to(_locked_target.global_position) <= attack_range and _line_of_sight(_locked_target):
-				_locked_target.take_damage(attack_damage, actor)
+				_locked_target.take_damage(DamageCalculator.mitigate(attack_damage, _locked_target.defense), actor)
 		return
 	if actor.global_position.distance_to(target_actor.global_position) > attack_range:
 		change_state(State.CHASE)

@@ -2,10 +2,15 @@ extends Node
 
 const SCHEMA_VERSION := 1
 const MAX_BYTES := 1024 * 1024
-const SAVE_PATH := "user://savegame.json"
+var SAVE_PATH := "user://tests/savegame.json" if "--test-harness" in OS.get_cmdline_user_args() else "user://savegame.json"
 var _busy := false
+var legacy_path := OS.get_user_data_dir().get_base_dir().path_join("Echoes of Aethel - Persistence Harness/savegame.json")
+
+func has_campaign() -> bool:
+	return FileAccess.file_exists(SAVE_PATH) or ("--test-harness" not in OS.get_cmdline_user_args() and FileAccess.file_exists(legacy_path))
 
 func _ready() -> void:
+	DirAccess.make_dir_recursive_absolute(SAVE_PATH.get_base_dir())
 	EventBus.checkpoint_reached.connect(_on_checkpoint_reached)
 
 func _error(code: String) -> Dictionary:
@@ -28,7 +33,7 @@ func _read(path: String) -> Dictionary:
 	var envelope: Dictionary = parser.data
 	if not envelope.has("schema_version") or envelope["schema_version"] != SCHEMA_VERSION:
 		return _error("UNSUPPORTED_SCHEMA")
-	if envelope.get("content_version") != WorldSaveSchema.CONTENT_VERSION:
+	if envelope.get("content_version") not in [WorldSaveSchema.CONTENT_VERSION, "world-save-1"]:
 		return _error("UNSUPPORTED_CONTENT")
 	if envelope.size() != 4 or not envelope.get("payload_json") is String or not envelope.get("sha256") is String:
 		return _error("INVALID_ENVELOPE")
@@ -38,10 +43,13 @@ func _read(path: String) -> Dictionary:
 	var payload_parser := JSON.new()
 	if payload_parser.parse(payload_text) != OK:
 		return _error("INVALID_PAYLOAD_JSON")
-	var problem := WorldSaveSchema.validate(payload_parser.data)
+	if not payload_parser.data is Dictionary:
+		return _error("INVALID_PAYLOAD")
+	var migrated := SaveMigrations.migrate(payload_parser.data, envelope.content_version)
+	var problem := WorldSaveSchema.validate(migrated)
 	if not problem.is_empty():
 		return _error(problem)
-	return {"ok": true, "payload": WorldSaveSchema.normalize(payload_parser.data), "source": path}
+	return {"ok": true, "payload": WorldSaveSchema.normalize(migrated), "source": path, "migrated": envelope.content_version == "world-save-1"}
 
 func read_snapshot() -> Dictionary:
 	var primary := _read(SAVE_PATH)
@@ -55,6 +63,11 @@ func read_snapshot() -> Dictionary:
 		backup["recovered"] = true
 		backup["primary_error"] = primary["code"]
 		return backup
+	if primary["code"] == "NOT_FOUND" and "--test-harness" not in OS.get_cmdline_user_args():
+		var legacy := _read(legacy_path)
+		if legacy["ok"]:
+			legacy["legacy_location"] = true
+			return legacy
 	return primary
 
 func load_game() -> Dictionary:

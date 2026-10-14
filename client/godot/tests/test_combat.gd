@@ -12,8 +12,8 @@ func damage_callback() -> bool:
 	calls += 1
 	return true
 func run() -> void:
-	var basic := load("res://combat/basic.tres") as AttackDefinition
-	var heavy := load("res://combat/heavy.tres") as AttackDefinition
+	var basic := load("res://content/attacks/basic.tres") as AttackDefinition
+	var heavy := load("res://content/attacks/heavy.tres") as AttackDefinition
 	var controller := AttackController.new()
 	check(not controller.advance(0.5)["active"], "idle never creates active window")
 	check(not CombatService.spend(10, 20, -1, 0)["ok"], "negative cost rejected")
@@ -65,6 +65,7 @@ func run() -> void:
 	var player := scene.get_node("Player") as Player
 	var enemy := scene.get_node("Enemy") as ActorBase
 	player.input_enabled = false
+	player.crit_chance_override = 0
 	player.set_physics_process(false)
 	enemy.set_physics_process(false)
 	scene.get_node("Enemy/Brain").set_physics_process(false)
@@ -74,24 +75,25 @@ func run() -> void:
 	await physics_frame
 	check(player.request_attack(false, 1) == AttackController.Status.ACCEPTED, "scene basic accepted")
 	player.advance_attack(0.16)
-	check(enemy.current_health == 88, "real physics query applies basic damage")
+	check(enemy.current_health == 58, "real physics query applies basic damage")
 	player.advance_attack(0.02)
-	check(enemy.current_health == 88, "overlapping body not hit twice")
+	check(enemy.current_health == 58, "overlapping body not hit twice")
 	player.advance_attack(0.06)
 	check(player.attempt_dash(), "basic recovery cancels with paid dash")
 	player.advance_timers(1.2)
-	check(player.request_attack(true, 2) == AttackController.Status.ACCEPTED and player.mp == 28, "scene heavy commits MP")
+	check(player.request_attack(true, 2) == AttackController.Status.ACCEPTED and player.mp == 40, "scene heavy commits MP")
 	check(not player.attempt_dash(), "heavy windup blocks dash")
 	player.advance_attack(0.5)
-	check(enemy.current_health == 64, "crossed active applies one heavy hit")
+	check(enemy.current_health == 8, "crossed active applies one heavy hit")
 	player.advance_attack(0.31)
 	player.global_position = Vector2(415, 360)
 	enemy.global_position = Vector2(465, 360)
 	await physics_frame
 	await physics_frame
+	player.advance_timers(7.0)
 	player.request_attack(true, 3)
 	player.advance_attack(0.5)
-	check(enemy.current_health == 64, "wall occludes attack")
+	check(enemy.current_health == 8, "wall occludes attack")
 	player.attacks.cancel()
 	player._sync_attack_state()
 	player.zone_id = &"citadel"
@@ -104,7 +106,7 @@ func run() -> void:
 	player.current_health = 1
 	check(player.take_damage(10, enemy) and player.is_dead, "death during attack")
 	player.advance_attack(0.5)
-	check(player.attacks.phase == CombatService.Phase.IDLE and enemy.current_health == 64, "death clears attack and future hits")
+	check(player.attacks.phase == CombatService.Phase.IDLE and enemy.current_health == 8, "death clears attack and future hits")
 	check(player.request_attack(false, 6) == AttackController.Status.REJECTED, "dead cannot start attack")
 	scene.queue_free()
 	await process_frame

@@ -1,5 +1,7 @@
 # Playtest 0.2.0-dev — Bosque / treino do Bastião
 
+Este documento descreve a arena técnica preservada em `res://playtest/arena.tscn`. A jornada principal abre em `res://scenes/game_root.tscn`; os controles e serviços atuais estão no [README da raiz](../../README.md).
+
 ## Abrir no Windows ou Linux
 
 1. Use Godot **4.6 stable**, edição Standard (GDScript). Não precisa de .NET.
