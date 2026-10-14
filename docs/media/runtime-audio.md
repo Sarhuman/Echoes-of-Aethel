@@ -1,0 +1,5 @@
+# Áudio original de runtime
+
+As quatro faixas (`prologue.wav`, `citadel.wav`, `forest.wav`, `combat.wav`) e os seis efeitos em `client/godot/audio/` foram sintetizados especificamente para Echoes of Aethel por `tools/generate_audio.py`. O script compõe notas, acordes, drones, pulsos e transientes matematicamente, com semente fixa. Não usa gravações, samples, soundfonts nem material de terceiros. Os WAVs são PCM mono 16-bit a 22,05 kHz e podem ser regenerados com Python 3 executando `python tools/generate_audio.py` na raiz.
+
+O diretor de áudio alterna prólogo, Cidadela, Bosque e combate conforme o estado real do jogo; os efeitos acompanham ações confirmadas de machado, Impacto, Guarda, Fenda, esquiva e dano. A faixa do prólogo usa uma progressão e timbres sintetizados originais; nenhuma gravação ou melodia de franquias de cinema foi usada. O TTS do sistema foi retirado porque a voz pausada prejudicou o playtest. O texto permanece na tela e avança apenas por comando do jogador; uma futura dublagem precisa ser gravada e dirigida como parte da produção da cinemática. A opção Som silencia música e efeitos. A mixagem e as transições ainda exigem playtest humano.

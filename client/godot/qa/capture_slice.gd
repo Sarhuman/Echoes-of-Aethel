@@ -17,6 +17,12 @@ func run() -> void:
 	root.add_child(game)
 	await capture("title")
 	game.start_game(false)
+	await capture("prologue")
+	game.command("skip_prologue")
+	game.nearest = {"id": "npc.elder", "name": "Irian"}
+	game.interact()
+	await capture("council")
+	game.command("skip_council")
 	await capture("citadel")
 	game.travel("forest_01")
 	game.player.position = Vector2(970,700)

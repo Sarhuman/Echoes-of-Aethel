@@ -2,6 +2,8 @@ extends Node2D
 const IDLE_ART := preload("res://assets/painted/actors_atlas.png")
 const WALK_ART := preload("res://assets/painted/bastion_walk.png")
 const ATTACK_ART := preload("res://assets/painted/bastion_attack.png")
+const WALK_FEET := [602.0, 597.0, 560.0, 560.0]
+const ATTACK_FEET := [598.0, 602.0, 540.0, 555.0]
 var player: Player
 var walk_clock := 0.0
 var flash_left := 0.0
@@ -41,24 +43,32 @@ func _draw() -> void:
 		var frame := int(walk_clock * 9.0) % 4
 		draw_frame(WALK_ART, frame, Vector2(94, 94), tint)
 	else:
-		draw_texture_rect_region(IDLE_ART, Rect2(-47, -79, 94, 94), Rect2(0, 0, 640, 640), tint)
+		draw_texture_rect_region(IDLE_ART, Rect2(-47, -75, 94, 94), atlas_cell(IDLE_ART, 0), tint)
 	draw_set_transform(Vector2.ZERO)
 	if player.is_dashing:
 		var trail := -player.dash_direction * 28
 		draw_line(Vector2.ZERO, Vector2(trail.x, trail.y * 0.5), Color(0.51, 0.87, 0.97, 0.56), 12)
 		draw_arc(Vector2.ZERO, 24, 0, TAU, 28, Color(0.63, 0.94, 1, 0.68), 3)
 	if player.guard.active_left > 0:
-		var angle := player.facing.angle()
-		draw_arc(Vector2.ZERO, 42, angle - 1.1, angle + 1.1, 28, Color("#9cefff"), 7)
-		draw_arc(Vector2.ZERO, 34, angle - 1.1, angle + 1.1, 28, Color(0.18, 0.70, 0.86, 0.62), 4)
+		var center := player.project_direction(player.facing) * 33 + Vector2(0, -21)
+		var shield := PackedVector2Array([center + Vector2(-12, -14), center + Vector2(12, -14), center + Vector2(11, 8), center + Vector2(0, 19), center + Vector2(-11, 8)])
+		draw_colored_polygon(shield, Color(0.12, 0.42, 0.55, 0.29))
+		for i in range(shield.size()):
+			draw_line(shield[i], shield[(i + 1) % shield.size()], Color(0.50, 0.88, 0.97, 0.72), 2)
 	if flash_left > 0 and last_action == &"twilight_guard":
-		draw_circle(Vector2.ZERO, 24 + (0.65 - flash_left) * 40, Color(0.26, 0.88, 0.97, flash_left * 0.13))
+		draw_circle(Vector2.ZERO, 20 + (0.65 - flash_left) * 28, Color(0.26, 0.88, 0.97, flash_left * 0.06))
 	if attacking:
 		draw_attack_effect()
 
 func draw_frame(texture: Texture2D, frame: int, dimensions: Vector2, tint: Color) -> void:
-	var source := Rect2((frame % 2) * 640, (frame / 2) * 640, 640, 640)
-	draw_texture_rect_region(texture, Rect2(-dimensions.x / 2, -dimensions.y + 15, dimensions.x, dimensions.y), source, tint)
+	var source := atlas_cell(texture, frame)
+	var feet: Array = WALK_FEET if texture == WALK_ART else ATTACK_FEET
+	var alignment := (600.0 - float(feet[frame])) / source.size.y * dimensions.y
+	draw_texture_rect_region(texture, Rect2(-dimensions.x / 2, -dimensions.y + 15 + alignment, dimensions.x, dimensions.y), source, tint)
+
+static func atlas_cell(texture: Texture2D, frame: int) -> Rect2:
+	var cell := Vector2(texture.get_width(), texture.get_height()) / 2.0
+	return Rect2(Vector2(frame % 2, frame / 2) * cell, cell)
 
 func draw_attack_effect() -> void:
 	var spec := player.attacks.definition

@@ -33,5 +33,17 @@ func run() -> void:
 	if inv != null:
 		check(MerchantService.purchase("potion_health_small","shop.full","citadel",full,save).code == "BAG_FULL","full bag refused")
 	check(full.inventory.gold == 20,"refused purchase preserves gold")
+	var trade := WorldSaveSchema.initial()
+	trade.inventory.gold = 40
+	trade.inventory.items["wolf_fang"] = 2
+	store.value = trade
+	check(MerchantService.purchase("iron_axe","shop.gear","citadel",store.value,save).ok,"equipment purchased")
+	check(store.value.inventory.gold == 5 and store.value.inventory.items.get("iron_axe",0) == 1,"equipment and gold committed atomically")
+	check(MerchantService.sell("wolf_fang","shop.sale","citadel",store.value,save).ok,"material sold")
+	check(store.value.inventory.gold == 8 and store.value.inventory.items.wolf_fang == 1,"sale credits once and removes one item")
+	check(MerchantService.sell("wolf_fang","shop.sale","citadel",store.value,save).get("replayed",false),"sale receipt prevents replay")
+	check(store.value.inventory.gold == 8 and store.value.inventory.items.wolf_fang == 1,"replay neither pays nor removes again")
+	check(not MerchantService.sell("training_axe","shop.equipped","citadel",store.value,save).ok,"equipped weapon cannot be sold")
+	check(not MerchantService.sell("wolf_fang","shop.outside","forest_01",store.value,save).ok,"sale requires hub")
 	print("%d checks; %d failures" % [checks,failures])
 	quit(1 if failures else 0)

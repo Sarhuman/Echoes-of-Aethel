@@ -1,6 +1,7 @@
 class_name SliceHUD
 extends CanvasLayer
 const ITEM_ART := preload("res://assets/painted/items_atlas.png")
+const CITADEL_ART := preload("res://assets/painted/citadel_courtyard.png")
 signal command(action: String)
 var hp: ProgressBar
 var mp: ProgressBar
@@ -20,6 +21,9 @@ var boss_hp: ProgressBar
 var overlay: Control
 var menu_box: VBoxContainer
 var menu_open := false
+var cinematic_skip_action := ""
+var cinematic_backdrop: TextureRect
+var cinematic_time := 0.0
 var reduced_effects := false
 var sound_enabled := true
 var notice_left := 0.0
@@ -150,6 +154,8 @@ func resource_value(parent: Node, y: float) -> Label:
 	value.add_theme_constant_override("shadow_offset_y",1)
 	return value
 func show_menu(title: String, body: String, buttons: Array) -> void:
+	cinematic_skip_action = ""
+	cinematic_backdrop = null
 	for child in overlay.get_children():
 		overlay.remove_child(child)
 		child.queue_free()
@@ -186,10 +192,69 @@ func show_menu(title: String, body: String, buttons: Array) -> void:
 		menu_box.add_child(button)
 		if first == null: first = button
 	if first != null: focus_menu_button.call_deferred(first)
+func show_cinematic(title: String, speaker: String, body: String, page: int, total: int, next_action: String = "prologue_next", skip_action: String = "skip_prologue") -> void:
+	cinematic_skip_action = skip_action
+	cinematic_time = 0.0
+	for child in overlay.get_children():
+		overlay.remove_child(child)
+		child.queue_free()
+	overlay.show()
+	menu_open = true
+	var backdrop := TextureRect.new()
+	backdrop.texture = CITADEL_ART
+	backdrop.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	backdrop.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	backdrop.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	overlay.add_child(backdrop)
+	cinematic_backdrop = backdrop
+	backdrop.offset_left = -18.0
+	backdrop.offset_top = -10.0
+	backdrop.offset_right = 18.0
+	backdrop.offset_bottom = 10.0
+	var veil := ColorRect.new()
+	veil.color = Color(0.015, 0.022, 0.039, 0.56)
+	veil.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	overlay.add_child(veil)
+	for rect in [Rect2(0, 0, 1280, 72), Rect2(0, 464, 1280, 256)]:
+		var letterbox := ColorRect.new()
+		letterbox.color = Color(0.012, 0.019, 0.031, 0.96)
+		letterbox.position = rect.position
+		letterbox.size = rect.size
+		overlay.add_child(letterbox)
+	var chapter := label(overlay, title, 22, Color("#e1cca1"))
+	chapter.position = Vector2(58, 18)
+	var progress := label(overlay, "%d / %d" % [page, total], 15, Color("#91a7aa"))
+	progress.position = Vector2(1150, 24)
+	var voice := label(overlay, speaker, 22, Color("#e1cca1"))
+	voice.position = Vector2(72, 490)
+	var line := RichTextLabel.new()
+	line.text = body
+	line.scroll_active = false
+	line.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	line.add_theme_font_size_override("normal_font_size", 23)
+	line.add_theme_color_override("default_color", Color("#f0e9d8"))
+	line.position = Vector2(72, 532)
+	line.size = Vector2(1136, 94)
+	overlay.add_child(line)
+	var next := Button.new()
+	next.text = ("Encerrar conselho" if next_action == "council_next" else "Entrar na Cidadela") if page == total else "Continuar"
+	next.position = Vector2(72, 647)
+	next.size = Vector2(225, 43)
+	next.pressed.connect(func(): command.emit(next_action))
+	overlay.add_child(next)
+	var skip := Button.new()
+	skip.text = "Pular conselho" if skip_action == "skip_council" else "Pular abertura"
+	skip.position = Vector2(318, 647)
+	skip.size = Vector2(190, 43)
+	skip.pressed.connect(func(): command.emit(skip_action))
+	overlay.add_child(skip)
+	focus_menu_button.call_deferred(next)
 func focus_menu_button(button: Button) -> void:
 	if is_instance_valid(button) and button.is_inside_tree(): button.grab_focus()
 func close_menu() -> void:
 	menu_open = false
+	cinematic_skip_action = ""
+	cinematic_backdrop = null
 	overlay.hide()
 func item_icon(id: String) -> AtlasTexture:
 	var cell := Vector2i(0, 0)
@@ -365,21 +430,31 @@ func update_state(player: Player, session: SliceSession, nearest: Dictionary) ->
 	var clues := 0
 	for id in session.quest.definition.clues:
 		if state.world_flags.get(id,false): clues += 1
-	if not state.world_flags.get("forest_01.moss_claws.defeated",false):
-		objective.text = "A CAÇA AO ESPIÃO\nInvestigue a aldeia (%d/3) e enfrente Garras de Musgo ao nordeste." % clues
-	elif not state.quest_choices.has("act1.spy_hunt"):
-		objective.text = "A CAÇA AO ESPIÃO\nGarras derrotado. Investigue (%d/3) e confirme sua decisão na aldeia." % clues
-	elif not state.applied_effects.has("first_return_to_citadel"):
-		objective.text = "O PESO DA ESCOLHA\nRetorne à Cidadela e encontre quem ficou."
-	else:
-		objective.text = "PRIMEIRA FATIA CONCLUÍDA\nConverse com o conselho. O Bosque continua aberto para exploração."
+	objective.text = objective_for(state, session.zone, clues)
+static func objective_for(state: Dictionary, zone: String, clues: int) -> String:
+	if state.world_flags.get("prologue.last_bell", false) and not state.world_flags.get("prologue.council", false) and not state.quest_choices.has("act1.spy_hunt") and clues == 0:
+		return "O CONSELHO DOS QUE FICARAM\nFale com Irian junto ao cristal da Cidadela." if zone == "citadel" else "O CONSELHO DOS QUE FICARAM\nVolte à Cidadela e fale com Irian junto ao cristal."
+	if not state.world_flags.get("forest_01.moss_claws.defeated", false):
+		return "A CAÇA AO ESPIÃO\nInvestigue a aldeia (%d/3) e enfrente Garras de Musgo ao nordeste." % clues
+	if not state.quest_choices.has("act1.spy_hunt"):
+		return "A CAÇA AO ESPIÃO\nGarras derrotado. Investigue (%d/3) e confirme sua decisão na aldeia." % clues
+	if not state.applied_effects.has("first_return_to_citadel"):
+		return "O PESO DA ESCOLHA\nRetorne à Cidadela e encontre quem ficou."
+	if not state.world_flags.get("hub.council_briefed", false):
+		return "O PESO DA ESCOLHA\n%s e fale com Irian, líder do conselho, junto ao cristal." % ("Volte à Cidadela" if zone != "citadel" else "Vá até o centro da Cidadela")
+	return "PRIMEIRA FATIA CONCLUÍDA\nSua decisão foi registrada por Irian. O Bosque continua aberto para exploração."
 func _process(delta: float) -> void:
 	notice_left = maxf(0,notice_left-delta)
 	if notice_left <= 0: message.text = ""
+	if is_instance_valid(cinematic_backdrop) and menu_open and not reduced_effects:
+		cinematic_time = minf(8.0, cinematic_time + delta)
+		var shift := cinematic_time * 2.0
+		cinematic_backdrop.offset_left = -18.0 + shift
+		cinematic_backdrop.offset_right = 18.0 + shift
 func _unhandled_key_input(event: InputEvent) -> void:
 	if not event is InputEventKey or not event.pressed or event.echo: return
 	if event.is_action_pressed("pause"):
-		command.emit("resume" if menu_open else "pause")
+		command.emit(cinematic_skip_action if not cinematic_skip_action.is_empty() else ("resume" if menu_open else "pause"))
 		get_viewport().set_input_as_handled()
 	elif not menu_open:
 		for action in ["inventory","journal","interact","use_health","use_mana"]:

@@ -4,7 +4,9 @@
 
 > O caminho para o inferno está cheio de boas intenções.
 
-O Bastião sai da Cidadela dos Últimos para investigar a aldeia no Bosque das Névoas. Esta versão **0.2.0-dev** contém uma primeira jornada jogável: explorar, lutar, coletar itens, derrotar Garras de Musgo, investigar três pistas, tomar uma decisão e voltar à Cidadela para observar a consequência.
+O Bastião sai da Cidadela dos Últimos para investigar a aldeia no Bosque das Névoas. Esta versão **0.2.0-dev** contém uma primeira jornada jogável: assistir ou pular a abertura, falar com o conselho, explorar, lutar, coletar itens, derrotar Garras de Musgo, investigar três pistas, tomar uma decisão e voltar à Cidadela para observar a consequência. Bram, Irian, Lyra, Maera e Sera aparecem na Cidadela e mantêm seus pontos de interação.
+
+![Abertura ilustrada no Godot](docs/media/runtime/prologue-gameplay.png)
 
 ![Captura real da Cidadela no Godot](docs/media/runtime/citadel-gameplay.png)
 
@@ -42,7 +44,9 @@ No editor, abra `client/godot/project.godot` e pressione **F5**. O projeto usa o
 
 O slot 5/F está reservado. A Cidadela é uma área segura: lá, ataques e habilidades de combate ficam bloqueados e mostram um aviso. Atravesse o portão leste para lutar no Bosque. A bolsa mostra itens em grade, equipamento, peso, capacidade e ações de usar, equipar ou descartar. Excedentes de recompensas aguardam retirada na Cidadela.
 
-Lyra e Sera atendem na Cidadela: aproxime-se e pressione **C** para comprar Poção de Vida (10 ouro) ou Frasco de Éter (12 ouro). Ouro vem dos encontros; compras recusadas por falta de ouro ou espaço não gastam nada. O HUD mostra Vida, Éter e Fôlego em medidores com valores numéricos.
+Uma campanha nova começa com uma curta cena ilustrada baseada no prólogo do GDD, com texto em português e trilha original. A voz sintética foi retirada após o playtest: as páginas podem ser lidas no próprio ritmo ou puladas sem perder equipamento ou objetivos. A primeira conversa com Irian apresenta o conselho; depois, o objetivo aponta para o Bosque. Golpes confirmados recebem um tremor breve de câmera, desativado em **Efeitos reduzidos**.
+
+Lyra e Sera atendem na Cidadela: aproxime-se e pressione **C** para comprar provisões, antídoto ou equipamento. Sera também compra materiais e peças não equipadas. Ouro vem dos encontros; transações recusadas não alteram a bolsa. O HUD mostra Vida, Éter e Fôlego em medidores com valores numéricos. A trilha original alterna entre Cidadela, Bosque e combate, com efeitos para golpes e habilidades; a opção **Som** silencia tudo. [Proveniência e geração do áudio](docs/media/runtime-audio.md).
 
 ![Captura real da bolsa de itens](docs/media/runtime/inventory-gameplay.png)
 
@@ -50,9 +54,9 @@ Lyra e Sera atendem na Cidadela: aproxime-se e pressione **C** para comprar Poç
 
 ## Conteúdo e limites
 
-A jornada traz Lobo Etéreo, Cultista Cego e Garras de Musgo com ataques antecipados, boss com três padrões, progressão de atributos, loot e XP. A quest **A Caça ao Espião** permite julgar suspeitos ou escoltar moradores; a escolha altera falas e detalhes do hub. A Cidadela é área segura e checkpoint único.
+A jornada traz Lobo Etéreo, Cultista Cego e Garras de Musgo com ataques antecipados, boss com três padrões, progressão de atributos, loot e XP. A quest **A Caça ao Espião** permite julgar suspeitos ou escoltar moradores; a escolha altera falas e detalhes do hub. Após a volta, fale com **Irian, líder do conselho, junto ao cristal**; a conversa encerra o objetivo e fica salva. A Cidadela é área segura e checkpoint único. Corpos de inimigos derrotados somem; o jogador atravessa inimigos sem ser preso contra a parede, e a borda do abismo do Bosque bloqueia a passagem. Acertos exibem dano vermelho; golpes que não encontram alvo exibem “MISS” azul. **3/E é Guarda:** reduz dano frontal enquanto o escudo aparece, sem atacar.
 
-Esta é a primeira fatia da campanha. Os quatro atos, as outras quatro classes e os demais mapas descritos no GDD continuam planejados. Há animações de caminhada e golpe; outros movimentos, a mixagem e o equilíbrio ainda precisam de playtest. Os valores de balanceamento estão marcados como experimentais em [experimental-values.md](docs/engineering/experimental-values.md).
+Esta é a primeira fatia da campanha. Os quatro atos, as outras quatro classes e os demais mapas descritos no GDD continuam planejados; **somente o Bastião é jogável nesta versão**. Há animações de caminhada e golpe do Bastião e quatro poses de caminhada do Lobo, Cultista e Garras de Musgo; outros movimentos, a mixagem e o equilíbrio ainda precisam de playtest. Os valores de balanceamento estão marcados como experimentais em [experimental-values.md](docs/engineering/experimental-values.md).
 
 ## Verificar e exportar
 
@@ -62,7 +66,7 @@ Da raiz do repositório:
 bash tools/run_tests.sh
 ```
 
-No Windows, também é possível executar `tools/run_tests.ps1 -Godot <caminho-para-godot.exe>`. A validação local desta branch aprovou **16 suítes e 308 verificações** em Godot 4.6, incluindo a arena técnica anterior, um fluxo de integração da jornada e compras. A exportação Windows usa `tools/export_windows.ps1` com os templates oficiais 4.6 instalados em `.godot-tools/`. O workflow de CI importa, testa e exporta automaticamente em pushes e PRs. Capturas de QA exigem `-- --test-harness` para isolar o save.
+No Windows, também é possível executar `tools/run_tests.ps1 -Godot <caminho-para-godot.exe>`. A validação local passou em **20 suítes / 408 verificações**, incluindo combate, mapa, áudio, comércio, save e o fluxo de integração da jornada. A exportação Windows usa `tools/export_windows.ps1` com os templates oficiais 4.6 instalados em `.godot-tools/`; o executável iniciou por 120 quadros no teste automatizado. O workflow de CI importa, testa e exporta automaticamente em pushes e PRs. Capturas de QA exigem `-- --test-harness` para isolar o save.
 
 As capturas acima são do executável Godot rodando localmente. Elas verificam renderização, mas não substituem um playtest humano de navegação, dificuldade e desempenho em diferentes PCs.
 

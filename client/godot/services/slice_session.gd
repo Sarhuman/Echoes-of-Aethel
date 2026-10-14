@@ -135,3 +135,6 @@ func discard(id: String) -> Dictionary:
 func buy(item_id: String) -> Dictionary:
 	var request_id := "shop." + Crypto.new().generate_random_bytes(12).hex_encode()
 	return MerchantService.purchase(item_id, request_id, zone, snapshot(), commit)
+func sell(item_id: String) -> Dictionary:
+	var request_id := "shop." + Crypto.new().generate_random_bytes(12).hex_encode()
+	return MerchantService.sell(item_id, request_id, zone, snapshot(), commit)

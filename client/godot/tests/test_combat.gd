@@ -51,6 +51,8 @@ func run() -> void:
 	check(controller._history.size() == 128 and controller.request(1, heavy, Vector2.RIGHT, 28, 100, true)["status"] == AttackController.Status.REJECTED, "bounded history rejects evicted IDs")
 	check(not CombatService.in_cone(Vector2.RIGHT, Vector2(-20, 0), 56), "rear target excluded")
 	check(CombatService.in_cone(Vector2.DOWN, Vector2(0, 28), 56) and not CombatService.in_cone(Vector2.DOWN, Vector2(0, 29), 56), "reach uses inverse isometric projection")
+	check(CombatService.in_cone_body(Vector2.UP, Vector2(0, -48), 64, 34), "large boss body can be struck at physical separation")
+	check(not CombatService.in_cone_body(Vector2.UP, Vector2(0, 48), 64, 34), "body radius does not allow rear hits")
 	var invalid := basic.duplicate() as AttackDefinition
 	invalid.active = NAN
 	check(not invalid.valid(), "nonfinite duration rejected")
@@ -109,6 +111,36 @@ func run() -> void:
 	check(player.attacks.phase == CombatService.Phase.IDLE and enemy.current_health == 8, "death clears attack and future hits")
 	check(player.request_attack(false, 6) == AttackController.Status.REJECTED, "dead cannot start attack")
 	scene.queue_free()
+	await process_frame
+	var arena := Node2D.new()
+	root.add_child(arena)
+	var hero := preload("res://entities/player/player.tscn").instantiate() as Player
+	var boss := preload("res://entities/enemies/moss_claws.tscn").instantiate() as EnemyActor
+	hero.zone_id = &"forest_01"
+	boss.zone_id = &"forest_01"
+	arena.add_child(hero)
+	arena.add_child(boss)
+	hero.input_enabled = false
+	hero.set_physics_process(false)
+	boss.set_physics_process(false)
+	hero.global_position = Vector2(300, 300)
+	boss.global_position = Vector2(300, 252)
+	hero.facing = Vector2.UP
+	hero.crit_chance_override = 0
+	await physics_frame
+	await physics_frame
+	check(hero.request_attack(true) == AttackController.Status.ACCEPTED, "Impacto starts near boss")
+	hero.advance_attack(0.5)
+	check(boss.current_health < boss.max_health, "Impacto deals damage to boss at visible melee range")
+	hero.attacks.cancel()
+	hero._sync_attack_state()
+	hero.global_position = Vector2(100, 400)
+	var miss_positions: Array[Vector2] = []
+	hero.attack_missed.connect(func(pos: Vector2): miss_positions.append(pos))
+	check(hero.request_attack(false) == AttackController.Status.ACCEPTED, "empty swing starts")
+	hero.advance_attack(0.3)
+	check(miss_positions.size() == 1, "empty attack reports exactly one MISS")
+	arena.queue_free()
 	await process_frame
 	print("Combat checks: %d; failures: %d" % [checks, failures])
 	quit(1 if failures else 0)

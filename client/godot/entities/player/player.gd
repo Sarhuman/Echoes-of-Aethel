@@ -5,6 +5,8 @@ signal stamina_changed(current: float, maximum: float)
 signal mp_changed(current: float, maximum: float)
 signal skill_unavailable(slot: int)
 signal attack_started(attack_id: StringName)
+signal attack_missed(world_position: Vector2)
+signal dash_started
 signal hp_changed(current: int, maximum: int)
 signal action_blocked(reason: String)
 
@@ -44,6 +46,7 @@ var damage_over_time := false
 var skill_cooldowns: Dictionary = {}
 var _rift: AttackDefinition = preload("res://content/attacks/steel_rift.tres")
 var slow_left := 0.0
+var _attack_landed := false
 
 var is_dashing: bool:
 	get: return dash_left > 0.00000001
@@ -102,6 +105,7 @@ func attempt_dash(direction: Vector2 = Vector2.ZERO) -> bool:
 	attacks.cancel()
 	current_action_state = ActionState.IDLE # Costs already paid are not refunded.
 	stamina_changed.emit(stamina, stamina_max)
+	dash_started.emit()
 	return true
 
 func request_attack(heavy: bool, sequence: int = 0) -> AttackController.Status:
@@ -116,6 +120,7 @@ func request_definition(spec: AttackDefinition, sequence: int = 0) -> AttackCont
 	var result := attacks.request(sequence, spec, facing, mp, stamina,
 		not is_dead and not is_dashing and combat_enabled and zone_id != &"citadel" and skill_cooldowns.get(spec.attack_id, 0.0) <= 0.0)
 	if result["status"] == AttackController.Status.ACCEPTED:
+		_attack_landed = false
 		# Single synchronous commit; publish only after resources and action agree.
 		mp = result["mp"]
 		stamina = result["stamina"]
@@ -161,6 +166,8 @@ func advance_attack(delta: float) -> void:
 	_sync_attack_state()
 	if result["active"]:
 		_resolve_attack_contacts()
+		if attacks.phase != CombatService.Phase.ACTIVE and not _attack_landed:
+			attack_missed.emit(global_position + project_direction(attacks.direction) * attacks.definition.reach * 0.8)
 	attacks.close_window()
 
 func _resolve_attack_contacts() -> void:
@@ -179,10 +186,14 @@ func _resolve_attack_contacts() -> void:
 		if not is_instance_valid(target) or target.is_dead or target.team_id == team_id:
 			continue
 		var offset := target.global_position - global_position
-		var inside := CombatService.in_cone(attacks.direction, offset, attacks.definition.reach)
+		var radius := 0.0
+		var collision := target.get_node_or_null("Shape") as CollisionShape2D
+		if collision != null and collision.shape is CircleShape2D:
+			radius = (collision.shape as CircleShape2D).radius
+		var inside := CombatService.in_cone_body(attacks.direction, offset, attacks.definition.reach, radius)
 		if attacks.definition.line_width > 0:
 			var logical := Vector2(offset.x, offset.y * 2)
-			inside = logical.dot(attacks.direction) >= 0 and logical.dot(attacks.direction) <= attacks.definition.reach and absf(logical.cross(attacks.direction)) <= attacks.definition.line_width
+			inside = logical.dot(attacks.direction) >= -radius and logical.dot(attacks.direction) <= attacks.definition.reach + radius and absf(logical.cross(attacks.direction)) <= attacks.definition.line_width + radius
 		if not inside:
 			continue
 		var ray := PhysicsRayQueryParameters2D.create(global_position, target.global_position, 2)
@@ -192,6 +203,7 @@ func _resolve_attack_contacts() -> void:
 		attacks.resolve_hit(target.get_instance_id(), func():
 			var hit := DamageCalculator.compute({"power": attacks.definition.power, "weapon": weapon_power, "attribute": stats.definition.strength, "level": stats.level, "defense": target.defense, "chance_bp": stats.crit_chance_bp() if crit_chance_override < 0 else crit_chance_override}, rng)
 			var applied := target.take_damage(hit.final, self)
+			if applied: _attack_landed = true
 			if applied and attacks.definition.interrupt_seconds > 0 and target.has_method("interrupt"):
 				target.interrupt(attacks.definition.interrupt_seconds)
 			return applied)

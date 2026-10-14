@@ -2,6 +2,20 @@
 
 ## 0.2.0-dev — 2026-10-13
 
+- Revisão da abertura de 14/10: removida a voz sintética após o playtest. O prólogo mantém texto em português, ritmo controlado pelo jogador e composição musical original. Validação headless: 20 suítes / 408 verificações.
+
+- Evolução de 14/10: abertura ilustrada com falas do prólogo, conselho de Irian na primeira conversa, opção de pular e progresso salvo sem recompensas duplicadas. A câmera responde brevemente a dano confirmado; Efeitos reduzidos desliga o tremor. Captura real da abertura e testes do fluxo adicionados. Validação: 20 suítes / 406 verificações.
+
+- Ajustes de 14/10 após retorno da missão: removidas as cinco listras artificiais do chão da Cidadela. O objetivo final identifica Irian como líder do conselho, orienta o retorno ao hub quando necessário e é concluído após uma conversa registrada no save. Validação: 19 suítes / 392 verificações.
+
+- Ajustes de 14/10 após novo playtest: Cultista Cego e Garras de Musgo recebem quatro quadros de locomoção com pés alinhados e sombras de contato; movimento deixa de aplicar oscilação vertical. Inimigos passam a colidir com cenário, sem prender o Bastião por contato físico, preservando ataques por proximidade. Validação: 19 suítes / 385 verificações, export Windows e inicialização por 120 quadros.
+
+- Ajustes visuais de 14/10: recorte dos atlas usa células de 627 px e os quadros do Bastião alinham os pés; indicadores de ataque inimigo recebem borda clara e preenchimento progressivo; marcadores cinzentos de pilares saem do Bosque. Validação: 19 suítes / 377 verificações, export Windows e inicialização por 120 quadros.
+
+- Ajustes de 14/10 após playtest: cinco NPCs passam a ser desenhados na Cidadela; Lobo Etéreo tem quatro quadros de locomoção e contorna o poço; o jogador deixa de ser preso pela colisão de inimigos. Impacto considera o corpo de Garras de Musgo, com números de dano e “MISS”; Guarda exibe um escudo mais legível. As outras quatro classes seguem documentadas para expansão, sem seleção jogável nesta versão. Validação: 19 suítes / 361 verificações, export Windows e inicialização do executável por 120 quadros.
+
+- Atualização de 14/10: inimigos derrotados deixam de gerar marcador residual; separação física, esquiva que atravessa atores e barreira acompanhando a borda do abismo no Bosque. Comércio ampliado com equipamento, antídoto e venda idempotente de materiais/peças. Três composições e seis efeitos originais gerados por código, integrados às opções de som. Validação: 18 suítes / 338 verificações, export Windows e inicialização do executável por 120 quadros.
+
 - Atualização de 14/10: medidores de Vida, Éter e Fôlego com molduras e valores; compras no hub com Lyra e Sera (10/12 ouro), débito/entrega atômicos e proteção contra repetição. Capturas de QA agora exigem slot de teste isolado. A arena técnica da `main` foi preservada como playtest opcional. Validação ampliada para 16 suítes / 308 verificações.
 
 - Primeira jornada jogável: Cidadela, Bosque, três inimigos, Garras de Musgo, quest com duas escolhas, diálogo, consequência no hub e retorno seguro.

@@ -21,6 +21,7 @@ func run() -> void:
 	check(player.project_direction(Vector2.DOWN) == Vector2(0, 0.5), "2:1 projection")
 	check(player.project_direction(Vector2(1, 1)).x < 0.71, "diagonal capped")
 	check(player.attempt_dash(Vector2.RIGHT) and player.stamina == 75, "approved cost 25")
+	check(player.collision_mask == 2, "player crosses actors but keeps scenery collision")
 	check(not player.attempt_dash(), "repeat dash refused")
 	check(not player.take_damage(15, enemy) and player.current_health == 172, "initial invulnerability")
 	player.advance_timers(0.119)
@@ -30,6 +31,7 @@ func run() -> void:
 	check(player.take_damage(15, enemy) and player.current_health == 157, "damage after window while dashing")
 	player.advance_timers(0.08)
 	check(not player.is_dashing and not player.attempt_dash(), "dash duration and cooldown separate")
+	check(player.collision_mask == 2, "actor cannot pin player after dash")
 	player.advance_timers(1.0)
 	player.request_attack(false)
 	player.advance_attack(0.24)
@@ -55,6 +57,7 @@ func run() -> void:
 	player.current_health = 5
 	check(player.take_damage(15, enemy) and player.is_dead, "death during remaining dash")
 	check(not player.is_dashing and not player.is_invulnerable and player.velocity == Vector2.ZERO, "death clears dash and timers")
+	check(player.collision_mask == 2, "death keeps scenery-only collision mask")
 	check(not player.attempt_dash(), "dead player cannot dash")
 	scene.queue_free()
 	await process_frame

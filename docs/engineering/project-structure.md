@@ -2,7 +2,7 @@
 
 Revisão: 14/10/2026 · Godot 4.6 stable · GDScript · primeira fatia `0.2.0-dev`.
 
-Este documento é o mapa operacional para quem implementa (incluindo o GPT). Ele **não substitui** [escopo](project-scope.md), [decisões de produção](production-decisions.md) nem o [GDD](../GDD/README.md). Coluna **Estado**: `existe` = no repositório e testado; `planejado` = pasta/arquivo a criar por um cartão de [tasks/](tasks/README.md); `vazio` = pasta reservada com `.gitkeep`.
+Este documento é o mapa operacional para quem implementa (incluindo o GPT). Ele **não substitui** [escopo](project-scope.md), [decisões de produção](production-decisions.md) nem o [GDD](../GDD/README.md). Coluna **Estado**: `existe` = no repositório e testado; `planejado` = pasta/arquivo a criar por um cartão de [tasks/](tasks/README.md); `vazio` = pasta reservada com `.gitkeep`. A árvore abaixo nasceu como plano; o estado efetivo do slice está registrado na tabela de atualização após ela.
 
 ## 1. Árvore alvo
 
@@ -65,6 +65,15 @@ client/godot/
 ```
 
 Fora de `client/godot/`: `docs/` (design e engenharia), `tools/run_tests.sh` (executa tudo), `AGENTS.md` (regras do GPT). Decisões e números: [decisions-first-slice.md](decisions-first-slice.md) e [experimental-values.md](experimental-values.md).
+
+| Área | Estado em 14/10/2026 |
+|---|---|
+| Domínio: catálogo, atributos, guarda, inventário, quest, diálogos e serviços | Existe e integra a primeira jornada |
+| Cenas e mapas: Cidadela e Bosque | Existem; Bosque agora bloqueia a borda pintada do abismo |
+| Comércio | Compra de consumíveis/equipamentos e venda de materiais/peças não equipadas, com recibo idempotente |
+| `audio/audio_director.gd`, `audio/music/`, `audio/sfx/` | Existem; quatro faixas e seis efeitos originais gerados por `tools/generate_audio.py`; voz sintética retirada após playtest |
+| `tests/test_*.gd` | Inclui regressão de mapa, áudio, colisão e comércio |
+| Prólogo, conselho e feedback de impacto | Abertura ilustrada e cena do conselho em `game_root.gd`/`SliceHUD`; tremor de câmera em `presentation/impact_feedback.gd`, com opção de efeitos reduzidos |
 
 ## 2. Camadas e regras de dependência
 

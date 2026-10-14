@@ -25,6 +25,10 @@ func run() -> void:
 	check(hud.menu_open, "inventory opens overlay")
 	hud.show_menu("Teste","Texto", [["Voltar","resume"]])
 	check(hud.menu_open and hud.overlay.visible,"menu appears")
+	hud.show_cinematic("Prólogo","Maera","Guarde essa mão.",1,3)
+	check(hud.menu_open and hud.overlay.visible and hud.overlay.get_child_count() >= 7 and hud.cinematic_skip_action == "skip_prologue","cinematic displays painted backdrop and controls")
+	hud.show_cinematic("Conselho","Irian","Comece pela estrada.",1,2,"council_next","skip_council")
+	check(hud.cinematic_skip_action == "skip_council","council escape uses durable skip action")
 	hud.close_menu()
 	check(not hud.menu_open and not hud.overlay.visible,"menu closes")
 	hud.reduced_effects = true
@@ -51,4 +55,17 @@ func run() -> void:
 	check(dialogue.valid(),"typed dialogue catalog valid")
 	for id in ["npc.blacksmith","npc.alchemist","npc.elder","npc.gatekeeper","npc.merchant"]:
 		check(not DialogueResolver.resolve(id,{}).is_empty(),"essential NPC has fallback "+id)
+	var return_state := WorldSaveSchema.initial()
+	return_state.world_flags["forest_01.moss_claws.defeated"] = true
+	return_state.quest_choices["act1.spy_hunt"] = "judge_suspects"
+	return_state.applied_effects["first_return_to_citadel"] = true
+	check(SliceHUD.objective_for(return_state, "citadel", 3).contains("Irian"), "hub objective identifies council leader")
+	check(SliceHUD.objective_for(return_state, "forest_01", 3).contains("Volte à Cidadela"), "forest objective points back to council")
+	return_state.world_flags["hub.council_briefed"] = true
+	check(SliceHUD.objective_for(return_state, "citadel", 3).contains("PRIMEIRA FATIA CONCLUÍDA"), "council briefing completes objective")
+	var prologue_state := WorldSaveSchema.initial()
+	prologue_state.world_flags["prologue.last_bell"] = true
+	check(SliceHUD.objective_for(prologue_state, "citadel", 0).contains("Fale com Irian"),"opening points to council")
+	prologue_state.world_flags["prologue.council"] = true
+	check(SliceHUD.objective_for(prologue_state, "citadel", 0).contains("A CAÇA AO ESPIÃO"),"council releases forest objective")
 	finish()

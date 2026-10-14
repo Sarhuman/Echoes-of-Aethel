@@ -67,6 +67,11 @@ func run() -> void:
 	for i in range(45): await physics_frame
 	check(common.position.x < 240,"charge blocked by physical wall")
 	common.set_physics_process(false)
+	check((common.get_node("Shape") as CollisionShape2D).shape.radius >= 20, "enemy body keeps visible separation")
+	check(EnemyActor.WOLF_WALK is Texture2D and EnemyActor.WOLF_WALK.get_width() > 1000, "wolf locomotion frames import")
+	for frame in range(4):
+		var cell := EnemyActor.atlas_cell(EnemyActor.ATLAS, frame)
+		check(cell.size == Vector2(627, 627) and cell.end.x <= EnemyActor.ATLAS.get_width() and cell.end.y <= EnemyActor.ATLAS.get_height(), "enemy atlas frame %d has exact bounds" % frame)
 	var cultist: EnemyDefinition = load("res://content/enemies/blind_cultist.tres")
 	var shot := EnemyProjectile.new()
 	shot.source = common
@@ -77,6 +82,57 @@ func run() -> void:
 	var hp := player.current_health
 	for i in range(35): await physics_frame
 	check(not is_instance_valid(shot) and player.current_health == hp,"projectile blocked by wall")
+	var corpse := preload("res://entities/enemies/ethereal_wolf.tscn").instantiate() as EnemyActor
+	corpse.actor_id = &"forest_01.ethereal_wolf.test:1"
+	corpse.zone_id = &"forest_01"
+	world.add_child(corpse)
+	corpse.set_physics_process(false)
+	corpse.current_health = 1
+	check(corpse.take_damage(1, player) and corpse.is_dead, "wolf death confirmed")
+	await create_timer(0.4).timeout
+	check(not is_instance_valid(corpse), "dead wolf leaves no painted marker or collision")
+	var forest := preload("res://world/maps/forest_01.tscn").instantiate() as SliceMap
+	world.add_child(forest)
+	player.position = Vector2(1010, 500)
+	common.position = Vector2(925, 500)
+	common.brain.phase = "idle"
+	common.brain.interrupted = 0
+	common.brain.attack_timer = 0
+	await physics_frame
+	common.brain.step(0.016, player)
+	check(common.brain.current_state == EnemyFSM.State.CHASE and absf(common.velocity.y) > 0, "wolf steers around well instead of freezing")
+	forest.queue_free()
+	await process_frame
+	player.position = Vector2(200, 300)
+	common.position = Vector2(235, 300)
+	await physics_frame
+	for i in range(35):
+		player.velocity = Vector2(150, 0)
+		player.move_and_slide()
+		await physics_frame
+	check(player.position.x > 255, "player can move through wolf without becoming pinned")
+	var mage := preload("res://entities/enemies/blind_cultist.tscn").instantiate() as EnemyActor
+	world.add_child(mage)
+	mage.set_physics_process(false)
+	check(player.collision_mask == 2 and common.collision_mask == 2 and boss.collision_mask == 2 and mage.collision_mask == 2, "all actors collide with scenery, not each other")
+	check(EnemyActor.CULTIST_WALK.get_width() / 4.0 == 543.0 and EnemyActor.MOSS_WALK.get_width() / 4.0 == 543.0, "cultist and boss have four walk cells")
+	for frame in range(4):
+		var cultist_foot: float = 10.0 - EnemyActor.CULTIST_FEET[frame] / EnemyActor.CULTIST_WALK.get_height() * 86.0 + EnemyActor.CULTIST_FEET[frame] / EnemyActor.CULTIST_WALK.get_height() * 86.0
+		var moss_foot: float = 10.0 - EnemyActor.MOSS_FEET[frame] / EnemyActor.MOSS_WALK.get_height() * 152.0 + EnemyActor.MOSS_FEET[frame] / EnemyActor.MOSS_WALK.get_height() * 152.0
+		check(absf(cultist_foot - moss_foot) < 0.1, "grounded enemy frame %d shares foot baseline" % frame)
+	boss.position = Vector2(435, 400)
+	player.position = Vector2(380, 400)
+	await physics_frame
+	for i in range(35):
+		player.velocity = Vector2(150, 0)
+		player.move_and_slide()
+		await physics_frame
+	check(player.position.x > 450, "player can pass through moss claws")
+	for i in range(35):
+		player.velocity = Vector2(-150, 0)
+		player.move_and_slide()
+		await physics_frame
+	check(player.position.x < 400, "player can return across moss claws")
 	world.queue_free()
 	await process_frame
 	finish()
