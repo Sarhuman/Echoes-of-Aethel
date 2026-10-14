@@ -2,6 +2,8 @@
 
 ## 0.2.0-dev — 2026-10-13
 
+- Abertura sonora de 14/10: composição épica original no prólogo e narração em português pela voz disponível no sistema, com legendas permanentes, redução de volume da música durante as falas e interrupção ao avançar ou pular. Validação headless: 20 suítes / 409 verificações; disponibilidade e qualidade da voz dependem do sistema do jogador.
+
 - Evolução de 14/10: abertura ilustrada com falas do prólogo, conselho de Irian na primeira conversa, opção de pular e progresso salvo sem recompensas duplicadas. A câmera responde brevemente a dano confirmado; Efeitos reduzidos desliga o tremor. Captura real da abertura e testes do fluxo adicionados. Validação: 20 suítes / 406 verificações.
 
 - Ajustes de 14/10 após retorno da missão: removidas as cinco listras artificiais do chão da Cidadela. O objetivo final identifica Irian como líder do conselho, orienta o retorno ao hub quando necessário e é concluído após uma conversa registrada no save. Validação: 19 suítes / 392 verificações.

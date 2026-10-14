@@ -79,6 +79,40 @@ def compose(name: str, roots: list[int], tempo: float, combat: bool = False) -> 
     write(name, samples)
 
 
+def compose_prologue() -> None:
+    """Original slow brass-and-choir score for the narrated opening."""
+    roots = [38, 43, 45, 40, 36, 41, 38, 35]
+    beat = 60 / 76
+    bar_length = int(4 * beat * RATE)
+    samples = [0.0] * (bar_length * len(roots))
+    rng = random.Random(1742)
+    for bar, root in enumerate(roots):
+        start = bar * bar_length
+        for offset, strength in ((0, 0.15), (3, 0.08), (7, 0.10), (10, 0.07)):
+            frequency = 440 * 2 ** ((root + offset - 69) / 12)
+            for i in range(bar_length):
+                t = i / RATE
+                swell = sin(pi * i / bar_length) ** 2
+                choir = sin(2 * pi * frequency * t) + 0.22 * sin(2 * pi * frequency * 2 * t)
+                samples[start + i] += strength * swell * choir
+        horn = 440 * 2 ** ((root + 12 - 69) / 12)
+        for i in range(bar_length):
+            t = i / RATE
+            swell = sin(pi * i / bar_length) ** 1.5
+            samples[start + i] += 0.12 * swell * (sin(2 * pi * horn * t) + 0.32 * sin(2 * pi * horn * 2 * t))
+        for pulse in (0, 2):
+            attack = start + int(pulse * beat * RATE)
+            for i in range(int(0.42 * RATE)):
+                t = i / RATE
+                low = sin(2 * pi * (68 - 28 * t) * t)
+                samples[attack + i] += 0.21 * exp(-8 * t) * (low + 0.15 * rng.uniform(-1, 1))
+    fade = int(0.7 * RATE)
+    for i in range(fade):
+        samples[i] *= i / fade
+        samples[-i - 1] *= i / fade
+    write("music/prologue.wav", samples)
+
+
 def effect(name: str, kind: str) -> None:
     seconds = 0.34 if kind == "rift" else 0.22
     rng = random.Random(sum(map(ord, name)))
@@ -98,6 +132,7 @@ def effect(name: str, kind: str) -> None:
 
 
 if __name__ == "__main__":
+    compose_prologue()
     compose("music/citadel.wav", [45, 41, 43, 40], 72)
     compose("music/forest.wav", [40, 38, 36, 38], 66)
     compose("music/combat.wav", [40, 43, 38, 36], 112, True)

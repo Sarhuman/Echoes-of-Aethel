@@ -71,7 +71,7 @@ Fora de `client/godot/`: `docs/` (design e engenharia), `tools/run_tests.sh` (ex
 | Domínio: catálogo, atributos, guarda, inventário, quest, diálogos e serviços | Existe e integra a primeira jornada |
 | Cenas e mapas: Cidadela e Bosque | Existem; Bosque agora bloqueia a borda pintada do abismo |
 | Comércio | Compra de consumíveis/equipamentos e venda de materiais/peças não equipadas, com recibo idempotente |
-| `audio/audio_director.gd`, `audio/music/`, `audio/sfx/` | Existem; três faixas e seis efeitos originais gerados por `tools/generate_audio.py` |
+| `audio/audio_director.gd`, `audio/music/`, `audio/sfx/` | Existem; quatro faixas e seis efeitos originais gerados por `tools/generate_audio.py`, mais narração pelo TTS do sistema quando disponível |
 | `tests/test_*.gd` | Inclui regressão de mapa, áudio, colisão e comércio |
 | Prólogo, conselho e feedback de impacto | Abertura ilustrada e cena do conselho em `game_root.gd`/`SliceHUD`; tremor de câmera em `presentation/impact_feedback.gd`, com opção de efeitos reduzidos |
 

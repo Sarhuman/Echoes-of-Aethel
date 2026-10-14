@@ -21,11 +21,11 @@ func run() -> void:
 	check(paused and game.ui.menu_open,"title pauses simulation")
 	game.start_game(false)
 	await physics_frame
-	check(game.begun and game.session.zone == "citadel" and paused and game.ui.menu_open,"new campaign shows opening")
+	check(game.begun and game.session.zone == "citadel" and paused and game.ui.menu_open and game.audio_director.cinematic,"new campaign shows opening with score")
 	game.command("prologue_next")
 	check(game.prologue_index == 1 and paused,"opening advances without moving world")
 	game.command("skip_prologue")
-	check(not paused and game.session.state.world_flags.get("prologue.last_bell",false),"skipping opening saves objective without reward")
+	check(not paused and game.session.state.world_flags.get("prologue.last_bell",false) and not game.audio_director.cinematic,"skipping opening saves objective and stops score")
 	check(game.begun and game.session.zone == "citadel" and not paused,"new campaign playable")
 	await process_frame
 	game.ui.update_state(game.player,game.session,{})

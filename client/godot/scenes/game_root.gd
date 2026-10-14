@@ -57,6 +57,7 @@ func _ready() -> void:
 	world.add_child(camera)
 	show_title()
 func show_title() -> void:
+	audio_director.set_cinematic(false)
 	get_tree().paused = true
 	var buttons: Array = []
 	if session.saves.has_campaign(): buttons.append(["Continuar jornada","continue"])
@@ -80,21 +81,28 @@ func start_game(continue_game: bool) -> void:
 func show_prologue_page() -> void:
 	get_tree().paused = true
 	var page: Array = PROLOGUE_PAGES[prologue_index]
+	audio_director.set_cinematic(true)
+	audio_director.narrate(page[2])
 	ui.show_cinematic(page[0], page[1], page[2], prologue_index + 1, PROLOGUE_PAGES.size())
 func finish_prologue() -> void:
 	var candidate := session.snapshot()
 	candidate.world_flags["prologue.last_bell"] = true
 	var saved := session.commit(candidate, "prologue")
-	if saved.ok: resume()
+	if saved.ok:
+		audio_director.set_cinematic(false)
+		resume()
 func show_council_page() -> void:
 	get_tree().paused = true
 	var page: Array = COUNCIL_PAGES[council_index]
+	audio_director.narrate(page[2])
 	ui.show_cinematic(page[0], page[1], page[2], council_index + 1, COUNCIL_PAGES.size(), "council_next", "skip_council")
 func finish_council() -> void:
 	var candidate := session.snapshot()
 	candidate.world_flags["prologue.council"] = true
 	var saved := session.commit(candidate, "prologue_council")
-	if saved.ok: resume()
+	if saved.ok:
+		audio_director.stop_narration()
+		resume()
 func load_zone() -> void:
 	for node in world.get_children():
 		world.remove_child(node)
@@ -236,6 +244,7 @@ func command(action: String) -> void:
 		ui.sound_enabled = not ui.sound_enabled
 		ui.save_options()
 		audio_director.enabled = ui.sound_enabled
+		if not ui.sound_enabled: audio_director.stop_narration()
 		command("options")
 	elif not begun: return
 	elif action == "interact": interact()
