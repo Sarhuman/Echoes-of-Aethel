@@ -8,6 +8,18 @@ func check(value: bool, label: String) -> void:
 		failures += 1
 		push_error(label)
 func run() -> void:
+	var bastion_art := preload("res://presentation/bastion_visual.gd")
+	var atlas := preload("res://assets/painted/bastion_walk.png")
+	for frame in range(4):
+		var cell: Rect2 = bastion_art.atlas_cell(atlas, frame)
+		check(cell.size == Vector2(627, 627) and cell.end.x <= atlas.get_width() and cell.end.y <= atlas.get_height(), "Bastion frame %d stays inside its atlas cell" % frame)
+		var walk_source_foot: float = bastion_art.WALK_FEET[frame]
+		var visible_foot: float = 15.0 - 94.0 + (600.0 - walk_source_foot) / cell.size.y * 94.0 + walk_source_foot / cell.size.y * 94.0
+		check(absf(visible_foot - 11.0) < 0.1, "Bastion walking frame %d shares foot baseline" % frame)
+		var attack_cell: Rect2 = bastion_art.atlas_cell(bastion_art.ATTACK_ART, frame)
+		var attack_source_foot: float = bastion_art.ATTACK_FEET[frame]
+		var attack_foot: float = 15.0 - 108.0 + (600.0 - attack_source_foot) / attack_cell.size.y * 108.0 + attack_source_foot / attack_cell.size.y * 108.0
+		check(absf(attack_foot - visible_foot) < 1.0, "Bastion attack frame %d keeps walking baseline" % frame)
 	var scene := load("res://scenes/test_scene.tscn").instantiate() as Node2D
 	root.add_child(scene)
 	var player := scene.get_node("Player") as Player

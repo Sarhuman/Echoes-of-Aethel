@@ -69,6 +69,9 @@ func run() -> void:
 	common.set_physics_process(false)
 	check((common.get_node("Shape") as CollisionShape2D).shape.radius >= 20, "enemy body keeps visible separation")
 	check(EnemyActor.WOLF_WALK is Texture2D and EnemyActor.WOLF_WALK.get_width() > 1000, "wolf locomotion frames import")
+	for frame in range(4):
+		var cell := EnemyActor.atlas_cell(EnemyActor.ATLAS, frame)
+		check(cell.size == Vector2(627, 627) and cell.end.x <= EnemyActor.ATLAS.get_width() and cell.end.y <= EnemyActor.ATLAS.get_height(), "enemy atlas frame %d has exact bounds" % frame)
 	var cultist: EnemyDefinition = load("res://content/enemies/blind_cultist.tres")
 	var shot := EnemyProjectile.new()
 	shot.source = common

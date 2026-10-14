@@ -100,9 +100,6 @@ func _draw() -> void:
 		if flags.get("hub.memorial_observed", false):
 			for index in range(5):
 				draw_line(Vector2(780 + index * 17, 710), Vector2(780 + index * 17, 675), Color("#c2b6a1"), 3)
-	else:
-		for point in pillars:
-			draw_circle(point, 5, Color("#afa798"))
 	for entry in interactions:
 		var point: Vector2 = entry.position
 		draw_arc(point, 12, 0, TAU, 24, Color("#d1af70"), 2)

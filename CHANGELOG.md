@@ -2,6 +2,8 @@
 
 ## 0.2.0-dev — 2026-10-13
 
+- Ajustes visuais de 14/10: recorte dos atlas usa células de 627 px e os quadros do Bastião alinham os pés; indicadores de ataque inimigo recebem borda clara e preenchimento progressivo; marcadores cinzentos de pilares saem do Bosque. Validação: 19 suítes / 377 verificações, export Windows e inicialização por 120 quadros.
+
 - Ajustes de 14/10 após playtest: cinco NPCs passam a ser desenhados na Cidadela; Lobo Etéreo tem quatro quadros de locomoção e contorna o poço; o jogador deixa de ser preso pela colisão de inimigos. Impacto considera o corpo de Garras de Musgo, com números de dano e “MISS”; Guarda exibe um escudo mais legível. As outras quatro classes seguem documentadas para expansão, sem seleção jogável nesta versão. Validação: 19 suítes / 361 verificações, export Windows e inicialização do executável por 120 quadros.
 
 - Atualização de 14/10: inimigos derrotados deixam de gerar marcador residual; separação física, esquiva que atravessa atores e barreira acompanhando a borda do abismo no Bosque. Comércio ampliado com equipamento, antídoto e venda idempotente de materiais/peças. Três composições e seis efeitos originais gerados por código, integrados às opções de som. Validação: 18 suítes / 338 verificações, export Windows e inicialização do executável por 120 quadros.

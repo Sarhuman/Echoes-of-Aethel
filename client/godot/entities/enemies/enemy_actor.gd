@@ -60,12 +60,16 @@ func _draw() -> void:
 	if is_dead: return
 	if brain != null and brain.phase == "windup":
 		var forward := Vector2(brain.locked_direction.x, brain.locked_direction.y * 0.5)
-		var col := Color(0.95, 0.48, 0.29, 0.45)
+		var progress := clampf(1.0 - brain.remaining / brain.windup_for(brain.pattern), 0.0, 1.0)
+		var col := Color("#a94750", lerpf(0.26, 0.64, progress))
+		var edge := Color("#f5eee2", 0.94)
 		if definition.category == &"sub_boss" and brain.pattern == 2:
 			var p := brain.locked_position - global_position
 			var width := definition.roots_half_width - definition.corridor_half_width
 			var left := -definition.roots_half_width if brain.roots_side < 0 else definition.corridor_half_width
-			draw_rect(Rect2(p + Vector2(left, -definition.roots_depth), Vector2(width, definition.roots_depth * 2)), col)
+			var area := Rect2(p + Vector2(left, -definition.roots_depth), Vector2(width, definition.roots_depth * 2))
+			draw_rect(area, col)
+			draw_rect(area, edge, false, 3.0)
 		else:
 			draw_set_transform(Vector2.ZERO,0,Vector2(1,0.5))
 			if definition.category == &"sub_boss" and brain.pattern == 0:
@@ -74,25 +78,30 @@ func _draw() -> void:
 				for i in range(25):
 					polygon.append(Vector2.from_angle(angle-PI/3+i*TAU/3/24)*(definition.attack_range+15))
 				draw_colored_polygon(polygon,col)
+				polygon.append(Vector2.ZERO)
+				draw_polyline(polygon, edge, 3.0)
 			else:
 				var direction := brain.locked_direction
 				var side := direction.orthogonal()*30
 				var reach := definition.charge_speed*definition.charge_duration+30
 				if definition.enemy_id == &"blind_cultist": reach = definition.attack_range
-				draw_colored_polygon(PackedVector2Array([-side,side,direction*reach+side,direction*reach-side]),col)
+				var area := PackedVector2Array([-side,side,direction*reach+side,direction*reach-side])
+				draw_colored_polygon(area,col)
+				area.append(-side)
+				draw_polyline(area, edge, 3.0)
 			draw_set_transform(Vector2.ZERO)
-			draw_arc(Vector2.ZERO, 27, 0, TAU * clampf(1.0 - brain.remaining / brain.windup_for(brain.pattern), 0, 1), 30, Color("#efb875"), 2)
+			draw_arc(Vector2.ZERO, 27, 0, TAU * progress, 30, edge, 3)
 	draw_set_transform(Vector2.ZERO, 0, Vector2(1, 0.5))
 	draw_circle(Vector2(0, 12), 18 if definition.category == &"sub_boss" else 12, Color(0, 0, 0, 0.4))
 	draw_set_transform(Vector2.ZERO)
 	var tint := Color("#fff5dc") if flash > 0 else Color.WHITE
-	var source := Rect2(640, 0, 640, 640)
+	var source := atlas_cell(ATLAS, 1)
 	var visual := Rect2(-42, -67, 84, 84)
 	if definition.enemy_id == &"blind_cultist":
-		source = Rect2(0, 640, 640, 640)
+		source = atlas_cell(ATLAS, 2)
 		visual = Rect2(-43, -72, 86, 86)
 	elif definition.enemy_id == &"moss_claws":
-		source = Rect2(640, 640, 640, 640)
+		source = atlas_cell(ATLAS, 3)
 		visual = Rect2(-90, -136, 180, 152)
 	if walk_clock > 0:
 		var stride := sin(walk_clock * TAU)
@@ -107,3 +116,7 @@ func _draw() -> void:
 	var bar_y := -81.0 if definition.category == &"common" else -143.0
 	draw_rect(Rect2(-22, bar_y, 44, 4), Color("#24252a"))
 	draw_rect(Rect2(-22, bar_y, 44.0 * current_health / max_health, 4), Color("#c5b47d"))
+
+static func atlas_cell(texture: Texture2D, frame: int) -> Rect2:
+	var cell := Vector2(texture.get_width(), texture.get_height()) / 2.0
+	return Rect2(Vector2(frame % 2, frame / 2) * cell, cell)

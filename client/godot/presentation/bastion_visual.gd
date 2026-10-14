@@ -2,6 +2,8 @@ extends Node2D
 const IDLE_ART := preload("res://assets/painted/actors_atlas.png")
 const WALK_ART := preload("res://assets/painted/bastion_walk.png")
 const ATTACK_ART := preload("res://assets/painted/bastion_attack.png")
+const WALK_FEET := [602.0, 597.0, 560.0, 560.0]
+const ATTACK_FEET := [598.0, 602.0, 540.0, 555.0]
 var player: Player
 var walk_clock := 0.0
 var flash_left := 0.0
@@ -41,7 +43,7 @@ func _draw() -> void:
 		var frame := int(walk_clock * 9.0) % 4
 		draw_frame(WALK_ART, frame, Vector2(94, 94), tint)
 	else:
-		draw_texture_rect_region(IDLE_ART, Rect2(-47, -79, 94, 94), Rect2(0, 0, 640, 640), tint)
+		draw_texture_rect_region(IDLE_ART, Rect2(-47, -75, 94, 94), atlas_cell(IDLE_ART, 0), tint)
 	draw_set_transform(Vector2.ZERO)
 	if player.is_dashing:
 		var trail := -player.dash_direction * 28
@@ -59,8 +61,14 @@ func _draw() -> void:
 		draw_attack_effect()
 
 func draw_frame(texture: Texture2D, frame: int, dimensions: Vector2, tint: Color) -> void:
-	var source := Rect2((frame % 2) * 640, (frame / 2) * 640, 640, 640)
-	draw_texture_rect_region(texture, Rect2(-dimensions.x / 2, -dimensions.y + 15, dimensions.x, dimensions.y), source, tint)
+	var source := atlas_cell(texture, frame)
+	var feet: Array = WALK_FEET if texture == WALK_ART else ATTACK_FEET
+	var alignment := (600.0 - float(feet[frame])) / source.size.y * dimensions.y
+	draw_texture_rect_region(texture, Rect2(-dimensions.x / 2, -dimensions.y + 15 + alignment, dimensions.x, dimensions.y), source, tint)
+
+static func atlas_cell(texture: Texture2D, frame: int) -> Rect2:
+	var cell := Vector2(texture.get_width(), texture.get_height()) / 2.0
+	return Rect2(Vector2(frame % 2, frame / 2) * cell, cell)
 
 func draw_attack_effect() -> void:
 	var spec := player.attacks.definition
