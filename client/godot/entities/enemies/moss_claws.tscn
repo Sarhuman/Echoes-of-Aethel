@@ -3,6 +3,6 @@
 [ext_resource type="Resource" path="res://content/enemies/moss_claws.tres" id="2"]
 [node name="moss_claws" type="CharacterBody2D"]
 collision_layer = 1
-collision_mask = 3
+collision_mask = 2
 script = ExtResource("1")
 definition = ExtResource("2")

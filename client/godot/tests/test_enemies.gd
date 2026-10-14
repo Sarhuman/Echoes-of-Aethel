@@ -111,6 +111,28 @@ func run() -> void:
 		player.move_and_slide()
 		await physics_frame
 	check(player.position.x > 255, "player can move through wolf without becoming pinned")
+	var mage := preload("res://entities/enemies/blind_cultist.tscn").instantiate() as EnemyActor
+	world.add_child(mage)
+	mage.set_physics_process(false)
+	check(player.collision_mask == 2 and common.collision_mask == 2 and boss.collision_mask == 2 and mage.collision_mask == 2, "all actors collide with scenery, not each other")
+	check(EnemyActor.CULTIST_WALK.get_width() / 4.0 == 543.0 and EnemyActor.MOSS_WALK.get_width() / 4.0 == 543.0, "cultist and boss have four walk cells")
+	for frame in range(4):
+		var cultist_foot: float = 10.0 - EnemyActor.CULTIST_FEET[frame] / EnemyActor.CULTIST_WALK.get_height() * 86.0 + EnemyActor.CULTIST_FEET[frame] / EnemyActor.CULTIST_WALK.get_height() * 86.0
+		var moss_foot: float = 10.0 - EnemyActor.MOSS_FEET[frame] / EnemyActor.MOSS_WALK.get_height() * 152.0 + EnemyActor.MOSS_FEET[frame] / EnemyActor.MOSS_WALK.get_height() * 152.0
+		check(absf(cultist_foot - moss_foot) < 0.1, "grounded enemy frame %d shares foot baseline" % frame)
+	boss.position = Vector2(435, 400)
+	player.position = Vector2(380, 400)
+	await physics_frame
+	for i in range(35):
+		player.velocity = Vector2(150, 0)
+		player.move_and_slide()
+		await physics_frame
+	check(player.position.x > 450, "player can pass through moss claws")
+	for i in range(35):
+		player.velocity = Vector2(-150, 0)
+		player.move_and_slide()
+		await physics_frame
+	check(player.position.x < 400, "player can return across moss claws")
 	world.queue_free()
 	await process_frame
 	finish()

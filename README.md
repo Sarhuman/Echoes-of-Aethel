@@ -52,7 +52,7 @@ Lyra e Sera atendem na Cidadela: aproxime-se e pressione **C** para comprar prov
 
 A jornada traz Lobo Etéreo, Cultista Cego e Garras de Musgo com ataques antecipados, boss com três padrões, progressão de atributos, loot e XP. A quest **A Caça ao Espião** permite julgar suspeitos ou escoltar moradores; a escolha altera falas e detalhes do hub. A Cidadela é área segura e checkpoint único. Corpos de inimigos derrotados somem; o jogador atravessa inimigos sem ser preso contra a parede, e a borda do abismo do Bosque bloqueia a passagem. Acertos exibem dano vermelho; golpes que não encontram alvo exibem “MISS” azul. **3/E é Guarda:** reduz dano frontal enquanto o escudo aparece, sem atacar.
 
-Esta é a primeira fatia da campanha. Os quatro atos, as outras quatro classes e os demais mapas descritos no GDD continuam planejados; **somente o Bastião é jogável nesta versão**. Há animações de caminhada e golpe do Bastião e quatro poses de caminhada do Lobo; outros movimentos, a mixagem e o equilíbrio ainda precisam de playtest. Os valores de balanceamento estão marcados como experimentais em [experimental-values.md](docs/engineering/experimental-values.md).
+Esta é a primeira fatia da campanha. Os quatro atos, as outras quatro classes e os demais mapas descritos no GDD continuam planejados; **somente o Bastião é jogável nesta versão**. Há animações de caminhada e golpe do Bastião e quatro poses de caminhada do Lobo, Cultista e Garras de Musgo; outros movimentos, a mixagem e o equilíbrio ainda precisam de playtest. Os valores de balanceamento estão marcados como experimentais em [experimental-values.md](docs/engineering/experimental-values.md).
 
 ## Verificar e exportar
 
@@ -62,7 +62,7 @@ Da raiz do repositório:
 bash tools/run_tests.sh
 ```
 
-No Windows, também é possível executar `tools/run_tests.ps1 -Godot <caminho-para-godot.exe>`. A validação local passou em **19 suítes / 377 verificações**, incluindo combate, mapa, áudio, comércio, save e o fluxo de integração da jornada. A exportação Windows usa `tools/export_windows.ps1` com os templates oficiais 4.6 instalados em `.godot-tools/`; o executável iniciou por 120 quadros no teste automatizado. O workflow de CI importa, testa e exporta automaticamente em pushes e PRs. Capturas de QA exigem `-- --test-harness` para isolar o save.
+No Windows, também é possível executar `tools/run_tests.ps1 -Godot <caminho-para-godot.exe>`. A validação local passou em **19 suítes / 385 verificações**, incluindo combate, mapa, áudio, comércio, save e o fluxo de integração da jornada. A exportação Windows usa `tools/export_windows.ps1` com os templates oficiais 4.6 instalados em `.godot-tools/`; o executável iniciou por 120 quadros no teste automatizado. O workflow de CI importa, testa e exporta automaticamente em pushes e PRs. Capturas de QA exigem `-- --test-harness` para isolar o save.
 
 As capturas acima são do executável Godot rodando localmente. Elas verificam renderização, mas não substituem um playtest humano de navegação, dificuldade e desempenho em diferentes PCs.
 

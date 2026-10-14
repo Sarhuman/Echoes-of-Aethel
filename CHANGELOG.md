@@ -2,6 +2,8 @@
 
 ## 0.2.0-dev — 2026-10-13
 
+- Ajustes de 14/10 após novo playtest: Cultista Cego e Garras de Musgo recebem quatro quadros de locomoção com pés alinhados e sombras de contato; movimento deixa de aplicar oscilação vertical. Inimigos passam a colidir com cenário, sem prender o Bastião por contato físico, preservando ataques por proximidade. Validação: 19 suítes / 385 verificações, export Windows e inicialização por 120 quadros.
+
 - Ajustes visuais de 14/10: recorte dos atlas usa células de 627 px e os quadros do Bastião alinham os pés; indicadores de ataque inimigo recebem borda clara e preenchimento progressivo; marcadores cinzentos de pilares saem do Bosque. Validação: 19 suítes / 377 verificações, export Windows e inicialização por 120 quadros.
 
 - Ajustes de 14/10 após playtest: cinco NPCs passam a ser desenhados na Cidadela; Lobo Etéreo tem quatro quadros de locomoção e contorna o poço; o jogador deixa de ser preso pela colisão de inimigos. Impacto considera o corpo de Garras de Musgo, com números de dano e “MISS”; Guarda exibe um escudo mais legível. As outras quatro classes seguem documentadas para expansão, sem seleção jogável nesta versão. Validação: 19 suítes / 361 verificações, export Windows e inicialização do executável por 120 quadros.

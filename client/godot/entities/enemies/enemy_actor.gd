@@ -2,6 +2,10 @@ class_name EnemyActor
 extends ActorBase
 const ATLAS := preload("res://assets/painted/actors_atlas.png")
 const WOLF_WALK := preload("res://assets/painted/wolf_walk.png")
+const CULTIST_WALK := preload("res://assets/painted/cultist_walk.png")
+const MOSS_WALK := preload("res://assets/painted/moss_claws_walk.png")
+const CULTIST_FEET := [683.0, 678.0, 684.0, 672.0]
+const MOSS_FEET := [637.0, 638.0, 640.0, 623.0]
 @export var definition: EnemyDefinition
 var brain: SliceEnemyFSM
 var flash := 0.0
@@ -91,25 +95,30 @@ func _draw() -> void:
 				draw_polyline(area, edge, 3.0)
 			draw_set_transform(Vector2.ZERO)
 			draw_arc(Vector2.ZERO, 27, 0, TAU * progress, 30, edge, 3)
-	draw_set_transform(Vector2.ZERO, 0, Vector2(1, 0.5))
-	draw_circle(Vector2(0, 12), 18 if definition.category == &"sub_boss" else 12, Color(0, 0, 0, 0.4))
+	draw_set_transform(Vector2(0, 8), 0, Vector2(1, 0.23))
+	var shadow_radius := 58.0 if definition.category == &"sub_boss" else (22.0 if definition.enemy_id == &"blind_cultist" else 17.0)
+	draw_circle(Vector2.ZERO, shadow_radius, Color("#202331", 0.54))
 	draw_set_transform(Vector2.ZERO)
 	var tint := Color("#fff5dc") if flash > 0 else Color.WHITE
 	var source := atlas_cell(ATLAS, 1)
 	var visual := Rect2(-42, -67, 84, 84)
 	if definition.enemy_id == &"blind_cultist":
 		source = atlas_cell(ATLAS, 2)
-		visual = Rect2(-43, -72, 86, 86)
+		visual = Rect2(-43, -66, 86, 86)
 	elif definition.enemy_id == &"moss_claws":
 		source = atlas_cell(ATLAS, 3)
-		visual = Rect2(-90, -136, 180, 152)
-	if walk_clock > 0:
-		var stride := sin(walk_clock * TAU)
-		draw_set_transform(Vector2(0, -2.5 * absf(stride)), stride * 0.025, Vector2(1.0 + stride * 0.018, 1.0 - stride * 0.018))
+		visual = Rect2(-90, -134, 180, 152)
 	if definition.enemy_id == &"ethereal_wolf" and walk_clock > 0:
 		var frame := int(walk_clock) % 4
 		var cell_width := WOLF_WALK.get_width() / 4.0
 		draw_texture_rect_region(WOLF_WALK, visual, Rect2(frame * cell_width, 0, cell_width, WOLF_WALK.get_height()), tint)
+	elif definition.enemy_id in [&"blind_cultist", &"moss_claws"] and walk_clock > 0:
+		var frame := int(walk_clock) % 4
+		var texture: Texture2D = CULTIST_WALK if definition.enemy_id == &"blind_cultist" else MOSS_WALK
+		var feet: Array = CULTIST_FEET if definition.enemy_id == &"blind_cultist" else MOSS_FEET
+		var cell_width := texture.get_width() / 4.0
+		visual.position.y = 10.0 - float(feet[frame]) / texture.get_height() * visual.size.y
+		draw_texture_rect_region(texture, visual, Rect2(frame * cell_width, 0, cell_width, texture.get_height()), tint)
 	else:
 		draw_texture_rect_region(ATLAS, visual, source, tint)
 	draw_set_transform(Vector2.ZERO)
