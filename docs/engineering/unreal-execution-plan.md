@@ -2,6 +2,8 @@
 
 > **Mudança de ordem solicitada em 15/10/2026:** a produção da parte jogável Unreal fica **adiada até a pré-produção cobrir os doze mapas, cinco protagonistas, elenco, bestiário e contexto de campanha**. O [atlas de mapas](../design/campaign-world-atlas-3d.md) e o [índice de personagens/criaturas](../design/campaign-cast-and-bestiary-3d.md) iniciam essa cobertura. As etapas de gameplay abaixo permanecem como plano posterior; suas datas e gates não autorizam começar a cena jogável agora. O build/teste da base C++ já feito continua válido.
 
+O [registro de conteúdo C0](campaign-content-ledger.md) acompanha quests, hubs, comércio, loot, secundárias, cenas e lacunas com sua origem. Ele distingue contrato aprovado, proposta e asset ainda ausente.
+
 ## Gate C0 — conteúdo antes de gameplay
 
 | Entrega | Evidência requerida |
