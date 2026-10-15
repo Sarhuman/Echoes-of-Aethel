@@ -1,5 +1,7 @@
 # Direção de arte — 16-bit
 
+> **Escopo histórico:** esta especificação de pixels, tiles e sprites rege o cliente Godot atual. O novo cliente 3D usa a paleta, as silhuetas e a atmosfera como referência, seguindo [Transição para Unreal](../engineering/unreal-transition.md) e [Primeira rota 3D](first-route-3d.md). Dimensões 16×16/32×32 não são escala de modelagem 3D.
+
 ## Perspectiva e escala
 
 Direção aprovada: top-down 3/4 com chão ortogonal e personagens mostrando frente e lateral. A impressão de profundidade vem da arte e da ordenação pelo ponto dos pés; não exige geometria isométrica. Combate continua em tempo real.

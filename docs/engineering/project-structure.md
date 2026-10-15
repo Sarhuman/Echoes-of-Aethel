@@ -1,5 +1,7 @@
 # Estrutura do projeto Godot
 
+> **Escopo:** mapa da implementação Godot atual. A arquitetura do próximo cliente 3D está descrita em [Transição para Unreal](unreal-transition.md); use [Primeira rota 3D](../design/first-route-3d.md) para conteúdo e interiores. Esta árvore `res://` não é a árvore de pastas Unreal.
+
 Revisão: 14/10/2026 · Godot 4.6 stable · GDScript · primeira fatia `0.2.0-dev`.
 
 Este documento é o mapa operacional para quem implementa (incluindo o GPT). Ele **não substitui** [escopo](project-scope.md), [decisões de produção](production-decisions.md) nem o [GDD](../GDD/README.md). Coluna **Estado**: `existe` = no repositório e testado; `planejado` = pasta/arquivo a criar por um cartão de [tasks/](tasks/README.md); `vazio` = pasta reservada com `.gitkeep`.
@@ -115,6 +117,8 @@ entities (adaptadores) ──▶ domínio + core        content/*.tres ◀──
 | Flags / recompensas | `forest_01.moss_claws.defeated`; `reward.forest_01.moss_claws.first_kill` (D1/T07) |
 | Itens iniciais | `training_axe`, `worn_tunic`, `potion_health_small`, `flask_aether_small`, `antidote_flask`, `wolf_fang`, `cultist_ash`, `root_essence` (D8, `experimental-values.md`) |
 | Prólogo | `prologue.last_bell`, `prologue.council` |
+| Proposta de interiores 3D (não implementados) | `citadel.bram_workshop`, `forest_01.abandoned_house`, `forest_01.root_cellar` — NOVO/EXPERIMENTAL |
+| Proposta de recompensas fixas 3D (não implementadas) | `reward.forest_01.abandoned_house.cache`, `reward.forest_01.root_cellar.cache` — NOVO/EXPERIMENTAL |
 
 Ao criar um ID novo, registre-o nesta tabela no mesmo PR.
 

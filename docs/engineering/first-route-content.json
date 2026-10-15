@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "status": "design_only_not_runtime",
+  "source_of_truth": [
+    "docs/GDD/04_mapas_e_quests.md",
+    "docs/GDD/07_roteiro_e_dialogos.md",
+    "docs/engineering/decisions-first-slice.md",
+    "docs/engineering/experimental-values.md",
+    "docs/design/first-route-3d.md"
+  ],
+  "checkpoint": "citadel",
+  "locations": [
+    {"id": "citadel", "kind": "hub", "safe": true, "status": "existing_id"},
+    {"id": "citadel.bram_workshop", "kind": "interior", "safe": true, "status": "new_experimental"},
+    {"id": "forest_01", "kind": "exterior", "safe": false, "status": "existing_id"},
+    {"id": "forest_01.abandoned_house", "kind": "interior", "safe": false, "status": "new_experimental"},
+    {"id": "forest_01.root_cellar", "kind": "interior", "safe": false, "status": "new_experimental"}
+  ],
+  "connections": [
+    {"from": "citadel", "to": "citadel.bram_workshop", "bidirectional": true},
+    {"from": "citadel", "to": "forest_01", "bidirectional": true},
+    {"from": "forest_01", "to": "forest_01.abandoned_house", "bidirectional": true},
+    {"from": "forest_01.abandoned_house", "to": "forest_01.root_cellar", "bidirectional": true}
+  ],
+  "actors": [
+    {"id": "npc.elder", "name": "Irian", "location": "citadel", "role": "council"},
+    {"id": "npc.blacksmith", "name": "Bram", "location": "citadel", "role": "blacksmith"},
+    {"id": "npc.alchemist", "name": "Lyra", "location": "citadel", "role": "consumables"},
+    {"id": "npc.merchant", "name": "Sera", "location": "citadel", "role": "merchant"},
+    {"id": "npc.gatekeeper", "name": "Maera", "location": "citadel", "role": "gatekeeper"}
+  ],
+  "encounters": [
+    {"enemy_id": "ethereal_wolf", "location": "forest_01", "category": "common"},
+    {"enemy_id": "blind_cultist", "location": "forest_01", "category": "common"},
+    {"enemy_id": "moss_claws", "location": "forest_01", "category": "sub_boss", "first_kill_reward_id": "reward.forest_01.moss_claws.first_kill"}
+  ],
+  "quest": {
+    "id": "act1.spy_hunt",
+    "location": "forest_01",
+    "required_clues": ["forest_01.clue.tracks", "forest_01.clue.testimony", "forest_01.clue.well"],
+    "options": ["judge_suspects", "shelter_villagers"]
+  },
+  "fixed_containers": [
+    {"reward_id": "reward.forest_01.abandoned_house.cache", "location": "forest_01.abandoned_house", "item_id": "potion_health_small", "quantity": 1, "status": "new_experimental", "repeat": "once_per_campaign"},
+    {"reward_id": "reward.forest_01.root_cellar.cache", "location": "forest_01.root_cellar", "item_id": "antidote_flask", "quantity": 1, "status": "new_experimental", "repeat": "once_per_campaign"}
+  ]
+}

@@ -4,21 +4,22 @@ Leia este arquivo inteiro antes de criar ou alterar qualquer arquivo. Ele vale p
 
 ## 1. Projeto em uma frase
 
-ARPG 2D offline, dark fantasy, pixel art, top-down 3/4 com projeção 2:1. **Godot 4.6 stable, GDScript, renderer GL Compatibility.** Plataforma inicial: Windows. Raiz do projeto Godot: `client/godot/` (`res://` aponta para essa pasta).
+ARPG dark fantasy offline para Windows. O cliente **atualmente jogável** é 2D em Godot 4.6/GDScript, em `client/godot/`. O próximo cliente de produção será 3D em Unreal Engine, conforme [transição](docs/engineering/unreal-transition.md). Não tratar as convenções Godot abaixo como regras de implementação Unreal.
 
 Estado: primeira fatia jogável `0.2.0-dev`, com Cidadela, Bosque, combate, inimigos, boss, inventário, loot, quest, diálogos, menus, save v2 e arte original de runtime. A referência de validação atual é o README e o workflow de CI; os cartões T00–T12 registram a implementação, mas parte de seus textos foi escrita quando estes módulos ainda eram apenas planejados.
 
 ## 2. Fontes de verdade (ordem de precedência)
 
-1. `docs/engineering/production-decisions.md` — decisões aprovadas pelo Game Director; prevalece sobre o resto.
-2. `docs/engineering/decisions-first-slice.md` — decisões D1–D8 do slice e emendas ao escopo (seção 9). **Não reabra** pontos já resolvidos ali.
-3. `docs/engineering/project-scope.md` — escopo da primeira fatia e controles aprovados (com as emendas acima).
-4. `docs/engineering/experimental-values.md` — **todos** os números do slice; nunca coloque literal de balanceamento no código.
-5. `docs/engineering/project-structure.md` — mapa de pastas, camadas e contratos.
-6. `docs/engineering/tasks/` — cartões de tarefa ordenados; trabalhe **um cartão por vez**.
-7. `docs/GDD/` e `docs/design/` — design detalhado. Documento não prova que o código existe.
+1. `docs/engineering/unreal-transition.md` — direção da nova engine, critérios de migração e limites; prevalece somente para engine e pipeline visual. `docs/design/first-route-3d.md` e `docs/engineering/first-route-content.json` detalham a primeira rota.
+2. `docs/engineering/production-decisions.md` — decisões de domínio aprovadas pelo Game Director; cláusula antiga de Godot definitivo foi substituída pelo item 1.
+3. `docs/engineering/decisions-first-slice.md` — decisões D1–D8 do slice e emendas ao escopo (seção 9). **Não reabra** pontos já resolvidos ali.
+4. `docs/engineering/project-scope.md` — escopo da primeira fatia Godot e controles aprovados (com as emendas acima).
+5. `docs/engineering/experimental-values.md` — números da primeira fatia; nunca espalhar literais de balanceamento no código.
+6. `docs/engineering/project-structure.md` — mapa das pastas Godot, camadas e contratos.
+7. `docs/engineering/tasks/` — cartões históricos da implementação Godot.
+8. `docs/GDD/` e `docs/design/` — design detalhado. Documento não prova que o código existe.
 
-Se duas fontes divergirem, siga a de menor número e registre a divergência no PR. **Nunca invente** números de balanceamento, IDs narrativos ou nomes de personagens: use os que estão em `experimental-values.md` e nos docs; se faltar algum valor, adicione-o àquela tabela marcado `NOVO`/`EXPERIMENTAL` no mesmo PR.
+Se duas fontes divergirem, siga a de menor número **no assunto que ela rege** e registre a divergência no PR. **Nunca invente silenciosamente** números de balanceamento, IDs narrativos ou nomes de personagens: use os existentes; qualquer proposta nova deve ser registrada como `NOVO`/`EXPERIMENTAL` e não altera o cânone sem revisão. IDs de interiores e recipientes propostos para Unreal estão identificados no manifesto da primeira rota.
 
 ## 3. Regras de ouro
 
@@ -32,7 +33,7 @@ Se duas fontes divergirem, siga a de menor número e registre a divergência no 
 8. **Saves nunca carregam `Resource` nem scripts.** Somente JSON validado (`WorldSaveSchema`).
 9. **Cuidado com a Cidadela:** nenhum dano, nenhum inimigo ativo, serviços essenciais sempre disponíveis.
 
-## 4. Convenções de GDScript (Godot 4.6)
+## 4. Convenções de GDScript (somente manutenção do cliente Godot 4.6)
 
 - **Indentação com TAB** (padrão dos arquivos existentes). Nunca misture com espaços.
 - Tipagem estática sempre que possível: `var hp: int = 0`, `func f(x: float) -> bool:`.
@@ -47,7 +48,7 @@ Se duas fontes divergirem, siga a de menor número e registre a divergência no 
 - Mensagens ao jogador em **português**; identificadores de código em **inglês**.
 - Parâmetros de conteúdo em `Resource` tipado dentro de `content/` (conteúdo confiável do projeto, não do save).
 
-## 5. Como entregar um cartão
+## 5. Como entregar um cartão Godot
 
 1. Crie uma branch `feat/<id-do-cartao>-<slug>` a partir da `main` atualizada.
 2. Leia o cartão em `docs/engineering/tasks/` e os docs que ele cita.
@@ -88,7 +89,7 @@ Mover: WASD/setas · Básico: `1` · Habilidade 1: `2`/`Q` · Hab. 2: `3`/`E` ·
 
 ## 8. Fora do escopo da primeira fatia (não implemente)
 
-Multiplayer/PvP, backend/FastAPI, contas, nuvem, telemetria, outras quatro classes, atos II–IV, mapas 2–12, geração procedural, crafting avançado, monetização, endgame, modo Eclipse, versões web/mobile.
+Para a primeira fatia Godot: multiplayer/PvP, backend/FastAPI, contas, nuvem, telemetria, outras quatro classes, atos II–IV, mapas 2–12, geração procedural, crafting avançado, monetização, endgame, modo Eclipse, versões web/mobile. Para a prova Unreal, seguir os limites de `unreal-transition.md`.
 
 ## 9. O que fazer em caso de dúvida
 

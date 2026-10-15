@@ -1,16 +1,18 @@
 # Índice do Game Design Document
 
+> A campanha, os personagens e as regras de domínio permanecem referências de conteúdo. As escolhas históricas de Godot e pixel art foram substituídas para o próximo cliente pelo [plano de transição Unreal](../engineering/unreal-transition.md). Veja também o [índice dos 12 mapas](../engineering/campaign-content-index.md).
+
 ## Módulos de Sprint
 
 | Módulo | Estado | Referência |
 |---|---|---|
-| 01 — Classes e atributos | Especificação experimental concluída; implementação pendente | [01_classes_e_atributos.md](01_classes_e_atributos.md) |
+| 01 — Classes e atributos | Cinco classes especificadas; Bastião jogável no Godot, demais pendentes | [01_classes_e_atributos.md](01_classes_e_atributos.md) |
 | 02 — Arquitetura técnica | Stack e contratos definidos; deploy/benchmarks pendentes | [02_arquitetura_tecnica.md](02_arquitetura_tecnica.md) |
-| 03 — Sistema de loot | Especificação experimental concluída; implementação pendente | [03_sistema_de_loot.md](03_sistema_de_loot.md) |
-| 04 — Mapas e quests | Bíblia de produção concluída; mapas/quests pendentes | [04_mapas_e_quests.md](04_mapas_e_quests.md) |
-| 05 — Combate e HUD | Regras experimentais; runtime/HUD/Eclipse pendentes | [05_combate_e_hud.md](05_combate_e_hud.md) |
-| 06 — Arquitetura de software | Godot definido; exemplos não executados na engine | [06_arquitetura_software.md](06_arquitetura_software.md) |
-| 07 — Roteiro e diálogos | Roteiro de produção; scripts/cenas pendentes | [07_roteiro_e_dialogos.md](07_roteiro_e_dialogos.md) |
+| 03 — Sistema de loot | Economia ampla especificada; primeira fatia de loot/inventário jogável no Godot | [03_sistema_de_loot.md](03_sistema_de_loot.md) |
+| 04 — Mapas e quests | Doze mapas especificados; Cidadela/Bosque e primeira escolha jogáveis no Godot | [04_mapas_e_quests.md](04_mapas_e_quests.md) |
+| 05 — Combate e HUD | Regras experimentais; primeira fatia de combate/HUD jogável, restante pendente | [05_combate_e_hud.md](05_combate_e_hud.md) |
+| 06 — Arquitetura de software | Arquitetura do cliente Godot; direção futura Unreal em documento próprio | [06_arquitetura_software.md](06_arquitetura_software.md) |
+| 07 — Roteiro e diálogos | Roteiro de produção; primeira quest/diálogos jogáveis, campanha restante pendente | [07_roteiro_e_dialogos.md](07_roteiro_e_dialogos.md) |
 | 08 — Diálogos e degradação do hub | Especificação narrativa/dados; scripts pendentes | [08_dialogos_hub_degradacao.md](08_dialogos_hub_degradacao.md) |
 | Sprint 8 — Save System | Código estrutural Godot, 27 verificações aprovadas | [08_save_system.md](08_save_system.md) |
 | 09 — Enemy FSM | Núcleo offline, 25 verificações aprovadas | [09_enemy_fsm.md](09_enemy_fsm.md) |
