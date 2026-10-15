@@ -1,6 +1,6 @@
 # Índice de produção da campanha
 
-Este índice evita confundir **conteúdo especificado** com mapas 3D construídos. A fonte detalhada das doze linhas é o [GDD 04](../GDD/04_mapas_e_quests.md); roteiro e variantes estão no [GDD 07](../GDD/07_roteiro_e_dialogos.md). IDs são preservados entre engines. A [primeira rota](../design/first-route-3d.md) é a única com ficha de interiores e colocação de tesouros; não extrapolar suas casas ou recompensas para os demais mapas.
+Este índice evita confundir **conteúdo especificado** com mapas 3D construídos. A fonte detalhada das doze linhas é o [GDD 04](../GDD/04_mapas_e_quests.md); roteiro e variantes estão no [GDD 07](../GDD/07_roteiro_e_dialogos.md). IDs são preservados entre engines. A [primeira rota](../design/first-route-3d.md) é a única com ficha de interiores e colocação de tesouros; não extrapolar suas casas ou recompensas para os demais mapas. A [ficha do elenco e das dungeons secundárias](../design/playable-cast-and-side-dungeons.md) distingue cinco heróis especificados, NPCs e duas quests opcionais `NOVO/EXPERIMENTAL`, fora da contagem dos doze mapas.
 
 | Ato/mapa | Zona | Quest principal | Confronto | Estado de produção |
 |---|---|---|---|---|
@@ -29,3 +29,4 @@ Este índice evita confundir **conteúdo especificado** com mapas 3D construído
 6. Lista de modelos, animações, materiais, VFX, áudio e proveniência. Medir desempenho e acessibilidade na build Windows.
 
 Um mapa só passa de **GDD** para **blockout** quando tiver essa ficha e um percurso testável. Só passa a **jogável** quando entrada/saída, combate, escolha, recompensa e reload forem verificados. Arte final é estado separado, não sinônimo de jogável.
+
