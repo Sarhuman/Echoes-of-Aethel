@@ -8,6 +8,8 @@ As fichas de [hubs e histórias secundárias](../design/hubs-and-side-stories-3d
 
 O [catálogo de habilidades](../design/ability-production-catalog-3d.md) cobre os 30 nós das cinco classes para preparar animação, VFX, SFX, ícones e IDs; não inicia implementação de combate.
 
+As [decisões D01–D08 de direção ARPG 3D](diablo-direction-decisions.md) respondem à planilha de comparação com Diablo II sem reabrir a migração de engine. Em especial, grade + baú são um contrato novo da Unreal; o inventário Godot de 60 posições continua referência e exige migração explícita se os saves forem importados.
+
 A planilha de acompanhamento **`plano-codex-echoes-of-aethel-v2(2).xlsx` substitui as cópias anteriores**. Ela acrescenta as tarefas C0-01 a C0-11 antes de E1-06, semanas reais, a aba Arte e riscos R1–R7. O arquivo foi fornecido fora do repositório; este documento registra a ordem e o estado do trabalho, sem tratar as fórmulas e durações estimadas como validação de produção. As [18 pranchas de personagens](../media/concepts/model-sheets/README.md) avançam C0-06, mas estão apenas **geradas**, não aprovadas; não fecham as fichas nem o gate.
 
 R1 aponta uma dependência circular: o atlas precisa de medidas de cápsula, câmera e largura antes dos blockouts, enquanto o nível navegável E1-06 espera C0. Adotar para C0-07 apenas uma arena **descartável de medição**, sem loop ou entrega jogável, resolve a medição sem antecipar E1-06. R2 pede um piloto de arte C0-08 com o Bastião, do conceito à importação, para medir horas reais por ator; ele também não abre gameplay. R3–R6 permanecem riscos de estimativa, toolchain Preview, prazo e verificação, a acompanhar nos gates. Os dois pilotos ainda não foram executados.
@@ -47,3 +49,4 @@ O [contrato de transição](unreal-transition.md), o [manifesto da primeira rota
 - O gate 4 é uma rota estável, não a conclusão da campanha. As estimativas da v1 (18/26/34 semanas para as etapas 1–4 e 10/6/3 mapas) foram substituídas pela v2 após incluir C0; não usar esses números antigos para prometer entrega. As outras quatro classes não entram na rota jogável inicial.
 
 Na expansão, não iniciar geração procedural, click-to-move, minimapa, as outras quatro classes, dungeons Rei Lich/Rei Orc, dublagem, conversor de saves Godot ou economia de afixos como efeito colateral de uma tarefa da primeira rota. Cada uma exige escopo e aceite próprios após a prova jogável. Revisar prioridades a cada gate e quando uma premissa medida invalidar o plano; não esperar que uma fórmula de prazo decida o design do jogo.
+
