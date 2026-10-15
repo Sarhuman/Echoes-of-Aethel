@@ -2,7 +2,7 @@
 
 **ARPG dark fantasy · um jogador · offline**
 
-**Estado:** a versão jogável atual é 2D em Godot 4.6. O próximo cliente de produção será uma prova 3D em Unreal Engine; [transição, contratos e aceite](docs/engineering/unreal-transition.md). Ainda não há projeto ou build Unreal neste repositório. O [índice da campanha](docs/engineering/campaign-content-index.md) separa os 12 mapas especificados dos mapas implementados; a [primeira rota 3D](docs/design/first-route-3d.md) define Cidadela, Bosque, interiores e recompensas propostas.
+**Estado:** a versão jogável atual é 2D em Godot 4.6. O próximo cliente de produção será uma prova 3D em Unreal Engine; [transição, contratos e aceite](docs/engineering/unreal-transition.md). O [projeto Unreal mínimo](client/unreal/README.md) já tem `.uproject` e módulo C++ para 5.8, mas ainda não há cena ou build Unreal validada. O [índice da campanha](docs/engineering/campaign-content-index.md) separa os 12 mapas especificados dos mapas implementados; a [primeira rota 3D](docs/design/first-route-3d.md) define Cidadela, Bosque, interiores e recompensas propostas.
 
 > O caminho para o inferno está cheio de boas intenções.
 
@@ -72,6 +72,6 @@ A arena experimental anterior continua em `res://playtest/arena.tscn` para compa
 
 ## Documentação
 
-[Transição Unreal](docs/engineering/unreal-transition.md) · [Índice da campanha](docs/engineering/campaign-content-index.md) · [Primeira rota 3D](docs/design/first-route-3d.md) · [Escopo Godot](docs/engineering/project-scope.md) · [Decisões da primeira fatia](docs/engineering/decisions-first-slice.md) · [Estrutura Godot](docs/engineering/project-structure.md) · [Cartões T00–T12](docs/engineering/tasks/README.md) · [GDD](docs/GDD/README.md) · [Proposta visual](docs/design/visual-proposal.md) · [Guia para agentes](AGENTS.md) · [Changelog](CHANGELOG.md)
+[Transição Unreal](docs/engineering/unreal-transition.md) · [Projeto Unreal mínimo](client/unreal/README.md) · [Índice da campanha](docs/engineering/campaign-content-index.md) · [Primeira rota 3D](docs/design/first-route-3d.md) · [Escopo Godot](docs/engineering/project-scope.md) · [Decisões da primeira fatia](docs/engineering/decisions-first-slice.md) · [Estrutura Godot](docs/engineering/project-structure.md) · [Cartões T00–T12](docs/engineering/tasks/README.md) · [GDD](docs/GDD/README.md) · [Proposta visual](docs/design/visual-proposal.md) · [Guia para agentes](AGENTS.md) · [Changelog](CHANGELOG.md)
 
 Nenhuma licença geral foi definida pelo proprietário do projeto; o repositório não concede licença pública automaticamente.

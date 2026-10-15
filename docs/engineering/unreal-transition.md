@@ -1,6 +1,6 @@
 # Transição de Echoes of Aethel para 3D
 
-**Decisão de direção, 14/10/2026.** O próximo cliente de produção será um ARPG 3D de câmera elevada na Unreal Engine, começando por uma prova curta Cidadela → Bosque. O cliente Godot 4.6 permanece como referência jogável e de regressão até existir uma substituição testada. Esta decisão substitui apenas as instruções anteriores que tornavam Godot/GDScript e pixel art 16-bit o destino final; não altera história, IDs, fórmulas, escolhas, segurança do hub nem direitos dos assets. Ainda não existe projeto `.uproject` nem build Unreal validada neste repositório.
+**Decisão de direção, 14/10/2026.** O próximo cliente de produção será um ARPG 3D de câmera elevada na Unreal Engine, começando por uma prova curta Cidadela → Bosque. O cliente Godot 4.6 permanece como referência jogável e de regressão até existir uma substituição testada. Esta decisão substitui apenas as instruções anteriores que tornavam Godot/GDScript e pixel art 16-bit o destino final; não altera história, IDs, fórmulas, escolhas, segurança do hub nem direitos dos assets. O esqueleto `.uproject`/C++ para 5.8 está em `client/unreal/`; ainda não há cena ou build Unreal validada.
 
 ## Fontes de verdade
 
@@ -8,6 +8,8 @@
 2. [Decisões de produção](production-decisions.md) e [decisões da primeira fatia](decisions-first-slice.md) continuam regendo regras de jogo, combate, save e segurança; cláusulas explicitamente 2D/Godot são históricas para a nova implementação.
 3. [GDD de mapas e quests](../GDD/04_mapas_e_quests.md), [roteiro](../GDD/07_roteiro_e_dialogos.md), [classes](../GDD/01_classes_e_atributos.md) e [loot](../GDD/03_sistema_de_loot.md) continuam regendo conteúdo. Não transportar literalmente pixels, tiles, `Resource`, cenas `.tscn` ou física 2:1 para unidades 3D.
 4. O [cliente Godot](../../client/godot/) mostra comportamento já jogável, não é a especificação de toda a campanha. Diferenças entre GDD e runtime são registradas antes de migrar cada sistema.
+
+A [direção de HUD, controles e navegação 3D](../design/hud-input-navigation-3d.md) registra a avaliação dos exemplos recebidos e os gates para click-to-move, NavMesh e minimapa.
 
 ## O que já está pronto como esqueleto de conteúdo
 
@@ -41,7 +43,7 @@
 
 ## Ordem de implementação e aceite
 
-1. **Projeto base:** fixar uma versão instalada da Unreal no controle de versões, criar projeto Top Down 3D para Windows e registrar instruções de abrir, cozinhar e empacotar. Não adicionar packs de terceiros sem licença e origem.
+1. **Projeto base:** o módulo inicial associa Unreal 5.8 instalada localmente. Abrir e compilar no editor, criar nível Top Down 3D para Windows e registrar instruções de cozinhar e empacotar antes de chamar a base de validada. Não adicionar packs de terceiros sem licença e origem.
 2. **Blockout de Cidadela e Bosque:** câmera 3/4, chão 3D, portão, oficina, casa abandonada, porão, poço, arena, volumes de colisão e navegação. A [ficha](../design/first-route-3d.md) define relações, não coordenadas inventadas. Mostrar limites antes de polir cenário.
 3. **Loop de equivalência:** Bastião anda, esquiva, ataca, encontra Lobo/Cultista/Garras, coleta recompensa única, decide `act1.spy_hunt`, retorna ao hub e recarrega sem duplicação. Serviços de Bram, Lyra e Sera permanecem acessíveis.
 4. **Cinemática curta:** enquadramentos do prólogo e conselho com direção de cena, música original e texto legível. Sem TTS automático. Dublagem só com áudio produzido e aprovado; opção de pular e controles de volume.
@@ -49,7 +51,7 @@
 
 ## Esqueleto previsto do cliente Unreal
 
-Esta é uma convenção de autoria para quando o editor estiver instalado; **os arquivos abaixo ainda não existem**. O manifesto JSON permanece em `docs/engineering/` como referência portável, não como dado de save recebido sem validação.
+O `.uproject`, os dois targets e o módulo C++ mínimo já existem em `client/unreal/`; **Content, níveis e sistemas listados abaixo ainda não existem**. O manifesto JSON permanece em `docs/engineering/` como referência portável, não como dado de save recebido sem validação.
 
 ```text
 client/unreal/EchoesOfAethel.uproject
@@ -68,7 +70,7 @@ client/unreal/Source/EchoesOfAethel/
   Presentation/     ponte para câmera, animação, HUD e áudio
 ```
 
-Blueprints e níveis montam atores e apresentação; a camada de aplicação confirma efeitos econômicos antes de emitir feedback. O save deve ter versão e fronteira de validação próprias. Antes de criar essa árvore, verificar nomes e módulos com a versão real da Unreal instalada e abrir um projeto vazio no editor. Não criar um `.uproject` de texto e anunciá-lo como executável sem essa verificação.
+Blueprints e níveis montam atores e apresentação; a camada de aplicação confirma efeitos econômicos antes de emitir feedback. O save deve ter versão e fronteira de validação próprias. Antes de anunciar o novo projeto como executável, compilar e abrir o `.uproject` com a instalação 5.8, verificar os módulos e registrar a saída real. O arquivo de projeto isolado não comprova runtime.
 
 ## Limites do primeiro marco
 

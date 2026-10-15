@@ -1,0 +1,7 @@
+# Projeto Unreal — Echoes of Aethel
+
+Este diretório é a **raiz do projeto Unreal** dentro do repositório. O arquivo `EchoesOfAethel.uproject` e a árvore `Source/` seguem o diagrama recebido; `Target.cs` de jogo e editor completam o esqueleto C++. A associação foi ajustada para Unreal **5.8**, a versão instalada neste computador em 14/10/2026. Não copiar o valor 5.4 do exemplo recebido.
+
+Abrir com `UnrealEditor.exe` da instalação 5.8 e este `.uproject` como argumento. A instalação local fora do repositório não é um caminho portável para CI ou outros colaboradores. `EnhancedInput` está habilitado; `Paper2D` e `ModelingToolsEditorMode` ficam desabilitados até uma necessidade concreta e revisão de versão/proveniência. O módulo declara UMG e NavigationSystem para futura HUD e navegação, mas ainda não contém widgets, níveis, personagens ou geração de dungeon.
+
+Este commit entrega **somente a estrutura de projeto**. Na inspeção local, `UE_5.8/Engine/Source` e uma instalação MSVC/Visual Studio não foram encontrados; por isso, **não foi possível compilar C++** nem validar abertura como jogo. Completar/verificar esses componentes antes de rodar UnrealBuildTool, e registrar o resultado real. O Godot em `../godot/` continua jogável e não recebe save compatível automaticamente. Direção, IDs e primeira rota: [transição](../../docs/engineering/unreal-transition.md), [Cidadela → Bosque](../../docs/design/first-route-3d.md).
