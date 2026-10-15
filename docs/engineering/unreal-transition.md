@@ -9,7 +9,7 @@
 3. [GDD de mapas e quests](../GDD/04_mapas_e_quests.md), [roteiro](../GDD/07_roteiro_e_dialogos.md), [classes](../GDD/01_classes_e_atributos.md) e [loot](../GDD/03_sistema_de_loot.md) continuam regendo conteúdo. Não transportar literalmente pixels, tiles, `Resource`, cenas `.tscn` ou física 2:1 para unidades 3D.
 4. O [cliente Godot](../../client/godot/) mostra comportamento já jogável, não é a especificação de toda a campanha. Diferenças entre GDD e runtime são registradas antes de migrar cada sistema.
 
-A [direção de HUD, controles e navegação 3D](../design/hud-input-navigation-3d.md) registra a avaliação dos exemplos recebidos e os gates para click-to-move, NavMesh e minimapa.
+A [direção de HUD, controles e navegação 3D](../design/hud-input-navigation-3d.md) registra a avaliação dos exemplos recebidos e os gates para click-to-move, NavMesh e minimapa. O [contrato de cinemáticas e áudio](../design/unreal-cinematics-and-audio.md) separa infraestrutura C++ de cenas e assets ainda não criados.
 
 ## O que já está pronto como esqueleto de conteúdo
 
@@ -51,7 +51,7 @@ A [direção de HUD, controles e navegação 3D](../design/hud-input-navigation-
 
 ## Esqueleto previsto do cliente Unreal
 
-O `.uproject`, os dois targets e o módulo C++ mínimo já existem em `client/unreal/`; **Content, níveis e sistemas listados abaixo ainda não existem**. O manifesto JSON permanece em `docs/engineering/` como referência portável, não como dado de save recebido sem validação.
+O `.uproject`, os dois targets, o módulo C++ mínimo e as classes de apresentação para cinemática/áudio já existem em `client/unreal/`; **Content, níveis, assets e sistemas de jogo listados abaixo ainda não existem**. O manifesto JSON permanece em `docs/engineering/` como referência portável, não como dado de save recebido sem validação.
 
 ```text
 client/unreal/EchoesOfAethel.uproject

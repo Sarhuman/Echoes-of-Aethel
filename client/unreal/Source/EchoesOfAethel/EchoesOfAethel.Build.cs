@@ -15,7 +15,8 @@ public class EchoesOfAethel : ModuleRules
             "EnhancedInput",
             "UMG",
             "AIModule",
-            "NavigationSystem"
+            "NavigationSystem",
+            "PhysicsCore"
         });
     }
 }

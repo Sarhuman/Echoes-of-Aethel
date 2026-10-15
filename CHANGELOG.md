@@ -2,6 +2,8 @@
 
 ## 0.2.0-dev — 2026-10-13
 
+- Preparação Unreal de 14/10: diretor e gatilho de introdução de chefe, crossfade musical/narração e passos por material físico adicionados como infraestrutura C++. Ainda sem mapas, sons, animações ou build compilada; a fase de 50% permanece especificação para playtest futuro.
+
 - Direção de produção de 14/10: documentada a transição para uma prova 3D em Unreal, com índice dos 12 mapas, ficha Cidadela → Bosque, interiores acessíveis propostos e duas fontes de loot fixo/idempotente. Os documentos Godot/16-bit foram marcados como históricos para a nova engine; nenhum `.uproject` ou asset 3D foi declarado pronto.
 
 - Atualização de 14/10: medidores de Vida, Éter e Fôlego com molduras e valores; compras no hub com Lyra e Sera (10/12 ouro), débito/entrega atômicos e proteção contra repetição. Capturas de QA agora exigem slot de teste isolado. A arena técnica da `main` foi preservada como playtest opcional. Validação ampliada para 16 suítes / 308 verificações.
