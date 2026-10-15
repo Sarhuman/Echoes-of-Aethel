@@ -97,6 +97,8 @@ Pare e registre a pergunta no PR (seção "Decisões pendentes"). Prefira entreg
 
 ## 10. Execução da transição Unreal
 
+Antes de criar assets, siga [as convenções de nomes e pastas Unreal](docs/engineering/unreal-content-conventions.md).
+
 Use [o plano de execução Unreal](docs/engineering/unreal-execution-plan.md) para ordenar entregas e registrar os gates. A planilha de estimativas que originou esse plano é uma proposta de planejamento: datas, durações e quantidade de mapas **não** são critérios de aceite nem substituem os documentos de design. O gate depende de evidência real de build, testes e playtest; registre o resultado antes de iniciar a etapa dependente.
 
 - Antes de criar classe, asset ou sistema, procure o conceito e os IDs no repositório, inclusive no cliente Godot e no manifesto `first-route-content.json`. Porte a regra de domínio ou estenda o que existe; não recrie um serviço com outra autoridade. Registre no PR o que encontrou e o que reutilizou.
