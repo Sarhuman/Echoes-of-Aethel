@@ -6,6 +6,8 @@ As propostas de [hubs/secundárias](../design/hubs-and-side-stories-3d.md) e [co
 
 O [catálogo de produção das 30 habilidades](../design/ability-production-catalog-3d.md) liga os nós do GDD 01 a necessidades de animação, efeito, som e leitura 3D. Ainda não há IDs técnicos aprovados nem habilidades jogáveis Unreal.
 
+Há [18 pranchas conceituais de modelagem](../media/concepts/model-sheets/README.md) para quatro heróis alternativos, oito subchefes, quatro bosses de ato e dois chefes opcionais. São referências visuais experimentais; continuam pendentes escala, ortografia consistente, modelos, rigs, animações e revisão em câmera de jogo.
+
 ## Missões principais e cenas
 
 Cada uma das 12 quests tem duas opções canônicas; ambas liberam o próximo mapa após seu gate. O GDD 04 guarda textos, consequências ocultas e afinidades. A coluna “conteúdo de produção” lista evidência/encenação necessária, não uma nova condição de vitória. Pistas essenciais são acessíveis antes da escolha e não dependem de loot aleatório.

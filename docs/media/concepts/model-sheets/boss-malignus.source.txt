@@ -1,0 +1,10 @@
+Arquivo: boss-malignus.png
+Data: 2026-10-15 (America/Bahia)
+Ferramenta: OpenAI imagegen integrado ao Codex
+Referências fornecidas: docs/media/concepts/aethel-visual-target.png
+Brief/prompt de assunto: Malignus; soberano de ossuário, máscara e almas do ato II.
+Template de composição: prancha original de personagem para ARPG 3D de fantasia sombria; mesma figura completa em frente, perfil e costas, detalhe de rosto/material, fundo de estúdio carvão, paleta gótica da referência, sem texto/UI/logos e sem semelhança intencional com personagem de franquia.
+Fidelidade do prompt: brief e template preservam a intenção; o texto integral exato da chamada de geração não foi arquivado para esta prancha. Não tratar este registro como transcrição literal.
+Resultado: 1672 x 941 px; 2835638 bytes; SHA-256 fa627676ca9202aa0ed988b9d22d852a849715fcbce3185f442c46164fe545ac
+Estado: gerado, não aprovado; vistas não ortográficas; silhueta preta, escala relativa ao Bastião, modelo, rig e animações ainda não validados.
+Direitos: saída gerada para o projeto, sem asset externo licenciado. Termos aplicáveis da OpenAI: https://openai.com/policies/terms-of-use/ e https://openai.com/policies/service-terms/ (consultados em 2026-10-15); o responsável deve revisar a origem dos inputs e o uso final. Este registro não escolhe a licença pública do jogo.

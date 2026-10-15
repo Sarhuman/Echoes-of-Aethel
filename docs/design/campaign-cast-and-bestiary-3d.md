@@ -2,6 +2,8 @@
 
 **Estado:** índice visual de pré-produção, sem modelos, rigs ou IA prontos. Os cinco heróis e habilidades vêm do [GDD 01](../GDD/01_classes_e_atributos.md); os encontros por mapa vêm do [GDD 04](../GDD/04_mapas_e_quests.md). Descrições de forma e movimento abaixo são **NOVO/EXPERIMENTAL** e não introduzem dano, HP, habilidades ou drops novos. Não derivar IDs técnicos dos nomes desta página.
 
+As [pranchas conceituais de quatro heróis, doze confrontos de campanha e dois chefes opcionais](../media/concepts/model-sheets/README.md) servem para avaliar silhueta e materiais em pré-produção. O Bastião tem [referência de cena própria](../media/concepts/aethel-visual-target.png). Nenhuma prancha fecha escala, anatomia, rig ou telegraph.
+
 ## Heróis e figuras recorrentes
 
 | Papel | Silhueta e animação a preparar | Continuidade |

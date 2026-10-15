@@ -17,3 +17,5 @@ Estas imagens orientam composição, paleta e atmosfera. Não são screenshots d
 - `moss-claws-arena.png`: `7c6e724f883ff7794ac441a747e24c0cabbf0e54899d954fd6b0b7eb1475e45f`
 
 Origem criativa: direção visual descrita em [proposta visual](../../design/visual-proposal.md). Personagens e mecânicas desenhados nas imagens continuam sujeitos ao escopo e à implementação.
+
+As [18 pranchas individuais de heróis, chefes e subchefes](model-sheets/README.md), geradas em 15/10/2026, têm proveniência e estado próprios. São referências para modelagem futura, sem substituir as fichas de conteúdo ou constituir modelos 3D.
