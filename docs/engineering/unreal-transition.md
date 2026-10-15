@@ -75,3 +75,9 @@ Blueprints e níveis montam atores e apresentação; a camada de aplicação con
 ## Limites do primeiro marco
 
 Não prometer os 12 mapas em 3D, cinco classes funcionais, dublagem, interiores para cada casa, geração procedural ou save antigo convertido. O primeiro marco entrega **uma rota pequena, jogável e mensurável**. O [GDD 04](../GDD/04_mapas_e_quests.md) permanece a fila de expansão; cada mapa futuro receberá uma ficha como a primeira rota antes de modelagem final.
+
+## Integração das branches abertas
+
+Em 14/10, a `main` ainda está em `1aea26e`; as PRs [#22](https://github.com/Sarhuman/Echoes-of-Aethel/pull/22), [#23](https://github.com/Sarhuman/Echoes-of-Aethel/pull/23) e [#24](https://github.com/Sarhuman/Echoes-of-Aethel/pull/24) são independentes e não foram mescladas. A #22 contém o runtime Godot citado como referência aqui. Ordem de revisão proposta: validar e integrar #22, atualizar #24 sobre a base resultante e conferir a HUD, então atualizar #23 sobre a `main` integrada e resolver conflitos de README/CHANGELOG. Nenhuma PR deve ser declarada integrada apenas porque sua branch ou esta documentação existe.
+
+O `.gitattributes` normaliza arquivos de texto em LF e prepara Git LFS apenas para futuros `.uasset`/`.umap` em `client/unreal/Content/` e fontes em `client/unreal/SourceArt/`. Os PNG/WAV Godot já versionados continuam no Git comum; migrar seu histórico para LFS seria uma decisão separada. Antes de adicionar assets Unreal, executar `git lfs install`, verificar quota e confirmar que os blobs foram enviados como ponteiros LFS. Upload direto pela API de árvore do GitHub não executa o filtro LFS.

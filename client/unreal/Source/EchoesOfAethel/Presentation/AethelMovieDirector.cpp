@@ -1,6 +1,8 @@
 #include "Presentation/AethelMovieDirector.h"
 #include "Camera/CameraActor.h"
 #include "Camera/CameraShakeBase.h"
+#include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Pawn.h"
 #include "GameFramework/PlayerController.h"
 #include "Kismet/GameplayStatics.h"
@@ -21,6 +23,14 @@ bool AAethelMovieDirector::PlayBossIntroduction(AActor* TargetBoss, APawn* Playe
     bPlaying = true;
     Controller->SetIgnoreMoveInput(true);
     Controller->SetIgnoreLookInput(true);
+    Controller->StopMovement();
+    if (ACharacter* Character = Cast<ACharacter>(PlayerPawn))
+    {
+        if (UCharacterMovementComponent* Movement = Character->GetCharacterMovement())
+        {
+            Movement->StopMovementImmediately();
+        }
+    }
     Controller->SetViewTargetWithBlend(IntroCamera, 0.0f);
     GetWorldTimerManager().SetTimer(ShotTimerHandle, this, &AAethelMovieDirector::TransitionToBossShot, 2.0f, false);
     return true;

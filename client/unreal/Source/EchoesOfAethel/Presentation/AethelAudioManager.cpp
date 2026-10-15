@@ -12,7 +12,8 @@ void UAethelAudioManager::PlayBackgroundMusic(USoundBase* NewMusic, float FadeIn
     MusicComponent = UGameplayStatics::CreateSound2D(GetWorld(), NewMusic, 1.0f, 1.0f, 0.0f, nullptr, false, false);
     if (IsValid(MusicComponent))
     {
-        MusicComponent->FadeIn(FMath::Max(0.0f, FadeInTime), IsValid(NarrationComponent) && NarrationComponent->IsPlaying() ? 0.6f : 1.0f);
+        MusicComponent->SetVolumeMultiplier(IsValid(NarrationComponent) && NarrationComponent->IsPlaying() ? 0.6f : 1.0f);
+        MusicComponent->FadeIn(FMath::Max(0.0f, FadeInTime), 1.0f);
         CurrentMusic = NewMusic;
     }
 }

@@ -9,7 +9,7 @@ bool FAethelPlayerStats::HasValidBaseAttributes() const
 {
     return Level >= 1 && Level <= 30
         && STR >= 1 && STR <= 99 && DEX >= 1 && DEX <= 99
-        && INT >= 1 && INT <= 99 && FTH >= 1 && FTH <= 99
+        && Intelligence >= 1 && Intelligence <= 99 && FTH >= 1 && FTH <= 99
         && VIT >= 1 && VIT <= 99;
 }
 
@@ -17,6 +17,6 @@ bool FAethelPlayerStats::RefreshDerivedStats()
 {
     if (!HasValidBaseAttributes()) return false;
     MaxHP = CalculateMaxHP(Level, VIT);
-    MaxMP = CalculateMaxMP(Level, INT, FTH);
+    MaxMP = CalculateMaxMP(Level, Intelligence, FTH);
     return true;
 }
