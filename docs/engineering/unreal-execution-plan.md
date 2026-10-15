@@ -4,6 +4,8 @@
 
 O [registro de conteúdo C0](campaign-content-ledger.md) acompanha quests, hubs, comércio, loot, secundárias, cenas e lacunas com sua origem. Ele distingue contrato aprovado, proposta e asset ainda ausente.
 
+As fichas de [hubs e histórias secundárias](../design/hubs-and-side-stories-3d.md) e de [comércio por classe/região](../design/regional-commerce-3d.md) são propostas para revisão no C0. Os serviços básicos existentes permanecem acessíveis; equipamento e preços novos exigem catálogo e simulação.
+
 ## Gate C0 — conteúdo antes de gameplay
 
 | Entrega | Evidência requerida |

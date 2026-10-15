@@ -2,6 +2,8 @@
 
 **Estado em 15/10/2026:** inventário de pré-produção; não é catálogo importável pela Unreal nem comprova asset pronto. Preserva IDs de [GDD 04](../GDD/04_mapas_e_quests.md), [roteiro 07](../GDD/07_roteiro_e_dialogos.md) e [loot 03](../GDD/03_sistema_de_loot.md). Layout e interiores são propostas do [atlas](../design/campaign-world-atlas-3d.md). Este registro acompanha **o que já tem contrato** e **o que precisa ser criado** antes da parte jogável.
 
+As propostas de [hubs/secundárias](../design/hubs-and-side-stories-3d.md) e [comércio regional por classe](../design/regional-commerce-3d.md) aprofundam os pacotes pendentes sem declarar preços, itens ou IDs novos aprovados.
+
 ## Missões principais e cenas
 
 Cada uma das 12 quests tem duas opções canônicas; ambas liberam o próximo mapa após seu gate. O GDD 04 guarda textos, consequências ocultas e afinidades. A coluna “conteúdo de produção” lista evidência/encenação necessária, não uma nova condição de vitória. Pistas essenciais são acessíveis antes da escolha e não dependem de loot aleatório.
@@ -64,9 +66,9 @@ O [resumo da campanha](../design/campaign.md) prevê **O Julgamento do Cultista*
 | IDs e opções das 12 quests | **GDD completo** | Reconciliar gatilhos, evidências e cenas com manifestos de conteúdo versionados |
 | Percurso/ambientação dos 12 mapas | **Proposta de atlas** | Revisão editorial e plantas com escala após blockout não jogável |
 | Cinco heróis, cinco NPCs, 33 mobs, 12 confrontos | **Índice de elenco** | Turnarounds, rigs, animações, telegraphs, áudio e fichas de cada ator |
-| Hubs e serviços além da Cidadela | **Lacuna** | IDs, planta, presença dos serviços e variantes de história |
-| Itens, vendas e baús além da primeira rota | **Lacuna** | Catálogo, economia simulada e IDs de recompensa persistente |
-| Secundárias e dungeons | **Propostas parciais** | Contratos narrativos/econômicos e aprovação editorial |
+| Hubs e serviços além da Cidadela | **Proposta de percurso/serviços; conteúdo pendente** | Plantas em escala, NPCs locais, variantes e testes de acesso |
+| Itens, vendas e baús além da primeira rota | **Política de comércio proposta; catálogo pendente** | Templates, economia simulada e IDs de recompensa persistente |
+| Secundárias e dungeons | **Fichas narrativas propostas** | IDs, contratos econômicos, plantas e aprovação editorial |
 | Cinemáticas e trilha | **Roteiro/infraestrutura parcial** | Storyboards, áudio original, licenças, ensaio de pulo/retorno |
 
 O gate C0 **não está concluído**. Esta tabela impede tratar a especificação de campanha ou a compilação C++ como mapa/ator/loot finalizado. A parte jogável Unreal só inicia quando a cobertura de conteúdo acordada no [plano](unreal-execution-plan.md) tiver revisão e evidência próprias.

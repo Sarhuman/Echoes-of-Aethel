@@ -2,6 +2,8 @@
 
 **Pré-produção 3D:** [atlas dos doze mapas](../design/campaign-world-atlas-3d.md), [elenco/bestiário](../design/campaign-cast-and-bestiary-3d.md) e [registro de conteúdo](campaign-content-ledger.md) detalham propostas, contratos e lacunas sem criar runtime. A [ordem atual](unreal-execution-plan.md) exige o gate de conteúdo C0 antes da parte jogável Unreal.
 
+[Hubs e secundárias](../design/hubs-and-side-stories-3d.md) detalham circulação, serviços e histórias opcionais. [Comércio regional](../design/regional-commerce-3d.md) propõe ofertas comuns, por classe e por ato; os novos itens/preços ainda não são catálogo aprovado.
+
 Este índice evita confundir **conteúdo especificado** com mapas 3D construídos. A fonte detalhada das doze linhas é o [GDD 04](../GDD/04_mapas_e_quests.md); roteiro e variantes estão no [GDD 07](../GDD/07_roteiro_e_dialogos.md). IDs são preservados entre engines. A [primeira rota](../design/first-route-3d.md) é a única com IDs e conteúdo de recipientes propostos; o atlas sugere interiores para os outros mapas sem lhes atribuir tesouros. A [ficha do elenco e das dungeons secundárias](../design/playable-cast-and-side-dungeons.md) distingue cinco heróis especificados, NPCs e duas quests opcionais `NOVO/EXPERIMENTAL`, fora da contagem dos doze mapas. O [contrato de dungeons opcionais](optional-dungeon-contract.md) define entrada, diário, retorno e recompensa para a futura implementação.
 
 | Ato/mapa | Zona | Quest principal | Confronto | Estado de produção |
