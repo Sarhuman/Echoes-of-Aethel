@@ -1,4 +1,4 @@
-#include "Presentation/AethelFootstepComponent.h"
+#include "AethelFootstepComponent.h"
 #include "Engine/EngineTypes.h"
 #include "Engine/World.h"
 #include "Kismet/GameplayStatics.h"

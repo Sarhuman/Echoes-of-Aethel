@@ -1,5 +1,5 @@
-#include "Presentation/AethelBossTrigger.h"
-#include "Presentation/AethelMovieDirector.h"
+#include "AethelBossTrigger.h"
+#include "AethelMovieDirector.h"
 #include "Components/BoxComponent.h"
 #include "GameFramework/Pawn.h"
 #include "GameFramework/PlayerController.h"

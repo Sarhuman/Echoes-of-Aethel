@@ -1,4 +1,4 @@
-#include "Domain/AethelPlayerStats.h"
+#include "AethelPlayerStats.h"
 
 static_assert(FAethelPlayerStats::CalculateMaxHP(1, 14) == 172);
 static_assert(FAethelPlayerStats::CalculateMaxMP(1, 3, 5) == 52);
