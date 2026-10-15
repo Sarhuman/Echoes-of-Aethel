@@ -97,6 +97,8 @@ Pare e registre a pergunta no PR (seção "Decisões pendentes"). Prefira entreg
 
 ## 10. Execução da transição Unreal
 
+**Ordem atual (15/10/2026):** concluir o gate de conteúdo C0 do [plano Unreal](docs/engineering/unreal-execution-plan.md) antes de criar a parte jogável. As doze fichas do [atlas 3D](docs/design/campaign-world-atlas-3d.md) e o [índice do elenco e bestiário](docs/design/campaign-cast-and-bestiary-3d.md) são pré-produção, não autorização para criar mapas/atores funcionais. Preservar o build e os testes de base já concluídos.
+
 Antes de criar assets, siga [as convenções de nomes e pastas Unreal](docs/engineering/unreal-content-conventions.md).
 
 Use [o plano de execução Unreal](docs/engineering/unreal-execution-plan.md) para ordenar entregas e registrar os gates. A planilha de estimativas que originou esse plano é uma proposta de planejamento: datas, durações e quantidade de mapas **não** são critérios de aceite nem substituem os documentos de design. O gate depende de evidência real de build, testes e playtest; registre o resultado antes de iniciar a etapa dependente.

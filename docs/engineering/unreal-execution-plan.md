@@ -1,5 +1,19 @@
 # Plano de execução da prova Unreal
 
+> **Mudança de ordem solicitada em 15/10/2026:** a produção da parte jogável Unreal fica **adiada até a pré-produção cobrir os doze mapas, cinco protagonistas, elenco, bestiário e contexto de campanha**. O [atlas de mapas](../design/campaign-world-atlas-3d.md) e o [índice de personagens/criaturas](../design/campaign-cast-and-bestiary-3d.md) iniciam essa cobertura. As etapas de gameplay abaixo permanecem como plano posterior; suas datas e gates não autorizam começar a cena jogável agora. O build/teste da base C++ já feito continua válido.
+
+## Gate C0 — conteúdo antes de gameplay
+
+| Entrega | Evidência requerida |
+|---|---|
+| Campanha inteira | Doze fichas de zona revisadas com rotas de entrada/retorno, interiores, escolha, encontro, ambiente móvel e limites; mapas de hubs e dungeons opcionais separados dos doze |
+| Elenco | Cinco protagonistas, NPCs recorrentes, 33 entradas de inimigos comuns, oito subchefes e quatro bosses com fichas de silhueta, função e dependências de animação/áudio |
+| Narrativa e economia | Cenas/diálogos e estados de consequência auditados contra GDD 04/07/08; loot, vendedores, recipientes e recompensas catalogados com IDs definitivos e regras de persistência |
+| Produção visual | Conceitos autorais e lista de modelos/rigs/materiais por zona e ator, com origem/licença; plantas/blockouts **não jogáveis** e orçamento técnico medido quando viável |
+| Revisão | Lacunas e propostas `NOVO/EXPERIMENTAL` decididas editorialmente; nenhuma ficha confundida com asset ou mapa 3D implementado |
+
+Somente depois de C0 fechado iniciar E1-06 em diante (nível de teste, blockout navegável, HUD e loop). A implementação antecipada do projeto base e dos testes de atributos não obriga continuar a vertical jogável. A ordem antiga da planilha era capacidade estimada, não uma restrição contra a direção atual do projeto.
+
 Este índice transforma a planilha de trabalho fornecida em 15/10/2026 em uma sequência verificável dentro do repositório. A planilha propõe 37 tarefas em cinco etapas; suas durações, data de início de 19/10/2026, reserva de seis semanas e fator de replanejamento de 1,5 são **suposições**, não compromissos ou decisões de design. O prazo desejado é aproximadamente um ano. Recalibre a previsão com o primeiro build e com o tempo real no editor.
 
 | Etapa | Entrega e gate | Evidência para avançar |

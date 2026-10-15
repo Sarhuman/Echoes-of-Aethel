@@ -1,5 +1,7 @@
 # Transição de Echoes of Aethel para 3D
 
+> **Sequência atualizada em 15/10/2026:** antes da prova jogável descrita abaixo, concluir o [gate de conteúdo C0](unreal-execution-plan.md) para os doze mapas e o elenco completo. O [atlas 3D](../design/campaign-world-atlas-3d.md) registra percursos e cenários propostos; não são níveis Unreal. O projeto base C++ e seus testes podem continuar documentados, mas gameplay fica em espera.
+
 **Decisão de direção, 14/10/2026.** O próximo cliente de produção será um ARPG 3D de câmera elevada na Unreal Engine, começando por uma prova curta Cidadela → Bosque. O cliente Godot 4.6 permanece como referência jogável e de regressão até existir uma substituição testada. Esta decisão substitui apenas as instruções anteriores que tornavam Godot/GDScript e pixel art 16-bit o destino final; não altera história, IDs, fórmulas, escolhas, segurança do hub nem direitos dos assets. O esqueleto `.uproject`/C++ para 5.8 está em `client/unreal/`; ainda não há cena ou build Unreal validada.
 
 ## Fontes de verdade
