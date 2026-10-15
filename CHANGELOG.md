@@ -2,6 +2,8 @@
 
 ## 0.2.0-dev — 2026-10-13
 
+- Verificação de 15/10: UnrealBuildTool 5.8.3 passou da validação do Windows SDK, mas bloqueou o build C++ por falta de MSVC x64/x86 válido (mínimo 14.38.33130, recomendado 14.50.35717). Nenhuma cena ou runtime Unreal foi declarado compilado.
+
 - Revisão de 14/10: áudio recupera volume integral após narração, cinemática cancela deslocamento ativo, `Intelligence` evita colisão de nome com Windows, targets fixam defaults da UE 5.8. `.gitattributes` padroniza LF e prepara LFS para assets Unreal futuros; ordem de integração das três PRs registrada.
 
 - Contrato Unreal de 14/10: fórmulas inteiras e validação dos cinco atributos em C++; especificação de save, recompensa única e retorno seguro de dungeon revisada contra os GDDs. Portal e loot de runtime aguardam transação persistente e compilação.
