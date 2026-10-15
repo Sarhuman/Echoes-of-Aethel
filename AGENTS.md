@@ -94,3 +94,16 @@ Para a primeira fatia Godot: multiplayer/PvP, backend/FastAPI, contas, nuvem, te
 ## 9. O que fazer em caso de dúvida
 
 Pare e registre a pergunta no PR (seção "Decisões pendentes"). Prefira entregar menos, testado, a entregar mais, suposto.
+
+## 10. Execução da transição Unreal
+
+Use [o plano de execução Unreal](docs/engineering/unreal-execution-plan.md) para ordenar entregas e registrar os gates. A planilha de estimativas que originou esse plano é uma proposta de planejamento: datas, durações e quantidade de mapas **não** são critérios de aceite nem substituem os documentos de design. O gate depende de evidência real de build, testes e playtest; registre o resultado antes de iniciar a etapa dependente.
+
+- Antes de criar classe, asset ou sistema, procure o conceito e os IDs no repositório, inclusive no cliente Godot e no manifesto `first-route-content.json`. Porte a regra de domínio ou estenda o que existe; não recrie um serviço com outra autoridade. Registre no PR o que encontrou e o que reutilizou.
+- Mantenha a mudança limitada à entrega em curso, com testes e documentação necessários. Registre ideias novas como trabalho futuro; não as inclua silenciosamente na tarefa atual. Se precisar tocar outras pastas ou rever a estimativa, atualize o plano e explique o motivo no PR.
+- Preserve `client/godot/` como referência de regressão durante a transição. Mudanças nele exigem motivo concreto e suas suítes relevantes; não transporte pixels, tiles, cenas `.tscn`, `Resource` ou escala 2:1 como geometria Unreal.
+- Para cada regra de domínio portada, reproduza os casos relevantes do Godot em testes Unreal. Declare equivalência apenas com resultado executado. Anexe ou transcreva o comando, ambiente e resultado real de compilação, testes e empacotamento; ausência de teste deve aparecer como pendência.
+- IDs persistidos exigem migração testada. Recompensas únicas, compras e viagem entre níveis seguem os contratos de persistência: comando repetido não duplica estado e falha de gravação mantém o estado anterior. HUD, animação, áudio e câmera apenas apresentam fatos confirmados.
+- Diálogos e narrativa usam IDs e texto aprovado no GDD; texto inexistente é lacuna de conteúdo a registrar. Cinemáticas puladas e assistidas devem deixar o mesmo estado de campanha, comprovado por teste.
+- Antes de adicionar assets externos, registre origem, licença e versão. Para `.uasset` e `.umap`, confirme os filtros LFS já configurados em `.gitattributes`, a disponibilidade do LFS e o envio dos ponteiros. Não declare um asset versionado só por existir localmente.
+- Em PRs Unreal, apresente **Buscas e reuso**, **Fora do escopo** e **Validação**. Destaque mudanças em assets binários, GDD, IDs persistidos, saves e versão da engine para revisão de quem mantém o projeto. Não faça merge sozinho.
