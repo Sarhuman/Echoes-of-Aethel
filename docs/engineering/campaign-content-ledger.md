@@ -4,6 +4,8 @@
 
 As propostas de [hubs/secundárias](../design/hubs-and-side-stories-3d.md) e [comércio regional por classe](../design/regional-commerce-3d.md) aprofundam os pacotes pendentes sem declarar preços, itens ou IDs novos aprovados.
 
+O [catálogo de produção das 30 habilidades](../design/ability-production-catalog-3d.md) liga os nós do GDD 01 a necessidades de animação, efeito, som e leitura 3D. Ainda não há IDs técnicos aprovados nem habilidades jogáveis Unreal.
+
 ## Missões principais e cenas
 
 Cada uma das 12 quests tem duas opções canônicas; ambas liberam o próximo mapa após seu gate. O GDD 04 guarda textos, consequências ocultas e afinidades. A coluna “conteúdo de produção” lista evidência/encenação necessária, não uma nova condição de vitória. Pistas essenciais são acessíveis antes da escolha e não dependem de loot aleatório.
@@ -66,6 +68,7 @@ O [resumo da campanha](../design/campaign.md) prevê **O Julgamento do Cultista*
 | IDs e opções das 12 quests | **GDD completo** | Reconciliar gatilhos, evidências e cenas com manifestos de conteúdo versionados |
 | Percurso/ambientação dos 12 mapas | **Proposta de atlas** | Revisão editorial e plantas com escala após blockout não jogável |
 | Cinco heróis, cinco NPCs, 33 mobs, 12 confrontos | **Índice de elenco** | Turnarounds, rigs, animações, telegraphs, áudio e fichas de cada ator |
+| 30 habilidades das cinco classes | **Mecânica no GDD; apresentação proposta** | IDs, dados 3D, ícones, animações/VFX/SFX e revisão de input por classe |
 | Hubs e serviços além da Cidadela | **Proposta de percurso/serviços; conteúdo pendente** | Plantas em escala, NPCs locais, variantes e testes de acesso |
 | Itens, vendas e baús além da primeira rota | **Política de comércio proposta; catálogo pendente** | Templates, economia simulada e IDs de recompensa persistente |
 | Secundárias e dungeons | **Fichas narrativas propostas** | IDs, contratos econômicos, plantas e aprovação editorial |

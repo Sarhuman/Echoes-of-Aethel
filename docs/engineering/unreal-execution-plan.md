@@ -6,6 +6,8 @@ O [registro de conteúdo C0](campaign-content-ledger.md) acompanha quests, hubs,
 
 As fichas de [hubs e histórias secundárias](../design/hubs-and-side-stories-3d.md) e de [comércio por classe/região](../design/regional-commerce-3d.md) são propostas para revisão no C0. Os serviços básicos existentes permanecem acessíveis; equipamento e preços novos exigem catálogo e simulação.
 
+O [catálogo de habilidades](../design/ability-production-catalog-3d.md) cobre os 30 nós das cinco classes para preparar animação, VFX, SFX, ícones e IDs; não inicia implementação de combate.
+
 ## Gate C0 — conteúdo antes de gameplay
 
 | Entrega | Evidência requerida |
