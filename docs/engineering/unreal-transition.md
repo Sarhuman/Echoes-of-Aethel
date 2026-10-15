@@ -9,7 +9,7 @@
 3. [GDD de mapas e quests](../GDD/04_mapas_e_quests.md), [roteiro](../GDD/07_roteiro_e_dialogos.md), [classes](../GDD/01_classes_e_atributos.md) e [loot](../GDD/03_sistema_de_loot.md) continuam regendo conteúdo. Não transportar literalmente pixels, tiles, `Resource`, cenas `.tscn` ou física 2:1 para unidades 3D.
 4. O [cliente Godot](../../client/godot/) mostra comportamento já jogável, não é a especificação de toda a campanha. Diferenças entre GDD e runtime são registradas antes de migrar cada sistema.
 
-A [direção de HUD, controles e navegação 3D](../design/hud-input-navigation-3d.md) registra a avaliação dos exemplos recebidos e os gates para click-to-move, NavMesh e minimapa. O [contrato de cinemáticas e áudio](../design/unreal-cinematics-and-audio.md) separa infraestrutura C++ de cenas e assets ainda não criados.
+A [direção de HUD, controles e navegação 3D](../design/hud-input-navigation-3d.md) registra a avaliação dos exemplos recebidos e os gates para click-to-move, NavMesh e minimapa. O [contrato de cinemáticas e áudio](../design/unreal-cinematics-and-audio.md) separa infraestrutura C++ de cenas e assets ainda não criados. O [contrato de persistência e viagem](unreal-persistence-contract.md) rege recompensa única, bilhete de dungeon e recuperação antes de qualquer `OpenLevel`.
 
 ## O que já está pronto como esqueleto de conteúdo
 

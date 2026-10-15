@@ -1,6 +1,6 @@
 # Contrato de entrada, diário e recompensa das dungeons opcionais
 
-**Estado:** `NOVO/EXPERIMENTAL`. Especificação portável para a futura implementação Unreal; não há `.uproject` ou C++ compilado no repositório. A [ficha de elenco e dungeons](../design/playable-cast-and-side-dungeons.md) define Namar e Gorvak. O [GDD 03](../GDD/03_sistema_de_loot.md) rege raridade/XP; o [GDD 04](../GDD/04_mapas_e_quests.md) rege os 12 mapas principais. A interação `C` e o diário `J` já são controles aprovados no cliente Godot.
+**Estado:** `NOVO/EXPERIMENTAL`. Especificação portável para a futura implementação Unreal; existe `.uproject` e infraestrutura de apresentação, mas não há C++ compilado nem dungeon jogável. O [contrato de persistência e viagem](unreal-persistence-contract.md) detalha a transação exigida antes de implementar portal/loot. A [ficha de elenco e dungeons](../design/playable-cast-and-side-dungeons.md) define Namar e Gorvak. O [GDD 03](../GDD/03_sistema_de_loot.md) rege raridade/XP; o [GDD 04](../GDD/04_mapas_e_quests.md) rege os 12 mapas principais. A interação `C` e o diário `J` já são controles aprovados no cliente Godot.
 
 ## Descoberta e entrada
 
@@ -37,5 +37,4 @@ Na proximidade da entrada, usar volume de apresentação local para interpolar n
 5. Vitória, reload, conversa repetida e bolsa cheia mantêm XP, ouro e item exatamente uma vez; taxa Raro/Épico do sub-boss usa RNG controlado em teste.
 6. Volume visual é reversível e legível com efeitos reduzidos; performance e contraste são testados no PC alvo.
 
-O trecho C++ enviado pelo usuário é ponto de partida conceitual. `print` não é a saída de log C++ da Unreal, `OpenLevel` está comentado, e o exemplo não faz as validações nem a persistência acima. Criar classe compilável e tests de automação somente após abrir o projeto Unreal real e confirmar módulo, API e versão da engine instalada.
-
+O trecho C++ enviado pelo usuário é ponto de partida conceitual. `print` não é a saída de log C++ da Unreal, e `OpenLevel` direto não faz as validações nem a persistência acima. Implementar gateway/loot somente com serviço transacional, destino/âncora validados e testes de automação; compilar na Unreal instalada antes de habilitar a viagem.

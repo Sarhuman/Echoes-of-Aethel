@@ -8,7 +8,7 @@ Revisão: 13/10/2026. Esta tabela registra o que existe no repositório; não an
 |---|---|---|
 | Projeto | `0.2.0-dev` em `/VERSION` e `client/godot/project.godot` → `config/version` | Primeira fatia jogável; ambos devem mudar juntos |
 | Engine validada | Godot `4.6.stable.official.89cea1439` | Manter 4.6 stable para reproduzir os testes; atualizar somente com validação |
-| Engine Unreal instalada localmente | Unreal `5.8.3` (`UE_5.8/Engine/Build/Build.version`) | `client/unreal/EchoesOfAethel.uproject` associa 5.8; `Engine/Source` e MSVC não encontrados nesta inspeção, então compilação e abertura ainda pendem de validação |
+| Engine Unreal instalada localmente | Unreal `5.8.3` (`UE_5.8/Engine/Build/Build.version`) | `client/unreal/EchoesOfAethel.uproject` associa 5.8; `Engine/Source` está presente, mas MSVC não foi encontrado, então compilação e abertura ainda pendem de validação |
 | Formato do projeto Godot | `config_version=5` | Formato do arquivo, não versão do jogo |
 | Schema do save | `SaveSystem.SCHEMA_VERSION = 1` | Não aumentar sem migração e testes de recuperação |
 | Conteúdo do save | `WorldSaveSchema.CONTENT_VERSION = "world-save-2"` | Migrável de `world-save-1`; separado da versão do envelope |
