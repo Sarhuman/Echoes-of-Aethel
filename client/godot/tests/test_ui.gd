@@ -12,11 +12,15 @@ func finish() -> void:
 	quit(1 if failures else 0)
 func run() -> void:
 	var path := "user://tests/settings.cfg"
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("user://tests"))
 	DirAccess.remove_absolute(path)
 	var hud := SliceHUD.new()
 	root.add_child(hud)
 	await process_frame
 	check(hud.hp.position.y + hud.hp.size.y <= hud.mp.position.y and hud.mp.position.y + hud.mp.size.y <= hud.stamina.position.y,"bars do not overlap")
+	check(hud.hp.size.x > hud.mp.size.x and hud.mp.size.x > hud.stamina.size.x,"resource hierarchy is legible")
+	check(hud.hp.size.y * hud.hp.scale.y > hud.mp.size.y * hud.mp.scale.y and hud.mp.size.y * hud.mp.scale.y > hud.stamina.size.y * hud.stamina.scale.y,"stamina is a thin meter")
+	check(hud.hp.get_parent().position.y < 100 and hud.level_badge != null,"status and level sit in the upper-left HUD")
 	var inventory := InventoryModel.new()
 	check(inventory.add(&"potion_health_small", 2).ok, "inventory fixture")
 	hud.show_inventory_grid(inventory)

@@ -152,7 +152,7 @@ Atualizado para `0.2.0-dev`. As suítes de teste estão distribuídas entre os m
 | Loot e XP atômicos | implementado | 26 | T07 |
 | Quest `act1.spy_hunt` | implementado | 26 + 37 integração | T08 |
 | Diálogos e NPCs | implementado | 15 UI | T09 |
-| HUD, menus e áudio mínimo | implementado | 15 UI | T10 |
+| HUD, menus e áudio mínimo | implementado; medidores góticos no alto à esquerda, visual pendente de playtest | 18 UI | T10 |
 | Consequência local no hub | implementado | 37 integração | T11 |
 | CI e export Windows | implementado; playtest humano pendente | 16 suítes + smoke | T12 |
 
