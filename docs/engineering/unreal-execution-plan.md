@@ -12,7 +12,7 @@ A planilha de acompanhamento **`plano-codex-echoes-of-aethel-v2(2).xlsx` substit
 
 R1 aponta uma dependência circular: o atlas precisa de medidas de cápsula, câmera e largura antes dos blockouts, enquanto o nível navegável E1-06 espera C0. Adotar para C0-07 apenas uma arena **descartável de medição**, sem loop ou entrega jogável, resolve a medição sem antecipar E1-06. R2 pede um piloto de arte C0-08 com o Bastião, do conceito à importação, para medir horas reais por ator; ele também não abre gameplay. R3–R6 permanecem riscos de estimativa, toolchain Preview, prazo e verificação, a acompanhar nos gates. Os dois pilotos ainda não foram executados.
 
-R7 trata do peso das pranchas. Os 18 PNGs medidos somam **48.794.687 bytes** e a regra LFS cobre somente `docs/media/concepts/model-sheets/*.png`, sem migrar imagens antigas. Cada prancha possui `*.source.txt` com proveniência. A instalação local de Git LFS foi confirmada; autenticação e quota de upload precisam ser verificadas na publicação.
+R7 trata do peso das pranchas. Os 18 PNGs medidos somam **48.794.687 bytes** e a regra LFS cobre somente `docs/media/concepts/model-sheets/*.png`, sem migrar imagens antigas. Cada prancha possui `*.source.txt` com proveniência. Git LFS e autenticação foram confirmados pelo upload completo dos 18 objetos em 15/10/2026; a quota restante não foi medida.
 
 ## Gate C0 — conteúdo antes de gameplay
 
