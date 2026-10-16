@@ -7,7 +7,7 @@ Leia este arquivo inteiro antes de criar ou alterar qualquer arquivo. Ele vale p
 
 ## 1. Projeto em uma frase
 
-ARPG dark fantasy offline para Windows. O cliente **atualmente jogável** é 2D em Godot 4.6/GDScript, em `client/godot/`. O próximo cliente de produção será 3D em Unreal Engine, conforme [transição](docs/engineering/unreal-transition.md). Não tratar as convenções Godot abaixo como regras de implementação Unreal.
+ARPG dark fantasy offline para Windows. O cliente **atualmente jogável** é 2D em Godot 4.6/GDScript, em `client/godot/`. O próximo cliente de produção será 3D em Unity, conforme [transição vigente](docs/engineering/unity-transition.md). O [estado verificável de produção](docs/engineering/production-status.md) distingue código C# headless de gameplay na engine. Convenções Godot abaixo valem para manutenção do cliente existente.
 
 Estado: primeira fatia jogável `0.2.0-dev`, com Cidadela, Bosque, combate, inimigos, boss, inventário, loot, quest, diálogos, menus, save v2 e arte original de runtime. A referência de validação atual é o README e o workflow de CI; os cartões T00–T12 registram a implementação, mas parte de seus textos foi escrita quando estes módulos ainda eram apenas planejados.
 

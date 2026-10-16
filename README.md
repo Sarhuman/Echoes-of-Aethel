@@ -3,7 +3,7 @@
 > **Direção atual — 16/10/2026:** próximo cliente em **Unity**, com URP proposto para o PC de desenvolvimento. A [transição Unity](docs/engineering/unity-transition.md) rege a nova produção; o cliente Unity ainda não existe. A [revisão de interações da campanha](docs/design/campaign-interactions.md) cobre 12 mapas, quatro hubs, três secundárias e duas dungeons como proposta editorial. As referências Godot/Unreal abaixo registram trabalho existente, não a engine futura.
 
 
-Primeiro núcleo C# independente: [memória persistente das escolhas](docs/engineering/world-memory-implementation.md), compilado e testado fora da engine. Integração Unity e apresentação visual pendentes.
+Base C# independente: [estado e próximos aceites](docs/engineering/production-status.md), [memória persistente](docs/engineering/world-memory-implementation.md) e [progressão/especialização integrada](docs/engineering/campaign-progression-implementation.md), compilados e testados fora da engine. Integração Unity e apresentação visual pendentes.
 
 **ARPG dark fantasy · um jogador · offline**
 

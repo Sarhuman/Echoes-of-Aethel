@@ -1,5 +1,13 @@
 # Changelog
 
+## Não lançado — progressão e agregado de campanha C# (16/10/2026)
+
+- Estado único combina memória, personagem, ouro, reserva da recompensa do Bosque e especialização; escolha/recompensa são confirmadas juntas por versão. Ritual principal deriva de escolhas únicas.
+- Seleção a partir do nível 5, pontos acumulados, cadeia/orçamento de nós, aviso dispensável e respec gratuito/pago com replay e falha sem cobrança parcial.
+- Projeção de ameaça por nível/categoria com texto acessível; catálogo de faixas dos 12 mapas gerado do design, sem autoscaling.
+- Novos IDs técnicos EXPERIMENTAIS de alocação em formato de protótipo; não migrar saves existentes. Tiers posteriores não possuem efeitos implementados.
+- Harness C# e CI ampliados; guia de integração e registro único de estado/aceites. Unity, Windows e playtest ainda precisam de validação própria.
+
 ## Não lançado — revisão de identidade visual (16/10/2026)
 
 - Revisão solicitada das pranchas de heróis/antagonistas, com achados confirmados em seis imagens, prioridades e escopo restante explícito.
