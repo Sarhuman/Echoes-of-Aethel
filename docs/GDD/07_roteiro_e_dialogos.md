@@ -1,5 +1,7 @@
 # Módulo 07 — Roteiro, diálogos e confronto final
 
+> **Encenação vigente:** [Unity 3D estilizado](../design/unity-art-direction.md). Atualizados descritores visuais; falas, line_ids, variantes, escolhas e consequências preservados. Roteiro não comprova cutscenes executáveis.
+
 **Projeto:** Echoes of Aethel · **Versão:** 1.0 · **Estado:** roteiro de produção; cenas, áudio e scripts pendentes.
 
 > **Spoilers completos.** A Sprint 6 de arquitetura já ocupa o módulo 06. Esta entrega narrativa usa o caminho solicitado `07_roteiro_e_dialogos.md`, sem substituir a arquitetura Godot.
@@ -20,7 +22,7 @@ Cenas podem ser puladas e relidas no diário. Pular chega ao mesmo estado narrat
 
 **ID:** `prologue.last_bell` · **Entrada:** nova campanha · **Local:** muralha da Cidadela.
 
-Tela escura. Três batidas de sino, a última quebrada. Surge um cristal frio sobre telhados apertados. A câmera desce por roupas penduradas, uma carroça vazia e mãos marcadas de poeira. Música original de timbres 16-bit: baixo contido e notas espaçadas, sem melodia triunfal.
+Tela escura. Três batidas de sino, a última quebrada. Surge um cristal frio sobre telhados apertados. A câmera desce por roupas penduradas, uma carroça vazia e mãos marcadas de poeira. Música original de timbres contidos: baixo contido e notas espaçadas, sem melodia triunfal.
 
 > **Narrador — P01.01**  
 > “Aethel aprendeu a medir o tempo pela luz do Éter. Quando o Coração se partiu, os relógios continuaram. Foi o mundo que perdeu o ritmo.”
@@ -180,7 +182,7 @@ No hub não há combate, dano de doença, flash hostil ou remoção dos quatro N
 
 **ID:** `final.vael.arrival` · **Pré-condições:** mapas 10/11 resolvidos, três fragmentos dos guardiões registrados, acesso à arena autorizado. O fragmento da Cidadela continua no hub; Vael carrega o quinto.
 
-Plataforma negra sobre nuvens interrompidas. Ao fundo, Aethel aparece como camadas de pixel art: bosque, ruínas, canais e muralhas. O eclipse parece imóvel. Vael está de costas, mãos vazias, arma nenhuma empunhada. Vira-se lentamente e abre os braços antes que a música de combate comece.
+Plataforma negra sobre nuvens interrompidas. Ao fundo, Aethel aparece em planos de profundidade do cenário 3D: bosque, ruínas, canais e muralhas. O eclipse parece imóvel. Vael está de costas, mãos vazias, arma nenhuma empunhada. Vira-se lentamente e abre os braços antes que a música de combate comece.
 
 > **Vael — F01.01**  
 > “Você demorou menos do que eu temia.”

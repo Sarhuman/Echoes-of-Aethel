@@ -1,5 +1,7 @@
 # Sprint 2 — Arquitetura técnica e infraestrutura
 
+> **Escopo técnico histórico:** APIs, sprites, pixels e projeção 2D desta página descrevem propostas/clientes anteriores. Para Unity, seguir [transição](../engineering/unity-transition.md) e [direção visual 3D](../design/unity-art-direction.md); portar contratos, sem copiar stack, unidades ou APIs de renderização.
+
 **Projeto:** Echoes of Aethel · **Versão:** 1.0 · **Estado:** arquitetura definida; implementação, deploy e benchmarks pendentes.
 
 Stack escolhida nesta Sprint: Dart/Flutter/Flame no cliente, Python/FastAPI no servidor e PostgreSQL. Esta decisão substitui a etapa anterior de seleção de engine. O protótipo offline continua como primeiro marco; progressão online terá autoridade do servidor e não aceitará importação irrestrita de saves locais.

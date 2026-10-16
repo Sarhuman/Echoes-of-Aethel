@@ -1,5 +1,7 @@
 # Sprint 9 — FSM de inimigos e NPCs hostis
 
+> **Escopo técnico histórico:** APIs, sprites, pixels e projeção 2D desta página descrevem propostas/clientes anteriores. Para Unity, seguir [transição](../engineering/unity-transition.md) e [direção visual 3D](../design/unity-art-direction.md); portar contratos, sem copiar stack, unidades ou APIs de renderização.
+
 **Estado:** núcleo offline implementado/testado em Godot 4.6. Ainda não há campanha jogável, CrimeService completo, pathfinding ou loot implementado.
 
 ## 1. Arquivos e composição

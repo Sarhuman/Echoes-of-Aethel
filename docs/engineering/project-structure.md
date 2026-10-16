@@ -1,5 +1,7 @@
 # Estrutura do projeto Godot
 
+> **Escopo desta árvore:** pastas e referências 2:1 abaixo descrevem Godot. O cliente futuro segue [transição Unity](unity-transition.md) e [guia visual 3D](../design/unity-art-direction.md). Revisão documental; não cria cliente ou migra arquivos.
+
 > **Escopo:** mapa da implementação Godot atual. A arquitetura do próximo cliente 3D está descrita em [Transição para Unreal](unreal-transition.md); use [Primeira rota 3D](../design/first-route-3d.md) para conteúdo e interiores. Esta árvore `res://` não é a árvore de pastas Unreal.
 
 Revisão: 14/10/2026 · Godot 4.6 stable · GDScript · primeira fatia `0.2.0-dev`.

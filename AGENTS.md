@@ -13,10 +13,10 @@ Estado: primeira fatia jogável `0.2.0-dev`, com Cidadela, Bosque, combate, inim
 
 ## 2. Fontes de verdade (ordem de precedência)
 
-1. `docs/engineering/unreal-transition.md` — direção da nova engine, critérios de migração e limites; prevalece somente para engine e pipeline visual. `docs/design/first-route-3d.md` e `docs/engineering/first-route-content.json` detalham a primeira rota.
+1. `docs/engineering/unity-transition.md` e `docs/design/unity-art-direction.md` — direção vigente de engine e apresentação 3D. Pixel art 16-bit, pixels/tiles e pipelines anteriores são históricos; não orientam a Unity. `docs/design/first-route-3d.md` e `docs/engineering/first-route-content.json` detalham a primeira rota.
 2. `docs/engineering/production-decisions.md` — decisões de domínio aprovadas pelo Game Director; cláusula antiga de Godot definitivo foi substituída pelo item 1.
 3. `docs/engineering/decisions-first-slice.md` — decisões D1–D8 do slice e emendas ao escopo (seção 9). **Não reabra** pontos já resolvidos ali.
-4. `docs/engineering/project-scope.md` — escopo da primeira fatia Godot e controles aprovados (com as emendas acima).
+4. `docs/engineering/project-scope.md` — direção vigente e registro separado da primeira fatia Godot; controles aprovados permanecem (com as emendas acima).
 5. `docs/engineering/experimental-values.md` — números da primeira fatia; nunca espalhar literais de balanceamento no código.
 6. `docs/engineering/project-structure.md` — mapa das pastas Godot, camadas e contratos.
 7. `docs/engineering/tasks/` — cartões históricos da implementação Godot.

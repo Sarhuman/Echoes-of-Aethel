@@ -1,6 +1,8 @@
-# Direção de arte — 16-bit
+# Direção de arte histórica — Godot 2D / 16-bit
 
-> **Escopo histórico:** esta especificação de pixels, tiles e sprites rege o cliente Godot atual. O novo cliente 3D usa a paleta, as silhuetas e a atmosfera como referência, seguindo [Transição para Unreal](../engineering/unreal-transition.md) e [Primeira rota 3D](first-route-3d.md). Dimensões 16×16/32×32 não são escala de modelagem 3D.
+> **Unity 3D:** seguir [direção vigente](unity-art-direction.md). Este documento preserva o briefing do Godot; pixels, filtro nearest, tiles e quadros de sprite não são requisitos de modelagem, UI ou animação do novo cliente.
+
+> **Escopo histórico:** esta especificação de pixels, tiles e sprites rege o cliente Godot atual. O novo cliente 3D usa a paleta, as silhuetas e a atmosfera como referência, seguindo [Transição Unity](../engineering/unity-transition.md) e [Primeira rota 3D](first-route-3d.md). Dimensões 16×16/32×32 não são escala de modelagem 3D.
 
 ## Perspectiva e escala
 

@@ -1,6 +1,6 @@
 # Índice do Game Design Document
 
-> A campanha, os personagens e as regras de domínio permanecem referências de conteúdo. As escolhas históricas de Godot e pixel art foram substituídas para o próximo cliente pelo [plano de transição Unreal](../engineering/unreal-transition.md). Veja também o [índice dos 12 mapas](../engineering/campaign-content-index.md).
+> A campanha, os personagens e as regras de domínio permanecem referências de conteúdo. As escolhas históricas de Godot e pixel art foram substituídas para o próximo cliente pela [transição Unity](../engineering/unity-transition.md) e [direção visual 3D](../design/unity-art-direction.md). Veja também o [índice dos 12 mapas](../engineering/campaign-content-index.md).
 
 ## Módulos de Sprint
 
@@ -11,7 +11,7 @@
 | 03 — Sistema de loot | Economia ampla especificada; primeira fatia de loot/inventário jogável no Godot | [03_sistema_de_loot.md](03_sistema_de_loot.md) |
 | 04 — Mapas e quests | Doze mapas especificados; Cidadela/Bosque e primeira escolha jogáveis no Godot | [04_mapas_e_quests.md](04_mapas_e_quests.md) |
 | 05 — Combate e HUD | Regras experimentais; primeira fatia de combate/HUD jogável, restante pendente | [05_combate_e_hud.md](05_combate_e_hud.md) |
-| 06 — Arquitetura de software | Arquitetura do cliente Godot; direção futura Unreal em documento próprio | [06_arquitetura_software.md](06_arquitetura_software.md) |
+| 06 — Arquitetura de software | Arquitetura do cliente Godot; direção Unity/C# em documento próprio | [06_arquitetura_software.md](06_arquitetura_software.md) |
 | 07 — Roteiro e diálogos | Roteiro de produção; primeira quest/diálogos jogáveis, campanha restante pendente | [07_roteiro_e_dialogos.md](07_roteiro_e_dialogos.md) |
 | 08 — Diálogos e degradação do hub | Especificação narrativa/dados; scripts pendentes | [08_dialogos_hub_degradacao.md](08_dialogos_hub_degradacao.md) |
 | Sprint 8 — Save System | Código estrutural Godot, 27 verificações aprovadas | [08_save_system.md](08_save_system.md) |
@@ -28,11 +28,13 @@ Módulos posteriores ao 09 ainda não possuem módulos publicados nesta pasta. N
 | Tema | Documento |
 |---|---|
 | Identidade, loop e invariantes de design | [Design canônico](../design/game-design.md) |
-| Arte, interface, sprites e animações | [Direção de arte 16-bit](../design/art-direction.md) |
+| Arte histórica, sprites e animações Godot | [Arte histórica Godot 16-bit](../design/art-direction.md) |
 | Prólogo, NPCs e encontros do Ato I | [Prólogo e Ato I](../design/prologue-and-act-one.md) |
 | Campanha, dilemas, fragmentos e revelação — spoilers | [Campanha](../design/campaign.md) |
 | Raridades e consumíveis experimentais | [Baseline de loot](../design/loot-baseline.md) |
 | Proposta original preservada como referência | [Proposta dos 12 mapas](../reference/proposta-original-12-mapas.md) |
+
+Direção vigente de arte/interface/modelos: [Unity 3D](../design/unity-art-direction.md).
 
 ## Engenharia
 
@@ -44,9 +46,9 @@ Módulos posteriores ao 09 ainda não possuem módulos publicados nesta pasta. N
 
 ## Precedência
 
-O módulo 01 define os cinco atributos, quatro ativas e duas passivas por classe e sprites jogáveis 32×32, substituindo o esboço preliminar. Para campanha e segurança dos hubs, vale o design canônico reconciliado. A proposta original é referência histórica e seu prompt textual não implementa o ARPG. Mudanças futuras precisam atualizar os documentos afetados e seus links.
+O módulo 01 define os cinco atributos, quatro ativas e duas passivas por classe e, historicamente no Godot, sprites jogáveis 32×32, substituindo o esboço preliminar. Para campanha e segurança dos hubs, vale o design canônico reconciliado. A proposta original é referência histórica e seu prompt textual não implementa o ARPG. Mudanças futuras precisam atualizar os documentos afetados e seus links.
 
-O módulo 02 define a stack Flutter/Flame + FastAPI/PostgreSQL e substitui a seleção de engine pendente na arquitetura preliminar. Offline e online usam autoridades separadas; não importar livremente saves locais para economia online.
+O módulo 02 registra a proposta histórica Flutter/Flame + FastAPI/PostgreSQL. Essa proposta de cliente foi sucedida por Godot e pela direção Unity; não define a stack ativa do novo cliente. Offline e online usam autoridades separadas; não importar livremente saves locais para economia online.
 
 O módulo 03 substitui o baseline de quatro raridades: acrescenta Mágico, especifica taxas condicionais e fixa receita/fragmento como recompensa única por campanha.
 
