@@ -1,0 +1,16 @@
+# C0 — blockout estático da Cidadela
+
+**Estado:** `NOVO/EXPERIMENTAL`, nível 3D não jogável. Este é um primeiro arranjo espacial editável para revisar proporções e acessos; não é um mapa aprovado nem um hub implementado. Fonte narrativa: [primeira rota 3D](../design/first-route-3d.md) e [hubs](../design/hubs-and-side-stories-3d.md). C0 continua aberto.
+
+O nível `client/unreal/Content/Aethel/Dev/Blockouts/L_C0_CitadelLayout.umap` foi criado pela Unreal 5.8.3. Contém piso da praça e aproximação do portão leste, pedestal/cristal, volume do conselho/arquivo, oficina de Bram, atendimento de Lyra, comércio de Sera, posto de Maera, cinco marcadores de NPC, duas luzes de inspeção e uma câmera perspectiva experimental de 35°. Tudo usa cubos padrão da engine. São **21 atores técnicos** com prefixo `C0_Citadel_`; marcadores não são personagens, serviços ou interações.
+
+As medidas são hipóteses em centímetros para inspeção: piso central 28 × 22 m e corredor de chegada ao portão com 6 m de largura. Não são escala aprovada. O núcleo livre liga praça, cristal e portão; o conselho fica a oeste, Bram a sudoeste, Lyra a norte, Sera a nordeste e Maera junto à saída leste. Essa disposição implementa apenas a *proposta de circulação* do documento de hubs. Sem avaliação gráfica, ela não comprova legibilidade, acessibilidade, colisão ou segurança do hub.
+
+## Reproduzir e conferir
+
+Com o editor fechado, na raiz do repositório, execute `UnrealEditor-Cmd.exe` com o `.uproject`, `-nullrhi -unattended -nop4` e `-ExecutePythonScript=<caminho absoluto com barras / para tools/unreal/c0_generate_citadel_blockout.py>`. O gerador substitui somente atores com prefixo `C0_Citadel_` no mesmo nível. Execute novamente com `tools/unreal/c0_check_citadel_blockout.py`; a saída esperada é `C0_CITADEL_BLOCKOUT_CHECK_OK actors=21 landmarks=15`. **Leia o log da Unreal:** uma falha no script pode deixar o processo com código de saída 0.
+
+Nesta máquina, Zen DDC não iniciou em um dos testes. A execução bem-sucedida usou `-ddc=NoZenLocalFallback` e `-LocalDataCachePath=<client/unreal/DerivedDataCache>` apenas no comando, sem alterar a configuração do projeto. O caminho de cache é ignorado pelo Git.
+
+**Verificado em 15/10/2026:** nível salvo com 41.834 bytes e recarregado pela Unreal; a checagem encontrou 21 atores e 15 marcos obrigatórios. Abertura gráfica, enquadramento, rota livre entre serviços, cápsulas dos cinco heróis, NavMesh, FPS e variantes narrativas **não foram verificados**. A câmera e as dimensões devem ser revistas depois da arena de escala C0-07. Não anexar GameMode, PlayerStart, inimigos, loot ou lógica de quest a este nível de C0.
+
