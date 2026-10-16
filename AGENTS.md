@@ -2,6 +2,9 @@
 
 Leia este arquivo inteiro antes de criar ou alterar qualquer arquivo. Ele vale para toda a árvore.
 
+> **Direção atual — 16/10/2026:** o proprietário escolheu a transição para Unity. Leia [unity-transition.md](docs/engineering/unity-transition.md) antes de usar as instruções históricas Godot/Unreal abaixo. Esse documento prevalece para engine e planejamento da revisão de campanha. Preserve clientes existentes; não apagar, migrar saves ou fazer merge automático. O gate C0 permanece aberto; propostas novas de narrativa/IDs exigem revisão. O novo cliente ainda não foi implementado.
+
+
 ## 1. Projeto em uma frase
 
 ARPG dark fantasy offline para Windows. O cliente **atualmente jogável** é 2D em Godot 4.6/GDScript, em `client/godot/`. O próximo cliente de produção será 3D em Unreal Engine, conforme [transição](docs/engineering/unreal-transition.md). Não tratar as convenções Godot abaixo como regras de implementação Unreal.
@@ -113,3 +116,4 @@ Use [o plano de execução Unreal](docs/engineering/unreal-execution-plan.md) pa
 - Diálogos e narrativa usam IDs e texto aprovado no GDD; texto inexistente é lacuna de conteúdo a registrar. Cinemáticas puladas e assistidas devem deixar o mesmo estado de campanha, comprovado por teste.
 - Antes de adicionar assets externos, registre origem, licença e versão. Para `.uasset` e `.umap`, confirme os filtros LFS já configurados em `.gitattributes`, a disponibilidade do LFS e o envio dos ponteiros. Não declare um asset versionado só por existir localmente.
 - Em PRs Unreal, apresente **Buscas e reuso**, **Fora do escopo** e **Validação**. Destaque mudanças em assets binários, GDD, IDs persistidos, saves e versão da engine para revisão de quem mantém o projeto. Não faça merge sozinho.
+

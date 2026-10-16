@@ -1,0 +1,607 @@
+{
+  "schema_version": 1,
+  "status": "editorial_proposal_not_runtime",
+  "target_engine": "Unity",
+  "render_pipeline": "URP",
+  "source_commit": "100b05e02725e5a5771d7418b3224c96d36d3aa4",
+  "canonical_route": "docs/engineering/campaign-route-manifest.json",
+  "proposal_ids_are_runtime_ids": false,
+  "maps": [
+    {
+      "zone_id": "forest_01",
+      "name": "Bosque das Névoas",
+      "act": 1,
+      "quest_id": "act1.spy_hunt",
+      "choice_ids": [
+        "judge_suspects",
+        "shelter_villagers"
+      ],
+      "final_encounter": {
+        "name": "Garras de Musgo",
+        "technical_id": "moss_claws",
+        "category": "sub_boss"
+      },
+      "requires_previous_zone": null,
+      "unlocks_zone": "swamp_02",
+      "design_status": "proposal_not_runtime",
+      "implemented_unity": false,
+      "identity": "Investigar confiança sob pressão",
+      "main_interaction": "Ler pegadas, ouvir testemunho e examinar o poço; distinguir indício de certeza.",
+      "optional_discovery": "Casa e porão: descobrir como os moradores organizavam o abrigo, com os dois recipientes já propostos.",
+      "human_anchor": "Maera recebe relatos; os moradores têm razões para temer tanto a estrada quanto a acusação.",
+      "combat_role": "Lobo pressiona flancos; Cultista força cobertura; Garras combina aproximação e golpe comprometido.",
+      "readability": "Enquadrar poço e bordas; ruído de folhas não mascara o aviso de ataque.",
+      "return_reaction": "Uma família agradece pela água limpa recebida, ou identifica um objeto recolhido da estrada; reação condicional, sem ressuscitar vítimas.",
+      "pacing": "Pista e abrigo antes da arena; pausa de retorno depois do confronto.",
+      "reward_role": "Dentes, consumíveis e raiz conforme catálogo existente.",
+      "regional_hub": "Cidadela dos Últimos",
+      "acceptance": "O jogador explica por que os três indícios não provam sozinhos a acusação.",
+      "decision_timing": "before_exit",
+      "consequence_authority": "docs/GDD/04_mapas_e_quests.md; preserve its exact trigger; do not expose future effects"
+    },
+    {
+      "zone_id": "swamp_02",
+      "name": "Pântano dos Lamentantes",
+      "act": 1,
+      "quest_id": "act1.desperate_alchemist",
+      "choice_ids": [
+        "deliver_venom",
+        "destroy_research"
+      ],
+      "final_encounter": {
+        "name": "Matriarca das Águas",
+        "technical_id": null,
+        "category": "sub_boss"
+      },
+      "requires_previous_zone": "forest_01",
+      "unlocks_zone": "temple_03",
+      "design_status": "proposal_not_runtime",
+      "implemented_unity": false,
+      "identity": "Observar e comparar antes de tratar",
+      "main_interaction": "Inspecionar animais tratados e cadernos; seguir margens firmes e sinalizar a passagem de retorno.",
+      "optional_discovery": "Ilha lateral de observação com anotações de doses; informação complementar, nunca cura secreta que anule o dilema.",
+      "human_anchor": "O pesquisador externo mostra melhora real de um paciente e admite não conhecer o efeito tardio.",
+      "combat_role": "Larvas disputam chão seguro; Afogados avançam lentamente; Harpias obrigam reposicionar; a Matriarca alterna pressão e pausa.",
+      "readability": "Água transitável e lama perigosa distinguíveis por forma; antídoto não é chave aleatória obrigatória.",
+      "return_reaction": "A pessoa tratada mantém nome e contexto; retorno tardio mostra o custo exato da opção, sem punir cura básica.",
+      "pacing": "Observação tranquila, travessia ameaçada, laboratório seguro para leitura, confronto.",
+      "reward_role": "Antídotos e materiais aquáticos; nenhum item resolve sozinho a decisão principal.",
+      "regional_hub": "Cidadela dos Últimos",
+      "acceptance": "As duas opções continuam compreensíveis depois da leitura dos cadernos, sem depender de acertar um puzzle.",
+      "decision_timing": "before_exit",
+      "consequence_authority": "docs/GDD/04_mapas_e_quests.md; preserve its exact trigger; do not expose future effects"
+    },
+    {
+      "zone_id": "temple_03",
+      "name": "O Portal do Julgamento",
+      "act": 1,
+      "quest_id": "act1.guardian_roots",
+      "choice_ids": [
+        "seal_sap",
+        "drain_sap"
+      ],
+      "final_encounter": {
+        "name": "Silvano",
+        "technical_id": null,
+        "category": "act_boss"
+      },
+      "requires_previous_zone": "swamp_02",
+      "unlocks_zone": "dunes_04",
+      "design_status": "proposal_not_runtime",
+      "implemented_unity": false,
+      "identity": "Compreender o que a proteção alimenta",
+      "main_interaction": "Percorrer ligações entre raízes, casas e selos; observar pares de inscrições antes da arena.",
+      "optional_discovery": "Arquivo lateral apresenta manutenção antiga dos selos; pode abrir atalho físico, não terceira solução para a seiva.",
+      "human_anchor": "Irian comenta a responsabilidade de sustentar abrigo; não exige leitura integral para avançar.",
+      "combat_role": "Defensores seguram terreno; cães expulsam de posições estáticas; Silvano testa guarda e reposicionamento.",
+      "readability": "Raízes animadas decorativas não mudam o collider sob os pés; fragmento tem assinatura visual distinta do loot.",
+      "return_reaction": "O fragmento obtido prova vitória; casas e vegetação exibem a consequência prevista no marco, não um reset do Bosque.",
+      "pacing": "Chegada monumental, investigação breve, arena, escolha depois da vitória, recuperação.",
+      "reward_role": "Fragmento e receita canônicos; recompensa de boss separada da escolha.",
+      "regional_hub": "Cidadela dos Últimos",
+      "acceptance": "A escolha só abre após vencer Silvano; ambas liberam a próxima zona sem retirar o cristal do hub.",
+      "decision_timing": "after_victory",
+      "consequence_authority": "docs/GDD/04_mapas_e_quests.md; preserve its exact trigger; do not expose future effects"
+    },
+    {
+      "zone_id": "dunes_04",
+      "name": "As Dunas de Sal",
+      "act": 2,
+      "quest_id": "act2.lost_caravan",
+      "choice_ids": [
+        "save_supplies",
+        "save_merchants"
+      ],
+      "final_encounter": {
+        "name": "Guerreiro de Vidro",
+        "technical_id": null,
+        "category": "sub_boss"
+      },
+      "requires_previous_zone": "temple_03",
+      "unlocks_zone": "valley_05",
+      "design_status": "proposal_not_runtime",
+      "implemented_unity": false,
+      "identity": "Ler a paisagem e administrar uma travessia",
+      "main_interaction": "Usar ossadas e abrigos como referências; examinar cordas e manifesto da caravana antes de escolher.",
+      "optional_discovery": "Rastro de peças desviadas apresenta a entrada da Coroa de Sucata; pode ser ignorado sem bloquear a caravana.",
+      "human_anchor": "Sobreviventes descrevem seu ofício e dependentes; a carga também representa pessoas que precisam comer.",
+      "combat_role": "Escorpiões ameaçam o chão; gárgulas interrompem abrigo prolongado; Guerreiro de Vidro expõe-se após avançar.",
+      "readability": "Tempestade reduz decoração, nunca a legibilidade de saída e telegraph; sem barra nova de sede.",
+      "return_reaction": "No acampamento, uma encomenda tem destinatário e uma ausência tem nome; a loja essencial permanece.",
+      "pacing": "Travessia aberta, abrigo, decisão, ameaça concentrada, descanso no acampamento.",
+      "reward_role": "Quartzo, resistência e essência solar; suprimentos básicos disponíveis sem dungeon.",
+      "regional_hub": "Acampamento das Dunas",
+      "acceptance": "Há caminho claro de ida e volta mesmo com efeitos reduzidos; a dungeon não vira requisito de equipamento.",
+      "decision_timing": "before_exit",
+      "consequence_authority": "docs/GDD/04_mapas_e_quests.md; preserve its exact trigger; do not expose future effects"
+    },
+    {
+      "zone_id": "valley_05",
+      "name": "O Vale dos Sacrifícios",
+      "act": 2,
+      "quest_id": "act2.flame_ritual",
+      "choice_ids": [
+        "offer_vitality",
+        "ritual_execution"
+      ],
+      "final_encounter": {
+        "name": "Executor de Bronze",
+        "technical_id": null,
+        "category": "sub_boss"
+      },
+      "requires_previous_zone": "dunes_04",
+      "unlocks_zone": "crypt_06",
+      "design_status": "proposal_not_runtime",
+      "implemented_unity": false,
+      "identity": "Ler uma sentença e assumir um custo",
+      "main_interaction": "Conferir o registro do condenado e seguir inscrições que conectam altar, fonte e tumbas.",
+      "optional_discovery": "Mirante de pedreiros revela a função original da ponte e um retorno protegido; não desfaz sentença ou custo.",
+      "human_anchor": "O prisioneiro é uma pessoa com responsabilidade verificável; não transformar exposição em absolvição automática.",
+      "combat_role": "Ritualistas preparam zonas; Hienas pressionam flancos; Executor pune permanência no mesmo lugar.",
+      "readability": "Pontes têm espaço de recuo; custo temporário conhecido aparece antes de confirmar.",
+      "return_reaction": "Marcas do altar e notícia das fontes permanecem identificáveis quando o jogador entra na Cripta.",
+      "pacing": "Pressão na ravina, pausa de evidência, compromisso, combate e passagem.",
+      "reward_role": "Bronze, runas e chama; nenhum prêmio moral novo sem orçamento aprovado.",
+      "regional_hub": "Acampamento das Dunas",
+      "acceptance": "Custo de vitalidade expira como no GDD, inclusive na morte/abandono do encontro associado; retry não cobra novamente.",
+      "decision_timing": "before_exit",
+      "consequence_authority": "docs/GDD/04_mapas_e_quests.md; preserve its exact trigger; do not expose future effects"
+    },
+    {
+      "zone_id": "crypt_06",
+      "name": "A Cripta de Ossos",
+      "act": 2,
+      "quest_id": "act2.ossuary",
+      "choice_ids": [
+        "free_captives",
+        "reinforce_seal"
+      ],
+      "final_encounter": {
+        "name": "Malignus",
+        "technical_id": null,
+        "category": "act_boss"
+      },
+      "requires_previous_zone": "valley_05",
+      "unlocks_zone": "sewers_07",
+      "design_status": "proposal_not_runtime",
+      "implemented_unity": false,
+      "identity": "Reconhecer pessoas por trás de uma prisão",
+      "main_interaction": "Ouvir nomes e observar correntes reagindo à pressão do selo; investigar antes de decidir o destino dos cativos.",
+      "optional_discovery": "Inscrição lateral introduz o Livro dos Nomes Perdidos; todas as provas da quest principal ficam fora da dungeon.",
+      "human_anchor": "Uma alma reconhece um registro de família; Irian conserva versões contraditórias, sem falar por todas as vítimas.",
+      "combat_role": "Múmias sustentam grupos; sombras pressionam posicionamento; Malignus combina contenção e janelas de ataque.",
+      "readability": "Caminhos e piso contrastam com ossos decorativos; vozes têm legenda e repetição acessível.",
+      "return_reaction": "O retorno diferencia libertação e prisão mantida pelo estado canônico; não substitui Malignus por Namar.",
+      "pacing": "Galerias silenciosas, ataques pontuais, ossuário, boss, escolha e retirada.",
+      "reward_role": "Fragmento e receita do Ossuário; primeira recompensa única independente da dungeon.",
+      "regional_hub": "Acampamento das Dunas",
+      "acceptance": "Recusar Namar não impede fragmento, revelação ou progressão ao ato III.",
+      "decision_timing": "after_victory",
+      "consequence_authority": "docs/GDD/04_mapas_e_quests.md; preserve its exact trigger; do not expose future effects"
+    },
+    {
+      "zone_id": "sewers_07",
+      "name": "Os Esgotos de Éter",
+      "act": 3,
+      "quest_id": "act3.purification_valve",
+      "choice_ids": [
+        "drain_lower",
+        "reverse_flow"
+      ],
+      "final_encounter": {
+        "name": "Mãe das Proles",
+        "technical_id": null,
+        "category": "sub_boss"
+      },
+      "requires_previous_zone": "crypt_06",
+      "unlocks_zone": "foundry_08",
+      "design_status": "proposal_not_runtime",
+      "implemented_unity": false,
+      "identity": "Entender infraestrutura e quem vive abaixo",
+      "main_interaction": "Inspecionar diagrama e marcas de moradia; usar passagens de manutenção para observar destino do fluxo.",
+      "optional_discovery": "Arquivo de reparos revela quem mantinha os canais; abre retorno curto com piso estável.",
+      "human_anchor": "Uma técnica dos canais tem conhecimentos e vizinhos; fala como trabalhadora, não como painel de instruções.",
+      "combat_role": "Ratos atacam em aproximações curtas; mutantes seguram passagens; aranhas sinalizam controle de espaço; Mãe das Proles exige priorização.",
+      "readability": "Água é legível em alturas diferentes; o hub nunca recebe dano após a mudança de fluxo.",
+      "return_reaction": "Relatos de moradores e familiares tornam o destino do resíduo concreto, no gatilho já previsto.",
+      "pacing": "Leitura hidráulica, travessia, pausa de decisão, ninho, retorno seco.",
+      "reward_role": "Catalisadores e essência tóxica; drenagem não cria fonte de farm por reload.",
+      "regional_hub": "Refúgio Subterrâneo",
+      "acceptance": "O jogador consegue apontar quem fica abaixo/acima antes de decidir; efeitos não bloqueiam o retorno.",
+      "decision_timing": "before_exit",
+      "consequence_authority": "docs/GDD/04_mapas_e_quests.md; preserve its exact trigger; do not expose future effects"
+    },
+    {
+      "zone_id": "foundry_08",
+      "name": "A Fundição Proibida",
+      "act": 3,
+      "quest_id": "act3.energy_core",
+      "choice_ids": [
+        "extract_core",
+        "stabilize_core"
+      ],
+      "final_encounter": {
+        "name": "Autômato Forjador",
+        "technical_id": null,
+        "category": "sub_boss"
+      },
+      "requires_previous_zone": "sewers_07",
+      "unlocks_zone": "abyss_09",
+      "design_status": "proposal_not_runtime",
+      "implemented_unity": false,
+      "identity": "Separar capacidade de produzir de responsabilidade",
+      "main_interaction": "Observar ciclos de máquinas e medidores; escutar exploradores e verificar o posto de contenção.",
+      "optional_discovery": "Oficina de manutenção mostra reparos e reuso; oferece descoberta temática, sem iniciar crafting avançado.",
+      "human_anchor": "Uma exploradora identifica companheiros pela voz; Bram reage depois por correspondência, não por teletransporte narrativo.",
+      "combat_role": "Constructos bloqueiam; elementalistas disputam posições; Autômato Forjador tem silhueta e recuperação próprias.",
+      "readability": "Primeira implementação usa piso estático; máquinas móveis só após teste de colisão e rota alternativa.",
+      "return_reaction": "Peças trazidas à oficina ou vozes na máquina correspondem à decisão, com ganho limitado e único.",
+      "pacing": "Cadência de máquinas, janela de observação, decisão sob pressão narrada, confronto.",
+      "reward_role": "Ligas, gemas e essência de forja; upgrade do núcleo respeita orçamento e unicidade.",
+      "regional_hub": "Refúgio Subterrâneo",
+      "acceptance": "Extrair/equipar/recarregar não duplica melhoria; estabilizar não prende o personagem com os exploradores.",
+      "decision_timing": "before_exit",
+      "consequence_authority": "docs/GDD/04_mapas_e_quests.md; preserve its exact trigger; do not expose future effects"
+    },
+    {
+      "zone_id": "abyss_09",
+      "name": "O Abismo da Voracidade",
+      "act": 3,
+      "quest_id": "act3.last_hunger",
+      "choice_ids": [
+        "break_bond",
+        "seal_creature"
+      ],
+      "final_encounter": {
+        "name": "Gorgoroth",
+        "technical_id": null,
+        "category": "act_boss"
+      },
+      "requires_previous_zone": "foundry_08",
+      "unlocks_zone": "gardens_10",
+      "design_status": "proposal_not_runtime",
+      "implemented_unity": false,
+      "identity": "Ouvir testemunhos e atravessar o horror sem perder orientação",
+      "main_interaction": "Seguir fios visuais de vínculo e identificar túneis habitados; parar em abrigo antes da arena.",
+      "optional_discovery": "Registro de uma expedição anterior contextualiza a rede; informação de linhagem obrigatória tem alternativa fora da secundária do Traidor.",
+      "human_anchor": "Uma vítima descreve a voz de sua filha; o jogo distingue esperança, fato observado e imitação.",
+      "combat_role": "Parasitas forçam mudança de alvo; abominações definem espaço; Gorgoroth testa leitura de vínculos e retirada.",
+      "readability": "Geometria estável sob superfície orgânica; modo reduzido mantém leitura sem pulsação intensa.",
+      "return_reaction": "Libertados ou memoriais sem nomes aparecem conforme a escolha e o marco do ato III.",
+      "pacing": "Opressores corredores curtos, abrigo, boss, escolha pós-vitória e saída limpa.",
+      "reward_role": "Fragmento e Foco Abissal conforme cânone; recompensas sem redução permanente por decisão.",
+      "regional_hub": "Refúgio Subterrâneo",
+      "acceptance": "Vencer Gorgoroth continua sendo vitória real; vínculo/fragmento e decisão sobrevivem a reload.",
+      "decision_timing": "after_victory",
+      "consequence_authority": "docs/GDD/04_mapas_e_quests.md; preserve its exact trigger; do not expose future effects"
+    },
+    {
+      "zone_id": "gardens_10",
+      "name": "Os Jardins Suspensos de Éter",
+      "act": 4,
+      "quest_id": "act4.judgment_throne",
+      "choice_ids": [
+        "grant_pardon",
+        "condemn_souls"
+      ],
+      "final_encounter": {
+        "name": "Arconte de Prata",
+        "technical_id": null,
+        "category": "sub_boss"
+      },
+      "requires_previous_zone": "abyss_09",
+      "unlocks_zone": "bridge_11",
+      "design_status": "proposal_not_runtime",
+      "implemented_unity": false,
+      "identity": "Julgar uma instituição pela origem de sua energia",
+      "main_interaction": "Ler listas do pedestal e observar muralhas distantes; comparar a proteção prometida com quem a sustenta.",
+      "optional_discovery": "Observatório oferece contexto das barreiras e um ponto de vista alternativo; não revela o epílogo.",
+      "human_anchor": "Registros de responsáveis e almas substituem sermão de um narrador onisciente.",
+      "combat_role": "Sentinelas controlam linhas; espectros obrigam reposicionar; Arconte expõe a lógica de proteção no confronto.",
+      "readability": "Mármore claro não apaga telegraphs; guardas visuais nas bordas e oclusão resolvida.",
+      "return_reaction": "O Posto comenta refugiados ou preservação das barreiras; efeito completo na Cidadela segue o gatilho existente.",
+      "pacing": "Amplitude e silêncio, leitura breve, combate ordenado, decisão e subida.",
+      "reward_role": "Materiais celestiais e essência estelar; buff conhecido limitado ao encontro associado.",
+      "regional_hub": "Posto do Limiar",
+      "acceptance": "Decisão não ameaça o cristal próprio da Cidadela; custo/benefício mecânico aparece sem spoilers futuros.",
+      "decision_timing": "before_exit",
+      "consequence_authority": "docs/GDD/04_mapas_e_quests.md; preserve its exact trigger; do not expose future effects"
+    },
+    {
+      "zone_id": "bridge_11",
+      "name": "A Ponte dos Lamentos",
+      "act": 4,
+      "quest_id": "act4.last_gate",
+      "choice_ids": [
+        "break_seal",
+        "channel_body"
+      ],
+      "final_encounter": {
+        "name": "Guardião dos Portões",
+        "technical_id": null,
+        "category": "sub_boss"
+      },
+      "requires_previous_zone": "gardens_10",
+      "unlocks_zone": "heart_12",
+      "design_status": "proposal_not_runtime",
+      "implemented_unity": false,
+      "identity": "Preparar uma última passagem e aceitar compromisso",
+      "main_interaction": "Observar fissuras, selo e sinais da escolta; confirmar recursos antes da travessia final.",
+      "optional_discovery": "Torre lateral permite rever registros de viagem e ouvir Maera; sem novo desvio longo de loot.",
+      "human_anchor": "A mensagem de Maera reconhece a escolta e suas escolhas sem tratar o herói como soma de karma.",
+      "combat_role": "Guardas de Vael e constructos exigem alternância de alvo; Guardião deixa espaço legível para esquiva.",
+      "readability": "Sem queda instantânea por câmera; ruptura narrativa não remove piso sob o herói nem impede retry seguro.",
+      "return_reaction": "A vigília ou a escolta marcada aparece no marco previsto; entrada final não reaplica custo de MP.",
+      "pacing": "Preparação calma, travessia tensa, confronto, decisão de selo, soleira.",
+      "reward_role": "Runas e essência de limiar; não exigir farm de dungeon para enfrentar Vael.",
+      "regional_hub": "Posto do Limiar",
+      "acceptance": "O jogador pode se preparar e repetir Vael sem lockout por ponte/custo; a primeira escolha continua gravada.",
+      "decision_timing": "before_exit",
+      "consequence_authority": "docs/GDD/04_mapas_e_quests.md; preserve its exact trigger; do not expose future effects"
+    },
+    {
+      "zone_id": "heart_12",
+      "name": "O Coração de Éter",
+      "act": 4,
+      "quest_id": "act4.heart_fate",
+      "choice_ids": [
+        "restore_order",
+        "embrace_ascension"
+      ],
+      "final_encounter": {
+        "name": "Vael",
+        "technical_id": null,
+        "category": "final_boss"
+      },
+      "requires_previous_zone": "bridge_11",
+      "unlocks_zone": null,
+      "design_status": "proposal_not_runtime",
+      "implemented_unity": false,
+      "identity": "Confrontar uma ideologia e escolher o destino do mundo",
+      "main_interaction": "Revisar provas de linhagem já observadas e enfrentar Vael antes de qualquer opção final.",
+      "optional_discovery": "Sem dungeon, sala de farm ou nova tarefa obrigatória; revisão opcional de registros preserva o ritmo final.",
+      "human_anchor": "Vael tenta apropriar-se das escolhas; testemunhos anteriores contradizem seu controle absoluto.",
+      "combat_role": "Fases propostas para medir domínio das ações aprendidas; nenhuma fase exige habilidade de outra classe.",
+      "readability": "Arena e borda estáveis; eclipse e música não escondem alvos; apresentação pulável restaura controle.",
+      "return_reaction": "Epílogos por regiões e pessoas mostram ganhos reais e custos canônicos; não apagar os nomes que o jogador preservou sem explicar o evento.",
+      "pacing": "Revelação, confronto, silêncio pós-vitória, decisão, epílogos com tempo de leitura.",
+      "reward_role": "Fragmento de Vael e recompensa final única; campanha encerrada sem farm implícito.",
+      "regional_hub": "Posto do Limiar",
+      "acceptance": "restore_order e embrace_ascension só aparecem após vitória; pular/assistir epílogo produz o mesmo save.",
+      "decision_timing": "after_victory",
+      "consequence_authority": "docs/GDD/04_mapas_e_quests.md; preserve its exact trigger; do not expose future effects"
+    }
+  ],
+  "hubs": [
+    {
+      "zone_id": "citadel",
+      "name": "Cidadela dos Últimos",
+      "act": 1,
+      "safe": true,
+      "services": [
+        "preparation",
+        "save",
+        "inventory",
+        "essential_shop"
+      ],
+      "cast": "Irian, Bram, Lyra, Sera, Maera (existentes)",
+      "proposed_local_role": "Conselho distribui relatos; nenhum NPC precisa repetir toda a exposição.",
+      "interactions": [
+        "Irian: comparar relatos observados e registrar ausentes.",
+        "Bram: inspecionar equipamento; oficina continua mesmo sem aprendiz.",
+        "Lyra: suprimentos e relatos de tratamento.",
+        "Sera: comércio e pistas de caravanas.",
+        "Maera: orientar saída e reconhecer retorno."
+      ],
+      "regional_memory": "Fatos específicos prevalecem sobre afinidade agregada; segurança e serviços nunca desaparecem."
+    },
+    {
+      "zone_id": "dunes_camp",
+      "name": "Acampamento das Dunas",
+      "act": 2,
+      "safe": true,
+      "services": [
+        "preparation",
+        "save",
+        "inventory",
+        "essential_shop"
+      ],
+      "cast": "Tessa, intendente de caravana (NOVO/EXPERIMENTAL; nome e ID não aprovados)",
+      "proposed_local_role": "Conta suprimentos por famílias, conhece a estrada e contesta simplificações de Sera sem substituí-la.",
+      "interactions": [
+        "Consultar quadro de carga/desaparecidos conforme fatos observados.",
+        "Comprar preparação básica por fornecedor local.",
+        "Ouvir sobrevivente e conhecer a pista de Gorvak, com opção de recusar."
+      ],
+      "regional_memory": "Carga ou sobreviventes da caravana alteram falas e objetos; poço secundário e dungeon não decidem a quest principal."
+    },
+    {
+      "zone_id": "underground_refuge",
+      "name": "Refúgio Subterrâneo",
+      "act": 3,
+      "safe": true,
+      "services": [
+        "preparation",
+        "save",
+        "inventory",
+        "essential_shop"
+      ],
+      "cast": "Dara, técnica dos canais; Eron, responsável de provisões (NOVO/EXPERIMENTAL; IDs pendentes)",
+      "proposed_local_role": "Dara dá rosto ao trabalho hidráulico já citado no GDD; Eron cuida de pessoas concretas, sem virar apenas vendedor.",
+      "interactions": [
+        "Ler mapa hidráulico com legenda acessível.",
+        "Ouvir versões das comunidades superiores e inferiores.",
+        "Receber relatos da Fundição e notícia verificável do Traidor."
+      ],
+      "regional_memory": "Fluxo, contenção e vítimas do Abismo têm retornos locais distintos; plataforma do hub permanece seca e segura."
+    },
+    {
+      "zone_id": "liminal_post",
+      "name": "Posto do Limiar",
+      "act": 4,
+      "safe": true,
+      "services": [
+        "preparation",
+        "save",
+        "inventory",
+        "essential_shop"
+      ],
+      "cast": "Vera, guardiã dos registros e provisões (NOVO/EXPERIMENTAL; ID pendente)",
+      "proposed_local_role": "Apresenta provas verificáveis e admite lacunas; não substitui Irian nem fala de eventos ainda não observados.",
+      "interactions": [
+        "Rever evidências de linhagem sem depender da palavra de Vael.",
+        "Preparar combate e verificar recursos.",
+        "Receber comunicação de Maera e rever fatos regionais conhecidos."
+      ],
+      "regional_memory": "Refugiados e escolta refletem flags específicas; posto não antecipa final e preserva preparação/retry."
+    }
+  ],
+  "dungeons": [
+    {
+      "proposal_key": "proposal.dungeon.ash_crown",
+      "name": "A Coroa de Sucata",
+      "source_zone": "dunes_04",
+      "boss": "Gorvak, Rei das Cinzas",
+      "category": "sub_boss",
+      "optional": true,
+      "campaign_fragment": false,
+      "affects_ritual_charge": false,
+      "design_status": "proposal_not_runtime",
+      "runtime_ids_approved": false,
+      "identity": "Cerco e logística: entender uma fortaleza construída por quem precisa sobreviver.",
+      "discovery": "Sera menciona caravanas; peças e marcas de carga na rota opcional confirmam o rumor sem exigir aceitar a missão.",
+      "beats": [
+        "Examinar a entrada e o aviso de risco; voltar livremente.",
+        "Observar sinais entre vigias goblins e defensores orcs da Coligação das Cinzas.",
+        "Escolher caminho de combate frontal ou desvio de manutenção; ambos chegam ao mesmo confronto e não são nova escolha moral.",
+        "Desativar um engenho opcional com interação legível; confirmação persiste e não duplica material.",
+        "Inspecionar carga e testemunho de sobrevivente; registrar o conflito por água sem declarar um povo maligno.",
+        "Abrir retirada antes da arena.",
+        "Enfrentar Gorvak: marreta anunciada, recuperação vulnerável e reforços limitados por fase; sem geometria destruída que prenda saída.",
+        "Confirmar resultado e recompensa; devolver à âncora segura.",
+        "Retornar à conversa de Sera para reconhecimento, sem rolar loot novamente."
+      ],
+      "boss_answer": "Usar cobertura sinalizada, reposicionar antes da marreta e aproveitar recuperação; reforços têm limite definido em catálogo antes do runtime.",
+      "narrative_payoff": "Sera reconhece o destino da carga e sobreviventes observados; conclusão não reverte save_supplies/save_merchants.",
+      "reward_policy": "Tabela de subchefe existente; recompensa adicional de primeira quest só após catálogo e simulação. Não prometer dois equipamentos garantidos por ambiguidade.",
+      "replay_policy": "Primeira versão sem reset/farm; retorno de exploração sem recompensas duplicadas. Repetição futura exige encounter_epoch e regra aprovada.",
+      "entry_exit": "Bilhete persistido, destino/âncora validados; falha de load recupera origem; morte segue checkpoint seguro sem perder fatos confirmados.",
+      "acceptance": [
+        "Pode concluir campanha sem entrar.",
+        "Pode sair antes do boss.",
+        "Bolsa cheia preserva recompensa na reserva.",
+        "Vitória antes da aceitação é reconhecida sem repetir boss/loot.",
+        "Gorvak não concede fragmento, carga ritual nem gate obrigatório."
+      ]
+    },
+    {
+      "proposal_key": "proposal.dungeon.lost_names",
+      "name": "O Livro dos Nomes Perdidos",
+      "source_zone": "crypt_06",
+      "boss": "Namar, o Rei sem Nome",
+      "category": "sub_boss",
+      "optional": true,
+      "campaign_fragment": false,
+      "affects_ritual_charge": false,
+      "design_status": "proposal_not_runtime",
+      "runtime_ids_approved": false,
+      "identity": "Memória como prisão: reconstruir testemunhos sem depender de reconhecer som ou cor.",
+      "discovery": "Registros de Irian e inscrição lateral da Cripta apontam o ossuário; informação essencial de Malignus permanece na campanha.",
+      "beats": [
+        "Ler aviso de perigo e registrar âncora de retorno.",
+        "Relacionar placas de nomes a registros de famílias; texto e ícones substituem pistas somente sonoras.",
+        "Atravessar sala de ecos com inimigos que reagem a sinos anunciados.",
+        "Silenciar um sino opcional por mecanismo acessível; persistir estado, sem puzzle de senha aleatória.",
+        "Ouvir contradição entre um nome preservado e a pessoa que o carregava; não revelar outra origem para Vael.",
+        "Abrir retirada antes da câmara.",
+        "Enfrentar Namar: comandos de invocação limitados, círculos de silêncio visíveis e janela após cada comando; básico e esquiva continuam utilizáveis.",
+        "Confirmar derrota e registro dos nomes; recompensa uma vez.",
+        "Voltar a Irian para microcena pulável de memória, sem transferir a ele a autoridade do save."
+      ],
+      "boss_answer": "Priorizar invocações relevantes, sair do círculo e punir o intervalo de comando; silêncio não pode inutilizar todas as respostas de uma classe.",
+      "narrative_payoff": "Nomes recuperados ganham lugar no arquivo; não substituem o dilema free_captives/reinforce_seal e não libertam retroativamente os cativos de Malignus.",
+      "reward_policy": "Categoria de subchefe existente, orçamento de mesmo ato. A recompensa informa função/raridade conhecida e nunca vende certeza não garantida.",
+      "replay_policy": "Primeira versão sem reset/farm; nova campanha tem identidade própria. Reentrada não repete vitória, item ou XP.",
+      "entry_exit": "Mesmo contrato transacional da Coroa; nome de cena não é ID persistido; nenhum checkpoint criado automaticamente.",
+      "acceptance": [
+        "Malignus e a campanha funcionam sem Namar.",
+        "Todas as pistas têm alternativa textual.",
+        "Silêncio mantém pelo menos resposta ofensiva e evasiva válida por classe.",
+        "Pular/assistir retorno dá o mesmo estado.",
+        "Namar não concede fragmento nem altera a carga ritual."
+      ]
+    }
+  ],
+  "side_quests": [
+    {
+      "proposal_key": "proposal.side.cultist_judgment",
+      "name": "O Julgamento do Cultista",
+      "zone": "forest_01",
+      "act": 1,
+      "setup": "Pessoas distintas dos acusados da aldeia; depoimento sobre crianças e rota de resgate.",
+      "interaction": "Investigar um ponto lateral seguro, confrontar versões e confirmar opção; não reutilizar a flag da aldeia.",
+      "options": [
+        "Poupar: resgate possível e contaminação posterior.",
+        "Executar: vetor interrompido, crianças sem resgate e maldição alimentada."
+      ],
+      "return_to": "Maera/Irian",
+      "affects_ritual_charge": false
+    },
+    {
+      "proposal_key": "proposal.side.water_of_life",
+      "name": "A Água da Vida",
+      "zone": "valley_05",
+      "act": 2,
+      "setup": "Poço lateral antes do altar principal; soldados melhoram, inscrição mostra ligação ao selo.",
+      "interaction": "Inspecionar poço e falar com beneficiário; escolha separada da vitalidade do mapa 05.",
+      "options": [
+        "Canalizar: cura e fanatismo.",
+        "Selar e inutilizar saída: barreira preservada, cura perdida."
+      ],
+      "return_to": "Acampamento das Dunas; relato posterior de Lyra",
+      "affects_ritual_charge": false
+    },
+    {
+      "proposal_key": "proposal.side.traitor_alliance",
+      "name": "A Aliança com o Traidor",
+      "zone": "foundry_08",
+      "act": 3,
+      "setup": "Prisioneiro ligado à rede de almas numa sala lateral; um registro verifica parte da oferta.",
+      "interaction": "Investigar e decidir sem bloquear o núcleo ou colocar linhagem obrigatória somente nesta missão.",
+      "options": [
+        "Libertar: informação e fortalecimento da rede.",
+        "Matar: rede encerrada e onda que altera encontros futuros, sem reduzir XP/loot permanentemente."
+      ],
+      "return_to": "Refúgio Subterrâneo",
+      "affects_ritual_charge": false
+    }
+  ],
+  "open_gates": [
+    "Editorial approval of new names/interactions",
+    "Metric layouts and camera test",
+    "Item catalog and economy simulation",
+    "Unity implementation",
+    "Assets rigs animation audio",
+    "Windows build and human playtest"
+  ]
+}

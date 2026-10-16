@@ -68,4 +68,9 @@ Vael recebe o herói antes do combate: “Cada misericórdia alimentou minha pac
 | Invocadora | “Seus ancestrais não me esqueceram. Fugiam de mim através de você.” |
 | Inquisidor | “Sua chama e a minha nasceram da mesma fome. O fogo não distingue pai e filho.” |
 
-Prólogo, revelação e epílogos são detalhados no [módulo 07](../GDD/07_roteiro_e_dialogos.md). O nome dramático “O Fim da Ordem” identifica restore_order, mantendo a restauração do filtro, sem trocar a opção canônica.
+Prólogo, revelação e epílogos são detalhados no [módulo 07](../GDD/07_roteiro_e_dialogos.md). Conforme `production-decisions.md`, `restore_order` usa **A Restauração da Ordem / O Fim da Ruína**; `embrace_ascension` usa **A Ascensão Estelar**, podendo usar **O Fim da Ordem** como subtítulo. Os títulos não trocam IDs, efeitos ou epílogos canônicos.
+
+
+## Interações da campanha completa
+
+A [proposta editorial de interações](campaign-interactions.md) detalha os 12 mapas, quatro hubs, três secundárias e duas dungeons para a direção Unity. Não altera as 24 opções nem aprova automaticamente nomes ou conteúdo novo.
