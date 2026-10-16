@@ -1,0 +1,10 @@
+Arquivo: subboss-water-matriarch.png
+Data: 2026-10-15 (America/Bahia)
+Ferramenta: OpenAI imagegen integrado ao Codex
+Referências fornecidas: docs/media/concepts/aethel-visual-target.png
+Brief/prompt de assunto: Matriarca das Águas; corpo aquático com centro visível.
+Template de composição: prancha original de personagem para ARPG 3D de fantasia sombria; mesma figura completa em frente, perfil e costas, detalhe de rosto/material, fundo de estúdio carvão, paleta gótica da referência, sem texto/UI/logos e sem semelhança intencional com personagem de franquia.
+Fidelidade do prompt: brief e template preservam a intenção; o texto integral exato da chamada de geração não foi arquivado para esta prancha. Não tratar este registro como transcrição literal.
+Resultado: 1672 x 941 px; 2620141 bytes; SHA-256 e6dccf3d8c0c6f273d9a0e026e8a63b253f2cdf3e75e75c810c9b1374f86dd24
+Estado: gerado, não aprovado; vistas não ortográficas; silhueta preta, escala relativa ao Bastião, modelo, rig e animações ainda não validados.
+Direitos: saída gerada para o projeto, sem asset externo licenciado. Termos aplicáveis da OpenAI: https://openai.com/policies/terms-of-use/ e https://openai.com/policies/service-terms/ (consultados em 2026-10-15); o responsável deve revisar a origem dos inputs e o uso final. Este registro não escolhe a licença pública do jogo.

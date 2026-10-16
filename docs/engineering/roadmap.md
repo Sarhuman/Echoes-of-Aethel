@@ -1,5 +1,9 @@
 # Plano de implementação
 
+## Nova direção de cliente — 14/10/2026
+
+O jogo Godot permanece a primeira fatia jogável e referência de regressão. O próximo cliente será uma prova 3D em Unreal Engine, conforme [plano de transição](unreal-transition.md). Antes de ampliar para os outros 11 mapas, produzir e medir a [rota Cidadela → Bosque](../design/first-route-3d.md), incluindo interiores, loot persistente, comércio, combate e uma abertura curta. O [índice da campanha](campaign-content-index.md) separa especificação, blockout, jogo e arte final. As seções numeradas abaixo registram o plano anterior do cliente Godot e a expansão narrativa; não são instruções para portar tiles ou scripts literalmente.
+
 ## 0 — Validar a base técnica escolhida
 
 Definir plataforma inicial e controles. Validar Godot/GDScript, conforme a [Sprint 6](../GDD/06_arquitetura_software.md), com uma cena pequena: movimento, colisão, ataque, luz e save. Registrar decisão, versão verificada e instruções reproduzíveis. Aceite: exportação executável no equipamento-alvo e retorno de save válido.

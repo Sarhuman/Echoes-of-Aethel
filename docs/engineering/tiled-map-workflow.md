@@ -1,5 +1,7 @@
 # Autoria de mapas com Tiled
 
+> **Escopo histórico do cliente Godot:** o próximo cliente 3D será construído na Unreal, conforme [transição](unreal-transition.md). Não exigir `.tmx` para mapas Unreal; manter este fluxo somente se algum mapa 2D Godot continuar em produção.
+
 Tiled é a ferramenta escolhida para desenhar os próximos mapas. A cena Godot continua responsável por combate, câmera, iluminação e interação. Cidadela e Bosque desta fatia ainda são cenas Godot com fundo pintado; não são mapas Tiled e não devem ser descritos como tal.
 
 Para cada mapa novo, mantenha o arquivo-fonte `.tmx` e seus tilesets no repositório. Use orientação isométrica 2:1, tamanho de tile fixo por conjunto e coordenadas em pixels para os objetos. Separe chão, obstáculos, elementos acima dos atores e detalhes decorativos em camadas. Use camadas de objetos para colisão, spawn, saídas e pontos de interação, com IDs estáveis compatíveis com o catálogo do jogo e com o save.

@@ -1,6 +1,8 @@
 # Echoes of Aethel
 
-**ARPG 2D dark fantasy · Godot 4.6 · um jogador · offline**
+**ARPG dark fantasy · um jogador · offline**
+
+**Estado:** a versão jogável atual é 2D em Godot 4.6. O próximo cliente de produção será 3D em Unreal Engine; [transição, contratos e aceite](docs/engineering/unreal-transition.md). O [projeto Unreal mínimo](client/unreal/README.md) compilou como Editor e passou o teste Automation de atributos em 15/10/2026; ainda não há cena jogável ou build Windows empacotada validada. A parte jogável espera o [gate de conteúdo C0](docs/engineering/unreal-execution-plan.md). O [índice da campanha](docs/engineering/campaign-content-index.md) separa os 12 mapas especificados dos mapas implementados; a [primeira rota 3D](docs/design/first-route-3d.md) define Cidadela, Bosque, interiores e recompensas propostas.
 
 > O caminho para o inferno está cheio de boas intenções.
 
@@ -70,6 +72,6 @@ A arena experimental anterior continua em `res://playtest/arena.tscn` para compa
 
 ## Documentação
 
-[Escopo](docs/engineering/project-scope.md) · [Decisões da primeira fatia](docs/engineering/decisions-first-slice.md) · [Estrutura](docs/engineering/project-structure.md) · [Cartões T00–T12](docs/engineering/tasks/README.md) · [GDD](docs/GDD/README.md) · [Proposta visual](docs/design/visual-proposal.md) · [Guia para agentes](AGENTS.md) · [Changelog](CHANGELOG.md)
+[Transição Unreal](docs/engineering/unreal-transition.md) · [Projeto Unreal mínimo](client/unreal/README.md) · [Índice da campanha](docs/engineering/campaign-content-index.md) · [Primeira rota 3D](docs/design/first-route-3d.md) · [Escopo Godot](docs/engineering/project-scope.md) · [Decisões da primeira fatia](docs/engineering/decisions-first-slice.md) · [Estrutura Godot](docs/engineering/project-structure.md) · [Cartões T00–T12](docs/engineering/tasks/README.md) · [GDD](docs/GDD/README.md) · [Proposta visual](docs/design/visual-proposal.md) · [Guia para agentes](AGENTS.md) · [Changelog](CHANGELOG.md)
 
 Nenhuma licença geral foi definida pelo proprietário do projeto; o repositório não concede licença pública automaticamente.

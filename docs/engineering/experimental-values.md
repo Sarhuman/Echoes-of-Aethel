@@ -116,6 +116,15 @@ Faixa de item do mapa 01: 1–3 (GDD 04); `requirement_level = 1`. Nomes são pl
 
 Fora do slice. Hub e saída inicial nunca geram elites (decisões de produção §3).
 
+## 10. Recipientes fixos da primeira rota 3D (proposta)
+
+Estes valores são **NOVO/EXPERIMENTAL** para a [ficha de interiores](../design/first-route-3d.md), não estão implementados no cliente Godot e não alteram suas tabelas de drop. Um item por recipiente, uma concessão por campanha, com reserva persistente se a bolsa estiver cheia.
+
+| `reward_id` | Item | Quantidade | Origem |
+|---|---|---:|---|
+| `reward.forest_01.abandoned_house.cache` | `potion_health_small` | 1 | NOVO/EXPERIMENTAL |
+| `reward.forest_01.root_cellar.cache` | `antidote_flask` | 1 | NOVO/EXPERIMENTAL |
+
 ## 10. Como alterar um valor
 
 1. Edite a linha aqui e o `.tres`/constante correspondente no mesmo PR.

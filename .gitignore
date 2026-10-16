@@ -6,3 +6,9 @@ secrets/
 .godot-tools/
 dist/
 test-results/
+client/unreal/Binaries/
+client/unreal/DerivedDataCache/
+client/unreal/Intermediate/
+client/unreal/Saved/
+client/unreal/.vs/
+client/unreal/*.sln

@@ -1,5 +1,7 @@
 # Echoes of Aethel — escopo de produto e produção
 
+> Este é o escopo da primeira fatia **Godot**. A direção do próximo cliente 3D e seus critérios de equivalência estão em [Transição para Unreal](unreal-transition.md); não converter pixels/tiles deste escopo em medidas 3D automaticamente.
+
 > Estado de implementação: a primeira fatia está jogável em `0.2.0-dev`. Para conflitos sobre slots, MP, dano e checkpoint, prevalecem as [decisões D1–D8](decisions-first-slice.md). Esta página mantém parte do texto histórico de planejamento.
 
 Versão 1.0 · 13/10/2026 · plataforma inicial: Windows · Godot 4.6.

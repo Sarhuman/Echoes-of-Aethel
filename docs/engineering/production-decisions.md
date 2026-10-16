@@ -1,12 +1,14 @@
 # Decisões de produção — vertical slice offline
 
-**Fonte:** definições do Game Director fornecidas em 13/10/2026. **Estado:** escopo aprovado; reconciliação de runtime pendente. Esta referência prevalece sobre propostas anteriores incompatíveis. Aprovação de design não significa que o código já implemente estas regras.
+> **Atualização de direção, 14/10/2026:** o usuário escolheu preparar um novo cliente 3D em Unreal. A decisão antiga de Godot/GDScript definitivo abaixo descreve a primeira fatia já jogável, não a engine do próximo cliente. O [plano de transição](unreal-transition.md) rege somente engine/pipeline; regras de domínio deste documento continuam válidas.
+
+**Fonte:** definições do Game Director fornecidas em 13/10/2026. **Estado:** regras aprovadas para a primeira fatia, com implementação Godot parcial/completa conforme cada módulo; próximo cliente 3D em preparação. Aprovação de design não significa que todo o GDD já seja executável.
 
 ## 1. Entrega e plataforma
 
-- Godot/GDScript definitivo; Windows desktop primeiro. Web e Android em marcos posteriores.
+- Cliente Godot/GDScript validado para a primeira fatia; novo cliente 3D planejado em Unreal conforme `unreal-transition.md`. Windows desktop primeiro; Web e Android em marcos posteriores.
 - Slice: Bastião, Cidadela, Bosque, Lobo Etéreo, Cultista Cego-Guiado (nome curto Cultista Cego), Garras de Musgo, A Caça ao Espião e degradação inicial do hub.
-- Core: combate básico, inventário com capacidade/peso, IA e save local. Outras classes, mapas 2–12, multiplayer, crafting avançado e comércio ficam fora do slice.
+- Core da primeira fatia: combate básico, inventário com capacidade/peso, IA, comércio limitado na Cidadela e save local. Outras classes, mapas 2–12, multiplayer e crafting avançado ficam fora do slice.
 - Top-down 3/4 com perfil de projeção 2:1. Input lógico limitado/normalizado; projeção `(x, y×0,5)`. Distância vertical na tela é menor por definição. Colisores/mapa/percepção precisam usar a métrica escolhida coerentemente; aplicar 0,5 só na velocidade não transforma automaticamente toda a física em isométrica.
 
 ## 2. Recursos e dash

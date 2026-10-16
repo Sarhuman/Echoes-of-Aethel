@@ -1,0 +1,48 @@
+# G02 — auditoria inicial de portabilidade Godot → Unreal
+
+**Estado: em andamento, 15/10/2026.** Leitura estática do checkout local e da base C++ do PR #23. Não executei as suítes neste passo nem medi FPS; os 22% da planilha `Echoes_of_Aethel_Rumo_ao_Diablo_II_v2.xlsx` continuam uma **estimativa**, não resultado desta auditoria. Contei 62 scripts `.gd` (17 sob `tests/`, dos quais 16 são suítes `test_*.gd` e um é sonda) e 13 arquivos `.h/.cpp` no módulo Unreal, incluindo um teste Automation. Contagens de arquivos não medem cobertura ou qualidade.
+
+## O que existe no código
+
+| Capacidade | Evidência Godot | Situação Unreal e ação de migração |
+|---|---|---|
+| Atributos HP/MP | `combat/character_stats.gd`, `content/classes/class_definition.gd`, `tests/test_damage.gd` | `Domain/AethelPlayerStats.{h,cpp}` e `Private/Tests/AethelPlayerStatsTest.cpp` cobrem fórmulas HP/MP e rejeição básica. Não há personagem jogável, DEF/MDEF, árvore de atributos nem as outras quatro classes em runtime Unreal. **Adaptar** fórmulas e ampliar testes depois de C0. |
+| Cálculo de dano | `combat/damage_calculator.gd` e `tests/test_damage.gd` têm fórmula, validação e RNG injetado | Nenhum calculador Unreal equivalente. **Portar regras com casos de teste**, preservar limites de resistências/crítico; não copiar `RandomNumberGenerator` de Godot. |
+| Ciclo de ataque, custo e guarda | `combat/combat_service.gd`, `attack_controller.gd`, `guard_controller.gd`, `tests/test_combat.gd`, `tests/test_guard.gd` | Nenhum executor de combate Unreal. Custos, fases e sequência idempotente são contratos portáveis. `Vector2`, `AttackDefinition : Resource` e a projeção 2:1 de `CombatService.in_cone` são específicos do cliente atual; **reescrever alvo/alcance no plano horizontal 3D**. |
+| Movimento e inimigos | `entities/actor_base.gd`, `entities/player/player.gd`, `entities/ai/enemy_fsm.gd`, `entities/ai/slice_enemy_fsm.gd` e testes de player/FSM/inimigos | `CharacterBody2D`, `Area2D`, `Vector2`, `move_and_slide`, `Input` e sinais exigem **implementação Unreal nova** com cápsula, navegação e colisão 3D. Preservar comportamentos e casos de teste, não portar posições em pixels. |
+| Navegação | `playtest/arena_navigation.gd` usa `AStarGrid2D`, `Rect2` e célula de 20 pixels; `arena_brain.gd` depende das rotas | **Reescrever** com geometria/cápsula/NavMesh reais. A grade 2D não prova largura de caminho 3D, separação de atores nem acesso ao poço. |
+| Inventário e equipamento | `inventory/inventory_model.gd`, `content/items/item_definition.gd`, `tests/test_inventory.gd` implementam contagem, **60 posições + peso**, dois slots e ouro separado | Nenhuma bolsa Unreal. **Preservar regras de propriedade/validação**, mas D01 cria grade + baú por personagem com schema novo. Não tratar os quadrados desenhados em `ui/hud/hud.gd` como item de largura/altura ou baú compartilhado. Migração de save exige teste próprio. |
+| Loot e comércio | `services/loot_service.gd`, `merchant_service.gd`, testes de loot/quest e mercador | Concessão por snapshot e requisição idempotente são portáveis. Tabelas/itens estão em `.tres`; **portar dados para catálogo Unreal versionado**, ampliar para instâncias de item antes de grade/afixos. Não há serviço Unreal de loot, loja ou baú. |
+| Quest, diálogo e hub | `quest/quest_service.gd`, `dialogue/dialogue_resolver.gd`, `services/hub_state_service.gd`, `tests/test_loot_quest.gd`, `tests/integration/test_game_flow.gd` | Flags, opções, estágio e prioridade de fala são contratos. Os serviços carregam `.tres`/`Resource` e conhecem apenas a primeira rota; **adaptar fontes de conteúdo** e implementar as outras missões separadamente. Nenhum NPC/diálogo Unreal ativo. |
+| Save e recuperação | `core/world_save_schema.gd`, `save_system.gd`, `save_migrations.gd`, `tests/test_save_system.gd`, `tests/test_save_migration.gd` | Validação, hash, backup, migração v1→v2 e commit são referência de casos. Nenhum save Unreal. **Implementar schema/versionamento próprios** conforme `unreal-persistence-contract.md`; conversor Godot→Unreal só após schema e testes de não perda. |
+| Mapas, HUD, arte e áudio | `world/maps/slice_map.gd`, `scenes/game_root.gd`, `ui/hud/hud.gd`, `presentation/*` e recursos PNG/WAV | Mapas, coordenadas, colisões, sprites e HUD 2D **não são assets Unreal**. O C++ Unreal tem apenas infraestrutura de áudio, passos e introdução de boss em `Presentation/`, sem níveis, Widget Blueprints, malhas ou encontros 3D montados. |
+
+## Correções de status da planilha
+
+### Evidência por pilar da v2
+
+| Pilar | Base observável no Godot | Base observável na Unreal hoje | Leitura para cobertura |
+|---|---|---|---|
+| P01 Loot e itemização | `inventory_model.gd`, `loot_service.gd`, catálogo `.tres` e testes de inventário/loot; itens são contagens por template, sem afixos instanciados | Nenhum inventário/loot C++ | Contrato de primeira fatia e GDD; sistemas D2-like ainda por construir |
+| P02 Build | Bastião jogável, `CharacterStats` e ataques/guarda; outras classes em GDD | `FAethelPlayerStats` + um Automation de HP/MP | Fórmulas iniciais, não árvore de seis nós Unreal |
+| P03 Combate | `CombatService`, `DamageCalculator`, `AttackController`, player e testes | Nenhum executor ou ator de combate Unreal | Regras portáveis, apresentação/física 3D ausentes |
+| P04 Monstros | Lobo, Cultista e **Garras de Musgo subchefe** no slice; FSM e testes | Nenhum monstro Unreal | A linha da planilha que chama Garras de “boss” deve ser corrigida |
+| P05 Mundo | Cidadela/Bosque Godot, arena técnica; atlas autoral de 12 mapas é documento | Nenhum nível de campanha Unreal | Planejamento não equivale a mundo 3D implementado |
+| P06 Dificuldade | Curva inicial e níveis no conteúdo; Eclipse/endgame fora do slice | Nenhum modo de dificuldade Unreal | Pós-prova, sem percentual de implementação inferido do GDD |
+| P07 Cidade/economia | `MerchantService.PRICES` vende duas unidades de catálogo **na zona Cidadela**, sem discriminar vendedor; HUD e NPCs apresentam serviços | Nenhuma loja/baú Unreal | A frase “Lyra e Sera vendem” na planilha é mais específica que o serviço de compra: conferir a UI antes de atribuir vendedor |
+| P08 Câmera/apresentação | HUD e arte 2D, cenas de jogo; conceitos separados | C++ de áudio, passos e diretor de introdução, sem câmera de jogo, nível, malha ou widget montado | Infraestrutura de apresentação não comprova linguagem 3D jogável |
+| P09 Narrativa | `QuestService`, `DialogueResolver`, `HubStateService`, uma quest e teste de fluxo | Nenhum serviço/ator Unreal de quest | Regras e conteúdo da primeira rota reaproveitáveis como contrato, não runtime Unreal |
+| P10 Fundação | Save JSON/hash/backup/migração e 16 suítes; CI de regressão | `.uproject`, módulo, `FAethelPlayerStats`, um Automation e build Editor relatado no plano | Base técnica real, ainda sem save, pacote Windows ou medição de desempenho |
+| P11 Multiplayer | Sem runtime; D08 adia | Sem runtime | Fora do escopo, excluído da média |
+
+Esta matriz **não recalcula percentuais** porque a planilha mistura evidência Godot, GDD e produção Unreal em um único numerador. Para atualizar P01–P10, definir pesos separados para especificação, código de domínio, integração jogável, assets aprovados e validação; caso contrário “22%” continuará opinião editorial.
+
+- **G01 “Em andamento” é coerente**, mas `README.md` ainda diz que não há build Unreal validada, embora o [plano](unreal-execution-plan.md) registre build de editor e teste Automation reais. `docs/design/visual-proposal.md` ainda descreve pixel art/2:1 sem aviso inicial de que essa cláusula é histórica para o novo cliente. `project-scope.md` já traz esse aviso; `AGENTS.md` já aponta para o gate C0. Corrigir os dois textos pendentes antes de fechar G01.
+- **G07 “Em andamento” é coerente apenas para HP/MP.** O teste Automation verifica níveis 1/2 e rejeições básicas; ainda não cobre DEF, MDEF, crítico, distribuição de pontos, 99 efetivo nem classes adicionais. A extensão pós-C0 continua bloqueada.
+- **G02 permanece em andamento.** Esta matriz identifica dependências e ausência de equivalentes. Antes de substituir percentuais em `Pilares`/`Já temos`, definir denominador e regra de pontuação por aceite, conferir as 16 suítes e o build no estado de branch avaliado, e registrar evidência de cada pilar. Não converter “existe arquivo” em porcentagem.
+- **G31 é uma reconciliação necessária.** O GDD 03 §4–5 descreve FastAPI/PostgreSQL e validação de vitória pelo servidor; `unreal-persistence-contract.md` define autoridade local offline. Permanecem transação única, `reward_id`, idempotência, validação de catálogo e rollback. Backend, DTOs FastAPI, bloqueio de linha PostgreSQL e RNG online não entram no cliente solo atual. Documentar essa leitura no contrato antes da implementação.
+- A coluna “Pode iniciar agora?” considera o gate C0, **não todas as dependências**: G24 aparece “Sim” embora dependa de G00, e G21 aparece “Sim” embora dependa de G03. Interpretar “Sim” como *gate permite*, não como *pré-requisitos cumpridos*; a próxima versão da fórmula deve avaliar os dois.
+
+## Próxima verificação
+
+Concluir G02 com matriz dos 11 pilares ligada a testes/aceites, medição do build Unreal no commit auditado e revisão do catálogo de conteúdo. Só então alterar o 22% estimado. Esta auditoria não fecha C0, não aprova pranchas de conceito e não libera parte jogável.
