@@ -72,6 +72,8 @@ Escudos absorvem o dano final antes do HP, até sua capacidade, sem nova mitiga�
 
 ## 2. Árvore e regras compartilhadas
 
+> **Extensão aprovada em 16/10/2026:** a [especialização de classe](../design/class-specializations.md) abre a primeira escolha no nível 5, por mentor em hub, com Bram para o Bastião. A seleção inicial é gratuita e separada dos pontos dos seis nós básicos abaixo. Os dois caminhos por classe e suas modificações dependem de catálogo, implementação e playtest; não são novos nós básicos já ativos.
+
 Cada classe tem **quatro habilidades ativas e duas passivas**. A1 é o ataque inicial gratuito; A2 é liberada no nível 2, A3 no 4, A4 no 6. P1 abre no 3 após A2; P2 no 5 após A3. A2–A4/P1–P2 custam um ponto cada. Um ponto por nível desde o 2 permite comprar os cinco nós até o 6. A4 requer A3. Sem ranks nesta versão; todos os nós comprados funcionam, sem pré-condição narrativa.
 
 Cooldown começa na execução validada, junto do gasto do recurso indicado. Sem alvo válido, recurso insuficiente, animação bloqueada ou cooldown ativo: comando recusado sem custo. Custos não são debitados de novo por retry. Repetir o mesmo comando não repete dano ou recompensa. Passivas custam 0 MP; cooldown “—” significa efeito contínuo, e cooldown explícito limita o disparo.

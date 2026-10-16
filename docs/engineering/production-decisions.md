@@ -66,3 +66,10 @@ Integrar PRs reais por dependência/base, revisando diffs e checks, não pela nu
 ## 8. Próximo marco verificável
 
 Player offline e cena mínima Windows: movimento 2:1, parede sólida, ataque normal, recovery cancelável, windup pesado não cancelável, dash de 120 ms sem dano e barras HP/MP/stamina. Integrar FSM e depois inventário/quest. Manter testes atuais; adicionar testes de recursos/dash, não alegar que os 52 checks antigos validam estas decisões novas.
+
+
+## 9. Especialização de classe — decisão de 16/10/2026
+
+O proprietário solicitou incorporar a proposta de especializações: primeira escolha a partir do nível 5, aviso discreto sem interromper combate, comparação acessível no menu e confirmação via NPC em hub seguro. Bram conduz o Bastião. Adiar a seleção não bloqueia progressão. O nível 5 é referência inicial, sujeita à validação da curva de XP; não promete um mapa ou minuto exato.
+
+A [ficha de especializações](../design/class-specializations.md) complementa o GDD 01 e rege esta extensão. A primeira seleção não consome os pontos da árvore básica; A1–A4/P1–P2 e seus desbloqueios permanecem. Especialização não depende de afinidade moral. Respec no hub faz parte da direção; custo/economia, IDs, modificações iniciais e investimentos posteriores precisam de catálogo e testes antes de ativação. Os mentores das outras classes ainda não estão atribuídos. Esta decisão adiciona design ao projeto, não declara cliente Unity ou árvore funcional.
