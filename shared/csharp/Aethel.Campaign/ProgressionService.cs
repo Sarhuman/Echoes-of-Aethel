@@ -6,7 +6,7 @@ namespace Aethel.Campaign
 {
     // Must be implemented by the trusted scene/application adapter, not supplied by a menu checkbox.
     public interface ITrainingAccess { bool CanTrain(string characterId, string classId); }
-    public enum ProgressionStatus { Accepted, Replayed, Invalid, Locked, Conflict, InsufficientGold, PersistenceFailed, HistoryFull }
+    public enum ProgressionStatus { Accepted, Replayed, Invalid, Locked, Conflict, InsufficientGold, PersistenceFailed, HistoryFull, Expired }
     public sealed class ProgressionResult
     {
         public ProgressionStatus Status { get; internal set; }
@@ -21,8 +21,8 @@ namespace Aethel.Campaign
             this.store = store ?? throw new ArgumentNullException("store");
             this.training = training ?? throw new ArgumentNullException("training");
         }
-        public CampaignState Read() { var s = store.Load(); s.Validate(); return s.Copy(); }
-        private ProgressionResult Run(string commandId, string payload, long expected, Func<CampaignState, ProgressionStatus> operation)
+        public CampaignState Read() { var s = store.Load(); s.Validate(); if (s.Schema != 2) throw new System.Runtime.Serialization.SerializationException("Campaign store must migrate to schema 2"); return s.Copy(); }
+        internal ProgressionResult Run(string commandId, string payload, long expected, Func<CampaignState, ProgressionStatus> operation)
         {
             var original = Read();
             Guid token;
@@ -32,16 +32,22 @@ namespace Aethel.Campaign
             commandId = token.ToString("D");
             if (original.Commands.ContainsKey(commandId))
                 return new ProgressionResult { Status = original.Commands[commandId] == payload ? ProgressionStatus.Replayed : ProgressionStatus.Conflict, State = original };
+            if (expected < original.ReceiptFloor)
+                return new ProgressionResult { Status = ProgressionStatus.Expired, State = original };
             if (original.Version != expected)
                 return new ProgressionResult { Status = ProgressionStatus.Conflict, State = original };
-            if (original.Commands.Count >= 512)
-                return new ProgressionResult { Status = ProgressionStatus.HistoryFull, State = original };
             var candidate = original.Copy();
             var status = operation(candidate);
             if (status == ProgressionStatus.Accepted)
             {
                 candidate.Memory.Version++;
-                candidate.Commands.Add(commandId, payload);
+                if (candidate.Commands.Count >= 512)
+                {
+                    var oldest = candidate.ReceiptVersions.OrderBy(x => x.Value).ThenBy(x => x.Key,StringComparer.Ordinal).First();
+                    candidate.ReceiptFloor = Math.Max(candidate.ReceiptFloor,oldest.Value + 1);
+                    candidate.Commands.Remove(oldest.Key); candidate.ReceiptVersions.Remove(oldest.Key);
+                }
+                candidate.Commands.Add(commandId, payload); candidate.ReceiptVersions.Add(commandId,expected);
                 candidate.Validate();
                 try { if (!store.TryCommit(expected, candidate.Copy())) status = ProgressionStatus.Conflict; }
                 catch (IOException) { status = ProgressionStatus.PersistenceFailed; }
@@ -50,13 +56,13 @@ namespace Aethel.Campaign
             return new ProgressionResult { Status = status, State = Read() };
         }
         // Application seam for a confirmed level from the future XP service. Not an XP award API.
-        public ProgressionResult SetConfirmedLevel(string commandId, int level, long expected)
+        internal ProgressionResult SetConfirmedLevel(string commandId, int level, long expected)
         {
             return Run(commandId, "level|" + level, expected, s => {
                 if (level < 1 || level > 30) return ProgressionStatus.Invalid;
                 if (level < s.Level) return ProgressionStatus.Conflict;
                 if (level == s.Level) return ProgressionStatus.Replayed;
-                s.Level = level; return ProgressionStatus.Accepted;
+                s.TotalXp = Math.Max(s.TotalXp, ExperienceRules.MinimumForLevel(level)); s.Level = level; return ProgressionStatus.Accepted;
             });
         }
         public ProgressionResult DismissNotice(string commandId, long expected)
@@ -108,6 +114,7 @@ namespace Aethel.Campaign
                 try { probe.Validate(); } catch (System.Runtime.Serialization.SerializationException) { return ProgressionStatus.Invalid; }
                 int price = s.RespecCount == 0 ? 0 : SpecializationCatalog.RespecGoldPerLevel * s.Level;
                 if (s.Gold < price) return ProgressionStatus.InsufficientGold;
+                s.Effects.CounterExpiresAt = 0;
                 s.Gold -= price; s.RespecCount++; s.PrimaryPath = primaryPath; s.Nodes = nodes.ToList();
                 return ProgressionStatus.Accepted;
             });

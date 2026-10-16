@@ -82,3 +82,10 @@ O proprietário delegou resolver a progressão das especializações e a leitura
 O [complemento de especializações](../design/class-specializations.md) substitui as pendências de design do item 9 quanto a cronograma e baseline de respec: seleção inicial no 5; mais um ponto no 10/15/20/25/30; quatro nós em cadeia por direção, máximo seis investimentos no total. Primeira redistribuição gratuita, depois custo experimental de 5 vezes o nível em ouro, somente em hub e sem cura/reset de cooldown. Define os dois primeiros modificadores experimentais do Bastião; não altera o combate ativo sem implementação/testes.
 
 Responsáveis de serviço na Cidadela: Bram/Bastião, Irian/Tecelão, Sera/Sentinela, Lyra/Invocadora e Maera/Inquisidor, oferecendo formação compatível com sua função e acesso a registros/exercícios. Outras regiões usam pessoas locais distintas com o mesmo serviço e progresso do personagem; nomes/IDs/roteiros desses novos atores ainda precisam de produção. Não duplicar NPC central nem depender do popup para liberar seleção. Esses números e papéis são decisões de direção para produção; balanceamento, testes e runtime continuam pendentes.
+
+
+## 11. Núcleo não visual v2 — implementação delegada em 16/10/2026
+
+O proprietário solicitou resolver o restante do núcleo independentemente da integração visual. O [runtime v2](runtime-core-v2.md) rege o incremento executado de inventário/XP/recursos, efeitos dos caminhos do Bastião, migração C# e retries. Grade e seis tiers posteriores do Bastião usam baselines NOVOS/EXPERIMENTAIS registrados em `experimental-values.md`; não alteram o cliente Godot.
+
+O formato C# passa de schema 1 a 2, sem conversor Godot. Recibos usam janela e versão de origem; retries compactados expiram sem executar, não bloqueiam sessões longas. Vida/MP e recompensa são persistidos com o agregado. Não anunciar as outras quatro classes, slots/afixos/loot futuros, IA ou combate físico como implementados por esta entrega. As permissões de hub, derrota e evidências precisam vir do adaptador de simulação confiável, não da UI. Gates de editor/câmera/playtest permanecem abertos.

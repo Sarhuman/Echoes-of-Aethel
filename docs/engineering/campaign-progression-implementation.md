@@ -1,5 +1,7 @@
 # Agregado de campanha e progressão C# — 16/10/2026
 
+> **Incremento posterior — schema 2:** [núcleo não visual v2](runtime-core-v2.md) implementa inventário/XP/recursos e os dois caminhos do Bastião, migra este formato e substitui o bloqueio de histórico cheio por janela de retries com expiração. Limites e pendências abaixo registram o estágio anterior; o guia v2 rege a nova implementação.
+
 **Estado:** incremento executável headless, fora de Unity. Fontes em `shared/csharp/Aethel.Campaign/`. Não há cenas, monstros, mentor, tela de árvore, efeitos de especialização ou cliente Unity criados por esta entrega.
 
 ## Uma gravação para a transação
