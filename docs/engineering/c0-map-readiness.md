@@ -2,7 +2,7 @@
 
 **Auditoria documental em 15/10/2026. Estado: aberta.** Comparei o [atlas de pré-produção](../design/campaign-world-atlas-3d.md), o [GDD 04](../GDD/04_mapas_e_quests.md) e o [registro C0](campaign-content-ledger.md). Todos os 12 mapas têm nome, percurso proposto, encontro final, ambiente e consequência descritos. Isso comprova cobertura narrativa inicial, **não** planta em escala, nível Unreal ou aprovação editorial. Nenhum mapa está pronto para produção jogável pelo critério abaixo.
 
-O [blockout estático da Cidadela](c0-citadel-blockout.md) foi criado como amostra experimental de hub, fora dos 12 mapas. O nível Unreal recarregou com 21 atores técnicos, mas suas dimensões e câmera ainda não foram medidas visualmente. Ele não promove nenhuma linha abaixo e não fecha C0-07 nem o gate.
+Os blockouts estáticos [da Cidadela](c0-citadel-blockout.md) e [do Bosque](c0-forest-blockout.md) são amostras experimentais de circulação, com 21 e 32 atores técnicos recarregados no Unreal. Cidadela é hub fora dos 12 mapas; Bosque ainda não tem escala, câmera, interiores, colisão ou navegação aprovados. Estes níveis não promovem nenhuma linha abaixo e não fecham C0-07 nem o gate.
 
 ## Critério de pronto por mapa
 
