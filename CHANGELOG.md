@@ -1,5 +1,11 @@
 # Changelog
 
+## Não lançado — revisão de identidade visual (16/10/2026)
+
+- Revisão solicitada das pranchas de heróis/antagonistas, com achados confirmados em seis imagens, prioridades e escopo restante explícito.
+- Galeria marcada em revisão; critérios de silhueta, câmera, rostos, materiais e coerência de turnaround registrados antes de aprovação para modelagem final.
+- Originais e proveniências preservados; nenhum PNG, variante, modelo ou asset substituído nesta etapa.
+
 ## Não lançado — formação regional e leitura de ameaça (16/10/2026)
 
 - Faixas experimentais de nível dos monstros nos 12 mapas e duas dungeons, independentes do nível do herói e distintas de nível de item; hubs seguros preservados.
