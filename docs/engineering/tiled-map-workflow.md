@@ -1,5 +1,7 @@
 # Autoria de mapas com Tiled
 
+> **Escopo Godot/arte 2D:** workflow histórico de sprites/tiles. Não rege geometria, navegação ou animação do mundo Unity 3D. Seguir [guia visual Unity](../design/unity-art-direction.md); aplicar à UI 2D somente quando apropriado.
+
 > **Escopo histórico do cliente Godot:** o próximo cliente 3D será construído na Unreal, conforme [transição](unreal-transition.md). Não exigir `.tmx` para mapas Unreal; manter este fluxo somente se algum mapa 2D Godot continuar em produção.
 
 Tiled é a ferramenta escolhida para desenhar os próximos mapas. A cena Godot continua responsável por combate, câmera, iluminação e interação. Cidadela e Bosque desta fatia ainda são cenas Godot com fundo pintado; não são mapas Tiled e não devem ser descritos como tal.

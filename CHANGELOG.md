@@ -1,5 +1,7 @@
 # Changelog
 
+> **16/10/2026 — Revisão visual documental:** direção Unity 3D centralizada; escopo atual separado do Godot histórico; GDDs e guias distinguem pixels/tiles/sprites de modelagem 3D. Sem alteração de código, assets, regras, falas ou IDs.
+
 ## 16/10/2026 — Núcleo C# v3 (experimental, sem cliente Unity)
 
 - Quatro kits com 16 ativas/8 passivas, 32 modificadores de caminhos, snapshots, ticks e invocações limitadas.

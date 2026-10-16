@@ -1,5 +1,7 @@
 # Decisões de produção — vertical slice offline
 
+> **Precedência visual atual (16/10/2026):** [Unity 3D](unity-transition.md) e [guia visual vigente](../design/unity-art-direction.md) substituem as cláusulas de engine, pixels e projeção 2:1 desta decisão histórica. Regras de domínio, IDs, controles e segurança permanecem; alcance/velocidade 3D exigem calibração própria, sem converter pixels em metros.
+
 > **Atualização de direção, 14/10/2026:** o usuário escolheu preparar um novo cliente 3D em Unreal. A decisão antiga de Godot/GDScript definitivo abaixo descreve a primeira fatia já jogável, não a engine do próximo cliente. O [plano de transição](unreal-transition.md) rege somente engine/pipeline; regras de domínio deste documento continuam válidas.
 
 **Fonte:** definições do Game Director fornecidas em 13/10/2026. **Estado:** regras aprovadas para a primeira fatia, com implementação Godot parcial/completa conforme cada módulo; próximo cliente 3D em preparação. Aprovação de design não significa que todo o GDD já seja executável.

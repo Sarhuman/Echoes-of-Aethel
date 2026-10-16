@@ -1,6 +1,8 @@
 # Sprint 6 — Arquitetura de software e padrões Godot
 
-> **Nota de 14/10/2026:** a arquitetura Godot desta Sprint continua descrevendo o cliente jogável e seus contratos. Para o próximo cliente 3D, a direção de engine e os critérios de portabilidade estão em [Transição para Unreal](../engineering/unreal-transition.md). Componentes, IDs e regras de domínio devem ser reinterpretados; nós Godot e coordenadas 2:1 não são instruções para a Unreal.
+> **Escopo técnico histórico:** APIs, sprites, pixels e projeção 2D desta página descrevem propostas/clientes anteriores. Para Unity, seguir [transição](../engineering/unity-transition.md) e [direção visual 3D](../design/unity-art-direction.md); portar contratos, sem copiar stack, unidades ou APIs de renderização.
+
+> **Nota de 14/10/2026:** a arquitetura Godot desta Sprint continua descrevendo o cliente jogável e seus contratos. Para o próximo cliente 3D, a direção de engine e os critérios de portabilidade estão em [Transição Unity](../engineering/unity-transition.md). Componentes, IDs e regras de domínio devem ser reinterpretados; nós Godot e coordenadas 2:1 não são instruções para a Unreal.
 
 **Projeto:** Echoes of Aethel · **Versão:** 1.0 · **Estado:** arquitetura de cliente revisada; exemplos não executados na engine.
 

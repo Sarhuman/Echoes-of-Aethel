@@ -1,8 +1,10 @@
 # Sprint 5 — Combate, recursos, dificuldade e HUD
 
+> **Visual Unity:** seguir [guia 3D](../design/unity-art-direction.md). Retratos em pixels, dimensões lógicas e shakes de 2 px são históricos; regras de combate e durações em milissegundos permanecem. Calibrar UI/câmera em 3D, sem converter pixel em metro.
+
 **Projeto:** Echoes of Aethel · **Versão:** 1.0 · **Estado:** especificação para protótipo; combate, HUD e Eclipse ainda não implementados.
 
-Este módulo define a engenharia do combate em tempo real com apresentação 16-bit. Complementa as [classes](01_classes_e_atributos.md), a [API autoritativa](02_arquitetura_tecnica.md), o [loot](03_sistema_de_loot.md) e os [mapas/quests](04_mapas_e_quests.md). Prevalece sobre regras anteriores de recurso do Bastião, regeneração e multiplicador crítico. O roteiro final detalhado de Vael continua pendente; esta Sprint passou a tratar combate e HUD.
+Este módulo define a engenharia do combate em tempo real, independente da apresentação 2D/3D. Complementa as [classes](01_classes_e_atributos.md), a [API autoritativa](02_arquitetura_tecnica.md), o [loot](03_sistema_de_loot.md) e os [mapas/quests](04_mapas_e_quests.md). Prevalece sobre regras anteriores de recurso do Bastião, regeneração e multiplicador crítico. O roteiro final detalhado de Vael continua pendente; esta Sprint passou a tratar combate e HUD.
 
 > **Revisão da Sprint 6:** Godot substitui Flutter/Flame na apresentação; dash passa a usar stamina universal (100 máximo, custo 25, duração 0,2 s e cooldown 1,2 s), separada de vigor. Demais regras de combate e autoridade permanecem conforme [módulo 06](06_arquitetura_software.md).
 
@@ -173,7 +175,7 @@ Aplicar limites de HP: com alvo de 10 HP, golpe nominal 35 registra `hp_damage=1
 
 ### 4.1 Layout responsivo
 
-HUD superior esquerda dentro de SafeArea: retrato pixel 48×48/64×64, nome curto, nível, HP vermelho acima e MP azul abaixo. Bastião recebe barra auxiliar de vigor âmbar. Barras mostram números atuais/máximos e ícone/abreviação, sem depender só de cor. XP em faixa discreta separada, não confundida com MP.
+Referência histórica Godot: HUD superior esquerda dentro de SafeArea, retrato pixel 48×48/64×64, nome curto, nível, HP vermelho acima e MP azul abaixo. Bastião recebe barra auxiliar de vigor âmbar. Barras mostram números atuais/máximos e ícone/abreviação, sem depender só de cor. XP em faixa discreta separada, não confundida com MP.
 
 | Elemento | Comportamento |
 |---|---|

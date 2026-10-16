@@ -1,5 +1,7 @@
 # Sprint 4 — Bíblia dos 12 mapas e dilemas morais
 
+> **Visual vigente:** [Unity 3D estilizado](../design/unity-art-direction.md). Biomas, paletas, quests e IDs permanecem; tiles e plantas 2D não fixam medidas 3D. Escala/câmera exigem blockout e playtest.
+
 **Projeto:** Echoes of Aethel · **Versão:** 1.0 · **Estado:** especificação de campanha; implementação e playtest pendentes.
 
 > **SPOILERS DE PRODUÇÃO:** consequências ocultas abaixo pertencem ao GDD e ao servidor. A interface do jogador mostra opções, fatos observados e custos mecânicos conhecidos; nunca despeja eventos futuros do catálogo.
@@ -40,8 +42,8 @@ Diálogos usam caixas azuis de borda dupla conforme [Sprint 1](01_classes_e_atri
 | Campo | Definição |
 |---|---|
 | Ato / ID | 1 / `forest_01` |
-| Bioma visual | Floresta fechada, pedras rúnicas e névoa baixa; pixel art top-down 3/4, tiles 16×16 |
-| Paleta 16-bit | Musgo #526044, marrom #604838, violeta #A17AC4 |
+| Bioma visual | Floresta fechada, pedras rúnicas e névoa baixa; composição 3D conforme direção Unity |
+| Paleta de referência | Musgo #526044, marrom #604838, violeta #A17AC4 |
 | Inimigos comuns | Lobos Etéreos, Cultistas Cego-Guiados, Espectros de Folhas |
 | Sub-boss / boss | Garras de Musgo |
 | Faixa experimental de item | 1–3 |
@@ -68,8 +70,8 @@ Um mensageiro acusa a aldeia de abastecer cultistas. A estrada corre perigo e pa
 | Campo | Definição |
 |---|---|
 | Ato / ID | 1 / `swamp_02` |
-| Bioma visual | Águas rasas, árvores mortas e lanternas rúnicas; pixel art top-down 3/4, tiles 16×16 |
-| Paleta 16-bit | Verde #526044, sombra #242A31, ácido #B5D95C e violeta #A17AC4 |
+| Bioma visual | Águas rasas, árvores mortas e lanternas rúnicas; composição 3D conforme direção Unity |
+| Paleta de referência | Verde #526044, sombra #242A31, ácido #B5D95C e violeta #A17AC4 |
 | Inimigos comuns | Larvas Parasitas, Afogados de Éter, Harpias de Lama |
 | Sub-boss / boss | Matriarca das Águas |
 | Faixa experimental de item | 2–5 |
@@ -96,8 +98,8 @@ Um pesquisador externo oferece soro experimental. Os primeiros pacientes respira
 | Campo | Definição |
 |---|---|
 | Ato / ID | 1 / `temple_03` |
-| Bioma visual | Templo de pedra coberto por raízes, cristais e armadura abandonada; pixel art top-down 3/4, tiles 16×16 |
-| Paleta 16-bit | Prata #AEB8C4, musgo #526044, aura azul #29334E |
+| Bioma visual | Templo de pedra coberto por raízes, cristais e armadura abandonada; composição 3D conforme direção Unity |
+| Paleta de referência | Prata #AEB8C4, musgo #526044, aura azul #29334E |
 | Inimigos comuns | Defensores Rúnicos, Cultistas Fanáticos, Cães de Guerra |
 | Sub-boss / boss | Silvano, o Traidor — boss de ato |
 | Faixa experimental de item | 4–7 |
@@ -124,8 +126,8 @@ Após a queda de Silvano, a seiva pode ser contida ou devolvida à terra. Ambas 
 | Campo | Definição |
 |---|---|
 | Ato / ID | 2 / `dunes_04` |
-| Bioma visual | Areia cinzenta, ossadas gigantes e tempestades com corredores legíveis; pixel art top-down 3/4, tiles 16×16 |
-| Paleta 16-bit | Ocre #B59050, areia #8C8277, sombra #3B323D |
+| Bioma visual | Areia cinzenta, ossadas gigantes e tempestades com corredores legíveis; composição 3D conforme direção Unity |
+| Paleta de referência | Ocre #B59050, areia #8C8277, sombra #3B323D |
 | Inimigos comuns | Escorpiões de Cristal, Nômades Corrompidos, Gárgulas de Areia |
 | Sub-boss / boss | Guerreiro de Vidro |
 | Faixa experimental de item | 6–10 |
@@ -152,8 +154,8 @@ Uma caravana rompeu o eixo sob ataque. A equipe só consegue puxar o carro de su
 | Campo | Definição |
 |---|---|
 | Ato / ID | 2 / `valley_05` |
-| Bioma visual | Cânions, pontes, estátuas decapitadas e altares antigos; pixel art top-down 3/4, tiles 16×16 |
-| Paleta 16-bit | Ocre #B59050, sangue #A94750, pedra #8C8277 |
+| Bioma visual | Cânions, pontes, estátuas decapitadas e altares antigos; composição 3D conforme direção Unity |
+| Paleta de referência | Ocre #B59050, sangue #A94750, pedra #8C8277 |
 | Inimigos comuns | Ritualistas de Sangue, Harpias de Obsidiana, Hienas de Éter |
 | Sub-boss / boss | Executor de Bronze |
 | Faixa experimental de item | 8–12 |
@@ -180,8 +182,8 @@ O altar bloqueia a passagem de refugiados e do herói. Aceita energia vital temp
 | Campo | Definição |
 |---|---|
 | Ato / ID | 2 / `crypt_06` |
-| Bioma visual | Mausoléu subterrâneo, pirâmides internas e rios místicos; pixel art top-down 3/4, tiles 16×16 |
-| Paleta 16-bit | Areia #8C8277, sombra #3B323D, fogo azul #73BDE0 |
+| Bioma visual | Mausoléu subterrâneo, pirâmides internas e rios místicos; composição 3D conforme direção Unity |
+| Paleta de referência | Areia #8C8277, sombra #3B323D, fogo azul #73BDE0 |
 | Inimigos comuns | Esqueletos Cristalizados, Múmias Rúnicas, Sombras Devoradoras |
 | Sub-boss / boss | Malignus, o Colecionador de Ossos — boss de ato |
 | Faixa experimental de item | 10–15 |
@@ -208,8 +210,8 @@ Malignus caiu, mas almas cativas sustentam um selo rachado. Rompê-lo encerra su
 | Campo | Definição |
 |---|---|
 | Ato / ID | 3 / `sewers_07` |
-| Bioma visual | Canais profundos e tubulações antigas com fluido verde; pixel art top-down 3/4, tiles 16×16 |
-| Paleta 16-bit | Chumbo #565E65, tóxico #A5D95D, sombra #1F252A |
+| Bioma visual | Canais profundos e tubulações antigas com fluido verde; composição 3D conforme direção Unity |
+| Paleta de referência | Chumbo #565E65, tóxico #A5D95D, sombra #1F252A |
 | Inimigos comuns | Ratos de Éter, Mutantes de Esgoto, Aranhas-Luminosas |
 | Sub-boss / boss | Mãe das Proles |
 | Faixa experimental de item | 13–18 |
@@ -236,8 +238,8 @@ Pressão ameaça colapsar os canais. Drenar para baixo limpa o acesso; inverter 
 | Campo | Definição |
 |---|---|
 | Ato / ID | 3 / `foundry_08` |
-| Bioma visual | Engrenagens, esteiras e poços de lava mágica; pixel art top-down 3/4, tiles 16×16 |
-| Paleta 16-bit | Chumbo #565E65, forja #DF8846, bruma #A17AC4 |
+| Bioma visual | Engrenagens, esteiras e poços de lava mágica; composição 3D conforme direção Unity |
+| Paleta de referência | Chumbo #565E65, forja #DF8846, bruma #A17AC4 |
 | Inimigos comuns | Constructos de Bronze, Autômatos, Elementalistas de Magma |
 | Sub-boss / boss | Autômato Forjador |
 | Faixa experimental de item | 15–21 |
@@ -264,8 +266,8 @@ O núcleo alimenta contenção e forjas. Pode reforçar uma arma para enfrentar 
 | Campo | Definição |
 |---|---|
 | Ato / ID | 3 / `abyss_09` |
-| Bioma visual | Cratera onde carne orgânica se funde à alvenaria; pixel art top-down 3/4, tiles 16×16 |
-| Paleta 16-bit | Sombra #1F252A, carne #A94750, tóxico #A5D95D |
+| Bioma visual | Cratera onde carne orgânica se funde à alvenaria; composição 3D conforme direção Unity |
+| Paleta de referência | Sombra #1F252A, carne #A94750, tóxico #A5D95D |
 | Inimigos comuns | Abominações de Carne, Vermes de Éter, Parasitas Espirituais |
 | Sub-boss / boss | Gorgoroth, a Boca das Sombras — boss de ato |
 | Faixa experimental de item | 18–24 |
@@ -292,8 +294,8 @@ Gorgoroth foi derrotado, mas vítimas conscientes permanecem ligadas à sua rede
 | Campo | Definição |
 |---|---|
 | Ato / ID | 4 / `gardens_10` |
-| Bioma visual | Mármore quebrado, ouro envelhecido e fissuras estelares; pixel art top-down 3/4, tiles 16×16 |
-| Paleta 16-bit | Noite #29334E, ouro #B8A16B, lilás #AB88D0 |
+| Bioma visual | Mármore quebrado, ouro envelhecido e fissuras estelares; composição 3D conforme direção Unity |
+| Paleta de referência | Noite #29334E, ouro #B8A16B, lilás #AB88D0 |
 | Inimigos comuns | Anjos Caídos, Sentinelas de Prata, Espectros Celestiais |
 | Sub-boss / boss | Arconte de Prata |
 | Faixa experimental de item | 21–27 |
@@ -320,8 +322,8 @@ Um pedestal administra almas retidas para sustentar barreiras de assentamentos e
 | Campo | Definição |
 |---|---|
 | Ato / ID | 4 / `bridge_11` |
-| Bioma visual | Ponte sobre o vazio, tempestades e relâmpagos mágicos; pixel art top-down 3/4, tiles 16×16 |
-| Paleta 16-bit | Noite #29334E, preto #141520, estelar #AB88D0 |
+| Bioma visual | Ponte sobre o vazio, tempestades e relâmpagos mágicos; composição 3D conforme direção Unity |
+| Paleta de referência | Noite #29334E, preto #141520, estelar #AB88D0 |
 | Inimigos comuns | Guardas de Vael, Constructos Rúnicos Supremos, Manifestações da Bruma |
 | Sub-boss / boss | Guardião dos Portões |
 | Faixa experimental de item | 24–30 |
@@ -348,8 +350,8 @@ Um selo impede a chegada à arena. Forçá-lo abre passagem antes da tempestade;
 | Campo | Definição |
 |---|---|
 | Ato / ID | 4 / `heart_12` |
-| Bioma visual | Plataforma de cristal negro no eclipse, com Aethel em ruínas ao fundo; pixel art top-down 3/4, tiles 16×16 |
-| Paleta 16-bit | Preto #141520, dourado #B8A16B, lilás #AB88D0 |
+| Bioma visual | Plataforma de cristal negro no eclipse, com Aethel em ruínas ao fundo; composição 3D conforme direção Unity |
+| Paleta de referência | Preto #141520, dourado #B8A16B, lilás #AB88D0 |
 | Inimigos comuns | Nenhum inimigo comum; apenas manifestações do próprio encontro |
 | Sub-boss / boss | Vael, o Arconte Primogênito / Sol-Negro — boss final |
 | Faixa experimental de item | 27–30 |

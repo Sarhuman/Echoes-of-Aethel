@@ -1,5 +1,7 @@
 # Classes e árvores de habilidades
 
+> **Visual Unity:** [guia 3D](unity-art-direction.md). Sprites 32×32 descrevem Godot histórico; classes/atributos/habilidades continuam contratos de domínio.
+
 A referência canônica deste módulo é [Sprint 1 — Classes e atributos](../GDD/01_classes_e_atributos.md).
 
 A Sprint 1 substitui a proposta preliminar: cinco atributos (STR, DEX, INT, FTH, VIT), quatro habilidades ativas e duas passivas por classe, sprites jogáveis 32×32. Vontade e Sabedoria são termos narrativos; a Invocadora escala com INT/FTH.

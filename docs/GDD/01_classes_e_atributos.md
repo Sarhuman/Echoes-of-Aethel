@@ -1,10 +1,12 @@
 # Sprint 1 — Classes e atributos
 
+> **Visual vigente:** [Unity 3D estilizado](../design/unity-art-direction.md). Sprites/células/direções e fonte pixel são históricos; paletas/silhuetas orientam modelos 3D. Atributos, habilidades, custos e IDs permanecem.
+
 > Os valores de combate da versão jogável seguem as [decisões da primeira fatia](../engineering/decisions-first-slice.md) e [valores experimentais](../engineering/experimental-values.md). Quando este GDD histórico fala em vigor ou quatro slots ativos, as decisões D2 e D5 prevalecem.
 
 **Projeto:** Echoes of Aethel · **Versão:** 1.0 · **Estado:** especificação para protótipo; valores sujeitos a playtest.
 
-Este módulo é a referência canônica para atributos, dimensões dos sprites jogáveis e árvores de classe. Substitui o desenho preliminar de três ramos e seis atributos. Combate ARPG em tempo real com apresentação 16-bit; as fórmulas são originais, inspiradas na simplicidade dos RPGs de console, sem alegar reproduzir a matemática de Final Fantasy VI.
+Este módulo é a referência canônica para atributos e árvores de classe, com dimensões históricas dos sprites Godot. Substitui o desenho preliminar de três ramos e seis atributos. Combate ARPG em tempo real cuja apresentação 16-bit abaixo pertence ao protótipo Godot; as fórmulas são originais, inspiradas na simplicidade dos RPGs de console, sem alegar reproduzir a matemática de Final Fantasy VI.
 
 Regras de combate/recursos são complementadas pela [Sprint 5](05_combate_e_hud.md): vigor do Bastião, regeneração somente fora de combate e crítico até 2×.
 
@@ -84,7 +86,7 @@ Esquiva e interação são ações universais fora da árvore. Esquiva/dash revi
 
 **ID:** `rune_weaver` · **Primário:** INT · **Secundário:** FTH. Combina controle e área com barreira, exigindo distância e gestão de MP.
 
-**Sprite:** 32×32, quatro direções; manto violeta #A17AC4, sombra azul #29334E, runas marfim #DDD5BD. Cajado com ponta clara e silhueta estreita. Origem nos pés; magia tem sprite próprio e não aumenta o colisor.
+**Referência visual histórica Godot (sprite):** 32×32, quatro direções; manto violeta #A17AC4, sombra azul #29334E, runas marfim #DDD5BD. Cajado com ponta clara e silhueta estreita. Origem nos pés; magia tem sprite próprio e não aumenta o colisor.
 
 | Nó / habilidade | MP | CD | Tipo / escala | Efeito e parâmetros iniciais |
 |---|---:|---|---|---|
@@ -105,7 +107,7 @@ Esquiva e interação são ações universais fora da árvore. Esquiva/dash revi
 
 **ID:** `shadow_sentinel` · **Primário:** DEX · **Secundário:** STR. Combate curto, armadilhas e reposicionamento; ocultação não elimina automaticamente o conhecimento da IA.
 
-**Sprite:** 32×32; capa noite #29334E, prata #AEB8C4, detalhe sangue #A94750. Duas adagas curtas e capuz recortado. Armas assimétricas exigem sprites próprios, sem espelhamento automático.
+**Referência visual histórica Godot (sprite):** 32×32; capa noite #29334E, prata #AEB8C4, detalhe sangue #A94750. Duas adagas curtas e capuz recortado. Armas assimétricas exigem sprites próprios, sem espelhamento automático.
 
 | Nó / habilidade | MP | CD | Tipo / escala | Efeito e parâmetros iniciais |
 |---|---:|---|---|---|
@@ -126,7 +128,7 @@ Esquiva e interação são ações universais fora da árvore. Esquiva/dash revi
 
 **ID:** `twilight_bastion` · **Primário:** STR · **Secundário:** VIT. Defesa frontal, golpes comprometidos e controle de aproximação.
 
-**Sprite:** 32×32; armadura azul-ferro #565E65, sombra #29334E, escudo âmbar #B59050. Corpo largo, machado e escudo com silhuetas distintas. Colisor nos pés, sem incorporar largura decorativa do escudo.
+**Referência visual histórica Godot (sprite):** 32×32; armadura azul-ferro #565E65, sombra #29334E, escudo âmbar #B59050. Corpo largo, machado e escudo com silhuetas distintas. Colisor nos pés, sem incorporar largura decorativa do escudo.
 
 | Nó / habilidade | Vigor | CD | Tipo / escala | Efeito e parâmetros iniciais |
 |---|---:|---|---|---|
@@ -147,7 +149,7 @@ Esquiva e interação são ações universais fora da árvore. Esquiva/dash revi
 
 **ID:** `thorn_summoner` · **Primário:** INT · **Secundário:** FTH. Invocação, veneno e sustentação; sabedoria ancestral é expressão narrativa desses atributos.
 
-**Sprite:** 32×32; musgo #526044, osso #DDD5BD, violeta #A17AC4. Cajado ramificado, cabelo/silhueta orgânica. Golem em 48×48 e fera em 32×32, separados da célula da heroína.
+**Referência visual histórica Godot (sprite):** 32×32; musgo #526044, osso #DDD5BD, violeta #A17AC4. Cajado ramificado, cabelo/silhueta orgânica. Golem em 48×48 e fera em 32×32, separados da célula da heroína.
 
 | Nó / habilidade | MP | CD | Tipo / escala | Efeito e parâmetros iniciais |
 |---|---:|---|---|---|
@@ -170,7 +172,7 @@ Máximo um golem e uma fera por heroína. Reinvocar substitui entidade anterior 
 
 **ID:** `sacred_flame_inquisitor` · **Primário:** FTH · **Secundário:** STR. Maça física, fogo sagrado e autocura; sem imunidade narrativa a corrupção.
 
-**Sprite:** 32×32; marfim #DDD5BD, cobre #B59050, chama azul #73BDE0. Tabardo gasto, maça larga, rosto exposto. Símbolo religioso original, sem copiar emblemas das referências.
+**Referência visual histórica Godot (sprite):** 32×32; marfim #DDD5BD, cobre #B59050, chama azul #73BDE0. Tabardo gasto, maça larga, rosto exposto. Símbolo religioso original, sem copiar emblemas das referências.
 
 | Nó / habilidade | MP | CD | Tipo / escala | Efeito e parâmetros iniciais |
 |---|---:|---|---|---|

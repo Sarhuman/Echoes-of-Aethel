@@ -4,7 +4,7 @@
 
 Título: **Echoes of Aethel**. Fantasia sombria com magia antiga decadente. Combate em tempo real, exploração, equipamentos e especialização de habilidades. A influência de ARPGs orienta o ritmo; personagens, mapas e arte serão próprios.
 
-Direção visual: top-down 3/4 em pixel art 16-bit, chão ortogonal e iluminação dinâmica limitada, conforme [guia de arte](art-direction.md). Profundidade vem da composição dos sprites e não exige geometria isométrica. Primeira entrega single-player offline, sem contas, backend ou multiplayer.
+Direção visual vigente: **3D estilizado de fantasia sombria em Unity**, câmera elevada e materiais com aparência pintada, conforme [guia Unity](unity-art-direction.md). Pixel art 16-bit e composição de sprites pertencem ao protótipo Godot. Produção single-player offline, sem contas, backend ou multiplayer.
 
 Loop: preparar equipamento no hub → explorar → lutar e coletar → decidir um dilema → enfrentar um sub-boss → voltar e observar consequências → avançar. A campanha final contém quatro atos de três mapas; não exige mundo aberto contínuo no MVP.
 
@@ -18,7 +18,7 @@ Loop: preparar equipamento no hub → explorar → lutar e coletar → decidir u
 | thorn_summoner | Invocadora de Espinhos | Feras espirituais, golens, veneno e suporte; INT/FTH; sabedoria ancestral narrativa | A tribo fundiu suas almas à natureza; ela carrega as vozes ancestrais no cajado. |
 | sacred_flame_inquisitor | Inquisidor da Chama Sagrada | Maça, fogo, autocura; FTH/STR | Renegou a seita ao descobrir a aliança de seu líder com a corrupção. |
 
-No protótipo, implementar somente o Bastião: ataque básico, defesa com custo de recurso e esquiva. Provocação influencia inimigos controlados por IA; não pressupõe multiplayer. As outras classes são conteúdo planejado. A [Sprint 1](../GDD/01_classes_e_atributos.md) define cinco atributos, quatro ativas e duas passivas por classe, fórmulas e custos experimentais. Éter é recurso; Precisão é derivada; Sabedoria e Vontade são termos narrativos, sem sexto atributo.
+No protótipo Godot histórico, o escopo inicial foi somente o Bastião: ataque básico, defesa com custo de recurso e esquiva. Provocação influencia inimigos controlados por IA; não pressupõe multiplayer. As outras classes possuem regras no [núcleo C# v3](../engineering/runtime-core-v3.md), ainda sem personagens jogáveis em Unity. A [Sprint 1](../GDD/01_classes_e_atributos.md) define cinco atributos, quatro ativas e duas passivas por classe, fórmulas e custos experimentais. Éter é recurso; Precisão é derivada; Sabedoria e Vontade são termos narrativos, sem sexto atributo.
 
 ## Combate, loot e progressão
 

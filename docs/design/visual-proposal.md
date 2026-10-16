@@ -1,6 +1,8 @@
 # Echoes of Aethel — proposta visual 01
 
-> Documento histórico da direção **Godot 2D**. Paleta, composição e leitura continuam referências; pixel art 16-bit, projeção 2:1 e medidas em pixels não são requisitos do cliente Unreal 3D. Ver [transição Unreal](../engineering/unreal-transition.md) e [decisões D01–D08](../engineering/diablo-direction-decisions.md).
+> **Unity 3D:** seguir [direção vigente](unity-art-direction.md). Este documento preserva o briefing do Godot; pixels, filtro nearest, tiles e quadros de sprite não são requisitos de modelagem, UI ou animação do novo cliente.
+
+> Documento histórico da direção **Godot 2D**. Paleta, composição e leitura continuam referências; pixel art 16-bit, projeção 2:1 e medidas em pixels não são requisitos do cliente Unity 3D. Ver [transição Unity](../engineering/unity-transition.md) e [decisões D01–D08](../engineering/diablo-direction-decisions.md).
 
 13/10/2026 · direção de produção e briefing de imagem conceitual.
 

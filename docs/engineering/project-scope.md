@@ -1,6 +1,16 @@
 # Echoes of Aethel — escopo de produto e produção
 
-> Este é o escopo da primeira fatia **Godot**. A direção do próximo cliente 3D e seus critérios de equivalência estão em [Transição para Unreal](unreal-transition.md); não converter pixels/tiles deste escopo em medidas 3D automaticamente.
+## Direção vigente — Unity 3D (16/10/2026)
+
+ARPG single-player offline de fantasia sombria para Windows, em **3D estilizado, câmera elevada e materiais com aparência pintada**. O [guia visual Unity](../design/unity-art-direction.md) e a [transição Unity](unity-transition.md) regem a nova produção. Pixel art 16-bit não é requisito do novo cliente.
+
+A campanha prevê cinco classes, quatro atos, 12 mapas e duas dungeons opcionais. O [núcleo C# v3](runtime-core-v3.md) contém regras testadas fora da engine; cliente Unity, física/IA, produção visual, build e playtest continuam pendentes. URP é proposto; versão do editor/pacotes e orçamentos dependem de prova local, sem promessa de FPS.
+
+Controles, narrativa, IDs e invariantes permanecem. Tiles, sprites, Resources, top-down 2D e projeção 2:1 abaixo regem somente Godot.
+
+## Registro histórico — primeira fatia Godot
+
+O restante desta página preserva o planejamento de 13/10/2026; consultar versões/estado de produção para evidência atual. Não é uma lista de requisitos visuais Unity.
 
 > Estado de implementação: a primeira fatia está jogável em `0.2.0-dev`. Para conflitos sobre slots, MP, dano e checkpoint, prevalecem as [decisões D1–D8](decisions-first-slice.md). Esta página mantém parte do texto histórico de planejamento.
 
@@ -10,7 +20,7 @@ Este documento consolida o projeto sem substituir os IDs narrativos, o GDD ou os
 
 ## 1. O jogo
 
-ARPG single-player offline, dark fantasy em pixel art 16-bit, exploração top-down 3/4 e combate em tempo real. O jogador atravessa um mundo ferido pela ruptura do Coração de Éter. Suas escolhas preservam vidas e valores, mas provocam consequências que reaparecem nos mapas e no hub.
+**Identidade histórica Godot:** ARPG single-player offline, dark fantasy em pixel art 16-bit, exploração top-down 3/4 e combate em tempo real. O jogador atravessa um mundo ferido pela ruptura do Coração de Éter. Suas escolhas preservam vidas e valores, mas provocam consequências que reaparecem nos mapas e no hub.
 
 **Promessa:** combate legível e responsivo, preparação de equipamentos e escolhas com consequências observáveis. O peso narrativo vem de personagens e mudanças no mundo; a segurança mecânica do hub nunca é sacrificada para criar drama.
 
