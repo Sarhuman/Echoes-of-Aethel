@@ -3,6 +3,8 @@
 > **Direção atual — 16/10/2026:** próximo cliente em **Unity**, com URP proposto para o PC de desenvolvimento. A [transição Unity](docs/engineering/unity-transition.md) rege a nova produção; o cliente Unity ainda não existe. A [revisão de interações da campanha](docs/design/campaign-interactions.md) cobre 12 mapas, quatro hubs, três secundárias e duas dungeons como proposta editorial. As referências Godot/Unreal abaixo registram trabalho existente, não a engine futura.
 
 
+Primeiro núcleo C# independente: [memória persistente das escolhas](docs/engineering/world-memory-implementation.md), compilado e testado fora da engine. Integração Unity e apresentação visual pendentes.
+
 **ARPG dark fantasy · um jogador · offline**
 
 **Estado do cliente existente:** a versão jogável atual é 2D em Godot 4.6. Antes da decisão por Unity, a produção 3D estava sendo preparada em Unreal Engine; [transição, contratos e aceite](docs/engineering/unreal-transition.md). O [projeto Unreal mínimo](client/unreal/README.md) compilou como Editor e passou o teste Automation de atributos em 15/10/2026; ainda não há cena jogável ou build Windows empacotada validada. A parte jogável espera o [gate de conteúdo C0](docs/engineering/unreal-execution-plan.md). O [índice da campanha](docs/engineering/campaign-content-index.md) separa os 12 mapas especificados dos mapas implementados; a [primeira rota 3D](docs/design/first-route-3d.md) define Cidadela, Bosque, interiores e recompensas propostas.

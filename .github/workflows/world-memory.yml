@@ -1,0 +1,33 @@
+name: CSharp world memory
+on:
+  pull_request:
+    paths:
+      - 'shared/csharp/**'
+      - 'tools/*world_memory*'
+      - 'docs/GDD/04_mapas_e_quests.md'
+      - 'docs/engineering/campaign-route-manifest.json'
+      - '.github/workflows/world-memory.yml'
+  push:
+    paths:
+      - 'shared/csharp/**'
+      - 'tools/*world_memory*'
+      - 'docs/GDD/04_mapas_e_quests.md'
+      - 'docs/engineering/campaign-route-manifest.json'
+      - '.github/workflows/world-memory.yml'
+permissions:
+  contents: read
+jobs:
+  domain:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install CSharp test toolchain
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y mono-mcs libmono-system-runtime-serialization4.0-cil
+          mono --version
+      - name: Verify canonical content
+        run: python3 tools/generate_world_memory_catalog.py
+      - name: Compile and exercise memory domain
+        run: bash tools/run_world_memory_tests.sh
