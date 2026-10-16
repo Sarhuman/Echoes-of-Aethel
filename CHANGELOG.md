@@ -1,5 +1,15 @@
 # Changelog
 
+## Não lançado — revisão Unity e campanha completa (16/10/2026)
+
+- Direção Unity documentada; clientes Godot/Unreal preservados e sem migração automática.
+- Proposta editorial de interações dos 12 mapas, quatro hubs, três secundárias e duas dungeons.
+- Novos nomes e encenações marcados como proposta, sem alterar IDs/opções/fragmentos canônicos.
+- Títulos dos finais no resumo corrigidos conforme decisões de produção.
+- JSON de design, documento gerado e validador com 13 testes; enumeração das 4.096 rotas de escolhas do modelo documental, sem afirmar teste de gameplay.
+- Gates restantes explícitos: aprovação editorial, catálogo/economia, câmera/layout, assets, runtime Unity e build/playtest.
+
+
 ## 0.2.0-dev — 2026-10-13
 
 - Verificação de 15/10: UnrealBuildTool 5.8.3 passou da validação do Windows SDK, mas bloqueou o build C++ por falta de MSVC x64/x86 válido (mínimo 14.38.33130, recomendado 14.50.35717). Nenhuma cena ou runtime Unreal foi declarado compilado.
@@ -46,3 +56,4 @@ Primeiro identificador de desenvolvimento do protótipo técnico; sem tag, relea
 ### Validação e limites
 
 125 verificações headless aprovadas em Godot 4.6 Linux: save 27, FSM 25, Player 19, apresentação 13 e combate 41. A atualização de metadados de versão recebe importação/smoke adicionais. Sem CI automatizada, benchmark, playtest visual ou export Windows. Imagens são conceitos gerados por IA, não screenshots de gameplay.
+
