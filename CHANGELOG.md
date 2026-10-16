@@ -1,5 +1,11 @@
 # Changelog
 
+## Não lançado — especializações de classe (16/10/2026)
+
+- Design incorporado para primeira escolha no nível 5, aviso discreto, consulta no menu e confirmação por mentor em hub; Bram para o Bastião.
+- Seleção inicial separada dos pontos dos nós básicos; dois caminhos propostos por classe, sem alterar controles ou vincular build à moralidade.
+- Fluxos de confirmação/adiamento, persistência, respec e critérios de aceite especificados. Efeitos, valores, demais mentores, UI e runtime continuam pendentes.
+
 ## Não lançado — núcleo C# de memória do mundo (16/10/2026)
 
 - Núcleo isolado para escolhas e consequências das 12 quests, com projeção sem efeitos futuros, afinidades e marcos canônicos.

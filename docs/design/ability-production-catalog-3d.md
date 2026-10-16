@@ -74,3 +74,8 @@
 3. Definir alcance, alvo, projeção 3D e colisão por habilidade; esses números espaciais não existem na ficha 2D. Medir na câmera antes de aprovar dano/tempo em combate.
 4. Montar catálogo de equipamento que garanta o A1 de cada herói e suporte as demais habilidades; [lojas regionais](regional-commerce-3d.md) continuam propostas até preços e itens simulados.
 5. Produzir testes de equivalência de regra por classe somente quando gameplay Unreal for iniciado, após gate C0. A ficha não prova que magia, IA, invocação ou passivas já funcionam.
+
+
+## Extensão de especializações — 16/10/2026
+
+A [ficha de especializações](class-specializations.md) acrescenta uma primeira escolha no nível 5 e duas direções propostas para cada classe, preservando os 30 nós básicos. Priorizar o piloto do Bastião: duas modificações com leitura visual/sonora distinta e reutilização do kit existente. Não produzir novas animações, ícones ou valores antes de fechar seus efeitos, IDs e limites. Bram conduz a seleção no hub; UI e mentores das demais classes ainda dependem de implementação. Para a Sentinela, preservar adagas e combate curto; direção de arco não foi adotada.
