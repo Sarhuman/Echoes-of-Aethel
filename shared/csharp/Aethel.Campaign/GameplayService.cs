@@ -34,7 +34,8 @@ namespace Aethel.Campaign
         public GameplayService(ICampaignStore store, ITrainingAccess training, IGameplayAccess access)
         { this.store = store; this.access = access ?? throw new ArgumentNullException("access"); commands = new ProgressionService(store, training); }
         public CampaignState Read() { return commands.Read(); }
-        public ProgressionResult AwardDefeat(string token, string spawnId, long expected)
+        // Compatibility harness only; production victory uses EncounterRewardService for atomic loot + XP.
+        internal ProgressionResult AwardDefeat(string token, string spawnId, long expected)
         {
             return commands.Run(token, "defeat|" + spawnId, expected, s => {
                 if (!CampaignState.ValidId(spawnId)) return ProgressionStatus.Invalid;
@@ -98,8 +99,10 @@ namespace Aethel.Campaign
         }
         public ProgressionResult Equip(string token, string slot, string instance, long expected)
         {
-            return commands.Run(token, "equip|" + slot + "|" + instance, expected, s => s.Inventory.Equip(s.ClassId,slot,instance) ? ProgressionStatus.Accepted : ProgressionStatus.Invalid);
+            return commands.Run(token, "equip|" + slot + "|" + instance, expected, s => EquipAndClamp(s,slot,instance));
         }
+        private static ProgressionStatus EquipAndClamp(CampaignState s,string slot,string instance)
+        { if(!s.Inventory.Equip(s.ClassId,slot,instance,s.Level))return ProgressionStatus.Invalid;s.Vitals.Hp=Math.Min(s.Vitals.Hp,CharacterRules.MaxHp(s));s.Vitals.Mp=Math.Min(s.Vitals.Mp,CharacterRules.MaxMp(s));return ProgressionStatus.Accepted; }
         public ProgressionResult BuyPotion(string token, string template, long expected)
         {
             return commands.Run(token, "buy|" + template, expected, s => {
@@ -141,11 +144,13 @@ namespace Aethel.Campaign
                 return new ProgressionResult { Status = ProgressionStatus.Invalid, State = s };
             if (time <= s.SimulationTime) return new ProgressionResult { Status = ProgressionStatus.Replayed, State = s };
             if (s.Version != expected) return new ProgressionResult { Status = ProgressionStatus.Conflict, State = s };
-            if (s.Vitals.Hp > 0 && access.IsOutOfCombat(s.CharacterId) && !s.Vitals.RemovablePoison)
+            if (s.Vitals.Hp > 0 && access.IsOutOfCombat(s.CharacterId) && !s.Vitals.RemovablePoison && !s.Kit.Targets.Any(x=>x.RemainingTicks>0))
             {
                 long start = Math.Max(s.SimulationTime,Math.Max(s.Vitals.LastHostileAt + 5000,s.Vitals.LastMpSpentAt + 3000));
                 long duration = Math.Max(0,time-start);
-                long numerator = s.Vitals.MpRegenRemainder + duration * (1 + CharacterRules.Attribute(s,2)/10);
+                long bonusDuration=0;
+                if(s.BasicNodes.Contains(s.ClassId+".p2")) { long end=s.ClassId=="rune_weaver" && s.Kit.Barrier>0?s.Kit.BarrierUntil:s.ClassId=="thorn_summoner"?s.Kit.Summons.Values.Where(x=>x.Hp>0).Select(x=>x.ExpiresAt).DefaultIfEmpty(0).Max():0; bonusDuration=Math.Max(0,Math.Min(time,end)-start); }
+                long numerator = s.Vitals.MpRegenRemainder + duration * (1 + CharacterRules.Attribute(s,2)/10) + bonusDuration;
                 s.Vitals.Mp = Math.Min(CharacterRules.MaxMp(s),s.Vitals.Mp + (int)(numerator/1000));
                 s.Vitals.MpRegenRemainder = s.Vitals.Mp == CharacterRules.MaxMp(s) ? 0 : (int)(numerator%1000);
             }
@@ -162,10 +167,10 @@ namespace Aethel.Campaign
             return commands.Run(token,"recover-at-hub",expected,s => {
                 if (!access.CanRecoverAtHub(s.CharacterId)) return ProgressionStatus.Locked;
                 if (s.Vitals.Hp == CharacterRules.MaxHp(s) && s.Vitals.Mp == CharacterRules.MaxMp(s) &&
-                    !s.Vitals.RemovablePoison && s.Effects.CounterExpiresAt == 0 && s.Effects.GuardExpiresAt == 0 && s.Effects.ImpactBonus.Count == 0)
+                    !s.Vitals.RemovablePoison && s.Effects.CounterExpiresAt == 0 && s.Effects.GuardExpiresAt == 0 && s.Effects.ImpactBonus.Count == 0 && s.Kit.Actions.Count==0 && s.Kit.Summons.Count==0 && s.Kit.Targets.Count==0 && s.Kit.Barrier==0 && s.Kit.ConcealedUntil==0)
                     return ProgressionStatus.Replayed;
                 s.Vitals.Hp = CharacterRules.MaxHp(s); s.Vitals.Mp = CharacterRules.MaxMp(s); s.Vitals.RemovablePoison = false;
-                s.Vitals.MpRegenRemainder = 0; s.Effects.ClearPersonalActions(); s.Effects.Ruptures.Clear();
+                s.Vitals.MpRegenRemainder = 0; s.Effects.ClearPersonalActions(); s.Kit.Clear(); s.Effects.Ruptures.Clear();
                 return ProgressionStatus.Accepted;
             });
         }
@@ -178,10 +183,12 @@ namespace Aethel.Campaign
                 if (sequence < 1 || sequence == long.MaxValue) return ProgressionStatus.Invalid;
                 if (sequence <= s.Vitals.LastDamageSequence) return ProgressionStatus.Replayed;
                 if (sequence != s.Vitals.LastDamageSequence + 1 || damage <= 0 || s.Vitals.Hp <= 0) return ProgressionStatus.Invalid;
+                ClassCombatService.BreakConceal(s);
+                if(s.SimulationTime<s.Kit.BarrierUntil) {int absorbed=Math.Min(damage,s.Kit.Barrier);s.Kit.Barrier-=absorbed;damage-=absorbed;}
                 s.Vitals.LastDamageSequence = sequence; s.Vitals.LastHostileAt = s.SimulationTime; s.Vitals.Hp = Math.Max(0,s.Vitals.Hp - damage);
                 if (s.Vitals.Hp == 0)
                 {
-                    s.Effects.ClearPersonalActions();
+                    s.Effects.ClearPersonalActions(); s.Kit.Clear();
                 }
                 return ProgressionStatus.Accepted;
             });

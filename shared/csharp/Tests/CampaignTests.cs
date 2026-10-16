@@ -258,7 +258,7 @@ internal static class CampaignTests
     }
     public static int Main()
     {
-        try { RuntimeTests.Run(); AggregateReward(); Progression(); RespecTransactions(); AllocationMatrix(); ThreatMatrix(); FullCampaignComposition(); DiskIntegration();
+        try { RuntimeTests.Run(); ExtendedRuntimeTests.Run(); AggregateReward(); Progression(); RespecTransactions(); AllocationMatrix(); ThreatMatrix(); FullCampaignComposition(); DiskIntegration();
             Console.WriteLine(checks + " campaign checks passed: transactions, 7500 allocations, 3600 threat comparisons"); return 0; }
         catch (Exception e) { Console.Error.WriteLine(e); return 1; }
     }

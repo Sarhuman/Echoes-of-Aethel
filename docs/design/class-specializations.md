@@ -1,5 +1,7 @@
 # Especializações das cinco classes
 
+> Atualização 16/10/2026: consulte [núcleo C# v3](../engineering/runtime-core-v3.md) para os quatro kits, oito caminhos adicionais, loot e 51 encontros agora executáveis fora da engine. As limitações históricas abaixo descrevem o estágio anterior; integração Unity e validação de gameplay continuam pendentes.
+
 > **Atualização de implementação:** o [núcleo v2](../engineering/runtime-core-v2.md) implementa em C# headless os oito modificadores dos caminhos do Bastião. Os seis tiers posteriores usam valores NOVOS/EXPERIMENTAIS detalhados nesse guia e em `GameplayBalance.cs`. As outras quatro classes continuam com alocação estrutural, sem seus kits/efeitos portados. A aprovação de leitura/combate em Unity permanece pendente.
 
 > **Complemento de direção de 16/10/2026:** os detalhes abaixo foram fechados por delegação do proprietário nas seções “Progressão e parâmetros do piloto” e em [ameaça e formação regional](regional-threat-and-training.md). Elas substituem as pendências iniciais de níveis, respec e atribuição de serviço. Valores novos continuam EXPERIMENTAIS até playtest; não indicam runtime pronto.

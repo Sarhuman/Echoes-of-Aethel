@@ -288,12 +288,12 @@ internal static class RuntimeTests
             var disk=new JsonCampaignStore(path,CampaignState.Create("legacy","character","twilight_bastion"));
             var state=disk.Load();
             S(new ProgressionService(disk,new TrainingTestAccess()).DismissNotice(oldNotice,0),ProgressionStatus.Replayed);
-            C(state.Schema==2 && state.Level==5 && state.TotalXp==700 && state.Inventory.Total("potion_health_small")==3,"Migration lost XP/reserve");
+            C(state.Schema==3 && state.Level==5 && state.TotalXp==700 && state.Inventory.Total("potion_health_small")==3,"Migration lost XP/reserve");
             C(File.ReadAllText(path)==before,"Read-only migration overwrote original");
             var service=new GameplayService(disk,new TrainingTestAccess(),new RuntimeAccess());
             S(service.LearnBasic(T(),"twilight_bastion.a2",service.Read().Version),ProgressionStatus.Accepted);
             C(File.ReadAllText(path+".bak")==before,"Migration backup not original");
-            state=disk.Load();C(state.Schema==2 && state.Inventory.Total("potion_health_small")==3,"Migration repeated reward");
+            state=disk.Load();C(state.Schema==3 && state.Inventory.Total("potion_health_small")==3,"Migration repeated reward");
             var progress=new ProgressionService(disk,new TrainingTestAccess());progress.SelectPath(T(),"twilight_bastion.defense",progress.Read().Version);
             service.LearnBasic(T(),"twilight_bastion.a3",service.Read().Version);service.UseGuard(T(),service.Read().Version);
             service.ConfirmBlock(T(),"disk.block",service.Read().Version);string action=T();service.UseImpact(action,service.Read().Version);

@@ -1,5 +1,7 @@
 # Estado verificável e próximos aceites — 16/10/2026
 
+> Atualização 16/10/2026: consulte [núcleo C# v3](runtime-core-v3.md) para os quatro kits, oito caminhos adicionais, loot e 51 encontros agora executáveis fora da engine. As limitações históricas abaixo descrevem o estágio anterior; integração Unity e validação de gameplay continuam pendentes.
+
 > **Atualização de núcleo:** o [runtime v2](runtime-core-v2.md) acrescenta inventário/XP/recursos, migração e efeitos dos dois caminhos do Bastião; as demais classes ainda têm alocação, sem kits de combate portados.
 
 Este índice é o ponto de entrada para a próxima entrega. A direção é Unity para Windows offline; Godot conserva a versão histórica jogável e Unreal conserva infraestrutura/blockouts. Clientes anteriores não foram removidos. Versão, manifests e projeto Unity ainda não foram inicializados/validados nesta série de PRs.

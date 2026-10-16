@@ -1,5 +1,13 @@
 # Changelog
 
+## 16/10/2026 — Núcleo C# v3 (experimental, sem cliente Unity)
+
+- Quatro kits com 16 ativas/8 passivas, 32 modificadores de caminhos, snapshots, ticks e invocações limitadas.
+- Loot de cinco raridades, afixos em três tiers, nove slots, lendários de efeito fixo e recompensa de encontro transacional.
+- Catálogo com 51 entradas: 33 comuns, 12 finais de mapa e seis entradas das duas dungeons opcionais.
+- Save schema 3, migração do 2 preservando recursos/história e outbox de dano persistida para consumidor idempotente futuro.
+- README, guia de integração e harness/CI atualizados; não anuncia build Unity, IA ou balanceamento prontos.
+
 ## Não lançado — núcleo não visual v2 (16/10/2026)
 
 - Inventário de instâncias com grade/baú/reserva, pilhas, movimentação, equipamento do catálogo fixo e compras de poções; recompensa do Bosque entregue atomicamente.
