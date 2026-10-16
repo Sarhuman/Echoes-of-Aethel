@@ -33,6 +33,7 @@ required = {
     "C0_Forest_ReturnGateNorth",
     "C0_Forest_ReturnGateSouth",
     "C0_Forest_ReviewCamera_FOV35_EXPERIMENTAL",
+    "C0_Forest_ReviewDirectionalLight_EXPERIMENTAL",
 }
 required.update(
     "C0_Forest_Clue_" + clue_id
@@ -45,8 +46,8 @@ required.update(
 missing = required - actors.keys()
 if missing:
     raise RuntimeError(f"Missing forest landmarks: {sorted(missing)}")
-if len(actors) != 32:
-    raise RuntimeError(f"Expected 32 C0 actors, found {len(actors)}")
+if len(actors) != 33:
+    raise RuntimeError(f"Expected 33 C0 actors, found {len(actors)}")
 
 # Continuous preliminary floor spine; this checks geometry only, not navmesh.
 pads = [
