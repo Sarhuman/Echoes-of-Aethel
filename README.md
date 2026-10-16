@@ -2,9 +2,26 @@
 
 **ARPG dark fantasy · um jogador · offline**
 
-**Estado do projeto:** a versão jogável `0.2.0-dev` continua em **Godot 4.6 (2D)**. A produção futura está sendo preparada em **Unreal Engine 5.8 (3D isométrico)** no [PR #23](https://github.com/Sarhuman/Echoes-of-Aethel/pull/23). O projeto Unreal já compilou no Editor e passou um teste de atributos, mas ainda **não possui cena jogável 3D nem pacote Windows validado**. O trabalho atual é a pré-produção de conteúdo C0: cobrir os 12 mapas, cinco heróis, personagens, criaturas, narrativa e economia antes de iniciar a rota jogável Unreal.
+**Direção atual — 16/10/2026:** o próximo cliente 3D será em **Unity**. URP é o pipeline proposto; versão do editor/pacotes ainda será fixada após a prova local. Godot 4.6 mantém a fatia jogável histórica; Unreal foi uma etapa anterior. Ainda não existe cliente Unity jogável ou build Windows 3D validado.
 
-> O caminho para o inferno está cheio de boas intenções.
+**Implementação em revisão:** [PR #32 — quatro kits, loot avançado e encontros](https://github.com/Sarhuman/Echoes-of-Aethel/pull/32), sobre a cadeia de domínio iniciada nos PRs anteriores. Esses módulos estão nas branches de trabalho e **ainda não foram mesclados à main**.
+
+| Componente | Estado verificável |
+|---|---|
+| Tecelão, Sentinela, Invocadora e Inquisidor | Regras C# de 16 ativas, 8 passivas e 32 modificadores de especialização, testadas fora da engine |
+| Loot avançado | Cinco raridades, afixos em três tiers, nove slots, restrições de classe/duas mãos e três efeitos lendários fixos experimentais |
+| Recompensas | XP, ouro, itens, receitas, fragmentos e confronto terminal na mesma transação; retry não duplica |
+| Encontros | 51 entradas: 33 comuns, 12 finais de mapa e seis nas duas dungeons opcionais |
+| Save C# | Schema 3 com migração dos formatos C# anteriores; não converte Godot/Unreal |
+| Integração de jogo | Física, IA/atores, consumidor persistente de dano, fases autorais de bosses, cenas, UI/áudio e build pendentes |
+
+[Contratos e limites do núcleo v3](https://github.com/Sarhuman/Echoes-of-Aethel/blob/5624836b9b85e6e0d32a2184fd8cc8121d6c4eaa/docs/engineering/runtime-core-v3.md) · [Direção Unity](https://github.com/Sarhuman/Echoes-of-Aethel/blob/5624836b9b85e6e0d32a2184fd8cc8121d6c4eaa/docs/engineering/unity-transition.md) · [Catálogo experimental](https://github.com/Sarhuman/Echoes-of-Aethel/blob/5624836b9b85e6e0d32a2184fd8cc8121d6c4eaa/docs/engineering/encounter-catalog.json).
+
+**Validação local:** Mono 6.8, C# 7.2; passaram 737 verificações anteriores de runtime, 1.436 novas e 22.046 do agregado. A memória passou 184.377 verificações, incluindo 4.096 rotas. Cinco geradores e 13 testes Python passaram. Os totais incluem matrizes/repetições; não são cobertura de gameplay, balanceamento ou teste de desempenho. Windows/.NET 8 remoto e Unity não foram validados localmente.
+
+Para conferir o código em revisão, use a branch `feat/four-kits-loot-encounters`. Execute `bash tools/run_campaign_tests.sh` com Mono, ou `dotnet run --project shared/csharp/Tests/CampaignHarness.csproj --configuration Release` com SDK .NET 8. As instruções seguintes continuam referentes ao **cliente Godot 0.2.0-dev**; as imagens são capturas dele.
+
+>  O caminho para o inferno está cheio de boas intenções.
 
 O Bastião sai da Cidadela dos Últimos para investigar a aldeia no Bosque das Névoas. Esta versão **0.2.0-dev** contém uma primeira jornada jogável: explorar, lutar, coletar itens, derrotar Garras de Musgo, investigar três pistas, tomar uma decisão e voltar à Cidadela para observar a consequência.
 
@@ -56,11 +73,12 @@ A jornada traz Lobo Etéreo, Cultista Cego e o **subchefe** Garras de Musgo, com
 
 Esta é a primeira fatia da campanha. Os quatro atos, as outras quatro classes e os demais mapas descritos no GDD continuam planejados. Há animações de caminhada e golpe; outros movimentos, a mixagem e o equilíbrio ainda precisam de playtest. Os valores de balanceamento estão marcados como experimentais em [experimental-values.md](docs/engineering/experimental-values.md).
 
-## Próxima produção (Unreal)
+## Próxima produção (Unity)
 
-O [PR #23](https://github.com/Sarhuman/Echoes-of-Aethel/pull/23) reúne o projeto mínimo Unreal, o atlas dos 12 mapas, o índice de heróis e bestiário, as decisões de direção e contratos iniciais de save, loot, grade e baú. As 18 pranchas de personagens são **conceitos gerados, ainda não modelos 3D aprovados**. Os documentos e o build básico são progresso de pré-produção; não equivalem a mapas, inimigos ou comércio implementados no Unreal.
+A [direção Unity](https://github.com/Sarhuman/Echoes-of-Aethel/blob/5624836b9b85e6e0d32a2184fd8cc8121d6c4eaa/docs/engineering/unity-transition.md) rege o novo cliente. Os clientes anteriores são preservados como referência; a infraestrutura e os blockouts do [PR #23](https://github.com/Sarhuman/Echoes-of-Aethel/pull/23) registram a etapa Unreal. As 18 pranchas de personagens são conceitos, ainda não modelos aprovados.
 
-A sequência acordada é: concluir e revisar o conteúdo C0; medir câmera, escala e custo de arte; só então produzir e validar a primeira rota 3D. O cliente Godot permanece como referência de comportamento e regressão durante a transição. A cobertura de 22% citada na planilha de planejamento é uma **estimativa**, não porcentagem de conclusão do jogo Unreal.
+Os gates C0/U0 continuam abertos: revisão editorial/visual, instalação e versões do editor, prova de câmera/escala, build Windows e medição no PC alvo (Xeon 2630, RX 580, 16 GB). Depois, integrar e testar uma rota completa. As regras C# verificadas não comprovam física, IA ou desempenho na engine; a antiga estimativa de 22% não é uma medida de conclusão do jogo.
+
 
 ## Verificar e exportar
 
