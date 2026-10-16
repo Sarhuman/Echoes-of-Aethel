@@ -8,6 +8,10 @@ O módulo agora contém infraestrutura de apresentação para [cinemáticas, mú
 
 Na primeira abertura sem renderização, `UnrealEditor-Cmd.exe` registrou `Engine is initialized` e carregou o mapa padrão. O comando `Quit` foi executado, mas não encerrou o processo; a instância de verificação foi terminada manualmente. Isso não substitui a abertura visual e um fechamento normal pelo editor.
 
+## Arena técnica de escala C0-07
+
+`Content/Aethel/Dev/Measurement/L_C0_ScaleProbe.umap` é uma cena descartável de pré-produção, versionada por Git LFS. Contém apenas geometria de teste, cinco volumes provisórios, duas câmeras e duas luzes; não há input, combate ou campanha. `tools/unreal/c0_generate_scale_probe.py` a regenera pelo editor com os plugins editoriais `PythonScriptPlugin` e `EditorScriptingUtilities` habilitados no `.uproject`. O [protocolo C0-07](../../docs/engineering/c0-camera-scale-protocol.md) registra o que ainda precisa ser medido. O recarregamento estrutural encontrou 20 atores, mas a captura automatizada saiu preta e a abertura gráfica não completou neste ambiente; não há câmera ou largura aprovada.
+
 Para rodar o teste de atributos da E1-05 a partir da raiz do repositório:
 
 ```powershell
