@@ -34,6 +34,7 @@ namespace Aethel.Campaign
                 if (s == null) throw new SerializationException("Empty campaign");
                 s.Validate();
                 if (s.Schema == 1) s = CampaignState.MigrateV1(s);
+                if (s.Schema == 2) s = CampaignState.MigrateV2(s);
                 if (!SameIdentity(s)) throw new SerializationException("Campaign identity mismatch");
                 return s;
             }
@@ -46,7 +47,7 @@ namespace Aethel.Campaign
         public bool TryCommit(long expectedVersion, CampaignState candidate)
         {
             candidate = candidate.Copy(); candidate.Validate();
-            if (candidate.Schema != 2 || !SameIdentity(candidate) || candidate.Version != expectedVersion + 1)
+            if (candidate.Schema != 3 || !SameIdentity(candidate) || candidate.Version != expectedVersion + 1)
                 throw new SerializationException("Invalid campaign transaction");
             using (var guard = new FileStream(path + ".lock", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None))
             {

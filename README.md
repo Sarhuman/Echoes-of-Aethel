@@ -3,7 +3,17 @@
 > **Direção atual — 16/10/2026:** próximo cliente em **Unity**, com URP proposto para o PC de desenvolvimento. A [transição Unity](docs/engineering/unity-transition.md) rege a nova produção; o cliente Unity ainda não existe. A [revisão de interações da campanha](docs/design/campaign-interactions.md) cobre 12 mapas, quatro hubs, três secundárias e duas dungeons como proposta editorial. As referências Godot/Unreal abaixo registram trabalho existente, não a engine futura.
 
 
-Base C# independente: [núcleo não visual v2](docs/engineering/runtime-core-v2.md) com grade/baú, XP, recursos e efeitos dos caminhos do Bastião; [estado e próximos aceites](docs/engineering/production-status.md), [memória persistente](docs/engineering/world-memory-implementation.md) e [progressão/especialização integrada](docs/engineering/campaign-progression-implementation.md), compilados e testados fora da engine. Integração Unity e apresentação visual pendentes.
+**Núcleo C# v3:** [kits, loot e encontros](docs/engineering/runtime-core-v3.md) implementados e testados fora da engine. Tecelão, Sentinela, Invocadora e Inquisidor têm quatro ativas, duas passivas e seus dois caminhos; loot com cinco raridades, afixos, nove slots e recompensas transacionais; catálogo com **51 encontros** nos 12 mapas e duas dungeons. **Isso ainda não torna as cinco classes jogáveis em Unity.** Física, IA/atores, consumidor persistente de dano, fases de bosses, cenas, build e playtest continuam necessários.
+
+| Parte | Estado verificável |
+|---|---|
+| Cliente Godot 0.2.0-dev | Primeira fatia jogável histórica |
+| Cliente Unity / versão do editor | Ainda não inicializado / não fixada |
+| Núcleo C# schema 3 | Compila e passa harness em Mono; migração dos formatos C# 1/2 |
+| Loot e encontros | Baseline experimental de domínio, sem balanceamento final |
+| Windows / desempenho no PC alvo | Validação pendente |
+
+Para conferir o núcleo: `bash tools/run_campaign_tests.sh` e `python3 tools/generate_encounter_catalog.py`. Consulte [estado de produção](docs/engineering/production-status.md) e [direção Unity](docs/engineering/unity-transition.md). As imagens e instruções abaixo pertencem ao cliente Godot existente.
 
 **ARPG dark fantasy · um jogador · offline**
 

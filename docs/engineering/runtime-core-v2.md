@@ -1,5 +1,7 @@
 # Núcleo não visual v2 — inventário, XP e Bastião
 
+> Atualização 16/10/2026: consulte [núcleo C# v3](runtime-core-v3.md) para os quatro kits, oito caminhos adicionais, loot e 51 encontros agora executáveis fora da engine. As limitações históricas abaixo descrevem o estágio anterior; integração Unity e validação de gameplay continuam pendentes.
+
 **Estado em 16/10/2026:** código C# compilado/testado em Mono, independente de Unity. Incremento sobre o agregado do PR #30. Isto não é um cliente jogável ou validação do combate físico. Fonte principal: `shared/csharp/Aethel.Campaign/`.
 
 ## O que foi implementado

@@ -29,14 +29,15 @@ namespace Aethel.Campaign
         [DataMember(IsRequired = true)] public int Quantity;
         [DataMember(IsRequired = true)] public string Location;
         [DataMember(IsRequired = true)] public int X, Y;
-        internal ItemInstance Copy() { return (ItemInstance)MemberwiseClone(); }
+        [DataMember] public EquipmentRoll Roll;
+        internal ItemInstance Copy() { var x=(ItemInstance)MemberwiseClone(); x.Roll=Roll==null?null:Roll.Copy(); return x; }
     }
     [DataContract]
     public sealed class InventoryState
     {
         [DataMember(IsRequired = true)] public List<ItemInstance> Items = new List<ItemInstance>();
         [DataMember(IsRequired = true)] public Dictionary<string, int> QuestItems = new Dictionary<string, int>();
-        [DataMember(IsRequired = true)] public Dictionary<string, string> Equipped = new Dictionary<string, string> { { "main_hand", "" }, { "chest", "" } };
+        [DataMember(IsRequired = true)] public Dictionary<string, string> Equipped = AdvancedItemCatalog.Slots.ToDictionary(x=>x,x=>"");
         [DataMember(IsRequired = true)] public long NextSerial;
         internal InventoryState Copy()
         {
@@ -45,18 +46,21 @@ namespace Aethel.Campaign
         }
         public int Total(string templateId) { if (templateId == null) return 0; return Items.Where(x => x.TemplateId == templateId).Sum(x => x.Quantity) + (QuestItems.ContainsKey(templateId) ? QuestItems[templateId] : 0); }
         public int WeaponPower { get { return EquippedStat("main_hand", false); } }
-        public int Armor { get { return EquippedStat("chest", true); } }
+        public int Armor { get { return Equipped.Values.Where(x=>x!="").Select(id=>Items.Single(x=>x.Id==id)).Sum(x=>ItemCatalog.Find(x.TemplateId).Armor + (x.Roll==null?0:x.Roll.Stat("armor"))); } }
+        public int AffixStat(string stat) { return Equipped.Values.Where(x=>x!="").Distinct().Select(id=>Items.Single(x=>x.Id==id)).Sum(x=>x.Roll==null?0:x.Roll.Stat(stat)); }
+        public int UniqueBonus(string id) { return Equipped.Values.Any(e=>Items.Any(x=>x.Id==e && x.Roll!=null && x.Roll.UniqueEffect==id))?500:0; }
+        public int UniqueWard { get { return Equipped.Values.Any(id=>Items.Any(x=>x.Id==id && x.Roll!=null && x.Roll.UniqueEffect=="unique.steadfast_ward"))?5:0; } }
         private int EquippedStat(string slot, bool armor)
         {
             var item = Items.FirstOrDefault(x => x.Id == Equipped[slot]);
             var def = item == null ? null : ItemCatalog.Find(item.TemplateId);
-            return def == null ? 0 : armor ? def.Armor : def.Power;
+            return def == null ? 0 : armor ? def.Armor : def.Power + (item.Roll==null?0:(item.Roll.Level-1)/2);
         }
         public void Validate(string owner)
         {
             if (Items == null || QuestItems == null || Equipped == null || NextSerial < 0 || NextSerial == long.MaxValue ||
                 Items.Count > GameplayBalance.BagWidth * GameplayBalance.BagHeight + GameplayBalance.StashWidth * GameplayBalance.StashHeight + GameplayBalance.ReserveInstances || Items.Any(x => x == null) || Items.Select(x => x.Id).Distinct().Count() != Items.Count ||
-                QuestItems.Count > 32 || Equipped.Count != 2 || !Equipped.ContainsKey("main_hand") || !Equipped.ContainsKey("chest") ||
+                QuestItems.Count > 32 || (Equipped.Count != 2 && Equipped.Count != 9) || Equipped.Keys.Any(k=>!AdvancedItemCatalog.Slots.Contains(k)) || !Equipped.ContainsKey("main_hand") || !Equipped.ContainsKey("chest") ||
                 Items.Count(x => x.Location == "reserve") > GameplayBalance.ReserveInstances)
                 throw new SerializationException("Invalid inventory collections");
             var occupied = new HashSet<string>();
@@ -64,9 +68,11 @@ namespace Aethel.Campaign
             {
                 var def = ItemCatalog.Find(item.TemplateId); Guid instance;
                 if (def == null || def.Kind == "quest" || !Guid.TryParseExact(item.Id, "D", out instance) || item.Id != instance.ToString("D") || item.Owner != owner ||
-                    item.ContentVersion != 1 || item.Quantity < 1 || item.Quantity > def.MaxStack ||
+                    (item.ContentVersion != 1 && item.ContentVersion != 2) || (item.ContentVersion==2 && item.Roll==null) || (item.ContentVersion==1 && item.Roll!=null) || item.Quantity < 1 || item.Quantity > def.MaxStack ||
                     (item.Location != "bag" && item.Location != "stash" && item.Location != "reserve"))
                     throw new SerializationException("Invalid item instance");
+                if (item.Roll!=null) item.Roll.Validate(item.TemplateId);
+                if (AdvancedItemCatalog.Find(item.TemplateId)!=null && def.Kind=="equipment" && item.Roll==null) throw new SerializationException("Advanced equipment requires roll");
                 if (item.Location == "reserve")
                 { if (item.X != -1 || item.Y != -1) throw new SerializationException("Reserved placement"); continue; }
                 int height = item.Location == "bag" ? GameplayBalance.BagHeight : GameplayBalance.StashHeight;
@@ -81,8 +87,14 @@ namespace Aethel.Campaign
                 if (ItemCatalog.Find(q.Key) == null || ItemCatalog.Find(q.Key).Kind != "quest" || q.Value < 1 || q.Value > 1000000)
                     throw new SerializationException("Invalid quest item");
             foreach (var e in Equipped)
-                if (e.Value != "" && !Items.Any(x => x.Id == e.Value && x.Location == "bag" && ItemCatalog.Find(x.TemplateId).Slot == e.Key))
+                if (e.Value != "" && !Items.Any(x => x.Id == e.Value && x.Location == "bag" && AdvancedItemCatalog.SlotMatches(x.TemplateId,e.Key)))
                     throw new SerializationException("Equipped reference missing");
+        }
+        internal bool GrantEquipment(string owner,string campaign,string template,EquipmentRoll roll)
+        {
+            roll.Validate(template);if(NextSerial==long.MaxValue)return false;
+            var item=new ItemInstance { Id=Mint(owner,campaign),Owner=owner,TemplateId=template,Roll=roll.Copy(),ContentVersion=2,Quantity=1,Location="reserve",X=-1,Y=-1 };
+            if(!PlaceFirst(item,"bag") && Items.Count(x=>x.Location=="reserve")>=GameplayBalance.ReserveInstances)return false;Items.Add(item);return true;
         }
         private string Mint(string owner, string campaign)
         {
@@ -111,7 +123,7 @@ namespace Aethel.Campaign
         internal bool Grant(string owner, string campaign, string templateId, int amount, bool allowReserve)
         {
             var def = ItemCatalog.Find(templateId);
-            if (NextSerial > long.MaxValue - 1000 || def == null || amount < 1 || amount > 1000) return false;
+            if ((AdvancedItemCatalog.Find(templateId)!=null && def!=null && def.Kind=="equipment") || NextSerial > long.MaxValue - 1000 || def == null || amount < 1 || amount > 1000) return false;
             if (def.Kind == "quest")
             {
                 int old = QuestItems.ContainsKey(templateId) ? QuestItems[templateId] : 0;
@@ -164,13 +176,16 @@ namespace Aethel.Campaign
             if (n <= 0) return false;
             source.Quantity -= n; target.Quantity += n; if (source.Quantity == 0) Items.Remove(source); return true;
         }
-        internal bool Equip(string classId, string slot, string instanceId)
+        internal bool Equip(string classId, string slot, string instanceId, int level=30)
         {
             if (slot == null || instanceId == null || !Equipped.ContainsKey(slot)) return false;
             if (instanceId == "") { Equipped[slot] = ""; return true; }
             var item = Items.FirstOrDefault(x => x.Id == instanceId && x.Location == "bag");
             var def = item == null ? null : ItemCatalog.Find(item.TemplateId);
-            if (def == null || def.Kind != "equipment" || def.Slot != slot || (slot == "main_hand" && classId != "twilight_bastion")) return false;
+            if (def == null || def.Kind != "equipment" || !AdvancedItemCatalog.SlotMatches(item.TemplateId,slot) || !AdvancedItemCatalog.Compatible(classId,item.TemplateId) || (item.Roll!=null && level<item.Roll.RequirementLevel)) return false;
+            if (Equipped.Any(e=>e.Key!=slot && e.Value==instanceId)) return false;
+            if (slot=="main_hand" && AdvancedItemCatalog.TwoHands(item.TemplateId) && Equipped.ContainsKey("off_hand") && Equipped["off_hand"]!="")return false;
+            if (slot=="off_hand" && Items.Any(i=>i.Id==Equipped["main_hand"] && AdvancedItemCatalog.TwoHands(i.TemplateId)))return false;
             Equipped[slot] = instanceId; return true;
         }
         internal void RemoveOne(string id)

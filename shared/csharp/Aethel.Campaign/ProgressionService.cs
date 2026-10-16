@@ -21,7 +21,7 @@ namespace Aethel.Campaign
             this.store = store ?? throw new ArgumentNullException("store");
             this.training = training ?? throw new ArgumentNullException("training");
         }
-        public CampaignState Read() { var s = store.Load(); s.Validate(); if (s.Schema != 2) throw new System.Runtime.Serialization.SerializationException("Campaign store must migrate to schema 2"); return s.Copy(); }
+        public CampaignState Read() { var s = store.Load(); s.Validate(); if (s.Schema != 3) throw new System.Runtime.Serialization.SerializationException("Campaign store must migrate to schema 3"); return s.Copy(); }
         internal ProgressionResult Run(string commandId, string payload, long expected, Func<CampaignState, ProgressionStatus> operation)
         {
             var original = Read();

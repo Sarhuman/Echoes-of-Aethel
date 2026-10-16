@@ -25,7 +25,7 @@ namespace Aethel.Campaign
         public static ItemTemplate Find(string id)
         {
             foreach (var item in Items) if (item.Id == id) return item;
-            return null;
+            return AdvancedItemCatalog.Find(id);
         }
     }
 }

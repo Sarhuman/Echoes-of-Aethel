@@ -10,7 +10,7 @@ namespace Aethel.Campaign
     [DataContract]
     public sealed class CampaignState
     {
-        [DataMember(IsRequired = true)] public int Schema = 2;
+        [DataMember(IsRequired = true)] public int Schema = 3;
         [DataMember(IsRequired = true)] public string CharacterId;
         [DataMember(IsRequired = true)] public string ClassId;
         [DataMember(IsRequired = true)] public int Level = 1;
@@ -34,6 +34,8 @@ namespace Aethel.Campaign
         [DataMember] public List<string> BasicNodes;
         [DataMember] public Dictionary<string, long> ReceiptVersions;
         [DataMember] public long ReceiptFloor;
+        [DataMember] public KitState Kit;
+        [DataMember] public LootState Loot;
         public long Version { get { return Memory.Version; } }
         public int RitualCharge { get { return Memory.Choices.Count; } }
         public int EarnedSpecializationPoints { get { return SpecializationCatalog.EarnedPoints(Level); } }
@@ -52,7 +54,7 @@ namespace Aethel.Campaign
                 ReservedHealthPotions = ReservedHealthPotions, Commands = new Dictionary<string, string>(Commands), Memory = Memory.Copy(), TotalXp = TotalXp, Attributes = Attributes == null ? null : (int[])Attributes.Clone(),
                 Inventory = Inventory == null ? null : Inventory.Copy(), Vitals = Vitals == null ? null : Vitals.Copy(),
                 Effects = Effects == null ? null : Effects.Copy(), SimulationTime = SimulationTime,
-                Defeats = Defeats == null ? null : new Dictionary<string, string>(Defeats), BasicNodes = BasicNodes == null ? null : new List<string>(BasicNodes), ReceiptVersions = ReceiptVersions == null ? null : new Dictionary<string,long>(ReceiptVersions), ReceiptFloor = ReceiptFloor };
+                Defeats = Defeats == null ? null : new Dictionary<string, string>(Defeats), BasicNodes = BasicNodes == null ? null : new List<string>(BasicNodes), ReceiptVersions = ReceiptVersions == null ? null : new Dictionary<string,long>(ReceiptVersions), ReceiptFloor = ReceiptFloor, Kit = Kit == null ? null : Kit.Copy(), Loot = Loot == null ? null : Loot.Copy() };
         }
         internal void AssertExtends(CampaignState previous)
         {
@@ -63,12 +65,13 @@ namespace Aethel.Campaign
                 previous.Memory.Choices.Any(p => !Memory.Choices.ContainsKey(p.Key) || Memory.Choices[p.Key] != p.Value) ||
                 previous.Memory.Clues.Except(Memory.Clues).Any() || previous.Memory.Encounters.Except(Memory.Encounters).Any() ||
                 previous.Memory.Entered.Except(Memory.Entered).Any() || previous.Memory.Revealed.Except(Memory.Revealed).Any() ||
-                previous.Commands.Any(p => Commands.ContainsKey(p.Key) ? Commands[p.Key] != p.Value || (previous.Schema == 2 && ReceiptVersions[p.Key] != previous.ReceiptVersions[p.Key]) :
+                previous.Commands.Any(p => Commands.ContainsKey(p.Key) ? Commands[p.Key] != p.Value || (previous.Schema >= 2 && ReceiptVersions[p.Key] != previous.ReceiptVersions[p.Key]) :
                     (previous.Schema == 1 || previous.ReceiptVersions[p.Key] >= ReceiptFloor)) ||
-                (previous.Schema == 2 && ReceiptFloor < previous.ReceiptFloor) ||
-                (previous.Schema == 2 && (TotalXp < previous.TotalXp || SimulationTime < previous.SimulationTime ||
+                (previous.Schema >= 2 && ReceiptFloor < previous.ReceiptFloor) ||
+                (previous.Schema >= 2 && (TotalXp < previous.TotalXp || SimulationTime < previous.SimulationTime ||
                     previous.Defeats.Any(p => !Defeats.ContainsKey(p.Key) || Defeats[p.Key] != p.Value) || previous.BasicNodes.Except(BasicNodes).Any())))
                 throw new SerializationException("Campaign transaction would erase confirmed history");
+            if (previous.Schema == 3 && (previous.Loot.Recipes.Except(Loot.Recipes).Any() || previous.Loot.Fragments.Except(Loot.Fragments).Any())) throw new SerializationException("Loot unlock history erased");
         }
         internal static bool ValidId(string id)
         {
@@ -77,7 +80,7 @@ namespace Aethel.Campaign
         }
         public void Validate()
         {
-            if ((Schema != 1 && Schema != 2) || !ValidId(CharacterId) || !SpecializationCatalog.Classes.Contains(ClassId) ||
+            if ((Schema != 1 && Schema != 2 && Schema != 3) || !ValidId(CharacterId) || !SpecializationCatalog.Classes.Contains(ClassId) ||
                 Level < 1 || Level > 30 || Gold < 0 || RespecCount < 0 || RespecCount == int.MaxValue ||
                 Memory == null || Nodes == null || Commands == null || Commands.Count > 512 || Nodes.Count > 6 || PrimaryPath == null ||
                 ReservedHealthPotions < 0 || ReservedHealthPotions > CampaignContent.FirstQuestHealthPotions)
@@ -103,10 +106,12 @@ namespace Aethel.Campaign
                     (node.Tier == 1 && node.PathId != PrimaryPath && Level < 10))
                     throw new SerializationException("Invalid specialization node");
             }
-            if (Schema == 2) ValidateRuntime();
+            if (Schema >= 2) ValidateRuntime();
+            if (Schema == 3) { if (Kit == null || Loot == null || Inventory.Equipped.Count != 9) throw new SerializationException("Missing schema 3 state"); Kit.Validate(this); Loot.Validate(); }
         }
         internal void InitializeRuntime()
         {
+            Kit = new KitState(); Loot = new LootState();
             TotalXp = ExperienceRules.MinimumForLevel(Level); Attributes = new int[5]; Inventory = new InventoryState();
             Vitals = new VitalsState(); Effects = new BastionEffectState(); Defeats = new Dictionary<string, string>(); BasicNodes = new List<string>(); ReceiptVersions = Commands.ToDictionary(x => x.Key,x => Math.Max(0,Memory.Version - 1)); ReceiptFloor = 0;
             if (ClassId == "twilight_bastion")
@@ -115,6 +120,7 @@ namespace Aethel.Campaign
                 Inventory.Grant(CharacterId, Memory.CampaignId, "worn_tunic", 1, false);
                 foreach (var item in Inventory.Items) Inventory.Equip(ClassId, ItemCatalog.Find(item.TemplateId).Slot, item.Id);
             }
+            foreach (var slot in AdvancedItemCatalog.Slots) if (!Inventory.Equipped.ContainsKey(slot)) Inventory.Equipped.Add(slot, "");
             Vitals.Hp = CharacterRules.MaxHp(this); Vitals.Mp = CharacterRules.MaxMp(this);
         }
         internal static CampaignState MigrateV1(CampaignState legacy)
@@ -134,8 +140,15 @@ namespace Aethel.Campaign
             }
             result.Validate(); return result;
         }
+        internal static CampaignState MigrateV2(CampaignState legacy)
+        {
+            legacy.Validate(); var s=legacy.Copy(); s.Schema=3; s.Kit=new KitState(); s.Loot=new LootState();
+            foreach(var slot in AdvancedItemCatalog.Slots) if(!s.Inventory.Equipped.ContainsKey(slot))s.Inventory.Equipped.Add(slot, "");
+            s.Validate(); return s;
+        }
         private void ValidateRuntime()
         {
+            if(Inventory!=null)Inventory.Validate(CharacterId);
             if (ReceiptVersions == null || ReceiptVersions.Count != Commands.Count || ReceiptFloor < 0 || ReceiptFloor > Version ||
                 ReceiptVersions.Any(x => !Commands.ContainsKey(x.Key) || x.Value < 0 || x.Value > Version) ||
                 Attributes == null || Attributes.Length != 5 || Attributes.Any(x => x < 0 || x > 98) ||
@@ -146,7 +159,10 @@ namespace Aethel.Campaign
                 SimulationTime < 0 || SimulationTime > long.MaxValue - 60000 || ReservedHealthPotions != 0 ||
                 Defeats.Any(x => !ValidId(x.Key) || ExperienceRules.EnemyXp(x.Value) == 0))
                 throw new SerializationException("Invalid runtime state");
-            Inventory.Validate(CharacterId); Vitals.Validate(this); Effects.Validate(SimulationTime);
+            Inventory.Validate(CharacterId);
+            foreach(var e in Inventory.Equipped.Where(x=>x.Value!="")) { var item=Inventory.Items.Single(x=>x.Id==e.Value); if(!AdvancedItemCatalog.Compatible(ClassId,item.TemplateId) || (item.Roll!=null && item.Roll.RequirementLevel>Level)) throw new SerializationException("Invalid equipped class or level"); }
+            if(Inventory.Equipped.Values.Where(x=>x!="").Distinct().Count()!=Inventory.Equipped.Values.Count(x=>x!="") || (Inventory.Equipped.ContainsKey("off_hand") && Inventory.Equipped["off_hand"]!="" && Inventory.Items.Any(x=>x.Id==Inventory.Equipped["main_hand"] && AdvancedItemCatalog.TwoHands(x.TemplateId)))) throw new SerializationException("Invalid hand or instance references");
+            Vitals.Validate(this); Effects.Validate(SimulationTime);
         }
     }
     public sealed class SpecializationNode
@@ -156,8 +172,8 @@ namespace Aethel.Campaign
         public string ClassId { get; internal set; }
         public int Tier { get; internal set; }
         public int RequiredLevel { get; internal set; }
-        public bool HasImplementedEffect { get { return ClassId == "twilight_bastion"; } }
-        // The other four classes retain allocation-only nodes until their effect catalogs are implemented.
+        public bool HasImplementedEffect { get { return true; } }
+        // Baseline modifiers are executable; visual integration and balance remain pending.
     }
     public static class SpecializationCatalog
     {
@@ -195,7 +211,7 @@ namespace Aethel.Campaign
     {
         private readonly ICampaignStore store;
         public CampaignMemoryAdapter(ICampaignStore store) { this.store = store ?? throw new ArgumentNullException("store"); }
-        public MemorySave Load() { var s = store.Load(); s.Validate(); if (s.Schema != 2) throw new SerializationException("Campaign store must migrate to schema 2"); return s.Memory.Copy(); }
+        public MemorySave Load() { var s = store.Load(); s.Validate(); if (s.Schema != 3) throw new SerializationException("Campaign store must migrate to schema 3"); return s.Memory.Copy(); }
         public bool TryCommit(long expectedVersion, MemorySave memory)
         {
             var s = store.Load(); s.Validate();

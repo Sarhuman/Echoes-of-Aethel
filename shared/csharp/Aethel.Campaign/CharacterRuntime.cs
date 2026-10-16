@@ -16,16 +16,20 @@ namespace Aethel.Campaign
             int level = 1; while (level < 30 && xp >= MinimumForLevel(level + 1)) level++; return level;
         }
         public static int EnemyXp(string id)
-        { return id == "ethereal_wolf" ? RuntimeRewards.WolfXp : id == "blind_cultist" ? RuntimeRewards.CultistXp : id == "moss_claws" ? RuntimeRewards.MossClawsXp : 0; }
+        { return id == "ethereal_wolf" ? RuntimeRewards.WolfXp : id == "blind_cultist" ? RuntimeRewards.CultistXp : id == "moss_claws" ? RuntimeRewards.MossClawsXp : EncounterCatalog.Find(id)==null?0:EncounterCatalog.Find(id).Xp; }
     }
     public static class CharacterRules
     {
         private static readonly int[][] Bases = { new[] {12,6,3,5,14}, new[] {4,6,14,8,8}, new[] {8,14,4,4,10}, new[] {4,6,12,10,8}, new[] {10,4,4,14,8} };
         public static int Attribute(CampaignState s, int index)
-        { return Bases[Array.IndexOf(SpecializationCatalog.Classes, s.ClassId)][index] + s.Attributes[index]; }
+        { return Math.Min(99,Bases[Array.IndexOf(SpecializationCatalog.Classes, s.ClassId)][index] + s.Attributes[index] + (s.Inventory==null?0:s.Inventory.AffixStat(new[]{"str","dex","int","fth","vit"}[index]))); }
         public static int MaxHp(CampaignState s) { return 60 + 8 * Attribute(s, 4) + 6 * (s.Level - 1); }
         public static int MaxMp(CampaignState s) { return 30 + 4 * Attribute(s, 2) + 2 * Attribute(s, 3) + 3 * (s.Level - 1); }
         public static int PhysicalDefense(CampaignState s) { return s.Inventory.Armor + Attribute(s, 4) / 2 + 2 * (s.Level - 1); }
+        public static int MagicalDefense(CampaignState s) { return s.Inventory.AffixStat("ward")+s.Inventory.UniqueWard+(Attribute(s,2)+Attribute(s,3))/3+s.Level-1; }
+        public static int CriticalChanceBp(CampaignState s) {return Math.Min(2500,500+25*Attribute(s,1)+s.Inventory.AffixStat("crit_bp"));}
+        public static int CriticalMultiplierBp(CampaignState s) {return Math.Min(20000,15000+s.Inventory.AffixStat("crit_multiplier_bp"));}
+        public static int ResistanceBp(CampaignState s) { return Math.Min(7500,s.Inventory.AffixStat("resist_bp")); }
         public static int UnspentAttributes(CampaignState s) { return 3 * (s.Level - 1) - s.Attributes.Sum(); }
     }
     public static class BasicAbilityRules

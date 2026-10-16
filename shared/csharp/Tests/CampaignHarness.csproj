@@ -12,5 +12,6 @@
     <Compile Include="../Aethel.Campaign/*.cs" />
     <Compile Include="CampaignTests.cs" />
     <Compile Include="RuntimeTests.cs" />
+    <Compile Include="ExtendedRuntimeTests.cs" />
   </ItemGroup>
 </Project>

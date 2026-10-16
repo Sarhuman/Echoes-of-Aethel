@@ -7,6 +7,8 @@ on:
       - 'tools/*campaign*'
       - 'tools/*item_catalog*'
       - 'tools/*runtime_rewards*'
+      - 'tools/*encounter_catalog*'
+      - 'docs/engineering/encounter-catalog.json'
       - 'client/godot/content/items/**'
       - 'docs/engineering/experimental-values.md'
       - 'docs/design/regional-threat-and-training.md'
@@ -21,6 +23,8 @@ on:
       - 'tools/*campaign*'
       - 'tools/*item_catalog*'
       - 'tools/*runtime_rewards*'
+      - 'tools/*encounter_catalog*'
+      - 'docs/engineering/encounter-catalog.json'
       - 'client/godot/content/items/**'
       - 'docs/engineering/experimental-values.md'
       - 'docs/design/regional-threat-and-training.md'
@@ -47,6 +51,7 @@ jobs:
           python3 tools/generate_campaign_content.py
           python3 tools/generate_item_catalog.py
           python3 tools/generate_runtime_rewards.py
+          python3 tools/generate_encounter_catalog.py
       - name: Compile and exercise memory domain
         run: bash tools/run_world_memory_tests.sh
 
