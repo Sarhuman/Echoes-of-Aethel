@@ -116,8 +116,19 @@ for name, xyz in (
         raise RuntimeError(f"Could not spawn {name} light")
     light.set_actor_label(PREFIX + "ReviewLight_" + name)
     component = light.get_components_by_class(unreal.PointLightComponent)[0]
+    component.set_mobility(unreal.ComponentMobility.MOVABLE)
     component.set_intensity(50000.0)
     component.set_attenuation_radius(4500.0)
+
+sun = actors.spawn_actor_from_class(
+    unreal.DirectionalLight, unreal.Vector(0, 0, 1200), unreal.Rotator(-60, -35, 0)
+)
+if sun is None:
+    raise RuntimeError("Could not spawn review directional light")
+sun.set_actor_label(PREFIX + "ReviewDirectionalLight_EXPERIMENTAL")
+sun_component = sun.get_components_by_class(unreal.DirectionalLightComponent)[0]
+sun_component.set_mobility(unreal.ComponentMobility.MOVABLE)
+sun_component.set_intensity(4.0)
 
 camera = actors.spawn_actor_from_class(
     unreal.CameraActor, unreal.Vector(-1000, -6500, 6200), unreal.Rotator(-43, 70, 0)
