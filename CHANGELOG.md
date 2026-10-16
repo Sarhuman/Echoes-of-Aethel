@@ -1,5 +1,12 @@
 # Changelog
 
+## Não lançado — núcleo C# de memória do mundo (16/10/2026)
+
+- Núcleo isolado para escolhas e consequências das 12 quests, com projeção sem efeitos futuros, afinidades e marcos canônicos.
+- Persistência JSON limitada/versionada, comparação de versão, escrita por substituição, backup e recusa de corrupção. Não migra saves anteriores.
+- Catálogo gerado do GDD e harness C# com as 4.096 combinações de escolhas; compilação/testes executados em Mono 6.8, fora da Unity.
+- CI dedicada e guia de integração transacional. Cliente Unity, quest completa, cenas, combate, loot e apresentação visual permanecem pendentes.
+
 ## Não lançado — revisão Unity e campanha completa (16/10/2026)
 
 - Direção Unity documentada; clientes Godot/Unreal preservados e sem migração automática.

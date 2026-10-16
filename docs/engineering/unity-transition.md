@@ -49,6 +49,10 @@ Não habilitar pipeline de alto custo por aparência. Medir abertura fria/quente
 - U4 — ato II e Coroa de Sucata, depois Livro dos Nomes, seguindo dependências de zona. Dungeons nunca obrigatórias para progressão principal.
 - U5 — atos III/IV e demais classes como incrementos aprovados; elenco completo descrito não é autorização para produzir tudo simultaneamente.
 
+## Incremento de domínio — 16/10/2026
+
+Após a solicitação de implementação, foi criado um [núcleo C# de memória do mundo](world-memory-implementation.md) isolado de engine, compilado e testado em Mono. Ele reutiliza as escolhas e marcos canônicos e possui uma prova de persistência própria; não equivale ao cliente Unity ou ao agregado completo de quests/save. Integração de recompensa/ritual na mesma transação e validação no editor continuam pendentes. C0 e U0 não foram declarados concluídos.
+
 ## Registro de lacunas real
 
 | Lacuna | Entrega desta revisão | O que ainda fecha o aceite |
