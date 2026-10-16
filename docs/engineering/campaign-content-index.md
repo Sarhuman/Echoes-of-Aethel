@@ -8,6 +8,8 @@ As quatro ativas e duas passivas de cada classe estão no GDD 01; o [catálogo d
 
 Este índice evita confundir **conteúdo especificado** com mapas 3D construídos. A fonte detalhada das doze linhas é o [GDD 04](../GDD/04_mapas_e_quests.md); roteiro e variantes estão no [GDD 07](../GDD/07_roteiro_e_dialogos.md). IDs são preservados entre engines. A [primeira rota](../design/first-route-3d.md) é a única com IDs e conteúdo de recipientes propostos; o atlas sugere interiores para os outros mapas sem lhes atribuir tesouros. A [ficha do elenco e das dungeons secundárias](../design/playable-cast-and-side-dungeons.md) distingue cinco heróis especificados, NPCs e duas quests opcionais `NOVO/EXPERIMENTAL`, fora da contagem dos doze mapas. O [contrato de dungeons opcionais](optional-dungeon-contract.md) define entrada, diário, retorno e recompensa para a futura implementação.
 
+O [manifesto da rota](campaign-route-manifest.json) oferece os 12 IDs de zona, quests, escolhas, encontros finais e dependências em formato legível por ferramentas. É derivado do GDD e deste índice, com estado `design_only_not_runtime`: não implementa desbloqueio nem substitui o texto narrativo. Para detectar divergências, execute `python tools/validate_campaign_route.py` da raiz; após uma mudança deliberada nas fontes, revise a diferença antes de regenerar com `--write`. IDs técnicos ainda ausentes permanecem `null`.
+
 | Ato/mapa | Zona | Quest principal | Confronto | Estado de produção |
 |---|---|---|---|---|
 | I/01 Bosque das Névoas | `forest_01` | `act1.spy_hunt` | Garras de Musgo, subchefe | Jogável em Godot; ficha 3D e interiores propostos |
