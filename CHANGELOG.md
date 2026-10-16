@@ -2,6 +2,8 @@
 
 ## 0.2.0-dev — 2026-10-13
 
+- HUD de 14/10: Vida, Éter e Fôlego reorganizados no canto superior esquerdo em moldura gótica, com valores legíveis e hierarquia visual. A validação local passou em 16 suítes / 311 verificações; a revisão visual no jogo fica para o próximo playtest.
+
 - Atualização de 14/10: medidores de Vida, Éter e Fôlego com molduras e valores; compras no hub com Lyra e Sera (10/12 ouro), débito/entrega atômicos e proteção contra repetição. Capturas de QA agora exigem slot de teste isolado. A arena técnica da `main` foi preservada como playtest opcional. Validação ampliada para 16 suítes / 308 verificações.
 
 - Primeira jornada jogável: Cidadela, Bosque, três inimigos, Garras de Musgo, quest com duas escolhas, diálogo, consequência no hub e retorno seguro.

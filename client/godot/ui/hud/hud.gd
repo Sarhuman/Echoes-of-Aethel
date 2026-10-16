@@ -9,6 +9,7 @@ var resources: Label
 var hp_value: Label
 var mp_value: Label
 var stamina_value: Label
+var level_badge: Label
 var objective: Label
 var location: Label
 var message: Label
@@ -40,33 +41,53 @@ func _ready() -> void:
 	screen.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	screen.theme = theme
 	add_child(screen)
-	var top := panel(screen, Rect2(24,22,320,65))
-	location = label(top, "CIDADELA DOS ÚLTIMOS", 18, Color("#e0c994"))
-	location.position = Vector2(18,10)
-	var subtitle := label(top,"ECHOES OF AETHEL  /  PRIMEIRA FATIA",11,Color("#94afa9"))
-	subtitle.position = Vector2(18,39)
-	boss_panel = panel(screen,Rect2(390,22,450,62))
+	var status := panel(screen,Rect2(24,22,430,145))
+	var status_frame := StyleBoxFlat.new()
+	status_frame.bg_color = Color("#101724")
+	status_frame.border_color = Color("#b29a69")
+	status_frame.set_border_width_all(2)
+	status_frame.set_corner_radius_all(2)
+	status_frame.shadow_color = Color(0,0,0,0.55)
+	status_frame.shadow_size = 5
+	status.add_theme_stylebox_override("panel",status_frame)
+	var hero_title := label(status,"BASTIÃO DO CREPÚSCULO",13,Color("#e5d2a5"))
+	hero_title.position = Vector2(16,8)
+	location = label(status,"CIDADELA DOS ÚLTIMOS",11,Color("#9eb6bc"))
+	location.position = Vector2(244,10)
+	location.size = Vector2(170,18)
+	location.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	var crest := panel(status,Rect2(16,37,77,76))
+	var crest_style := StyleBoxFlat.new()
+	crest_style.bg_color = Color("#1a2331")
+	crest_style.border_color = Color("#786c55")
+	crest_style.set_border_width_all(2)
+	crest.add_theme_stylebox_override("panel",crest_style)
+	var crest_mark := label(crest,"◆",22,Color("#d6bb84"))
+	crest_mark.position = Vector2(26,6)
+	level_badge = label(crest,"NÍV. 01",13,Color("#f4e6c7"))
+	level_badge.position = Vector2(5,47)
+	level_badge.size = Vector2(67,20)
+	level_badge.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	hp = resource_bar(status,"VIDA",39,Color("#bd423d"),246,23)
+	mp = resource_bar(status,"ÉTER",69,Color("#337fae"),230,18)
+	stamina = resource_bar(status,"FÔLEGO",97,Color("#c7a947"),166,11)
+	hp_value = resource_value(status,39,246,23)
+	mp_value = resource_value(status,69,230,18)
+	stamina_value = resource_value(status,93,74,18)
+	stamina_value.position.x = 332
+	resources = label(status,"",12,Color("#d9c698"))
+	resources.position = Vector2(103,119)
+	resources.size = Vector2(305,20)
+	boss_panel = panel(screen,Rect2(470,22,400,62))
 	boss_name = label(boss_panel,"GARRAS DE MUSGO",14,Color("#d6c797"))
 	boss_name.position = Vector2(16,8)
-	boss_hp = bar(boss_panel,Vector2(16,36),Vector2(418,8),Color("#b6a577"))
+	boss_hp = bar(boss_panel,Vector2(16,36),Vector2(368,8),Color("#b6a577"))
 	boss_panel.hide()
 	var quest_panel := panel(screen,Rect2(890,22,366,99))
 	objective = label(quest_panel,"",15,Color("#dce0d6"))
 	objective.position = Vector2(17,12)
 	objective.size = Vector2(334,80)
 	objective.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	var bottom := panel(screen,Rect2(24,548,410,148))
-	var heading := label(bottom,"BASTIÃO DO CREPÚSCULO",12,Color("#c5ad7e"))
-	heading.position = Vector2(17,7)
-	hp = resource_bar(bottom,"VIDA",30,Color("#e74c3c"))
-	mp = resource_bar(bottom,"ÉTER",59,Color("#3498db"))
-	stamina = resource_bar(bottom,"FÔLEGO",88,Color("#f1c40f"))
-	hp_value = resource_value(bottom,30)
-	mp_value = resource_value(bottom,59)
-	stamina_value = resource_value(bottom,88)
-	resources = label(bottom,"",13,Color("#e7d6a9"))
-	resources.position = Vector2(18,119)
-	resources.size = Vector2(375,22)
 	var skill_panel := panel(screen,Rect2(454,621,802,75))
 	skills = label(skill_panel,"",15,Color("#ded9bd"))
 	skills.position = Vector2(18,9)
@@ -122,29 +143,29 @@ func bar(parent: Node, p: Vector2, s: Vector2, color: Color) -> ProgressBar:
 	b.add_theme_stylebox_override("fill",fg)
 	parent.add_child(b)
 	return b
-func resource_bar(parent: Node, title: String, y: float, color: Color) -> ProgressBar:
+func resource_bar(parent: Node, title: String, y: float, color: Color, width: float, height: float) -> ProgressBar:
 	var caption := label(parent,title,12,Color("#ddd0ae"))
-	caption.position = Vector2(18,y + 2)
-	caption.size = Vector2(76,20)
-	var meter := bar(parent,Vector2(98,y),Vector2(291,21),color)
+	caption.position = Vector2(103,y - 1)
+	caption.size = Vector2(55,20)
+	var meter := bar(parent,Vector2(160,y),Vector2(width,height),color)
 	var background := StyleBoxFlat.new()
-	background.bg_color = Color("#080e16")
-	background.border_color = Color("#8c7a57")
+	background.bg_color = Color("#090d15")
+	background.border_color = Color("#786c55")
 	background.set_border_width_all(2)
-	background.set_corner_radius_all(3)
 	var fill := StyleBoxFlat.new()
-	fill.bg_color = color.darkened(0.22)
-	fill.border_color = color.lightened(0.28)
+	fill.bg_color = color
+	fill.border_color = color.lightened(0.30)
 	fill.set_border_width_all(1)
-	fill.set_corner_radius_all(2)
 	meter.add_theme_stylebox_override("background",background)
 	meter.add_theme_stylebox_override("fill",fill)
+	meter.scale.y = height / maxf(1.0,meter.get_combined_minimum_size().y)
 	return meter
-func resource_value(parent: Node, y: float) -> Label:
+func resource_value(parent: Node, y: float, width: float, height: float) -> Label:
 	var value := label(parent,"",12,Color("#fff5df"))
-	value.position = Vector2(100,y + 1)
-	value.size = Vector2(285,19)
+	value.position = Vector2(160,y)
+	value.size = Vector2(width,height)
 	value.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	value.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	value.add_theme_color_override("font_shadow_color",Color(0,0,0,0.95))
 	value.add_theme_constant_override("shadow_offset_x",1)
 	value.add_theme_constant_override("shadow_offset_y",1)
@@ -353,7 +374,8 @@ func update_state(player: Player, session: SliceSession, nearest: Dictionary) ->
 	hp_value.text = "%d / %d" % [player.current_health,player.max_health]
 	mp_value.text = "%d / %d" % [int(player.mp),int(player.mp_max)]
 	stamina_value.text = "%d / %d" % [int(player.stamina),int(player.stamina_max)]
-	resources.text = "NÍVEL %d     ◆  %d OURO" % [player.stats.level,session.inventory.gold]
+	level_badge.text = "NÍV. %02d" % player.stats.level
+	resources.text = "◆  %d OURO" % session.inventory.gold
 	location.text = "CIDADELA DOS ÚLTIMOS" if session.zone == "citadel" else "BOSQUE DAS NÉVOAS"
 	prompt.text = "" if nearest.is_empty() else "[C]  " + nearest.name
 	var labels: Array[String] = []
