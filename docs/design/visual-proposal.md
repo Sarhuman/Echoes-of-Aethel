@@ -1,5 +1,7 @@
 # Echoes of Aethel — proposta visual 01
 
+> Documento histórico da direção **Godot 2D**. Paleta, composição e leitura continuam referências; pixel art 16-bit, projeção 2:1 e medidas em pixels não são requisitos do cliente Unreal 3D. Ver [transição Unreal](../engineering/unreal-transition.md) e [decisões D01–D08](../engineering/diablo-direction-decisions.md).
+
 13/10/2026 · direção de produção e briefing de imagem conceitual.
 
 ## Conceito: a luz que ainda resiste
