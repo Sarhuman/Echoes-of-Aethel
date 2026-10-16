@@ -1,6 +1,6 @@
 # C0-07 / G00 — protocolo da arena descartável de escala e câmera
 
-**Estado em 15/10/2026: preparação, sem medição visual concluída.** O executável local `UnrealEditor.exe` foi encontrado com versão `++UE5+Release-5.8-CL-58210709`. O build Editor e o teste de atributos já constam do [plano](unreal-execution-plan.md); eles não validam escala, câmera ou desempenho. A consulta automática de CPU/GPU/RAM via CIM retornou `Acesso negado`, portanto o PC-alvo ainda precisa ser registrado por método permitido.
+**Estado em 15/10/2026: cena técnica gerada localmente, sem medição visual concluída.** O executável local `UnrealEditor.exe` foi encontrado com versão `++UE5+Release-5.8-CL-58210709`. O build Editor e o teste de atributos já constam do [plano](unreal-execution-plan.md); eles não validam escala, câmera ou desempenho. A consulta automática de CPU/GPU/RAM via CIM retornou `Acesso negado`, portanto o PC-alvo ainda precisa ser registrado por método permitido.
 
 Este spike atende [D02](diablo-direction-decisions.md) e à dependência R1 do plano. É uma **arena técnica descartável**, sem quest, save, loot, combate, IA, progressão ou entrada no menu. Nada dela vira mapa de campanha sem nova revisão. O [atlas](../design/campaign-world-atlas-3d.md) e a [matriz C0-01](c0-map-readiness.md) usarão apenas resultados medidos e aceitos, não as dimensões iniciais abaixo.
 
@@ -33,6 +33,9 @@ Este spike atende [D02](diablo-direction-decisions.md) e à dependência R1 do p
 
 - Instalação Unreal: **confirmada**, executável 5.8 encontrado.
 - Build do módulo e Automation de atributos: **registrados anteriormente** no plano.
-- Nível temporário, capturas, cápsulas, NavMesh e comparação de câmeras: **não criados nem medidos**.
+- Nível temporário: **gerado e salvo localmente** em `client/unreal/Content/Aethel/Dev/Measurement/L_C0_ScaleProbe.umap` (36.626 bytes); o log contém `C0_SCALE_PROBE_CREATED`. Há três larguras experimentais de passagem (200/300/400 cm), cinco volumes de classe, uma coluna e câmeras perspectiva/ortográfica. São cubos de referência, não cápsulas ou personagens validados.
+- Gerador reproduzível: [`tools/unreal/c0_generate_scale_probe.py`](../../tools/unreal/c0_generate_scale_probe.py), executado pelo Editor 5.8 com `-ExecutePythonScript=<caminho com barras / > -nullrhi -DDC-ForceMemoryCache`. `PythonScriptPlugin` e `EditorScriptingUtilities` foram habilitados no `.uproject` para automação editorial. [A documentação da Epic](https://dev.epicgames.com/documentation/en-us/unreal-engine/scripting-the-unreal-editor-using-python) descreve esse modo como restrito ao editor.
+- **O `.umap` binário ainda não está no PR**: o checkout Git separado para envio por LFS falhou, com um erro de aplicação `git.exe` observado. Não usar GitHub Contents API para contornar o LFS. O script e o contrato foram publicados; a cena pode ser regenerada até que o envio LFS seja recuperado.
+- Capturas, cápsulas reais, NavMesh, comparação visual de câmeras e FPS: **não medidos**.
 - Hardware via CIM: **consulta recusada pelo Windows**; procurar leitura pelo editor ou ferramenta local antes de publicar FPS.
 - Gate C0: **aberto**. Este protocolo não autoriza E1-06 nem a parte jogável.
