@@ -24,6 +24,7 @@ required = {
     "C0_Citadel_EastGate_Pillar_North",
     "C0_Citadel_EastGate_Pillar_South",
     "C0_Citadel_ReviewCamera_FOV35_EXPERIMENTAL",
+    "C0_Citadel_ReviewDirectionalLight_EXPERIMENTAL",
 }
 required.update(
     f"C0_Citadel_NPCMarker_{name}_EXPERIMENTAL"
@@ -32,7 +33,7 @@ required.update(
 missing = required - labels
 if missing:
     raise RuntimeError(f"Missing blockout landmarks: {sorted(missing)}")
-if len(labels) != 21:
-    raise RuntimeError(f"Expected 21 C0 actors, found {len(labels)}")
+if len(labels) != 22:
+    raise RuntimeError(f"Expected 22 C0 actors, found {len(labels)}")
 print(f"C0_CITADEL_BLOCKOUT_CHECK_OK actors={len(labels)} landmarks={len(required)}")
 
