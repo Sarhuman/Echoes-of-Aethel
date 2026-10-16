@@ -226,3 +226,8 @@ Por comando: validar ownership/versão → validar custo/ação → executar no 
 - Nenhum dano/estado hostil atinge o jogador no hub seguro.
 
 Documento entrega regras e contratos, não runtime ou teste de carga. Custos, preços, multiplicadores e taxas de promoção são baseline experimental a validar no protótipo.
+
+
+## 7. Extensão Unity — leitura de ameaça e nível regional (16/10/2026)
+
+A [ficha de ameaça e formação regional](../design/regional-threat-and-training.md) define níveis experimentais dos inimigos por mapa, sem autoscaling pelo nível do jogador, e a leitura de nome/nível/cor. Diferença +4 ou maior: vermelho escuro + símbolo; +1 a +3: vermelho claro; igual: branco; abaixo: azul. A cor é comparação de nível, não garantia de facilidade, raridade de loot ou multiplicador de dano. Identificar elite/boss separadamente. Hubs seguem seguros; promoção de Bruma segue decisões de produção. Sem implementação de HUD/monstros declarada nesta atualização.

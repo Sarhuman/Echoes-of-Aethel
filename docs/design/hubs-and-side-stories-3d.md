@@ -39,3 +39,8 @@ As dungeons ficam **fora** dos 12 mapas. São mais exigentes, opcionais e não f
 ## Entregáveis de conteúdo antes de gameplay
 
 Para cada hub: planta com pontos de chegada/saída e serviços, retratos/turnarounds de atores locais, textos de chegada/retorno/flag, três estados visuais relevantes e lista de props/música original. Para cada secundária: `quest_id`, localização, gatilho, pistas, escolha e consequências, NPC, encontro, recompensa, `reward_id`, texto do diário e condições de repetição. Para cada dungeon: planta fixa, roster, arena, loot/XP simulado, bilhete e retirada. Todos os novos IDs só entram no catálogo após revisão; esta ficha não fecha o gate C0 sozinha.
+
+
+## Formação nos hubs — direção delegada de 16/10/2026
+
+A [ficha regional](regional-threat-and-training.md) acrescenta formação de classe aos serviços seguros: responsáveis da Cidadela e representantes locais nos hubs II–IV, com identidades distintas. A pessoa local abre a mesma progressão por personagem, inclusive primeira escolha pendente após o nível 5, sem exigir popup ou clonar Bram. Layout, pessoa/ID e diálogo local continuam produção pendente; não há serviço implementado nesta ficha. Degradação nunca elimina acesso à formação; se necessário um substituto mantém a função.

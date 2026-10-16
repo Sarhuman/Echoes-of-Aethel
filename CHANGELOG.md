@@ -1,5 +1,13 @@
 # Changelog
 
+## Não lançado — formação regional e leitura de ameaça (16/10/2026)
+
+- Faixas experimentais de nível dos monstros nos 12 mapas e duas dungeons, independentes do nível do herói e distintas de nível de item; hubs seguros preservados.
+- HUD planejado com nome/nível/cor, símbolo de ameaça e identificação separada de boss/elite; acesso a especialização sem depender de popup.
+- Responsáveis da Cidadela atribuídos às cinco classes; regiões seguintes recebem pessoas locais distintas, sem clonagem narrativa.
+- Baseline de especialização: níveis 5/10/15/20/25/30, quatro nós por direção e seis investimentos totais; primeira redistribuição gratuita, depois 5 vezes o nível em ouro.
+- Dois modificadores iniciais do Bastião detalhados para teste futuro. Somente design; números não simulados e nenhuma alteração de combate ou UI ativa.
+
 ## Não lançado — especializações de classe (16/10/2026)
 
 - Design incorporado para primeira escolha no nível 5, aviso discreto, consulta no menu e confirmação por mentor em hub; Bram para o Bastião.
