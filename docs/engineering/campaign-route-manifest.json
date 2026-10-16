@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "status": "design_only_not_runtime",
+  "source_of_truth": [
+    "docs/GDD/04_mapas_e_quests.md",
+    "docs/engineering/campaign-content-index.md",
+    "docs/engineering/first-route-content.json"
+  ],
+  "progression_rule": "next_zone_requires_previous_encounter_and_recorded_choice",
+  "final_choice_rule": "heart_12_choice_after_vael_victory",
+  "maps": [
+    {
+      "order": 1,
+      "act": 1,
+      "zone_id": "forest_01",
+      "name": "Bosque das Névoas",
+      "quest_id": "act1.spy_hunt",
+      "choice_ids": [
+        "judge_suspects",
+        "shelter_villagers"
+      ],
+      "final_encounter": {
+        "name": "Garras de Musgo",
+        "technical_id": "moss_claws",
+        "category": "sub_boss"
+      },
+      "requires_previous_zone": null,
+      "unlocks_zone": "swamp_02"
+    },
+    {
+      "order": 2,
+      "act": 1,
+      "zone_id": "swamp_02",
+      "name": "Pântano dos Lamentantes",
+      "quest_id": "act1.desperate_alchemist",
+      "choice_ids": [
+        "deliver_venom",
+        "destroy_research"
+      ],
+      "final_encounter": {
+        "name": "Matriarca das Águas",
+        "technical_id": null,
+        "category": "sub_boss"
+      },
+      "requires_previous_zone": "forest_01",
+      "unlocks_zone": "temple_03"
+    },
+    {
+      "order": 3,
+      "act": 1,
+      "zone_id": "temple_03",
+      "name": "O Portal do Julgamento",
+      "quest_id": "act1.guardian_roots",
+      "choice_ids": [
+        "seal_sap",
+        "drain_sap"
+      ],
+      "final_encounter": {
+        "name": "Silvano",
+        "technical_id": null,
+        "category": "act_boss"
+      },
+      "requires_previous_zone": "swamp_02",
+      "unlocks_zone": "dunes_04"
+    },
+    {
+      "order": 4,
+      "act": 2,
+      "zone_id": "dunes_04",
+      "name": "As Dunas de Sal",
+      "quest_id": "act2.lost_caravan",
+      "choice_ids": [
+        "save_supplies",
+        "save_merchants"
+      ],
+      "final_encounter": {
+        "name": "Guerreiro de Vidro",
+        "technical_id": null,
+        "category": "sub_boss"
+      },
+      "requires_previous_zone": "temple_03",
+      "unlocks_zone": "valley_05"
+    },
+    {
+      "order": 5,
+      "act": 2,
+      "zone_id": "valley_05",
+      "name": "O Vale dos Sacrifícios",
+      "quest_id": "act2.flame_ritual",
+      "choice_ids": [
+        "offer_vitality",
+        "ritual_execution"
+      ],
+      "final_encounter": {
+        "name": "Executor de Bronze",
+        "technical_id": null,
+        "category": "sub_boss"
+      },
+      "requires_previous_zone": "dunes_04",
+      "unlocks_zone": "crypt_06"
+    },
+    {
+      "order": 6,
+      "act": 2,
+      "zone_id": "crypt_06",
+      "name": "A Cripta de Ossos",
+      "quest_id": "act2.ossuary",
+      "choice_ids": [
+        "free_captives",
+        "reinforce_seal"
+      ],
+      "final_encounter": {
+        "name": "Malignus",
+        "technical_id": null,
+        "category": "act_boss"
+      },
+      "requires_previous_zone": "valley_05",
+      "unlocks_zone": "sewers_07"
+    },
+    {
+      "order": 7,
+      "act": 3,
+      "zone_id": "sewers_07",
+      "name": "Os Esgotos de Éter",
+      "quest_id": "act3.purification_valve",
+      "choice_ids": [
+        "drain_lower",
+        "reverse_flow"
+      ],
+      "final_encounter": {
+        "name": "Mãe das Proles",
+        "technical_id": null,
+        "category": "sub_boss"
+      },
+      "requires_previous_zone": "crypt_06",
+      "unlocks_zone": "foundry_08"
+    },
+    {
+      "order": 8,
+      "act": 3,
+      "zone_id": "foundry_08",
+      "name": "A Fundição Proibida",
+      "quest_id": "act3.energy_core",
+      "choice_ids": [
+        "extract_core",
+        "stabilize_core"
+      ],
+      "final_encounter": {
+        "name": "Autômato Forjador",
+        "technical_id": null,
+        "category": "sub_boss"
+      },
+      "requires_previous_zone": "sewers_07",
+      "unlocks_zone": "abyss_09"
+    },
+    {
+      "order": 9,
+      "act": 3,
+      "zone_id": "abyss_09",
+      "name": "O Abismo da Voracidade",
+      "quest_id": "act3.last_hunger",
+      "choice_ids": [
+        "break_bond",
+        "seal_creature"
+      ],
+      "final_encounter": {
+        "name": "Gorgoroth",
+        "technical_id": null,
+        "category": "act_boss"
+      },
+      "requires_previous_zone": "foundry_08",
+      "unlocks_zone": "gardens_10"
+    },
+    {
+      "order": 10,
+      "act": 4,
+      "zone_id": "gardens_10",
+      "name": "Os Jardins Suspensos de Éter",
+      "quest_id": "act4.judgment_throne",
+      "choice_ids": [
+        "grant_pardon",
+        "condemn_souls"
+      ],
+      "final_encounter": {
+        "name": "Arconte de Prata",
+        "technical_id": null,
+        "category": "sub_boss"
+      },
+      "requires_previous_zone": "abyss_09",
+      "unlocks_zone": "bridge_11"
+    },
+    {
+      "order": 11,
+      "act": 4,
+      "zone_id": "bridge_11",
+      "name": "A Ponte dos Lamentos",
+      "quest_id": "act4.last_gate",
+      "choice_ids": [
+        "break_seal",
+        "channel_body"
+      ],
+      "final_encounter": {
+        "name": "Guardião dos Portões",
+        "technical_id": null,
+        "category": "sub_boss"
+      },
+      "requires_previous_zone": "gardens_10",
+      "unlocks_zone": "heart_12"
+    },
+    {
+      "order": 12,
+      "act": 4,
+      "zone_id": "heart_12",
+      "name": "O Coração de Éter",
+      "quest_id": "act4.heart_fate",
+      "choice_ids": [
+        "restore_order",
+        "embrace_ascension"
+      ],
+      "final_encounter": {
+        "name": "Vael",
+        "technical_id": null,
+        "category": "final_boss"
+      },
+      "requires_previous_zone": "bridge_11",
+      "unlocks_zone": null
+    }
+  ]
+}
+
