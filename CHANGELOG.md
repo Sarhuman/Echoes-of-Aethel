@@ -1,5 +1,14 @@
 # Changelog
 
+## Não lançado — núcleo não visual v2 (16/10/2026)
+
+- Inventário de instâncias com grade/baú/reserva, pilhas, movimentação, equipamento do catálogo fixo e compras de poções; recompensa do Bosque entregue atomicamente.
+- XP da primeira rota/curva até 30, atributos e recursos persistidos, consumíveis/cooldowns, regeneração de MP e recuperação no hub sem reset de cooldown.
+- Guarda/Impacto/Postura Firme e oito modificadores dos caminhos do Bastião em C# headless, com snapshots e vetores de dano. Outros kits ainda não portados.
+- Schema 2 com migração do protótipo C# anterior, backup e teste de reserva/reload; sem conversão Godot.
+- Recibos compactados com piso de expiração para não bloquear sessões longas; retries antigos expiram sem reaplicar.
+- Testes de runtime e CI ampliados; valores novos de grade/tier explicitamente experimentais e sem claim de balanceamento ou teste Unity.
+
 ## Não lançado — progressão e agregado de campanha C# (16/10/2026)
 
 - Estado único combina memória, personagem, ouro, reserva da recompensa do Bosque e especialização; escolha/recompensa são confirmadas juntas por versão. Ritual principal deriva de escolhas únicas.

@@ -1,5 +1,7 @@
 # Especializações das cinco classes
 
+> **Atualização de implementação:** o [núcleo v2](../engineering/runtime-core-v2.md) implementa em C# headless os oito modificadores dos caminhos do Bastião. Os seis tiers posteriores usam valores NOVOS/EXPERIMENTAIS detalhados nesse guia e em `GameplayBalance.cs`. As outras quatro classes continuam com alocação estrutural, sem seus kits/efeitos portados. A aprovação de leitura/combate em Unity permanece pendente.
+
 > **Complemento de direção de 16/10/2026:** os detalhes abaixo foram fechados por delegação do proprietário nas seções “Progressão e parâmetros do piloto” e em [ameaça e formação regional](regional-threat-and-training.md). Elas substituem as pendências iniciais de níveis, respec e atribuição de serviço. Valores novos continuam EXPERIMENTAIS até playtest; não indicam runtime pronto.
 
 **Direção aprovada na conversa de 16/10/2026:** acrescentar escolhas de desenvolvimento dentro de cada classe, com primeira escolha no nível 5, aviso discreto, conversa com NPC no hub e tela de comparação. Bram conduz o Bastião. O nível 5 é a referência inicial para implementação; seu momento na campanha ainda depende da curva de XP e de playtest. Esta ficha não afirma que há árvore, NPC interativo ou efeitos de especialização implementados em Unity.

@@ -130,3 +130,12 @@ Estes valores são **NOVO/EXPERIMENTAL** para a [ficha de interiores](../design/
 1. Edite a linha aqui e o `.tres`/constante correspondente no mesmo PR.
 2. Atualize os testes que dependem do valor e liste-os no PR.
 3. Não escreva "balanceado" em PR, README ou changelog.
+
+
+## 11. Extensão C# de inventário/especialização — NOVO/EXPERIMENTAL
+
+Por delegação do proprietário em 16/10/2026, o [núcleo v2](runtime-core-v2.md) usa a direção de grade do G21 para o novo cliente, sem alterar limites do Godot acima. Bolsa 10×6, baú por personagem 10×10; machado 1×3, peitoral 2×3, demais itens 1×1; sem rotação. Grade substitui as posições/peso do cliente antigo nesta prova, sem migração Godot automática. O catálogo/quantidades/valores dos 16 templates permanecem os existentes.
+
+Tiers posteriores de defesa do Bastião: t2 +5 pontos percentuais de redução da Guarda (teto global 60%); t3 custo de Guarda 8→6 MP; t4 contra-ataque 15%→30% aditivo. Tiers posteriores de ruptura: t2 custo de Impacto 12→9 MP; t3 duração 5→7 s; t4 redução física 15%→20%, metade em subchefes/bosses. Valores centralizados em `shared/csharp/Aethel.Campaign/GameplayBalance.cs`; são parâmetros para teste, não balanceamento validado. Níveis, pré-requisitos e orçamento seguem a ficha de especializações.
+
+A curva de XP da seção 5 não foi alterada. Ela e as três recompensas de XP da primeira rota agora têm geração/verificação de constantes C#. A simulação econômica e a curva para os demais encontros permanecem pendentes.

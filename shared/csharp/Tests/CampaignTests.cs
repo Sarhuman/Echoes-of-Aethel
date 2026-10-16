@@ -49,11 +49,11 @@ internal static class CampaignTests
             store.LoseCas = false;
             MemoryStatus(memory.Decide("act1.spy_hunt", choice, v), CommandStatus.Accepted);
             Check(store.State.ForestRewardClaimed && store.State.RitualCharge == 1, "Missing aggregate receipt");
-            Check(choice == "judge_suspects" ? store.State.Gold == 25 : store.State.ReservedHealthPotions == 3, "Wrong canonical reward");
+            Check(choice == "judge_suspects" ? store.State.Gold == 25 : store.State.Inventory.Total("potion_health_small") == 3, "Wrong canonical reward");
             MemoryStatus(memory.Decide("act1.spy_hunt", choice, v), CommandStatus.Replayed);
             MemoryStatus(memory.Decide("act1.spy_hunt", choice == "judge_suspects" ? "shelter_villagers" : "judge_suspects", memory.Read().Version), CommandStatus.Conflict);
             memory.VisitCitadel(memory.Read().Version); memory.VisitCitadel(memory.Read().Version);
-            Check(store.State.RitualCharge == 1 && (choice == "judge_suspects" ? store.State.Gold == 25 : store.State.ReservedHealthPotions == 3), "Repeated reward");
+            Check(store.State.RitualCharge == 1 && (choice == "judge_suspects" ? store.State.Gold == 25 : store.State.Inventory.Total("potion_health_small") == 3), "Repeated reward");
             var invalid = store.State.Copy(); invalid.ForestRewardClaimed = false; Check(!Valid(invalid), "Missing reward receipt accepted");
         }
         var overflow = new CampaignTestStore(); overflow.State.Gold = int.MaxValue;
@@ -133,10 +133,13 @@ internal static class CampaignTests
         Status(service.Respec(Token(), b, null, service.Read().Version), ProgressionStatus.Invalid);
         Check(service.Read().Memory.Choices.Count == 0, "Respec changed narrative");
         var history = new CampaignTestStore();
-        for (int i = 0; i < 512; i++) history.State.Commands.Add(Token(), "test");
+        history.State.Memory.Version = 512;
+        for (int i = 0; i < 512; i++) { string id = Token(); history.State.Commands.Add(id, "test"); history.State.ReceiptVersions.Add(id,i); }
+        string evicted = history.State.ReceiptVersions.Single(x=>x.Value==0).Key;
         var capped = new ProgressionService(history, access);
-        Status(capped.SetConfirmedLevel(Token(), 5, 0), ProgressionStatus.HistoryFull);
-        Check(capped.Read().Level == 1, "Full journal mutated state");
+        Status(capped.SetConfirmedLevel(Token(), 5, 512), ProgressionStatus.Accepted);
+        Status(capped.SetConfirmedLevel(evicted, 5, 0), ProgressionStatus.Expired);
+        Check(capped.Read().Level == 5 && capped.Read().Commands.Count == 512 && capped.Read().ReceiptFloor == 1, "Journal compaction");
     }
     static void AllocationMatrix()
     {
@@ -148,7 +151,7 @@ internal static class CampaignTests
         for (int right = 0; right <= 4; right++)
         {
             var paths = SpecializationCatalog.Paths(cls);
-            var s = CampaignState.Create("matrix", "character", cls); s.Level = level;
+            var s = CampaignState.Create("matrix", "character", cls); s.Level = level; s.TotalXp = ExperienceRules.MinimumForLevel(level);
             s.PrimaryPath = paths[primary];
             for (int i = 1; i <= left; i++) s.Nodes.Add(paths[0] + ".t" + i);
             for (int i = 1; i <= right; i++) s.Nodes.Add(paths[1] + ".t" + i);
@@ -255,7 +258,7 @@ internal static class CampaignTests
     }
     public static int Main()
     {
-        try { AggregateReward(); Progression(); RespecTransactions(); AllocationMatrix(); ThreatMatrix(); FullCampaignComposition(); DiskIntegration();
+        try { RuntimeTests.Run(); AggregateReward(); Progression(); RespecTransactions(); AllocationMatrix(); ThreatMatrix(); FullCampaignComposition(); DiskIntegration();
             Console.WriteLine(checks + " campaign checks passed: transactions, 7500 allocations, 3600 threat comparisons"); return 0; }
         catch (Exception e) { Console.Error.WriteLine(e); return 1; }
     }
