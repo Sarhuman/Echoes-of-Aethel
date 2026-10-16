@@ -2,6 +2,8 @@
 
 **Auditoria documental em 15/10/2026. Estado: aberta.** Comparei o [atlas de pré-produção](../design/campaign-world-atlas-3d.md), o [GDD 04](../GDD/04_mapas_e_quests.md) e o [registro C0](campaign-content-ledger.md). Todos os 12 mapas têm nome, percurso proposto, encontro final, ambiente e consequência descritos. Isso comprova cobertura narrativa inicial, **não** planta em escala, nível Unreal ou aprovação editorial. Nenhum mapa está pronto para produção jogável pelo critério abaixo.
 
+O [blockout estático da Cidadela](c0-citadel-blockout.md) foi criado como amostra experimental de hub, fora dos 12 mapas. O nível Unreal recarregou com 21 atores técnicos, mas suas dimensões e câmera ainda não foram medidas visualmente. Ele não promove nenhuma linha abaixo e não fecha C0-07 nem o gate.
+
 ## Critério de pronto por mapa
 
 Uma ficha só passa a `Pronto para blockout` quando registra, com revisão, (1) entrada, retorno e âncoras; (2) planta em metros com largura de rota, câmera e cápsula medidas; (3) portas, interiores e colisão estática/móvel; (4) encontro e telegraphs para os cinco heróis; (5) ID de quest, opções, evidências, itens e `reward_id` persistidos; (6) lista de modelos, rig, materiais, VFX e áudio com origem; (7) plano de testes de ida/volta, acessibilidade e desempenho. `Pronto para gameplay` só existe após o gate C0 global e implementação/testes próprios.
