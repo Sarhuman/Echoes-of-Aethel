@@ -1,9 +1,12 @@
-name: CSharp world memory
+name: CSharp campaign and world memory
 on:
   pull_request:
     paths:
       - 'shared/csharp/**'
       - 'tools/*world_memory*'
+      - 'tools/*campaign*'
+      - 'docs/design/regional-threat-and-training.md'
+      - 'client/godot/content/quests/quest_definition.gd'
       - 'docs/GDD/04_mapas_e_quests.md'
       - 'docs/engineering/campaign-route-manifest.json'
       - '.github/workflows/world-memory.yml'
@@ -11,6 +14,9 @@ on:
     paths:
       - 'shared/csharp/**'
       - 'tools/*world_memory*'
+      - 'tools/*campaign*'
+      - 'docs/design/regional-threat-and-training.md'
+      - 'client/godot/content/quests/quest_definition.gd'
       - 'docs/GDD/04_mapas_e_quests.md'
       - 'docs/engineering/campaign-route-manifest.json'
       - '.github/workflows/world-memory.yml'
@@ -28,6 +34,21 @@ jobs:
           sudo apt-get install -y mono-mcs libmono-system-runtime-serialization4.0-cil
           mono --version
       - name: Verify canonical content
-        run: python3 tools/generate_world_memory_catalog.py
+        run: |
+          python3 tools/generate_world_memory_catalog.py
+          python3 tools/generate_campaign_content.py
       - name: Compile and exercise memory domain
         run: bash tools/run_world_memory_tests.sh
+
+      - name: Exercise integrated campaign progression
+        run: bash tools/run_campaign_tests.sh
+  windows-campaign:
+    runs-on: windows-2022
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Exercise aggregate persistence on Windows
+        run: dotnet run --project shared/csharp/Tests/CampaignHarness.csproj --configuration Release

@@ -1,5 +1,7 @@
 # Memória do mundo — primeiro núcleo C#
 
+> **Incremento posterior:** o [agregado de campanha e progressão](campaign-progression-implementation.md) agora demonstra a transação conjunta de escolha, recompensa canônica do Bosque, estado de personagem e especialização. Para nova integração use `CampaignMemoryAdapter` sobre `ICampaignStore`. `JsonMemoryStore` abaixo permanece harness histórico isolado, sem migração automática ou autoridade paralela. As recompensas dos outros mapas, inventário e modificadores de combate continuam pendentes.
+
 Implementação isolada e executável em `shared/csharp/Aethel.WorldMemory/`. É a primeira parte da direção “um mundo que se lembra”: escolhas confirmadas produzem fatos imediatos e reações da Cidadela observáveis somente após seus marcos. Não é um cliente Unity, nem uma implementação completa de quests, recursos, recompensas ou das novas interações propostas no PR #25.
 
 ## Reuso e autoridade
