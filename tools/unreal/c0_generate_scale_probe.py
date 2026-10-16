@@ -62,6 +62,20 @@ for index, (label, width_cm, height_cm) in enumerate(
 
 add_box("C0_OcclusionColumn", (150, 0, 150), (100, 100, 300))
 
+for label, location in (
+    ("C0_InspectionLight_West", (-700, -500, 900)),
+    ("C0_InspectionLight_East", (700, 500, 900)),
+):
+    light = actors.spawn_actor_from_class(
+        unreal.PointLight, unreal.Vector(*location), unreal.Rotator()
+    )
+    if light is None:
+        raise RuntimeError(f"Could not spawn {label}")
+    light.set_actor_label(label)
+    component = light.get_components_by_class(unreal.PointLightComponent)[0]
+    component.set_intensity(50000.0)
+    component.set_attenuation_radius(3000.0)
+
 camera_location = unreal.Vector(-1100, -1100, 1500)
 camera_rotation = unreal.Rotator(-42, 45, 0)
 for label, projection in (
