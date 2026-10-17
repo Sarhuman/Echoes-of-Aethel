@@ -52,6 +52,11 @@ public sealed class U1Player : MonoBehaviour
     private CampaignState savedState;
     private bool inventoryOpen;
     private Vector2 inventoryScroll;
+    private Texture2D hudMedallion;
+    private GUIStyle hudTitleStyle;
+    private GUIStyle hudValueStyle;
+    private GUIStyle hudShadowStyle;
+    private GUIStyle hudPortraitStyle;
 
     private void Awake()
     {
@@ -305,15 +310,7 @@ public sealed class U1Player : MonoBehaviour
 
     private void OnGUI()
     {
-        GUI.color = new Color(0.04f, 0.06f, 0.1f, 0.9f);
-        GUI.Box(new Rect(16, 16, 350, 126), "");
-        GUI.color = Color.white;
-        GUI.Label(new Rect(29, 22, 320, 22), "BASTIÃO DO CREPÚSCULO  ·  PROVA UNITY");
-        DrawBar(29, 50, "VIDA", hp, maxHp, new Color(0.65f, 0.17f, 0.14f));
-        DrawBar(29, 78, "ÉTER", mp, maxMp, new Color(0.15f, 0.42f, 0.68f));
-        DrawBar(29, 106, "FÔLEGO", stamina, 100f, new Color(0.65f, 0.49f, 0.12f));
-        GUI.color = new Color(0.04f, 0.06f, 0.1f, 0.9f);
-        GUI.Box(new Rect(16, 148, 350, 28), "NÍVEL " + savedLevel + "  ·  " + savedXp + " XP  ·  " + savedGold + " OURO");
+        DrawResourceHud();
 
         GUI.color = new Color(0.04f, 0.06f, 0.1f, 0.86f);
         GUI.Box(new Rect(16, Screen.height - 82, 620, 66), "");
@@ -402,14 +399,91 @@ public sealed class U1Player : MonoBehaviour
         }
     }
 
-    private static void DrawBar(float x, float y, string label, float value, float maximum, Color fill)
+    private void DrawResourceHud()
     {
-        GUI.Label(new Rect(x, y, 72, 22), label);
-        GUI.color = new Color(0.06f, 0.06f, 0.07f);
-        GUI.DrawTexture(new Rect(x + 75, y + 2, 230, 17), Texture2D.whiteTexture);
-        GUI.color = fill;
-        GUI.DrawTexture(new Rect(x + 76, y + 3, 228 * Mathf.Clamp01(value / maximum), 15), Texture2D.whiteTexture);
+        if (hudMedallion == null) CreateHudResources();
+        Rect panel = new Rect(12f, 12f, 408f, 150f);
+        FillRect(panel, new Color(0.035f, 0.052f, 0.077f, 0.94f));
+        StrokeRect(panel, new Color(0.56f, 0.43f, 0.27f));
         GUI.color = Color.white;
-        GUI.Label(new Rect(x + 311, y, 70, 22), Mathf.CeilToInt(value) + "/" + Mathf.CeilToInt(maximum));
+        GUI.DrawTexture(new Rect(19f, 26f, 91f, 91f), hudMedallion);
+        GUI.Label(new Rect(25f, 47f, 79f, 46f), "B", hudPortraitStyle);
+        FillRect(new Rect(31f, 119f, 67f, 22f), new Color(0.12f, 0.14f, 0.18f));
+        StrokeRect(new Rect(31f, 119f, 67f, 22f), new Color(0.56f, 0.43f, 0.27f));
+        GUI.Label(new Rect(32f, 120f, 65f, 20f), "NV " + savedLevel, hudValueStyle);
+
+        GUI.Label(new Rect(120f, 18f, 280f, 22f), "BASTIÃO DO CREPÚSCULO", hudTitleStyle);
+        DrawHudBar(120f, 46f, "VIDA", hp, maxHp, new Color(0.78f, 0.20f, 0.17f));
+        DrawHudBar(120f, 72f, "ÉTER", mp, maxMp, new Color(0.19f, 0.48f, 0.82f));
+        DrawHudBar(120f, 98f, "FÔLEGO", stamina, 100f, new Color(0.37f, 0.65f, 0.36f));
+        GUI.Label(new Rect(120f, 126f, 270f, 19f), savedXp + " XP   ·   " + savedGold + " OURO", hudTitleStyle);
+        GUI.color = Color.white;
+    }
+
+    private void DrawHudBar(float x, float y, string label, float value, float maximum, Color fill)
+    {
+        GUI.Label(new Rect(x, y - 1f, 57f, 21f), label, hudTitleStyle);
+        Rect frame = new Rect(x + 57f, y, 218f, 20f);
+        FillRect(frame, new Color(0.54f, 0.42f, 0.27f));
+        FillRect(new Rect(frame.x + 2f, frame.y + 2f, frame.width - 4f, frame.height - 4f),
+            new Color(0.045f, 0.055f, 0.075f));
+        float fraction = maximum > 0f ? Mathf.Clamp01(value / maximum) : 0f;
+        float width = (frame.width - 6f) * fraction;
+        FillRect(new Rect(frame.x + 3f, frame.y + 3f, width, frame.height - 6f), fill);
+        FillRect(new Rect(frame.x + 3f, frame.y + 3f, width, 3f), Color.Lerp(fill, Color.white, 0.32f));
+        string amount = Mathf.CeilToInt(value) + " / " + Mathf.CeilToInt(maximum);
+        GUI.Label(new Rect(frame.x + 1f, frame.y + 1f, frame.width, frame.height), amount, hudShadowStyle);
+        GUI.Label(frame, amount, hudValueStyle);
+    }
+
+    private void CreateHudResources()
+    {
+        hudTitleStyle = new GUIStyle(GUI.skin.label);
+        hudTitleStyle.normal.textColor = new Color(0.91f, 0.87f, 0.76f);
+        hudTitleStyle.fontSize = 12;
+        hudTitleStyle.fontStyle = FontStyle.Bold;
+        hudValueStyle = new GUIStyle(hudTitleStyle);
+        hudValueStyle.alignment = TextAnchor.MiddleCenter;
+        hudValueStyle.normal.textColor = Color.white;
+        hudValueStyle.fontSize = 12;
+        hudShadowStyle = new GUIStyle(hudValueStyle);
+        hudShadowStyle.normal.textColor = new Color(0.01f, 0.02f, 0.04f);
+        hudPortraitStyle = new GUIStyle(hudValueStyle);
+        hudPortraitStyle.fontSize = 36;
+        hudPortraitStyle.normal.textColor = new Color(0.82f, 0.70f, 0.48f);
+
+        const int size = 96;
+        hudMedallion = new Texture2D(size, size, TextureFormat.RGBA32, false);
+        hudMedallion.hideFlags = HideFlags.DontSave;
+        for (int y = 0; y < size; y++)
+        for (int x = 0; x < size; x++)
+        {
+            float radius = Vector2.Distance(new Vector2(x, y), new Vector2(47.5f, 47.5f));
+            Color color = radius > 47f ? Color.clear : radius > 43f ? new Color(0.67f, 0.50f, 0.29f) :
+                radius > 39f ? new Color(0.09f, 0.11f, 0.16f) :
+                radius > 36f ? new Color(0.35f, 0.45f, 0.54f) : new Color(0.08f, 0.13f, 0.20f);
+            hudMedallion.SetPixel(x, y, color);
+        }
+        hudMedallion.Apply(false, true);
+    }
+
+    private void OnDestroy()
+    {
+        if (hudMedallion != null) Destroy(hudMedallion);
+    }
+
+    private static void FillRect(Rect rect, Color color)
+    {
+        GUI.color = color;
+        GUI.DrawTexture(rect, Texture2D.whiteTexture);
+        GUI.color = Color.white;
+    }
+
+    private static void StrokeRect(Rect rect, Color color)
+    {
+        FillRect(new Rect(rect.x, rect.y, rect.width, 2f), color);
+        FillRect(new Rect(rect.x, rect.yMax - 2f, rect.width, 2f), color);
+        FillRect(new Rect(rect.x, rect.y, 2f, rect.height), color);
+        FillRect(new Rect(rect.xMax - 2f, rect.y, 2f, rect.height), color);
     }
 }
