@@ -11,3 +11,5 @@ O projeto e os manifests foram criados pelo editor instalado em 16/10/2026. Ele 
 O executável sai em `client/unity/Build/EchoesOfAethel-U0.exe`, diretório ignorado pelo Git. Em 16/10/2026, a compilação terminou com `U0 Windows inspection build succeeded` e o executável iniciou fora do editor em modo `-batchmode -nographics`. O log registrou Unity `6000.6.6f1`, CPU Xeon E5-2630 v3, 16.224 MB de RAM e resolução 1424×720. A GPU apareceu como `Null Device` porque o teste desabilitou a renderização; isso **não valida** a RX 580, qualidade visual, FPS, tempo de frame nem memória de vídeo real. A abertura visual e a medição no PC continuam pendentes.
 
 `shared/csharp/` ainda não foi integrado às assemblies Unity. Os clientes Godot e Unreal permanecem preservados. O gate C0 de conteúdo segue aberto e esta cena não antecipa gameplay.
+
+[Checagem de portabilidade do núcleo C#](../../docs/engineering/unity-domain-portability.md): o código de produção compilou para `netstandard2.1` fora da Unity; importação, persistência e player ainda precisam de testes na engine.

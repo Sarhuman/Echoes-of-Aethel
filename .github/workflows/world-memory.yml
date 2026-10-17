@@ -8,6 +8,7 @@ on:
       - 'tools/*item_catalog*'
       - 'tools/*runtime_rewards*'
       - 'tools/*encounter_catalog*'
+      - 'tools/portability/**'
       - 'docs/engineering/encounter-catalog.json'
       - 'client/godot/content/items/**'
       - 'docs/engineering/experimental-values.md'
@@ -24,6 +25,7 @@ on:
       - 'tools/*item_catalog*'
       - 'tools/*runtime_rewards*'
       - 'tools/*encounter_catalog*'
+      - 'tools/portability/**'
       - 'docs/engineering/encounter-catalog.json'
       - 'client/godot/content/items/**'
       - 'docs/engineering/experimental-values.md'
@@ -67,3 +69,5 @@ jobs:
           dotnet-version: '8.0.x'
       - name: Exercise aggregate persistence on Windows
         run: dotnet run --project shared/csharp/Tests/CampaignHarness.csproj --configuration Release
+      - name: Check Unity-compatible .NET API surface
+        run: dotnet build tools/portability/Aethel.UnityApiSurface.csproj --configuration Release
