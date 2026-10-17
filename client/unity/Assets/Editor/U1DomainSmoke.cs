@@ -13,6 +13,11 @@ public static class U1DomainSmoke
         {
             throw new Exception("Bastion starting vitals changed");
         }
+        Vector3 attackDirection;
+        if (!U1Player.TryGetAttackDirection(Vector3.zero, new Vector3(1.7f, 0.7f, 0f), 2.1f, out attackDirection) ||
+            attackDirection.x < 0.99f ||
+            U1Player.TryGetAttackDirection(Vector3.zero, new Vector3(2.2f, 0f, 0f), 2.1f, out attackDirection))
+            throw new Exception("U1 melee targeting range or auto-facing regressed");
 
         string root = Path.Combine(Path.GetTempPath(), "aethel-unity-smoke-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(root);

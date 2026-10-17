@@ -34,6 +34,13 @@ public sealed class U1Player : MonoBehaviour
     private float messageEndsAt;
     private string message = "Atravesse o portão e enfrente o Lobo Etéreo.";
     private Color messageColor = Color.white;
+    private string outgoingText = "";
+    private Color outgoingColor;
+    private Vector3 outgoingPosition;
+    private float outgoingEndsAt;
+    private string incomingText = "";
+    private Vector3 incomingPosition;
+    private float incomingEndsAt;
     private bool victory;
     private bool routeComplete;
     private bool paused;
@@ -149,9 +156,14 @@ public sealed class U1Player : MonoBehaviour
 
     private void TryAttack(int raw, float range, float cooldown, int cost, bool interrupt, ref float readyAt)
     {
-        if (Time.time < readyAt || !SpendMp(cost))
+        if (Time.time < readyAt)
         {
-            Show("Habilidade indisponível", Color.white);
+            if (cost > 0) Show("Habilidade em recarga", Color.white);
+            return;
+        }
+        if (!SpendMp(cost))
+        {
+            Show("Éter insuficiente", Color.white);
             return;
         }
         readyAt = Time.time + cooldown;
@@ -160,20 +172,42 @@ public sealed class U1Player : MonoBehaviour
             Show("MISS", new Color(0.35f, 0.7f, 1f));
             return;
         }
-        Vector3 toEnemy = Enemy.transform.position - transform.position;
-        toEnemy.y = 0f;
-        if (toEnemy.magnitude > range || Vector3.Dot(facing, toEnemy.normalized) < 0.25f)
+        Vector3 targetDirection;
+        if (!TryGetAttackDirection(transform.position, Enemy.transform.position, range, out targetDirection))
         {
-            Show("MISS", new Color(0.35f, 0.7f, 1f));
+            ShowOutgoing("MISS", new Color(0.35f, 0.7f, 1f));
             return;
         }
+        // A single-target U1 melee strike turns toward a nearby enemy. Keeping
+        // the last movement vector as aim made stationary attacks miss sideways.
+        facing = targetDirection;
+        Visual.rotation = Quaternion.LookRotation(facing);
         int damage = Enemy.ReceiveAttack(raw, interrupt);
-        Show(damage.ToString(), new Color(1f, 0.3f, 0.25f));
+        ShowOutgoing(damage > 0 ? damage.ToString() : "MISS",
+            damage > 0 ? new Color(1f, 0.3f, 0.25f) : new Color(0.35f, 0.7f, 1f));
         if (!Enemy.IsAlive)
         {
             victory = true;
             ConfirmReward();
         }
+    }
+
+    public static bool TryGetAttackDirection(Vector3 origin, Vector3 target, float range, out Vector3 direction)
+    {
+        direction = target - origin;
+        direction.y = 0f;
+        float distance = direction.magnitude;
+        if (distance > range || distance < 0.001f) return false;
+        direction /= distance;
+        return true;
+    }
+
+    private void ShowOutgoing(string text, Color color)
+    {
+        outgoingText = text;
+        outgoingColor = color;
+        outgoingPosition = Enemy.transform.position + Vector3.up * 1.5f;
+        outgoingEndsAt = Time.time + 1.2f;
     }
 
     private void ConfirmReward()
@@ -224,7 +258,9 @@ public sealed class U1Player : MonoBehaviour
         int reduction = Time.time < guardEndsAt ? 4000 : 0;
         int damage = CombatMath.DirectDamage(raw, 0, false, 15000, 9, 0, reduction);
         hp = Mathf.Max(0, hp - damage);
-        Show("-" + damage, new Color(1f, 0.3f, 0.25f));
+        incomingText = "-" + damage;
+        incomingPosition = transform.position + Vector3.up * 2f;
+        incomingEndsAt = Time.time + 1.2f;
         if (IsDead)
         {
             Show("Derrotado — F6 reinicia a tentativa", Color.white);
@@ -241,6 +277,7 @@ public sealed class U1Player : MonoBehaviour
         stamina = 100f;
         basicReadyAt = impactReadyAt = guardReadyAt = riftReadyAt = dashReadyAt = 0f;
         dashEndsAt = invulnerableUntil = guardEndsAt = 0f;
+        outgoingEndsAt = incomingEndsAt = 0f;
         victory = routeComplete = paused = false;
         if (rewardSession != null)
         {
@@ -300,8 +337,25 @@ public sealed class U1Player : MonoBehaviour
             GUI.Label(new Rect(Screen.width / 2 - 110, Screen.height / 2 - 80, 260, 35), message);
         }
         if (paused) GUI.Box(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 30, 200, 60), "PAUSADO");
+        if (Time.time < outgoingEndsAt)
+            DrawFloatingText(outgoingText, outgoingColor, outgoingPosition);
+        if (Time.time < incomingEndsAt)
+            DrawFloatingText(incomingText, new Color(1f, 0.3f, 0.25f), incomingPosition);
         if (inventoryOpen) DrawInventory();
         GUI.color = Color.white;
+    }
+
+    private void DrawFloatingText(string text, Color color, Vector3 worldPosition)
+    {
+        Vector3 screen = ViewCamera.WorldToScreenPoint(worldPosition);
+        if (screen.z <= 0f) return;
+        var style = new GUIStyle(GUI.skin.label);
+        style.alignment = TextAnchor.MiddleCenter;
+        style.fontStyle = FontStyle.Bold;
+        style.fontSize = Mathf.Max(20, Mathf.RoundToInt(Screen.height * 0.03f));
+        style.normal.textColor = color;
+        GUI.color = Color.white;
+        GUI.Label(new Rect(screen.x - 75f, Screen.height - screen.y - 25f, 150f, 40f), text, style);
     }
 
     private void DrawInventory()
