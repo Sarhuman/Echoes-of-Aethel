@@ -4,7 +4,7 @@
 
 **ARPG dark fantasy · um jogador · offline**
 
-**Direção atual — 16/10/2026:** o próximo cliente 3D será em **Unity**. URP é o pipeline proposto; versão do editor/pacotes ainda será fixada após a prova local. Godot 4.6 mantém a fatia jogável histórica; Unreal foi uma etapa anterior. Ainda não existe cliente Unity jogável ou build Windows 3D validado.
+**Direção atual — 16/10/2026:** o próximo cliente 3D será em **Unity 6.6 (6000.6.6f1)**. URP continua proposto, sem pacote ou renderer final escolhido. Godot 4.6 mantém a fatia jogável histórica; Unreal foi uma etapa anterior. Há uma [cena técnica de inspeção](client/unity/README.md) e um build Windows executado em modo headless. Ainda não existe cliente Unity jogável nem validação visual ou de desempenho 3D.
 
 **Implementação em revisão:** [PR #32 — quatro kits, loot avançado e encontros](https://github.com/Sarhuman/Echoes-of-Aethel/pull/32), sobre a cadeia de domínio iniciada nos PRs anteriores. Esses módulos estão nas branches de trabalho e **ainda não foram mesclados à main**.
 

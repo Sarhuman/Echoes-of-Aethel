@@ -12,3 +12,13 @@ client/unreal/Intermediate/
 client/unreal/Saved/
 client/unreal/.vs/
 client/unreal/*.sln
+client/unity/Library/
+client/unity/Temp/
+client/unity/Obj/
+client/unity/Logs/
+client/unity/UserSettings/
+client/unity/Build/
+client/unity/*.csproj
+client/unity/*.sln
+client/unity/*.slnx
+client/unity/.vsconfig

@@ -1,10 +1,10 @@
 # Estado verificável e próximos aceites — 16/10/2026
 
-> Atualização 16/10/2026: consulte [núcleo C# v3](runtime-core-v3.md) para os quatro kits, oito caminhos adicionais, loot e 51 encontros agora executáveis fora da engine. As limitações históricas abaixo descrevem o estágio anterior; integração Unity e validação de gameplay continuam pendentes.
+> Atualização 16/10/2026: consulte [núcleo C# v3](runtime-core-v3.md) para os quatro kits, oito caminhos adicionais, loot e 51 encontros agora executáveis fora da engine. O [projeto técnico Unity 6.6](../../client/unity/README.md) gerou uma cena e um build Windows de inspeção, executado sem renderização. Integração do núcleo, validação visual e gameplay continuam pendentes. As limitações históricas abaixo descrevem o estágio anterior.
 
 > **Atualização de núcleo:** o [runtime v2](runtime-core-v2.md) acrescenta inventário/XP/recursos, migração e efeitos dos dois caminhos do Bastião; as demais classes ainda têm alocação, sem kits de combate portados.
 
-Este índice é o ponto de entrada para a próxima entrega. A direção é Unity para Windows offline; Godot conserva a versão histórica jogável e Unreal conserva infraestrutura/blockouts. Clientes anteriores não foram removidos. Versão, manifests e projeto Unity ainda não foram inicializados/validados nesta série de PRs.
+Este índice é o ponto de entrada para a próxima entrega. A direção é Unity para Windows offline; Godot conserva a versão histórica jogável e Unreal conserva infraestrutura/blockouts. Clientes anteriores não foram removidos. Versão, manifests e projeto técnico Unity estão registrados; renderer final, integração de domínio e validação visual continuam pendentes.
 
 ## Estado por entrega
 
@@ -19,7 +19,7 @@ Este índice é o ponto de entrada para a próxima entrega. A direção é Unity
 | Mapas | Dois blockouts históricos e percursos propostos | Câmera/cápsula medidas, planta métrica, navegação, interiores e retorno |
 | Combate Unity | Contratos e referência Godot | Jogador/Lobo/Cultista, colisão, feedback, dano e dash testados na engine |
 | Dungeons | Dois percursos e contratos de retirada/recompensa propostos | Layout, bosses, recompensa atômica e ida/volta reais |
-| Lançamento | Windows offline como alvo | Build instalada fora do editor, desempenho, acessibilidade e playtests |
+| Lançamento | Windows offline como alvo; build técnica U0 iniciou fora do editor sem renderização | Build de jogo, desempenho visual, acessibilidade e playtests |
 
 “Compilado em Mono” não significa “funciona na Unity”. “Aprovado em design” não significa “implementado”. O C0 continua aberto; esta entrega não remove um gate para antecipar quantidade de mapas.
 

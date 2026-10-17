@@ -2,7 +2,7 @@
 
 Leia este arquivo inteiro antes de criar ou alterar qualquer arquivo. Ele vale para toda a árvore.
 
-> **Direção atual — 16/10/2026:** o proprietário escolheu a transição para Unity. Leia [unity-transition.md](docs/engineering/unity-transition.md) antes de usar as instruções históricas Godot/Unreal abaixo. Esse documento prevalece para engine e planejamento da revisão de campanha. Preserve clientes existentes; não apagar, migrar saves ou fazer merge automático. O gate C0 permanece aberto; propostas novas de narrativa/IDs exigem revisão. O novo cliente ainda não foi implementado.
+> **Direção atual — 16/10/2026:** o proprietário escolheu a transição para Unity. Leia [unity-transition.md](docs/engineering/unity-transition.md) antes de usar as instruções históricas Godot/Unreal abaixo. Esse documento prevalece para engine e planejamento da revisão de campanha. Preserve clientes existentes; não apagar, migrar saves ou fazer merge automático. O gate C0 permanece aberto; propostas novas de narrativa/IDs exigem revisão. `client/unity/` contém somente uma cena técnica U0 gerada com Unity 6.6, sem gameplay, URP ou núcleo C# integrado.
 
 
 ## 1. Projeto em uma frase
