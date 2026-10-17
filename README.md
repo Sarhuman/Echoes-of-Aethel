@@ -4,7 +4,7 @@
 
 **ARPG dark fantasy · um jogador · offline**
 
-**Direção atual — 16/10/2026:** o próximo cliente 3D será em **Unity 6.6 (6000.6.6f1)**. URP continua proposto, sem pacote ou renderer final escolhido. Godot 4.6 mantém a fatia jogável histórica; Unreal foi uma etapa anterior. Há uma [cena técnica de inspeção](client/unity/README.md) e um build Windows executado em modo headless. Ainda não existe cliente Unity jogável nem validação visual ou de desempenho 3D.
+**Direção atual — 16/10/2026:** o próximo cliente 3D será em **Unity 6.6 (6000.6.6f1)**. URP continua proposto, sem pacote ou renderer final escolhido. Godot 4.6 mantém a fatia jogável histórica; Unreal foi uma etapa anterior. O [cliente Unity](client/unity/README.md) tem inspeção U0 e um percurso U1 técnico jogável com Bastião, portão Cidadela–Bosque e Lobo Etéreo. O build Windows compilou e iniciou sem gráficos; aparência e desempenho aguardam playtest visual.
 
 **Implementação em revisão:** [PR #32 — quatro kits, loot avançado e encontros](https://github.com/Sarhuman/Echoes-of-Aethel/pull/32), sobre a cadeia de domínio iniciada nos PRs anteriores. Esses módulos estão nas branches de trabalho e **ainda não foram mesclados à main**.
 
@@ -15,11 +15,11 @@
 | Recompensas | XP, ouro, itens, receitas, fragmentos e confronto terminal na mesma transação; retry não duplica |
 | Encontros | 51 entradas: 33 comuns, 12 finais de mapa e seis nas duas dungeons opcionais |
 | Save C# | Schema 3 com migração dos formatos C# anteriores; não converte Godot/Unreal |
-| Integração de jogo | Física, IA/atores, consumidor persistente de dano, fases autorais de bosses, cenas, UI/áudio e build pendentes |
+| Integração de jogo | U1 liga atributos e dano ao núcleo, ator e lobo provisórios, colisão, câmera e HUD técnico; consumidor persistente de dano, bosses, loot, quest, UI/áudio finais e save seguem pendentes |
 
 [Contratos e limites do núcleo v3](https://github.com/Sarhuman/Echoes-of-Aethel/blob/5624836b9b85e6e0d32a2184fd8cc8121d6c4eaa/docs/engineering/runtime-core-v3.md) · [Direção Unity](https://github.com/Sarhuman/Echoes-of-Aethel/blob/5624836b9b85e6e0d32a2184fd8cc8121d6c4eaa/docs/engineering/unity-transition.md) · [Catálogo experimental](https://github.com/Sarhuman/Echoes-of-Aethel/blob/5624836b9b85e6e0d32a2184fd8cc8121d6c4eaa/docs/engineering/encounter-catalog.json).
 
-**Validação local:** Mono 6.8, C# 7.2; passaram 737 verificações anteriores de runtime, 1.436 novas e 22.046 do agregado. A memória passou 184.377 verificações, incluindo 4.096 rotas. Cinco geradores e 13 testes Python passaram. Os totais incluem matrizes/repetições; não são cobertura de gameplay, balanceamento ou teste de desempenho. Windows/.NET 8 remoto e Unity não foram validados localmente.
+**Validação local do núcleo v3:** Mono 6.8, C# 7.2; passaram 737 verificações anteriores de runtime, 1.436 novas e 22.046 do agregado. A memória passou 184.377 verificações, incluindo 4.096 rotas. Cinco geradores e 13 testes Python passaram. Os totais incluem matrizes/repetições; não são cobertura de gameplay, balanceamento ou teste de desempenho. A integração Unity U1 passou no smoke do editor e na inicialização Windows sem gráficos; ainda não houve medição de FPS ou playtest visual.
 
 Para conferir o código em revisão, use a branch `feat/four-kits-loot-encounters`. Execute `bash tools/run_campaign_tests.sh` com Mono, ou `dotnet run --project shared/csharp/Tests/CampaignHarness.csproj --configuration Release` com SDK .NET 8. As instruções seguintes continuam referentes ao **cliente Godot 0.2.0-dev**; as imagens são capturas dele.
 
