@@ -1,5 +1,7 @@
 # Changelog
 
+> **16/10/2026 — Unity U1:** vitória e retorno à Cidadela confirmados pelo proprietário no PC. O lobo U1 passou a conceder recompensa persistente única pelo núcleo C# em save próprio; teste EditMode de gravação/reload/replay, build Windows e inicialização sem gráficos passaram. A recompensa nova ainda aguarda playtest visual.
+
 > **16/10/2026 — Revisão visual documental:** direção Unity 3D centralizada; escopo atual separado do Godot histórico; GDDs e guias distinguem pixels/tiles/sprites de modelagem 3D. Sem alteração de código, assets, regras, falas ou IDs.
 
 ## 16/10/2026 — Núcleo C# v3 (experimental, sem cliente Unity)

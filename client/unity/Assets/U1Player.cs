@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+using System.Runtime.Serialization;
 using Aethel.Campaign;
 using UnityEngine;
 
@@ -33,6 +36,11 @@ public sealed class U1Player : MonoBehaviour
     private bool victory;
     private bool routeComplete;
     private bool paused;
+    private U1RewardSession rewardSession;
+    private int savedGold;
+    private int savedXp;
+    private int savedLevel = 1;
+    private string rewardNotice = "";
 
     private void Awake()
     {
@@ -42,6 +50,19 @@ public sealed class U1Player : MonoBehaviour
         maxMp = CharacterRules.MaxMp(startingState);
         hp = maxHp;
         mp = maxMp;
+        try
+        {
+            rewardSession = new U1RewardSession(Path.Combine(Application.persistentDataPath, "aethel-u1-campaign.json"));
+            CampaignState saved = rewardSession.Read();
+            savedGold = saved.Gold;
+            savedXp = saved.TotalXp;
+            savedLevel = saved.Level;
+        }
+        catch (Exception ex) when (ex is IOException || ex is UnauthorizedAccessException || ex is SerializationException)
+        {
+            rewardNotice = "Save U1 indisponível; nenhuma recompensa será gravada";
+            Debug.LogError("U1 reward save unavailable: " + ex.Message);
+        }
         messageEndsAt = Time.time + 7f;
     }
 
@@ -142,7 +163,36 @@ public sealed class U1Player : MonoBehaviour
         }
         int damage = Enemy.ReceiveAttack(raw, interrupt);
         Show(damage.ToString(), new Color(1f, 0.3f, 0.25f));
-        if (!Enemy.IsAlive) victory = true;
+        if (!Enemy.IsAlive)
+        {
+            victory = true;
+            ConfirmReward();
+        }
+    }
+
+    private void ConfirmReward()
+    {
+        if (rewardSession == null) return;
+        try
+        {
+            int oldGold = savedGold;
+            int oldXp = savedXp;
+            ProgressionResult result = rewardSession.ClaimDefeatedWolf();
+            savedGold = result.State.Gold;
+            savedXp = result.State.TotalXp;
+            savedLevel = result.State.Level;
+            if (result.Status == ProgressionStatus.Accepted)
+                rewardNotice = "+" + (savedXp - oldXp) + " XP  ·  +" + (savedGold - oldGold) + " ouro (salvo)";
+            else if (result.Status == ProgressionStatus.Replayed)
+                rewardNotice = "Recompensa deste lobo já recebida";
+            else
+                rewardNotice = "Recompensa pendente: " + result.Status + " — F6 para tentar novamente";
+        }
+        catch (Exception ex) when (ex is IOException || ex is UnauthorizedAccessException || ex is SerializationException)
+        {
+            rewardNotice = "Falha ao salvar recompensa — F6 para tentar novamente";
+            Debug.LogError("U1 reward claim failed: " + ex.Message);
+        }
     }
 
     public void ReceiveHit(int raw)
@@ -169,6 +219,7 @@ public sealed class U1Player : MonoBehaviour
         basicReadyAt = impactReadyAt = guardReadyAt = riftReadyAt = dashReadyAt = 0f;
         dashEndsAt = invulnerableUntil = guardEndsAt = 0f;
         victory = routeComplete = paused = false;
+        if (rewardSession != null) rewardNotice = "";
         Enemy.ResetEncounter();
         Show("Nova tentativa", Color.white);
     }
@@ -189,6 +240,8 @@ public sealed class U1Player : MonoBehaviour
         DrawBar(29, 50, "VIDA", hp, maxHp, new Color(0.65f, 0.17f, 0.14f));
         DrawBar(29, 78, "ÉTER", mp, maxMp, new Color(0.15f, 0.42f, 0.68f));
         DrawBar(29, 106, "FÔLEGO", stamina, 100f, new Color(0.65f, 0.49f, 0.12f));
+        GUI.color = new Color(0.04f, 0.06f, 0.1f, 0.9f);
+        GUI.Box(new Rect(16, 148, 350, 28), "NÍVEL " + savedLevel + "  ·  " + savedXp + " XP  ·  " + savedGold + " OURO");
 
         GUI.color = new Color(0.04f, 0.06f, 0.1f, 0.86f);
         GUI.Box(new Rect(16, Screen.height - 82, 620, 66), "");
@@ -196,6 +249,8 @@ public sealed class U1Player : MonoBehaviour
         GUI.Label(new Rect(28, Screen.height - 75, 600, 25),
             "WASD mover  ·  1 atacar  ·  2/Q impacto  ·  3/E guarda  ·  4/R fenda");
         GUI.Label(new Rect(28, Screen.height - 49, 600, 25), "Espaço esquiva  ·  F6 reiniciar  ·  Esc pausa");
+        if (rewardNotice != "")
+            GUI.Box(new Rect(16, Screen.height - 122, 620, 34), rewardNotice);
 
         GUI.color = Color.white;
         string objective = IsDead ? "Tentativa encerrada" : routeComplete ? "Percurso U1 concluído — F6 para repetir" :

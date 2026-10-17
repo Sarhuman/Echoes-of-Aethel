@@ -1,6 +1,6 @@
 # Estado verificável e próximos aceites — 16/10/2026
 
-> Atualização 16/10/2026: consulte [núcleo C# v3](runtime-core-v3.md) para os quatro kits, oito caminhos adicionais, loot e 51 encontros agora executáveis fora da engine. O [cliente Unity 6.6](../../client/unity/README.md) tem prova U0 e percurso U1 de combate com geometria provisória. A Unity importou o núcleo, e o build U1 iniciou sem gráficos; gameplay visual e desempenho continuam sem validação humana. As limitações históricas abaixo descrevem o estágio anterior.
+> Atualização 16/10/2026: consulte [núcleo C# v3](runtime-core-v3.md) para os quatro kits, oito caminhos adicionais, loot e 51 encontros agora executáveis fora da engine. O [cliente Unity 6.6](../../client/unity/README.md) tem prova U0 e percurso U1 com geometria provisória. O proprietário confirmou vitória e retorno na U1. A recompensa do lobo agora é persistida uma única vez em save próprio, testada no editor, mas ainda sem playtest visual. FPS e desempenho não foram medidos. As limitações históricas abaixo descrevem o estágio anterior.
 
 > **Atualização de núcleo:** o [runtime v2](runtime-core-v2.md) acrescenta inventário/XP/recursos, migração e efeitos dos dois caminhos do Bastião; as demais classes ainda têm alocação, sem kits de combate portados.
 
@@ -17,7 +17,8 @@ Este índice é o ponto de entrada para a próxima entrega. A direção é Unity
 | Ameaça regional | Faixas experimentais verificadas e projeção C# de comparação | Spawn/estatísticas/XP, percepção e HUD conectados |
 | Arte de personagens | [Revisão solicitada](../design/character-visual-review.md), seis pranchas avaliadas | Variantes, comparação de silhueta, aprovação e assets de runtime |
 | Mapas | Dois blockouts históricos e percurso U1 Cidadela–Bosque com colisão | Câmera/cápsula medidas visualmente, planta métrica, navegação e interiores |
-| Combate Unity | U1 técnico com Bastião, Lobo, HP/MP e dano do núcleo, dash, guarda e feedback básico | Playtest visual, animação, IA completa, Cultista e consumidor persistente de dano |
+| Combate Unity | U1 técnico com Bastião/Lobo, retorno validado pelo proprietário, HP/MP e dano do núcleo, dash, guarda e feedback básico | Animação, IA completa, Cultista e consumidor persistente de dano |
+| Recompensa Unity | U1 grava XP, ouro e loot do lobo em uma transação única; teste EditMode confirmou reload sem duplicação | Playtest visual da recompensa, inventário e demais encontros |
 | Dungeons | Dois percursos e contratos de retirada/recompensa propostos | Layout, bosses, recompensa atômica e ida/volta reais |
 | Lançamento | Windows offline como alvo; U0 e U1 iniciaram fora do editor sem renderização | Build de jogo completo, desempenho visual, acessibilidade e playtests |
 

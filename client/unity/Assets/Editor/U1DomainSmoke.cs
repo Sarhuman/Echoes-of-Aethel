@@ -43,7 +43,22 @@ public static class U1DomainSmoke
                 throw new Exception("Atomic file replacement failed");
             }
 
-            Debug.Log("AETHEL_UNITY_DOMAIN_SMOKE_OK hp=172 mp=52 json=ok replace=ok");
+            string rewardSave = Path.Combine(root, "u1-reward.json");
+            var session = new U1RewardSession(rewardSave);
+            var first = session.ClaimDefeatedWolf();
+            if (first.Status != ProgressionStatus.Accepted ||
+                !first.State.Defeats.ContainsKey(U1RewardSession.WolfSpawnId) ||
+                first.State.TotalXp != 10 || !File.Exists(rewardSave))
+                throw new Exception("First U1 wolf reward was not committed");
+            long committedVersion = first.State.Version;
+            var reloadedSession = new U1RewardSession(rewardSave);
+            var replay = reloadedSession.ClaimDefeatedWolf();
+            if (replay.Status != ProgressionStatus.Replayed ||
+                replay.State.Version != committedVersion || replay.State.Gold != first.State.Gold ||
+                replay.State.Inventory.Items.Count != first.State.Inventory.Items.Count)
+                throw new Exception("U1 wolf reward duplicated after reload");
+
+            Debug.Log("AETHEL_UNITY_DOMAIN_SMOKE_OK hp=172 mp=52 json=ok replace=ok reward=once");
         }
         finally
         {
