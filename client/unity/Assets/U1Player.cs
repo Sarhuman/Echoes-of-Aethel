@@ -31,6 +31,7 @@ public sealed class U1Player : MonoBehaviour
     private string message = "Atravesse o portão e enfrente o Lobo Etéreo.";
     private Color messageColor = Color.white;
     private bool victory;
+    private bool routeComplete;
     private bool paused;
 
     private void Awake()
@@ -66,6 +67,11 @@ public sealed class U1Player : MonoBehaviour
         if (Time.time < dashEndsAt) move = facing * 10f;
         else move *= 4f;
         controller.Move((move + Vector3.down * 0.2f) * dt);
+        if (victory && !routeComplete && transform.position.z < -7f)
+        {
+            routeComplete = true;
+            Show("Percurso U1 concluído — F6 para repetir", new Color(0.94f, 0.78f, 0.39f));
+        }
         if (move.sqrMagnitude > 0.01f)
         {
             facing = move.normalized;
@@ -162,7 +168,7 @@ public sealed class U1Player : MonoBehaviour
         stamina = 100f;
         basicReadyAt = impactReadyAt = guardReadyAt = riftReadyAt = dashReadyAt = 0f;
         dashEndsAt = invulnerableUntil = guardEndsAt = 0f;
-        victory = paused = false;
+        victory = routeComplete = paused = false;
         Enemy.ResetEncounter();
         Show("Nova tentativa", Color.white);
     }
@@ -192,7 +198,8 @@ public sealed class U1Player : MonoBehaviour
         GUI.Label(new Rect(28, Screen.height - 49, 600, 25), "Espaço esquiva  ·  F6 reiniciar  ·  Esc pausa");
 
         GUI.color = Color.white;
-        string objective = IsDead ? "Tentativa encerrada" : victory ? "Lobo derrotado — retorne à Cidadela" :
+        string objective = IsDead ? "Tentativa encerrada" : routeComplete ? "Percurso U1 concluído — F6 para repetir" :
+            victory ? "Lobo derrotado — retorne à Cidadela" :
             transform.position.z < 0f ? "Atravesse o portão para o Bosque" : "Derrote o Lobo Etéreo";
         GUI.Box(new Rect(Screen.width - 320, 16, 304, 55), objective);
         if (Enemy != null && Enemy.IsAlive && transform.position.z >= 0f)
