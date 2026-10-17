@@ -4,7 +4,7 @@
 
 **ARPG dark fantasy · um jogador · offline**
 
-**Direção atual — 16/10/2026:** o próximo cliente 3D será em **Unity 6.6 (6000.6.6f1)**. URP continua proposto, sem pacote ou renderer final escolhido. Godot 4.6 mantém a fatia jogável histórica; Unreal foi uma etapa anterior. O [cliente Unity](client/unity/README.md) tem inspeção U0 e percurso U1 técnico com Bastião, portão Cidadela–Bosque e Lobo Etéreo. O proprietário testou a vitória e o retorno no PC; o próximo build acrescenta recompensa única persistente, validada em EditMode, ainda sem playtest visual. FPS e aparência final aguardam avaliação.
+**Direção atual — 16/10/2026:** o próximo cliente 3D será em **Unity 6.6 (6000.6.6f1)**. URP continua proposto, sem pacote ou renderer final escolhido. Godot 4.6 mantém a fatia jogável histórica; Unreal foi uma etapa anterior. O [cliente Unity](client/unity/README.md) tem inspeção U0 e percurso U1 técnico com Bastião, portão Cidadela–Bosque e Lobo Etéreo. O proprietário testou a vitória e o retorno no PC; a revisão seguinte permite recompensa por nova tentativa e consulta de itens com `I`, validada em EditMode e ainda sem playtest visual. FPS e aparência final aguardam avaliação.
 
 **Implementação em revisão:** [PR #32 — quatro kits, loot avançado e encontros](https://github.com/Sarhuman/Echoes-of-Aethel/pull/32), sobre a cadeia de domínio iniciada nos PRs anteriores. Esses módulos estão nas branches de trabalho e **ainda não foram mesclados à main**.
 
@@ -15,7 +15,7 @@
 | Recompensas | XP, ouro, itens, receitas, fragmentos e confronto terminal na mesma transação; retry não duplica |
 | Encontros | 51 entradas: 33 comuns, 12 finais de mapa e seis nas duas dungeons opcionais |
 | Save C# | Schema 3 com migração dos formatos C# anteriores; não converte Godot/Unreal |
-| Integração de jogo | U1 liga atributos, dano e recompensa única do lobo ao núcleo; ator, colisão, câmera e HUD são provisórios. Save cobre a recompensa; consumidor persistente de dano, bosses, quest, UI/áudio e save completo seguem pendentes |
+| Integração de jogo | U1 liga atributos, dano e recompensa por nova tentativa do lobo ao núcleo; a bolsa `I` exibe itens salvos. Ator, colisão, câmera e HUD são provisórios. Consumidor persistente de dano, bosses, quest, UI/áudio finais e save completo seguem pendentes |
 
 [Contratos e limites do núcleo v3](https://github.com/Sarhuman/Echoes-of-Aethel/blob/5624836b9b85e6e0d32a2184fd8cc8121d6c4eaa/docs/engineering/runtime-core-v3.md) · [Direção Unity](https://github.com/Sarhuman/Echoes-of-Aethel/blob/5624836b9b85e6e0d32a2184fd8cc8121d6c4eaa/docs/engineering/unity-transition.md) · [Catálogo experimental](https://github.com/Sarhuman/Echoes-of-Aethel/blob/5624836b9b85e6e0d32a2184fd8cc8121d6c4eaa/docs/engineering/encounter-catalog.json).
 

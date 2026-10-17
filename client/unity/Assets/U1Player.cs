@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 using Aethel.Campaign;
 using UnityEngine;
@@ -41,6 +42,9 @@ public sealed class U1Player : MonoBehaviour
     private int savedXp;
     private int savedLevel = 1;
     private string rewardNotice = "";
+    private CampaignState savedState;
+    private bool inventoryOpen;
+    private Vector2 inventoryScroll;
 
     private void Awake()
     {
@@ -53,10 +57,7 @@ public sealed class U1Player : MonoBehaviour
         try
         {
             rewardSession = new U1RewardSession(Path.Combine(Application.persistentDataPath, "aethel-u1-campaign.json"));
-            CampaignState saved = rewardSession.Read();
-            savedGold = saved.Gold;
-            savedXp = saved.TotalXp;
-            savedLevel = saved.Level;
+            ApplySavedState(rewardSession.Read());
         }
         catch (Exception ex) when (ex is IOException || ex is UnauthorizedAccessException || ex is SerializationException)
         {
@@ -68,6 +69,11 @@ public sealed class U1Player : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            inventoryOpen = !inventoryOpen;
+            if (inventoryOpen) RefreshSavedState();
+        }
         if (Input.GetKeyDown(KeyCode.Escape)) paused = !paused;
         if (Input.GetKeyDown(KeyCode.F6)) ResetAttempt();
         if (paused || IsDead) return;
@@ -178,13 +184,11 @@ public sealed class U1Player : MonoBehaviour
             int oldGold = savedGold;
             int oldXp = savedXp;
             ProgressionResult result = rewardSession.ClaimDefeatedWolf();
-            savedGold = result.State.Gold;
-            savedXp = result.State.TotalXp;
-            savedLevel = result.State.Level;
+            ApplySavedState(result.State);
             if (result.Status == ProgressionStatus.Accepted)
                 rewardNotice = "+" + (savedXp - oldXp) + " XP  ·  +" + (savedGold - oldGold) + " ouro (salvo)";
             else if (result.Status == ProgressionStatus.Replayed)
-                rewardNotice = "Recompensa deste lobo já recebida";
+                rewardNotice = "Esta tentativa já foi recompensada — F6 inicia outra";
             else
                 rewardNotice = "Recompensa pendente: " + result.Status + " — F6 para tentar novamente";
         }
@@ -192,6 +196,25 @@ public sealed class U1Player : MonoBehaviour
         {
             rewardNotice = "Falha ao salvar recompensa — F6 para tentar novamente";
             Debug.LogError("U1 reward claim failed: " + ex.Message);
+        }
+    }
+
+    private void ApplySavedState(CampaignState state)
+    {
+        savedState = state;
+        savedGold = state.Gold;
+        savedXp = state.TotalXp;
+        savedLevel = state.Level;
+    }
+
+    private void RefreshSavedState()
+    {
+        if (rewardSession == null) return;
+        try { ApplySavedState(rewardSession.Read()); }
+        catch (Exception ex) when (ex is IOException || ex is UnauthorizedAccessException || ex is SerializationException)
+        {
+            rewardNotice = "Não foi possível abrir a bolsa salva";
+            Debug.LogError("U1 inventory read failed: " + ex.Message);
         }
     }
 
@@ -219,7 +242,19 @@ public sealed class U1Player : MonoBehaviour
         basicReadyAt = impactReadyAt = guardReadyAt = riftReadyAt = dashReadyAt = 0f;
         dashEndsAt = invulnerableUntil = guardEndsAt = 0f;
         victory = routeComplete = paused = false;
-        if (rewardSession != null) rewardNotice = "";
+        if (rewardSession != null)
+        {
+            try
+            {
+                rewardSession.BeginAttempt();
+                rewardNotice = "Nova tentativa: recompensa disponível";
+            }
+            catch (Exception ex) when (ex is IOException || ex is UnauthorizedAccessException || ex is SerializationException)
+            {
+                rewardNotice = "Save U1 indisponível; recompensa suspensa";
+                Debug.LogError("U1 could not begin a new reward attempt: " + ex.Message);
+            }
+        }
         Enemy.ResetEncounter();
         Show("Nova tentativa", Color.white);
     }
@@ -248,7 +283,7 @@ public sealed class U1Player : MonoBehaviour
         GUI.color = Color.white;
         GUI.Label(new Rect(28, Screen.height - 75, 600, 25),
             "WASD mover  ·  1 atacar  ·  2/Q impacto  ·  3/E guarda  ·  4/R fenda");
-        GUI.Label(new Rect(28, Screen.height - 49, 600, 25), "Espaço esquiva  ·  F6 reiniciar  ·  Esc pausa");
+        GUI.Label(new Rect(28, Screen.height - 49, 600, 25), "Espaço esquiva  ·  I bolsa  ·  F6 reiniciar  ·  Esc pausa");
         if (rewardNotice != "")
             GUI.Box(new Rect(16, Screen.height - 122, 620, 34), rewardNotice);
 
@@ -265,7 +300,52 @@ public sealed class U1Player : MonoBehaviour
             GUI.Label(new Rect(Screen.width / 2 - 110, Screen.height / 2 - 80, 260, 35), message);
         }
         if (paused) GUI.Box(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 30, 200, 60), "PAUSADO");
+        if (inventoryOpen) DrawInventory();
         GUI.color = Color.white;
+    }
+
+    private void DrawInventory()
+    {
+        float width = 420f;
+        float height = Mathf.Min(480f, Screen.height - 170f);
+        Rect panel = new Rect(Screen.width - width - 16f, 80f, width, height);
+        GUI.color = new Color(0.04f, 0.06f, 0.1f, 0.94f);
+        GUI.Box(panel, "BOLSA U1  ·  somente leitura  ·  I fecha");
+        GUI.color = Color.white;
+        if (savedState == null)
+        {
+            GUI.Label(new Rect(panel.x + 16f, panel.y + 40f, width - 32f, 28f), "Save indisponível");
+            return;
+        }
+
+        ItemInstance[] items = savedState.Inventory.Items
+            .OrderBy(item => item.Location == "bag" ? 0 : item.Location == "reserve" ? 1 : 2)
+            .ThenBy(item => item.Y).ThenBy(item => item.X).ToArray();
+        Rect view = new Rect(panel.x + 14f, panel.y + 38f, width - 28f, height - 52f);
+        Rect content = new Rect(0f, 0f, width - 52f, Mathf.Max(view.height, items.Length * 27f + 12f));
+        inventoryScroll = GUI.BeginScrollView(view, inventoryScroll, content);
+        for (int i = 0; i < items.Length; i++)
+        {
+            ItemInstance item = items[i];
+            string equipped = savedState.Inventory.Equipped.ContainsValue(item.Id) ? " [equipado]" : "";
+            string rarity = item.Roll == null ? "" : " [" + item.Roll.Rarity + "]";
+            GUI.Label(new Rect(4f, i * 27f, content.width - 8f, 25f),
+                ItemName(item.TemplateId) + " ×" + item.Quantity + rarity + equipped + "  ·  " + item.Location);
+        }
+        GUI.EndScrollView();
+    }
+
+    private static string ItemName(string id)
+    {
+        switch (id)
+        {
+            case "training_axe": return "Machado de treino";
+            case "worn_tunic": return "Túnica gasta";
+            case "wolf_fang": return "Presa de lobo";
+            case "potion_health_small": return "Poção de vida";
+            case "flask_aether_small": return "Frasco de éter";
+            default: return id;
+        }
     }
 
     private static void DrawBar(float x, float y, string label, float value, float maximum, Color fill)
