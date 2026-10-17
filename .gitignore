@@ -12,3 +12,19 @@ client/unreal/Intermediate/
 client/unreal/Saved/
 client/unreal/.vs/
 client/unreal/*.sln
+client/unity/Library/
+client/unity/Temp/
+client/unity/Obj/
+client/unity/Logs/
+client/unity/UserSettings/
+client/unity/Build/
+client/unity/*.csproj
+client/unity/*.sln
+client/unity/*.slnx
+client/unity/.vsconfig
+client/unity/.vs/
+client/unity/ProjectSettings/PackageManagerSettings.asset
+# Separate Hub project; keep it local while client/unity is the primary project.
+client/unity/Echoes-of-Aethel/
+tools/portability/bin/
+tools/portability/obj/

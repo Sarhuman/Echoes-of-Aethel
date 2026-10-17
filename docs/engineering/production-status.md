@@ -1,10 +1,10 @@
 # Estado verificável e próximos aceites — 16/10/2026
 
-> Atualização 16/10/2026: consulte [núcleo C# v3](runtime-core-v3.md) para os quatro kits, oito caminhos adicionais, loot e 51 encontros agora executáveis fora da engine. As limitações históricas abaixo descrevem o estágio anterior; integração Unity e validação de gameplay continuam pendentes.
+> Atualização 16/10/2026: consulte [núcleo C# v3](runtime-core-v3.md) para os quatro kits, oito caminhos adicionais, loot e 51 encontros agora executáveis fora da engine. O [cliente Unity 6.6](../../client/unity/README.md) tem prova U0 e percurso U1 com geometria provisória. O proprietário confirmou vitória e retorno na U1 e observou que a implementação inicial premiava o lobo só uma vez. A revisão permite recompensa por nova tentativa, sem duplicação dentro da mesma tentativa, e bolsa de consulta; passou no editor, mas ainda aguarda playtest visual. FPS e desempenho não foram medidos. As limitações históricas abaixo descrevem o estágio anterior.
 
 > **Atualização de núcleo:** o [runtime v2](runtime-core-v2.md) acrescenta inventário/XP/recursos, migração e efeitos dos dois caminhos do Bastião; as demais classes ainda têm alocação, sem kits de combate portados.
 
-Este índice é o ponto de entrada para a próxima entrega. A direção é Unity para Windows offline; Godot conserva a versão histórica jogável e Unreal conserva infraestrutura/blockouts. Clientes anteriores não foram removidos. Versão, manifests e projeto Unity ainda não foram inicializados/validados nesta série de PRs.
+Este índice é o ponto de entrada para a próxima entrega. A direção é Unity para Windows offline; Godot conserva a versão histórica jogável e Unreal conserva infraestrutura/blockouts. Clientes anteriores não foram removidos. Versão, manifests e projeto técnico Unity estão registrados; renderer final e validação visual continuam pendentes.
 
 ## Estado por entrega
 
@@ -16,12 +16,13 @@ Este índice é o ponto de entrada para a próxima entrega. A direção é Unity
 | Especializações | Alocação/respec/aviso persistidos e testados em C# | Outros kits/classes, conteúdo dos seus efeitos, acesso por NPC e UI |
 | Ameaça regional | Faixas experimentais verificadas e projeção C# de comparação | Spawn/estatísticas/XP, percepção e HUD conectados |
 | Arte de personagens | [Revisão solicitada](../design/character-visual-review.md), seis pranchas avaliadas | Variantes, comparação de silhueta, aprovação e assets de runtime |
-| Mapas | Dois blockouts históricos e percursos propostos | Câmera/cápsula medidas, planta métrica, navegação, interiores e retorno |
-| Combate Unity | Contratos e referência Godot | Jogador/Lobo/Cultista, colisão, feedback, dano e dash testados na engine |
+| Mapas | Dois blockouts históricos e percurso U1 Cidadela–Bosque com colisão | Câmera/cápsula medidas visualmente, planta métrica, navegação e interiores |
+| Combate Unity | U1 técnico com Bastião/Lobo, retorno validado pelo proprietário, HP/MP e dano do núcleo, dash, guarda e feedback básico | Animação, IA completa, Cultista e consumidor persistente de dano |
+| Recompensa Unity | U1 grava XP, ouro e loot por tentativa do lobo; teste EditMode exige replay sem duplicação dentro da tentativa e nova recompensa após `F6` | Playtest visual da revisão, bolsa em modo leitura e demais encontros |
 | Dungeons | Dois percursos e contratos de retirada/recompensa propostos | Layout, bosses, recompensa atômica e ida/volta reais |
-| Lançamento | Windows offline como alvo | Build instalada fora do editor, desempenho, acessibilidade e playtests |
+| Lançamento | Windows offline como alvo; U0 e U1 iniciaram fora do editor sem renderização | Build de jogo completo, desempenho visual, acessibilidade e playtests |
 
-“Compilado em Mono” não significa “funciona na Unity”. “Aprovado em design” não significa “implementado”. O C0 continua aberto; esta entrega não remove um gate para antecipar quantidade de mapas.
+“Compilado em Mono” não significa “funciona na Unity”. “Aprovado em design” não significa “implementado”. O C0 continua aberto; o U1 foi autorizado como protótipo isolado e não aprova outros mapas.
 
 ## Sequência de trabalho
 

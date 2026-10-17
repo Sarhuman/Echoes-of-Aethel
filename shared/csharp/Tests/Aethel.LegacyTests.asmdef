@@ -1,0 +1,8 @@
+{
+  "name": "Aethel.LegacyTests",
+  "rootNamespace": "Aethel",
+  "references": ["Aethel.Domain"],
+  "includePlatforms": ["Editor"],
+  "defineConstraints": ["AETHEL_INCLUDE_LEGACY_TESTS"],
+  "noEngineReferences": true
+}

@@ -1,5 +1,9 @@
 # Changelog
 
+> **16/10/2026 — Feedback de combate Unity U1:** o ataque básico deixa de depender da direção do último movimento quando o lobo está próximo. `MISS` azul marca alvo fora do alcance; dano causado e recebido têm indicadores separados sobre os respectivos atores. Teste de alcance na Unity, build Windows e inicialização sem gráficos passaram; legibilidade visual aguarda teste no PC.
+
+> **16/10/2026 — Unity U1:** vitória e retorno à Cidadela confirmados pelo proprietário no PC. A primeira integração premiava o lobo só uma vez, como o proprietário observou; a revisão agora concede recompensa por nova tentativa, preservando replay idempotente dentro da tentativa. A bolsa `I` mostra os itens salvos em modo leitura. Testes EditMode, build Windows e inicialização sem gráficos passaram; a revisão ainda aguarda playtest visual.
+
 > **16/10/2026 — Revisão visual documental:** direção Unity 3D centralizada; escopo atual separado do Godot histórico; GDDs e guias distinguem pixels/tiles/sprites de modelagem 3D. Sem alteração de código, assets, regras, falas ou IDs.
 
 ## 16/10/2026 — Núcleo C# v3 (experimental, sem cliente Unity)

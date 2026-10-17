@@ -23,3 +23,9 @@ docs/media/concepts/model-sheets/*.png filter=lfs diff=lfs merge=lfs -text
 client/unreal/Content/**/*.uasset filter=lfs diff=lfs merge=lfs -text
 client/unreal/Content/**/*.umap filter=lfs diff=lfs merge=lfs -text
 client/unreal/SourceArt/** filter=lfs diff=lfs merge=lfs -text
+
+# Unity-generated YAML contains intentional empty scalar values with trailing spaces.
+client/unity/Assets/*.meta text eol=lf -whitespace
+client/unity/Assets/**/*.meta text eol=lf -whitespace
+client/unity/Assets/**/*.unity text eol=lf -whitespace
+client/unity/ProjectSettings/*.asset text eol=lf -whitespace

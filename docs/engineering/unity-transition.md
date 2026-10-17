@@ -2,7 +2,7 @@
 
 > **Direção visual confirmada em 16/10/2026:** 3D estilizado de fantasia sombria, câmera elevada e materiais com aparência pintada, conforme [guia Unity](../design/unity-art-direction.md). Pixel art 16-bit e unidades de sprites/tiles são históricos. URP proposto, sem versão ou FPS alegadamente validados.
 
-**Direção solicitada pelo proprietário nesta conversa:** preparar um cliente limpo Unity para o ARPG 3D, preservando história, contratos e referências úteis. URP é a opção de pipeline proposta para o PC informado (Xeon 2630, RX 580, 16 GB). A versão exata do editor e dos pacotes será fixada após verificar a instalação local e executar uma cena mínima; este documento não afirma que existe projeto Unity compilado.
+**Direção solicitada pelo proprietário nesta conversa:** preparar um cliente limpo Unity para o ARPG 3D, preservando história, contratos e referências úteis. URP é a opção de pipeline proposta para o PC informado (Xeon 2630, RX 580, 16 GB). O projeto técnico em `client/unity/` foi gerado pelo editor Unity 6.6 `6000.6.6f1` e compilou uma cena de inspeção para Windows; consulte seu README para resultados e limites. URP ainda não foi instalado ou validado.
 
 Esta decisão substitui Unreal como destino de produção e as instruções específicas de sua engine. Não muda IDs, opções, fragmentos, mortes, recursos ou finais. Godot continua a evidência histórica de jornada jogável; Unreal contém infraestrutura e blockouts. Nenhum deles foi apagado, migrado automaticamente ou convertido em C# neste PR.
 

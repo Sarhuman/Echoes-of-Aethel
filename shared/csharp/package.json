@@ -1,0 +1,7 @@
+{
+  "name": "com.sarhuman.aethel.domain",
+  "version": "0.1.0",
+  "displayName": "Aethel Domain",
+  "description": "Engine-independent campaign, combat, loot and world memory rules.",
+  "unity": "6000.0"
+}

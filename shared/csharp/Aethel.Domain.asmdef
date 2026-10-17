@@ -1,0 +1,7 @@
+{
+  "name": "Aethel.Domain",
+  "rootNamespace": "Aethel",
+  "references": [],
+  "autoReferenced": true,
+  "noEngineReferences": true
+}
